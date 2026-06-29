@@ -1,0 +1,833 @@
+from __future__ import annotations
+
+import argparse
+import json
+import math
+import os
+import re
+import sqlite3
+import subprocess
+import sys
+from collections import defaultdict
+from dataclasses import dataclass
+from datetime import date, datetime, time, timedelta
+from pathlib import Path
+from typing import Any
+from urllib.parse import urlparse
+
+
+ROOT = Path(r"C:\Users\Klh\Documents\computer-time-dashboard")
+DATA_DIR = ROOT / "data"
+SITE_DIR = ROOT / "site"
+HISTORY_PATH = DATA_DIR / "history.json"
+STATE_PATH = DATA_DIR / "state.json"
+INDEX_PATH = SITE_DIR / "index.html"
+NOJEKYLL_PATH = SITE_DIR / ".nojekyll"
+DB_PATH = Path(r"C:\Users\Klh\AppData\Local\activitywatch\activitywatch\aw-server\peewee-sqlite.v2.db")
+LOCAL_TZ = datetime.now().astimezone().tzinfo
+DELIVERY_TIME = time(hour=19, minute=30)
+WEEKDAY_NAMES = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+CATEGORY_COLORS = {
+    "工作/创作": "#7aa2ff",
+    "学习/信息": "#61ddaa",
+    "沟通": "#5ad1e6",
+    "设计": "#f6bd16",
+    "娱乐": "#ff7d7d",
+    "系统/维护": "#8a7dff",
+    "生活/杂务": "#ffa940",
+    "其他": "#cbd5e1",
+}
+CATEGORY_RULES = [
+    ("工作/创作", [
+        "hermes", "terminal", "powershell", "cursor", "vscode", "code", "github", "gitlab",
+        "pycharm", "notepad++", "windsurf", "openai", "claude", "chatgpt", "jupyter",
+        "python", "excel", "word", "powerpoint", "docs", "sheets", "obsidian", "notion",
+    ]),
+    ("设计", ["figma", "photoshop", "illustrator", "canva", "sketch", "after effects", "premiere"]),
+    ("沟通", ["微信", "wechat", "feishu", "lark", "钉钉", "qq", "slack", "discord", "telegram", "teams", "outlook", "mail"]),
+    ("娱乐", ["bilibili", "哔哩", "douyin", "抖音", "youtube", "netflix", "spotify", "music", "steam", "media player", "播放器"]),
+    ("学习/信息", ["wikipedia", "arxiv", "read", "docs", "blog", "news", "google chrome", "edge", "browser", "浏览器", "activitywatch", "search", "搜索"]),
+    ("系统/维护", ["explorer", "setting", "设置", "control panel", "task manager", "clash", "installer", "install", "下载", "驱动", "program manager", "quick settings", "shellhost", "文件资源管理器"]),
+    ("生活/杂务", ["taobao", "京东", "美团", "外卖", "calendar", "todo", "地图", "map", "shop", "shopping", "支付宝", "bank"]),
+]
+BROWSER_APPS = {"chrome.exe", "msedge.exe", "firefox.exe", "browser", "chrome", "edge"}
+
+
+@dataclass
+class Segment:
+    start: datetime
+    end: datetime
+    seconds: float
+    app: str
+    title: str
+    activity: str
+    category: str
+
+
+def ensure_dirs() -> None:
+    for path in (DATA_DIR, SITE_DIR):
+        path.mkdir(parents=True, exist_ok=True)
+
+
+def load_json(path: Path, default: Any) -> Any:
+    if not path.exists():
+        return default
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def save_json(path: Path, data: Any) -> None:
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--now")
+    parser.add_argument("--force-date")
+    parser.add_argument("--rebuild-days", type=int, default=14)
+    parser.add_argument("--send-all-missed", action="store_true")
+    parser.add_argument("--skip-push", action="store_true")
+    parser.add_argument("--print-dry-run", action="store_true")
+    return parser.parse_args()
+
+
+def local_now(args: argparse.Namespace) -> datetime:
+    if args.now:
+        return datetime.fromisoformat(args.now).astimezone(LOCAL_TZ)
+    return datetime.now().astimezone()
+
+
+def dt_to_local(value: str) -> datetime:
+    return datetime.fromisoformat(value).astimezone(LOCAL_TZ)
+
+
+def start_of_day(day: date) -> datetime:
+    return datetime.combine(day, time.min, tzinfo=LOCAL_TZ)
+
+
+def end_of_day(day: date) -> datetime:
+    return start_of_day(day) + timedelta(days=1)
+
+
+def fmt_duration(seconds: float) -> str:
+    total = int(round(max(seconds, 0)))
+    h, rem = divmod(total, 3600)
+    m, s = divmod(rem, 60)
+    parts = []
+    if h:
+        parts.append(f"{h}小时")
+    if m:
+        parts.append(f"{m}分")
+    if not parts:
+        parts.append(f"{s}秒")
+    return "".join(parts)
+
+
+def pct(value: float) -> str:
+    return f"{value * 100:.1f}%"
+
+
+def slug_week(start_day: date, end_day: date) -> str:
+    return f"{start_day.isoformat()}~{end_day.isoformat()}"
+
+
+def parse_datastr(text: str) -> dict[str, Any]:
+    try:
+        return json.loads(text or "{}")
+    except json.JSONDecodeError:
+        return {}
+
+
+def open_db() -> sqlite3.Connection:
+    if not DB_PATH.exists():
+        raise FileNotFoundError(f"ActivityWatch 数据库不存在: {DB_PATH}")
+    conn = sqlite3.connect(str(DB_PATH))
+    conn.row_factory = sqlite3.Row
+    return conn
+
+
+def latest_bucket_key(conn: sqlite3.Connection, bucket_type: str) -> int | None:
+    row = conn.execute(
+        "SELECT key FROM bucketmodel WHERE type = ? ORDER BY created DESC LIMIT 1",
+        (bucket_type,),
+    ).fetchone()
+    return int(row[0]) if row else None
+
+
+def fetch_events(conn: sqlite3.Connection, bucket_key: int, start: datetime, end: datetime) -> list[dict[str, Any]]:
+    rows = conn.execute(
+        "SELECT timestamp, duration, datastr FROM eventmodel WHERE bucket_id = ? AND timestamp < ? ORDER BY timestamp ASC",
+        (bucket_key, end.astimezone().isoformat(sep=" ")),
+    ).fetchall()
+    events: list[dict[str, Any]] = []
+    for row in rows:
+        s = dt_to_local(row[0])
+        duration = float(row[1] or 0)
+        e = s + timedelta(seconds=duration)
+        if e <= start or s >= end or duration <= 0:
+            continue
+        events.append({"start": s, "end": e, "seconds": duration, "data": parse_datastr(row[2])})
+    return events
+
+
+def intersect_ranges(a_start: datetime, a_end: datetime, b_start: datetime, b_end: datetime) -> tuple[datetime, datetime] | None:
+    start = max(a_start, b_start)
+    end = min(a_end, b_end)
+    if end <= start:
+        return None
+    return start, end
+
+
+def load_active_ranges(conn: sqlite3.Connection, day: date) -> list[tuple[datetime, datetime]]:
+    bucket_key = latest_bucket_key(conn, "afkstatus")
+    if bucket_key is None:
+        return []
+    ranges = []
+    for event in fetch_events(conn, bucket_key, start_of_day(day), end_of_day(day)):
+        if event["data"].get("status") == "not-afk":
+            ranges.append((event["start"], event["end"]))
+    return ranges
+
+
+def normalize_text(text: str) -> str:
+    return re.sub(r"\s+", " ", (text or "").strip())
+
+
+def enrich_browser_activity(app: str, title: str, start: datetime, web_events: list[dict[str, Any]]) -> tuple[str, str]:
+    app_name = (app or "").lower()
+    if app_name not in BROWSER_APPS and app_name.replace(".exe", "") not in BROWSER_APPS:
+        return title, title
+    for event in web_events:
+        overlap = intersect_ranges(start, start + timedelta(seconds=1), event["start"], event["end"])
+        if overlap or abs((event["start"] - start).total_seconds()) <= 8:
+            url = event["data"].get("url", "")
+            page_title = normalize_text(event["data"].get("title") or title)
+            domain = urlparse(url).netloc
+            if page_title and domain:
+                return f"{page_title}｜{domain}", page_title
+            if page_title:
+                return page_title, page_title
+    return title, title
+
+
+def classify_activity(activity: str, app: str, title: str) -> str:
+    haystack = f"{activity} {app} {title}".lower()
+    for category, keywords in CATEGORY_RULES:
+        if any(keyword in haystack for keyword in keywords):
+            return category
+    return "其他"
+
+
+def load_segments(conn: sqlite3.Connection, day: date) -> list[Segment]:
+    bucket_key = latest_bucket_key(conn, "currentwindow")
+    web_key = latest_bucket_key(conn, "web.tab.current")
+    if bucket_key is None:
+        return []
+    active_ranges = load_active_ranges(conn, day)
+    if not active_ranges:
+        return []
+    web_events = fetch_events(conn, web_key, start_of_day(day), end_of_day(day)) if web_key else []
+    segments: list[Segment] = []
+    for event in fetch_events(conn, bucket_key, start_of_day(day), end_of_day(day)):
+        app = normalize_text(event["data"].get("app", "未知应用"))
+        title = normalize_text(event["data"].get("title", "未命名窗口"))
+        if not title:
+            title = app
+        enriched_activity, title_hint = enrich_browser_activity(app, title, event["start"], web_events)
+        activity = f"{app}｜{enriched_activity}" if enriched_activity and app not in enriched_activity else enriched_activity or f"{app}｜{title}"
+        category = classify_activity(activity, app, title_hint)
+        for active_start, active_end in active_ranges:
+            overlap = intersect_ranges(event["start"], event["end"], active_start, active_end)
+            if not overlap:
+                continue
+            seg_start, seg_end = overlap
+            seconds = (seg_end - seg_start).total_seconds()
+            if seconds < 1:
+                continue
+            segments.append(Segment(seg_start, seg_end, seconds, app, title, activity, category))
+    segments.sort(key=lambda item: item.start)
+    return segments
+
+
+def merge_focus_segments(segments: list[Segment]) -> list[dict[str, Any]]:
+    merged: list[dict[str, Any]] = []
+    for seg in segments:
+        if merged:
+            prev = merged[-1]
+            gap = (seg.start - prev["end"]).total_seconds()
+            if seg.activity == prev["activity"] and gap <= 90:
+                prev["end"] = max(prev["end"], seg.end)
+                prev["seconds"] += seg.seconds
+                continue
+        merged.append({
+            "activity": seg.activity,
+            "category": seg.category,
+            "start": seg.start,
+            "end": seg.end,
+            "seconds": seg.seconds,
+        })
+    return merged
+
+
+def build_daily_summary(day: date, segments: list[Segment]) -> dict[str, Any]:
+    total = sum(seg.seconds for seg in segments)
+    category_seconds: dict[str, float] = defaultdict(float)
+    activity_seconds: dict[str, float] = defaultdict(float)
+    category_reps: dict[str, dict[str, float]] = defaultdict(lambda: defaultdict(float))
+    hourly_seconds: dict[str, float] = {str(hour): 0.0 for hour in range(24)}
+    for seg in segments:
+        category_seconds[seg.category] += seg.seconds
+        activity_seconds[seg.activity] += seg.seconds
+        category_reps[seg.category][seg.activity] += seg.seconds
+        cursor = seg.start
+        while cursor < seg.end:
+            next_hour = (cursor.replace(minute=0, second=0, microsecond=0) + timedelta(hours=1))
+            chunk_end = min(next_hour, seg.end)
+            hourly_seconds[str(cursor.hour)] += (chunk_end - cursor).total_seconds()
+            cursor = chunk_end
+
+    merged = merge_focus_segments(segments)
+    longest = max(merged, key=lambda item: item["seconds"], default=None)
+    switch_count = 0
+    prev_activity = None
+    for block in merged:
+        if prev_activity and block["activity"] != prev_activity:
+            switch_count += 1
+        prev_activity = block["activity"]
+
+    categories = []
+    for name, seconds in sorted(category_seconds.items(), key=lambda item: item[1], reverse=True):
+        reps = sorted(category_reps[name].items(), key=lambda item: item[1], reverse=True)[:3]
+        categories.append({
+            "name": name,
+            "seconds": round(seconds, 2),
+            "share": round(seconds / total, 4) if total else 0,
+            "representatives": [rep for rep, _ in reps],
+            "color": CATEGORY_COLORS.get(name, "#cbd5e1"),
+        })
+
+    top_categories = [item["name"] for item in categories[:3]]
+    comm_share = next((item["share"] for item in categories if item["name"] == "沟通"), 0)
+    entertainment_share = next((item["share"] for item in categories if item["name"] == "娱乐"), 0)
+    sys_share = next((item["share"] for item in categories if item["name"] == "系统/维护"), 0)
+    most_fragmented = max(categories, key=lambda item: item["share"] if item["name"] not in (top_categories[:1] or [""]) else 0, default=None)
+
+    if total >= 4 * 3600 and switch_count <= 90:
+        confidence = "高"
+    elif total >= 90 * 60:
+        confidence = "中"
+    else:
+        confidence = "低"
+
+    evidence = [
+        f"总活跃时长 {fmt_duration(total)}",
+        f"窗口切换 {switch_count} 次",
+        f"最长连续专注块 {fmt_duration(longest['seconds']) if longest else '0秒'}",
+    ]
+    summary_line = summarize_day_line(total, categories, switch_count)
+    notes = build_daily_notes(total, categories, switch_count, longest)
+
+    return {
+        "date": day.isoformat(),
+        "weekday": WEEKDAY_NAMES[day.weekday()],
+        "total_active_seconds": round(total, 2),
+        "total_active_text": fmt_duration(total),
+        "top_categories": top_categories,
+        "categories": categories,
+        "switch_count": switch_count,
+        "segment_count": len(segments),
+        "summary_line": summary_line,
+        "notes": notes,
+        "longest_focus": {
+            "category": longest["category"] if longest else "无",
+            "activity": longest["activity"] if longest else "无",
+            "seconds": round(longest["seconds"], 2) if longest else 0,
+            "text": fmt_duration(longest["seconds"]) if longest else "0秒",
+            "range": f"{longest['start'].strftime('%H:%M')}–{longest['end'].strftime('%H:%M')}" if longest else "—",
+        },
+        "energy": {
+            "high_zone": top_categories[0] if top_categories else "无",
+            "fragmented_zone": most_fragmented["name"] if most_fragmented else "无",
+            "recovery_zone": "娱乐" if entertainment_share > 0.08 else ("沟通" if comm_share > 0.12 else ("系统/维护" if sys_share > 0.15 else "无明显恢复区")),
+            "confidence": confidence,
+            "evidence": evidence,
+        },
+        "hourly_seconds": {hour: round(value, 2) for hour, value in hourly_seconds.items()},
+        "top_activities": [
+            {"activity": activity, "seconds": round(seconds, 2), "text": fmt_duration(seconds)}
+            for activity, seconds in sorted(activity_seconds.items(), key=lambda item: item[1], reverse=True)[:8]
+        ],
+        "generated_at": datetime.now().astimezone().isoformat(),
+    }
+
+
+def summarize_day_line(total: float, categories: list[dict[str, Any]], switch_count: int) -> str:
+    if total == 0:
+        return "这一天没有读到有效的电脑活跃记录。"
+    lead = categories[0]["name"] if categories else "其他"
+    if switch_count >= 120:
+        rhythm = "切换密度偏高，像是在多线程推进。"
+    elif switch_count >= 60:
+        rhythm = "节奏中等，主线明确但中间有若干打断。"
+    else:
+        rhythm = "节奏相对稳定，存在可识别的连续工作块。"
+    return f"这一天共记录 {fmt_duration(total)} 的活跃电脑时间，主轴是“{lead}”，{rhythm}"
+
+
+def build_daily_notes(total: float, categories: list[dict[str, Any]], switch_count: int, longest: dict[str, Any] | None) -> list[str]:
+    notes: list[str] = []
+    if not categories:
+        return ["今天没有足够的数据生成复盘提示。"]
+    lead = categories[0]
+    notes.append(f"主类目是“{lead['name']}”，占比 {pct(lead['share'])}，说明当天最主要的电脑注意力投向比较清晰。")
+    if switch_count >= 120:
+        notes.append("窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。")
+    elif switch_count <= 40:
+        notes.append("窗口切换不高，说明这一天的任务切换成本相对可控。")
+    if longest and longest["seconds"] >= 45 * 60:
+        notes.append(f"出现了 {fmt_duration(longest['seconds'])} 的长专注块，可以回看这段前后的环境条件并尝试复用。")
+    elif longest and longest["seconds"] <= 10 * 60:
+        notes.append("最长连续专注块偏短，后续可重点观察是什么因素把整块时间切碎了。")
+    return notes[:3]
+
+
+def monday_of(day: date) -> date:
+    return day - timedelta(days=day.weekday())
+
+
+def build_week_summary(end_day: date, days: list[dict[str, Any]]) -> dict[str, Any]:
+    start_day = monday_of(end_day)
+    selected = [item for item in days if start_day.isoformat() <= item["date"] <= end_day.isoformat()]
+    total = sum(item.get("total_active_seconds", 0) for item in selected)
+    by_category: dict[str, float] = defaultdict(float)
+    daily_totals = []
+    for item in selected:
+        daily_totals.append({"date": item["date"], "seconds": item.get("total_active_seconds", 0), "text": item.get("total_active_text", "0秒")})
+        for cat in item.get("categories", []):
+            by_category[cat["name"]] += cat["seconds"]
+    categories = [
+        {
+            "name": name,
+            "seconds": round(seconds, 2),
+            "share": round(seconds / total, 4) if total else 0,
+            "color": CATEGORY_COLORS.get(name, "#cbd5e1"),
+        }
+        for name, seconds in sorted(by_category.items(), key=lambda item: item[1], reverse=True)
+    ]
+    top_days = sorted(daily_totals, key=lambda item: item["seconds"], reverse=True)[:3]
+    summary = f"本周累计 {fmt_duration(total)}，主轴是“{categories[0]['name']}”。" if categories else f"本周累计 {fmt_duration(total)}。"
+    notes = []
+    if top_days:
+        notes.append(f"最投入的一天是 {top_days[0]['date']}，活跃 {fmt_duration(top_days[0]['seconds'])}。")
+    if len(selected) >= 2:
+        weekend = sum(item["seconds"] for item in daily_totals if date.fromisoformat(item["date"]).weekday() >= 5)
+        weekday = sum(item["seconds"] for item in daily_totals if date.fromisoformat(item["date"]).weekday() < 5)
+        if weekend and weekday:
+            notes.append(f"周末占比 {pct(weekend / (weekend + weekday))}，可用来观察休息日是否也被工作/信息流挤占。")
+    if categories:
+        notes.append(f"前三类目合计占比 {pct(sum(item['share'] for item in categories[:3]))}，说明这一周的电脑使用主线集中度。")
+    return {
+        "id": slug_week(start_day, end_day),
+        "start_date": start_day.isoformat(),
+        "end_date": end_day.isoformat(),
+        "label": f"{start_day.strftime('%m/%d')} - {end_day.strftime('%m/%d')}",
+        "total_active_seconds": round(total, 2),
+        "total_active_text": fmt_duration(total),
+        "categories": categories,
+        "daily_totals": daily_totals,
+        "summary_line": summary,
+        "notes": notes[:3],
+        "generated_at": datetime.now().astimezone().isoformat(),
+    }
+
+
+def build_all_weeks(days: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    by_date = {date.fromisoformat(item["date"]): item for item in days}
+    sundays = sorted(day for day in by_date if day.weekday() == 6)
+    return [build_week_summary(sunday, days) for sunday in sundays]
+
+
+def update_history(now: datetime, rebuild_days: int, force_date: str | None = None) -> tuple[dict[str, Any], dict[str, Any]]:
+    ensure_dirs()
+    history = load_json(HISTORY_PATH, {"days": [], "weeks": [], "meta": {}})
+    state = load_json(STATE_PATH, {"sent_days": [], "sent_weeks": [], "last_push": None})
+    by_date = {item["date"]: item for item in history.get("days", [])}
+
+    conn = open_db()
+    try:
+        if force_date:
+            target_days = [date.fromisoformat(force_date)]
+        else:
+            target_days = [(now.date() - timedelta(days=offset)) for offset in range(rebuild_days + 1)]
+        for day in target_days:
+            summary = build_daily_summary(day, load_segments(conn, day))
+            by_date[summary["date"]] = summary
+    finally:
+        conn.close()
+
+    days = sorted(by_date.values(), key=lambda item: item["date"])
+    weeks = build_all_weeks(days)
+    history = {
+        "days": days,
+        "weeks": weeks,
+        "meta": {
+            "db_path": str(DB_PATH),
+            "generated_at": now.isoformat(),
+            "delivery_time": DELIVERY_TIME.strftime("%H:%M"),
+            "timezone": str(now.tzinfo),
+        },
+    }
+    save_json(HISTORY_PATH, history)
+    return history, state
+
+
+def eligible_unsent_day(history: dict[str, Any], state: dict[str, Any], now: datetime) -> dict[str, Any] | None:
+    sent = set(state.get("sent_days", []))
+    forced = None
+    for day in history.get("days", []):
+        day_date = date.fromisoformat(day["date"])
+        due = datetime.combine(day_date, DELIVERY_TIME, tzinfo=LOCAL_TZ)
+        if day_date < now.date() or now >= due:
+            if day["date"] not in sent and day.get("total_active_seconds", 0) > 0:
+                forced = day
+    return forced
+
+
+def corresponding_week(history: dict[str, Any], day_record: dict[str, Any]) -> dict[str, Any] | None:
+    target = date.fromisoformat(day_record["date"])
+    if target.weekday() != 6:
+        return None
+    week_id = slug_week(monday_of(target), target)
+    for week in history.get("weeks", []):
+        if week.get("id") == week_id:
+            return week
+    return None
+
+
+def mark_sent(state: dict[str, Any], day_record: dict[str, Any], week_record: dict[str, Any] | None) -> None:
+    sent_days = set(state.get("sent_days", []))
+    sent_days.add(day_record["date"])
+    state["sent_days"] = sorted(sent_days)
+    if week_record:
+        sent_weeks = set(state.get("sent_weeks", []))
+        sent_weeks.add(week_record["id"])
+        state["sent_weeks"] = sorted(sent_weeks)
+    save_json(STATE_PATH, state)
+
+
+def repo_has_remote() -> bool:
+    result = subprocess.run(["git", "remote", "get-url", "origin"], cwd=ROOT, capture_output=True, text=True)
+    return result.returncode == 0 and bool(result.stdout.strip())
+
+
+def run_git(args: list[str]) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(args, cwd=ROOT, capture_output=True, text=True)
+
+
+def maybe_commit_and_push(now: datetime, skip_push: bool) -> dict[str, Any]:
+    status = {"committed": False, "pushed": False, "message": "未配置远程仓库，已只在本地更新。"}
+    run_git(["git", "add", "site/index.html", "site/.nojekyll", "data/history.json", "data/state.json"])
+    diff = run_git(["git", "diff", "--cached", "--quiet"])
+    if diff.returncode == 0:
+        status["message"] = "本次没有新的 Git 变更。"
+        return status
+    commit = run_git(["git", "commit", "-m", f"update dashboard {now.strftime('%Y-%m-%d %H:%M')}"])
+    status["committed"] = commit.returncode == 0
+    if not repo_has_remote() or skip_push:
+        status["message"] = "本地仓库已更新，但尚未推送到 GitHub。"
+        return status
+    push = run_git(["git", "push", "origin", "main"])
+    status["pushed"] = push.returncode == 0
+    status["message"] = "已推送到 GitHub。" if push.returncode == 0 else f"GitHub 推送失败：{(push.stderr or push.stdout).strip()}"
+    return status
+
+
+def render_html(history: dict[str, Any]) -> str:
+    template = '''<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>电脑时间与精力分布看板</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: rgba(13, 22, 42, 0.88);
+      --panel-2: rgba(17, 28, 54, 0.9);
+      --line: rgba(255,255,255,0.08);
+      --text: #eff4ff;
+      --muted: #9fb0d6;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--text); background: radial-gradient(circle at top, #12203e, var(--bg) 42%); font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif; }
+    .shell { display: grid; grid-template-columns: 310px 1fr; min-height: 100vh; }
+    .sidebar { padding: 24px 18px; border-right: 1px solid var(--line); background: rgba(6, 11, 24, 0.78); backdrop-filter: blur(20px); position: sticky; top: 0; height: 100vh; overflow: auto; }
+    .brand h1 { margin: 0 0 8px; font-size: 24px; }
+    .brand p { margin: 0; color: var(--muted); line-height: 1.7; font-size: 13px; }
+    .meta-stack { display: grid; gap: 8px; margin-top: 16px; }
+    .meta-pill { border: 1px solid var(--line); border-radius: 999px; padding: 8px 10px; font-size: 12px; color: var(--muted); background: rgba(255,255,255,0.03); }
+    .tabs { display: flex; gap: 8px; margin: 18px 0 16px; }
+    .tab { border: 1px solid var(--line); background: transparent; color: var(--text); border-radius: 999px; padding: 8px 12px; cursor: pointer; }
+    .tab.active { background: rgba(122,162,255,0.16); border-color: rgba(122,162,255,0.45); }
+    .list { display: none; gap: 10px; flex-direction: column; }
+    .list.active { display: flex; }
+    .item { width: 100%; text-align: left; background: var(--panel-2); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; color: var(--text); cursor: pointer; }
+    .item strong { display: block; font-size: 14px; }
+    .item small { display: block; color: var(--muted); margin-top: 6px; line-height: 1.6; }
+    .item.active { border-color: rgba(122,162,255,0.55); box-shadow: 0 0 0 1px rgba(122,162,255,0.2) inset; }
+    .main { padding: 28px; }
+    .header { display: flex; justify-content: space-between; gap: 16px; align-items: start; margin-bottom: 18px; }
+    .header h2 { margin: 0 0 8px; font-size: 32px; }
+    .header p { margin: 0; line-height: 1.7; color: var(--muted); max-width: 760px; }
+    .header .info { color: var(--muted); font-size: 13px; text-align: right; }
+    .grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 24px; padding: 20px; box-shadow: 0 18px 60px rgba(0,0,0,0.18); }
+    .span-12 { grid-column: span 12; }
+    .span-8 { grid-column: span 8; }
+    .span-6 { grid-column: span 6; }
+    .span-4 { grid-column: span 4; }
+    .kpis { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; }
+    .kpi { padding: 16px; border-radius: 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); }
+    .kpi label { display:block; font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+    .kpi strong { font-size: 24px; }
+    .section-title { margin: 0 0 14px; font-size: 17px; }
+    .bars { display:grid; gap:12px; }
+    .bar-row { display:grid; grid-template-columns: 120px 1fr 100px; gap:10px; align-items:center; }
+    .bar { height:10px; border-radius:999px; background: rgba(255,255,255,0.07); overflow:hidden; }
+    .bar > span { display:block; height:100%; border-radius:999px; }
+    .timeline { display:grid; grid-template-columns: repeat(24, minmax(0,1fr)); gap:6px; height:180px; align-items:end; }
+    .hour { position:relative; min-height:6px; border-radius: 10px 10px 4px 4px; background: linear-gradient(180deg, rgba(122,162,255,0.95), rgba(122,162,255,0.18)); }
+    .hour span { position:absolute; bottom:-22px; left:50%; transform:translateX(-50%); font-size:11px; color:var(--muted); }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; }
+    .chip { padding:8px 10px; border-radius:999px; background: rgba(255,255,255,0.05); font-size: 13px; }
+    table { width:100%; border-collapse:collapse; }
+    th, td { text-align:left; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.08); vertical-align:top; }
+    th { color:var(--muted); font-size:12px; font-weight:500; }
+    .note-list { margin:0; padding-left:18px; line-height:1.8; }
+    .subtle { color:var(--muted); }
+    @media (max-width: 1100px) {
+      .shell { grid-template-columns: 1fr; }
+      .sidebar { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--line); }
+      .span-8, .span-6, .span-4 { grid-column: span 12; }
+      .kpis { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <h1>电脑时间与精力分布</h1>
+        <p>每日 19:30 的复盘看板。可以查看当天、历史日期，以及每周日汇总的周节奏。若 19:30 当时电脑没开，系统会在下次 Hermes 重新运行后补发。</p>
+      </div>
+      <div class="meta-stack">
+        <div class="meta-pill" id="generatedMeta"></div>
+        <div class="meta-pill" id="sourceMeta"></div>
+      </div>
+      <div class="tabs">
+        <button class="tab active" data-tab="days">每日</button>
+        <button class="tab" data-tab="weeks">每周</button>
+      </div>
+      <div class="list active" id="dayList"></div>
+      <div class="list" id="weekList"></div>
+    </aside>
+    <main class="main">
+      <div class="header">
+        <div>
+          <h2 id="title">加载中…</h2>
+          <p id="subtitle"></p>
+        </div>
+        <div class="info" id="meta"></div>
+      </div>
+      <section class="grid" id="content"></section>
+    </main>
+  </div>
+  <script>
+    const store = __STORE_JSON__;
+    const days = [...store.days].filter(day => (day.total_active_seconds || 0) > 0).sort((a, b) => b.date.localeCompare(a.date));
+    const weeks = [...store.weeks].filter(week => (week.total_active_seconds || 0) > 0).sort((a, b) => b.end_date.localeCompare(a.end_date));
+    const tabs = document.querySelectorAll('.tab');
+    const dayList = document.getElementById('dayList');
+    const weekList = document.getElementById('weekList');
+    const title = document.getElementById('title');
+    const subtitle = document.getElementById('subtitle');
+    const meta = document.getElementById('meta');
+    const content = document.getElementById('content');
+    const generatedMeta = document.getElementById('generatedMeta');
+    const sourceMeta = document.getElementById('sourceMeta');
+
+    generatedMeta.textContent = `最近一次生成：${new Date(store.meta.generated_at).toLocaleString('zh-CN')}`;
+    sourceMeta.textContent = `数据源：ActivityWatch 本地库 · 发送时间：${store.meta.delivery_time}`;
+
+    const fmtDuration = (seconds) => {
+      seconds = Math.round(seconds || 0);
+      const h = Math.floor(seconds / 3600);
+      const m = Math.floor((seconds % 3600) / 60);
+      const s = seconds % 60;
+      if (h && m) return `${h}小时${m}分`;
+      if (h) return `${h}小时${m ? `${m}分` : ''}`;
+      if (m) return `${m}分`;
+      return `${s}秒`;
+    };
+    const pct = (share) => `${(share * 100).toFixed(1)}%`;
+
+    let mode = 'days';
+    let currentKey = days[0]?.date || weeks[0]?.id;
+
+    function switchMode(next) {
+      mode = next;
+      tabs.forEach(tab => tab.classList.toggle('active', tab.dataset.tab === next));
+      dayList.classList.toggle('active', next === 'days');
+      weekList.classList.toggle('active', next === 'weeks');
+      currentKey = next === 'days' ? (days[0]?.date) : (weeks[0]?.id);
+      renderNav();
+      renderContent();
+    }
+
+    function renderNav() {
+      dayList.innerHTML = days.map(day => `
+        <button class="item ${currentKey === day.date && mode === 'days' ? 'active' : ''}" data-kind="day" data-key="${day.date}">
+          <strong>${day.date} · ${day.weekday}</strong>
+          <small>${day.total_active_text} · ${(day.top_categories || []).join(' / ') || '暂无分类'}</small>
+        </button>
+      `).join('');
+      weekList.innerHTML = weeks.map(week => `
+        <button class="item ${currentKey === week.id && mode === 'weeks' ? 'active' : ''}" data-kind="week" data-key="${week.id}">
+          <strong>${week.label}</strong>
+          <small>${week.total_active_text} · ${(week.categories || []).slice(0,3).map(c => c.name).join(' / ') || '暂无分类'}</small>
+        </button>
+      `).join('');
+      document.querySelectorAll('.item').forEach(node => node.onclick = () => {
+        currentKey = node.dataset.key;
+        mode = node.dataset.kind === 'day' ? 'days' : 'weeks';
+        tabs.forEach(tab => tab.classList.toggle('active', tab.dataset.tab === mode));
+        dayList.classList.toggle('active', mode === 'days');
+        weekList.classList.toggle('active', mode === 'weeks');
+        renderNav();
+        renderContent();
+      });
+    }
+
+    function renderDay(day) {
+      title.textContent = `每日复盘 · ${day.date} · ${day.weekday}`;
+      subtitle.textContent = day.summary_line;
+      meta.innerHTML = `总活跃：${day.total_active_text}<br>切换：${day.switch_count} 次<br>最长专注：${day.longest_focus.text}`;
+      const maxHour = Math.max(...Object.values(day.hourly_seconds || {}), 1);
+      content.innerHTML = `
+        <article class="card span-12"><div class="kpis">
+          <div class="kpi"><label>总活跃时长</label><strong>${day.total_active_text}</strong></div>
+          <div class="kpi"><label>主类目</label><strong>${day.top_categories[0] || '—'}</strong></div>
+          <div class="kpi"><label>窗口切换</label><strong>${day.switch_count}</strong></div>
+          <div class="kpi"><label>结论置信度</label><strong>${day.energy.confidence}</strong></div>
+        </div></article>
+        <article class="card span-8"><h3 class="section-title">类目时间分布</h3><div class="bars">
+          ${(day.categories || []).map(cat => `<div class="bar-row"><div>${cat.name}</div><div class="bar"><span style="width:${pct(cat.share)}; background:${cat.color};"></span></div><div>${fmtDuration(cat.seconds)} · ${pct(cat.share)}</div></div>`).join('')}
+        </div></article>
+        <article class="card span-4"><h3 class="section-title">精力判断</h3><div class="chips">
+          <span class="chip">高投入：${day.energy.high_zone}</span><span class="chip">碎片区：${day.energy.fragmented_zone}</span><span class="chip">恢复区：${day.energy.recovery_zone}</span>
+        </div><ul class="note-list" style="margin-top:12px;">${(day.energy.evidence || []).map(item => `<li>${item}</li>`).join('')}</ul></article>
+        <article class="card span-12"><h3 class="section-title">小时节奏</h3><div class="timeline">
+          ${Object.entries(day.hourly_seconds || {}).map(([hour, seconds]) => `<div class="hour" style="height:${Math.max((seconds / maxHour) * 100, 4)}%; opacity:${seconds ? 1 : 0.22};"><span>${hour}</span></div>`).join('')}
+        </div></article>
+        <article class="card span-6"><h3 class="section-title">代表活动</h3><table><thead><tr><th>活动</th><th>时长</th></tr></thead><tbody>
+          ${(day.top_activities || []).map(item => `<tr><td>${item.activity}</td><td>${item.text}</td></tr>`).join('')}
+        </tbody></table></article>
+        <article class="card span-6"><h3 class="section-title">复盘提示</h3><ul class="note-list">
+          ${(day.notes || []).map(item => `<li>${item}</li>`).join('')}
+        </ul><p class="subtle" style="margin-top:16px;">最长连续专注块：${day.longest_focus.range} · ${day.longest_focus.activity}</p></article>
+      `;
+    }
+
+    function renderWeek(week) {
+      title.textContent = `周总结 · ${week.label}`;
+      subtitle.textContent = week.summary_line;
+      meta.innerHTML = `统计区间：${week.start_date} ～ ${week.end_date}<br>总活跃：${week.total_active_text}<br>纳入天数：${week.daily_totals.length} 天`;
+      const maxDay = Math.max(...(week.daily_totals || []).map(item => item.seconds), 1);
+      const topDay = [...(week.daily_totals || [])].sort((a,b)=>b.seconds-a.seconds)[0];
+      content.innerHTML = `
+        <article class="card span-12"><div class="kpis">
+          <div class="kpi"><label>周总活跃</label><strong>${week.total_active_text}</strong></div>
+          <div class="kpi"><label>主类目</label><strong>${week.categories[0]?.name || '—'}</strong></div>
+          <div class="kpi"><label>活跃最高日</label><strong>${topDay?.date || '—'}</strong></div>
+          <div class="kpi"><label>累计日数</label><strong>${week.daily_totals.length}</strong></div>
+        </div></article>
+        <article class="card span-7"><h3 class="section-title">本周类目占比</h3><div class="bars">
+          ${(week.categories || []).map(cat => `<div class="bar-row"><div>${cat.name}</div><div class="bar"><span style="width:${pct(cat.share)}; background:${cat.color};"></span></div><div>${fmtDuration(cat.seconds)} · ${pct(cat.share)}</div></div>`).join('')}
+        </div></article>
+        <article class="card span-5"><h3 class="section-title">周观察</h3><ul class="note-list">${(week.notes || []).map(item => `<li>${item}</li>`).join('')}</ul></article>
+        <article class="card span-12"><h3 class="section-title">每日总量</h3><div class="bars">
+          ${(week.daily_totals || []).map(item => `<div class="bar-row"><div>${item.date}</div><div class="bar"><span style="width:${(item.seconds / maxDay * 100).toFixed(1)}%; background:#7aa2ff;"></span></div><div>${item.text}</div></div>`).join('')}
+        </div></article>
+      `;
+    }
+
+    function renderContent() {
+      if (mode === 'days') {
+        const day = days.find(item => item.date === currentKey) || days[0];
+        if (!day) return;
+        renderDay(day);
+      } else {
+        const week = weeks.find(item => item.id === currentKey) || weeks[0];
+        if (!week) return;
+        renderWeek(week);
+      }
+    }
+
+    tabs.forEach(tab => tab.onclick = () => switchMode(tab.dataset.tab));
+    renderNav();
+    renderContent();
+  </script>
+</body>
+</html>'''
+    return template.replace("__STORE_JSON__", json.dumps(history, ensure_ascii=False))
+
+
+def write_site(history: dict[str, Any]) -> None:
+    INDEX_PATH.write_text(render_html(history), encoding="utf-8")
+    NOJEKYLL_PATH.write_text("", encoding="utf-8")
+
+def build_message(day_record: dict[str, Any], week_record: dict[str, Any] | None, git_status: dict[str, Any]) -> str:
+    lines = [
+        f"# 电脑时间复盘｜{day_record['date']}（{day_record['weekday']}）",
+        "",
+        f"- 总活跃时长：{day_record['total_active_text']}",
+        f"- 主要类目：{' / '.join(day_record['top_categories'][:3]) if day_record['top_categories'] else '暂无'}",
+        f"- 今日判断：{day_record['summary_line']}",
+        f"- 最长专注块：{day_record['longest_focus']['text']} · {day_record['longest_focus']['range']}",
+    ]
+    if week_record:
+        lines.extend([
+            f"- 周总结：{week_record['label']} 累计 {week_record['total_active_text']}，主轴是“{week_record['categories'][0]['name']}”。" if week_record.get('categories') else f"- 周总结：{week_record['label']} 累计 {week_record['total_active_text']}。",
+        ])
+    lines.extend([
+        f"- 同步状态：{git_status['message']}",
+        "",
+        f"MEDIA:{INDEX_PATH}",
+    ])
+    return "\n".join(lines)
+
+
+def main() -> int:
+    args = parse_args()
+    now = local_now(args)
+    history, state = update_history(now, rebuild_days=args.rebuild_days, force_date=args.force_date)
+    write_site(history)
+    git_status = maybe_commit_and_push(now, skip_push=args.skip_push)
+    day_record = None
+    if args.force_date:
+        target = args.force_date
+        day_record = next((item for item in history["days"] if item["date"] == target), None)
+    else:
+        day_record = eligible_unsent_day(history, state, now)
+    if not day_record:
+        if args.print_dry_run:
+            print("[SILENT]")
+        return 0
+    week_record = corresponding_week(history, day_record)
+    if not args.print_dry_run:
+        mark_sent(state, day_record, week_record)
+    print(build_message(day_record, week_record, git_status))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
