@@ -19,10 +19,13 @@ from urllib.parse import urlparse
 ROOT = Path(r"C:\Users\Klh\Documents\computer-time-dashboard")
 DATA_DIR = ROOT / "data"
 SITE_DIR = ROOT / "site"
+DOCS_DIR = ROOT / "docs"
 HISTORY_PATH = DATA_DIR / "history.json"
 STATE_PATH = DATA_DIR / "state.json"
 INDEX_PATH = SITE_DIR / "index.html"
 NOJEKYLL_PATH = SITE_DIR / ".nojekyll"
+DOCS_INDEX_PATH = DOCS_DIR / "index.html"
+DOCS_NOJEKYLL_PATH = DOCS_DIR / ".nojekyll"
 DB_PATH = Path(r"C:\Users\Klh\AppData\Local\activitywatch\activitywatch\aw-server\peewee-sqlite.v2.db")
 LOCAL_TZ = datetime.now().astimezone().tzinfo
 DELIVERY_TIME = time(hour=19, minute=30)
@@ -65,7 +68,7 @@ class Segment:
 
 
 def ensure_dirs() -> None:
-    for path in (DATA_DIR, SITE_DIR):
+    for path in (DATA_DIR, SITE_DIR, DOCS_DIR):
         path.mkdir(parents=True, exist_ok=True)
 
 
@@ -525,7 +528,7 @@ def run_git(args: list[str]) -> subprocess.CompletedProcess[str]:
 
 def maybe_commit_and_push(now: datetime, skip_push: bool) -> dict[str, Any]:
     status = {"committed": False, "pushed": False, "message": "未配置远程仓库，已只在本地更新。"}
-    run_git(["git", "add", "site/index.html", "site/.nojekyll", "data/history.json", "data/state.json"])
+    run_git(["git", "add", "site/index.html", "site/.nojekyll", "docs/index.html", "docs/.nojekyll", "data/history.json", "data/state.json"])
     diff = run_git(["git", "diff", "--cached", "--quiet"])
     if diff.returncode == 0:
         status["message"] = "本次没有新的 Git 变更。"
@@ -784,6 +787,8 @@ def render_html(history: dict[str, Any]) -> str:
 def write_site(history: dict[str, Any]) -> None:
     INDEX_PATH.write_text(render_html(history), encoding="utf-8")
     NOJEKYLL_PATH.write_text("", encoding="utf-8")
+    DOCS_INDEX_PATH.write_text(render_html(history), encoding="utf-8")
+    DOCS_NOJEKYLL_PATH.write_text("", encoding="utf-8")
 
 def build_message(day_record: dict[str, Any], week_record: dict[str, Any] | None, git_status: dict[str, Any]) -> str:
     lines = [

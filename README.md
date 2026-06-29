@@ -7,18 +7,20 @@
 - 若 19:30 电脑未开机，Hermes 下次运行后自动补发上一日
 - 每周日自动附带周总结
 - 使用 ActivityWatch 本地数据库作为数据源
-- 生成可直接部署到 GitHub Pages 的静态页面：`site/index.html`
+- 生成本地预览页面：`site/index.html`
+- 同步生成 GitHub Pages 发布目录：`docs/index.html`
 
 ## 目录
 - `scripts/sync_dashboard.py`：主脚本，读取数据、更新历史、生成 HTML、可选 Git 推送
 - `data/history.json`：累计的日/周历史数据
 - `data/state.json`：已发送日期状态，避免重复推送
-- `site/index.html`：最终看板页面
+- `site/index.html`：本地预览页面
+- `docs/index.html`：GitHub Pages 发布页面
 
 ## GitHub Pages 建议
 将仓库推送到 GitHub 后，把 Pages 源设置为：
 - Branch: `main`
-- Folder: `/site`
+- Folder: `/docs`
 
 ## 本地手动运行
 ```bash
