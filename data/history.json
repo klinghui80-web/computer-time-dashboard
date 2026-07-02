@@ -238,7 +238,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-02T09:35:31.585969+08:00"
+      "generated_at": "2026-07-02T09:40:31.965198+08:00"
     },
     {
       "date": "2026-06-19",
@@ -298,7 +298,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-02T09:35:31.585969+08:00"
+      "generated_at": "2026-07-02T09:40:31.965198+08:00"
     },
     {
       "date": "2026-06-20",
@@ -358,7 +358,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-02T09:35:31.585969+08:00"
+      "generated_at": "2026-07-02T09:40:31.964200+08:00"
     },
     {
       "date": "2026-06-21",
@@ -418,7 +418,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-02T09:35:31.585969+08:00"
+      "generated_at": "2026-07-02T09:40:31.963198+08:00"
     },
     {
       "date": "2026-06-22",
@@ -478,7 +478,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-02T09:35:31.585969+08:00"
+      "generated_at": "2026-07-02T09:40:31.963198+08:00"
     },
     {
       "date": "2026-06-23",
@@ -538,7 +538,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-02T09:35:31.585969+08:00"
+      "generated_at": "2026-07-02T09:40:31.962199+08:00"
     },
     {
       "date": "2026-06-24",
@@ -598,7 +598,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-02T09:35:31.585137+08:00"
+      "generated_at": "2026-07-02T09:40:31.961199+08:00"
     },
     {
       "date": "2026-06-25",
@@ -658,7 +658,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-02T09:35:31.584137+08:00"
+      "generated_at": "2026-07-02T09:40:31.961199+08:00"
     },
     {
       "date": "2026-06-26",
@@ -718,7 +718,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-02T09:35:31.584137+08:00"
+      "generated_at": "2026-07-02T09:40:31.960198+08:00"
     },
     {
       "date": "2026-06-27",
@@ -889,7 +889,7 @@
           "text": "3分"
         }
       ],
-      "generated_at": "2026-07-02T09:35:31.583134+08:00"
+      "generated_at": "2026-07-02T09:40:31.959210+08:00"
     },
     {
       "date": "2026-06-28",
@@ -1071,7 +1071,7 @@
           "text": "4分"
         }
       ],
-      "generated_at": "2026-07-02T09:35:31.551645+08:00"
+      "generated_at": "2026-07-02T09:40:31.926782+08:00"
     },
     {
       "date": "2026-06-29",
@@ -1253,7 +1253,7 @@
           "text": "6分"
         }
       ],
-      "generated_at": "2026-07-02T09:35:31.493517+08:00"
+      "generated_at": "2026-07-02T09:40:31.868912+08:00"
     },
     {
       "date": "2026-06-30",
@@ -1438,7 +1438,7 @@
           "text": "19分"
         }
       ],
-      "generated_at": "2026-07-02T09:35:31.330884+08:00"
+      "generated_at": "2026-07-02T09:40:31.697257+08:00"
     },
     {
       "date": "2026-07-01",
@@ -1622,83 +1622,85 @@
           "text": "12分"
         }
       ],
-      "generated_at": "2026-07-02T09:35:31.144803+08:00"
+      "generated_at": "2026-07-02T09:40:31.519022+08:00"
     },
     {
       "date": "2026-07-02",
       "weekday": "周四",
-      "total_active_seconds": 490.84,
-      "total_active_text": "8分",
+      "total_active_seconds": 756.21,
+      "total_active_text": "12分",
       "top_categories": [
         "其他",
-        "系统/维护",
+        "学习/信息",
         "设计"
       ],
       "categories": [
         {
           "name": "其他",
-          "seconds": 463.41,
-          "share": 0.9441,
+          "seconds": 583.37,
+          "share": 0.7714,
           "representatives": [
             "chrome.exe｜(58) Pinterest｜www.pinterest.com",
             "chrome.exe｜新标签页｜newtab",
-            "chrome.exe｜bo.video | Bo by Ancher｜bo.video"
+            "chrome.exe｜Lovart：全球首个AI设计智能体 | 自动化平面设计平台｜www.lovart.ai"
           ],
           "color": "#cbd5e1"
         },
         {
-          "name": "系统/维护",
-          "seconds": 16.27,
-          "share": 0.0332,
+          "name": "学习/信息",
+          "seconds": 130.03,
+          "share": 0.1719,
           "representatives": [
-            "clash-verge.exe｜Clash Verge",
-            "explorer.exe｜Program Manager",
-            "explorer.exe"
+            "chrome.exe｜(58) Pinterest - Google Chrome",
+            "chrome.exe｜收藏到 DM - Google Chrome",
+            "chrome.exe｜Under one roof - Google Chrome"
           ],
-          "color": "#8a7dff"
+          "color": "#61ddaa"
         },
         {
           "name": "设计",
-          "seconds": 10.15,
-          "share": 0.0207,
+          "seconds": 26.55,
+          "share": 0.0351,
           "representatives": [
             "Figma.exe｜电商详情页 - Figma"
           ],
           "color": "#f6bd16"
         },
         {
-          "name": "学习/信息",
-          "seconds": 1.01,
-          "share": 0.0021,
+          "name": "系统/维护",
+          "seconds": 16.27,
+          "share": 0.0215,
           "representatives": [
-            "msedge.exe｜bo.video | Bo by Ancher｜bo.video"
+            "clash-verge.exe｜Clash Verge",
+            "explorer.exe｜Program Manager",
+            "explorer.exe"
           ],
-          "color": "#61ddaa"
+          "color": "#8a7dff"
         }
       ],
-      "switch_count": 7,
-      "segment_count": 12,
-      "summary_line": "这一天共记录 8分 的活跃电脑时间，主轴是“其他”，节奏相对稳定，存在可识别的连续工作块。",
+      "switch_count": 27,
+      "segment_count": 39,
+      "summary_line": "这一天共记录 12分 的活跃电脑时间，主轴是“其他”，节奏相对稳定，存在可识别的连续工作块。",
       "notes": [
-        "主类目是“其他”，占比 94.4%，说明当天最主要的电脑注意力投向比较清晰。",
+        "主类目是“其他”，占比 77.1%，说明当天最主要的电脑注意力投向比较清晰。",
         "窗口切换不高，说明这一天的任务切换成本相对可控。",
         "最长连续专注块偏短，后续可重点观察是什么因素把整块时间切碎了。"
       ],
       "longest_focus": {
         "category": "其他",
         "activity": "chrome.exe｜(58) Pinterest｜www.pinterest.com",
-        "seconds": 306.01,
+        "seconds": 322.41,
         "text": "5分",
         "range": "09:30–09:35"
       },
       "energy": {
         "high_zone": "其他",
-        "fragmented_zone": "系统/维护",
+        "fragmented_zone": "学习/信息",
         "recovery_zone": "无明显恢复区",
         "confidence": "低",
         "evidence": [
-          "总活跃时长 8分",
-          "窗口切换 7 次",
+          "总活跃时长 12分",
+          "窗口切换 27 次",
           "最长连续专注块 5分"
         ]
       },
@@ -1712,7 +1714,7 @@
         "6": 0.0,
         "7": 0.0,
         "8": 0.0,
-        "9": 490.84,
+        "9": 756.21,
         "10": 0.0,
         "11": 0.0,
         "12": 0.0,
@@ -1731,7 +1733,7 @@
       "top_activities": [
         {
           "activity": "chrome.exe｜(58) Pinterest｜www.pinterest.com",
-          "seconds": 306.01,
+          "seconds": 336.78,
           "text": "5分"
         },
         {
@@ -1740,37 +1742,37 @@
           "text": "2分"
         },
         {
+          "activity": "chrome.exe｜Lovart：全球首个AI设计智能体 | 自动化平面设计平台｜www.lovart.ai",
+          "seconds": 89.19,
+          "text": "1分"
+        },
+        {
+          "activity": "chrome.exe｜(58) Pinterest - Google Chrome",
+          "seconds": 64.41,
+          "text": "1分"
+        },
+        {
+          "activity": "chrome.exe｜收藏到 DM - Google Chrome",
+          "seconds": 27.69,
+          "text": "28秒"
+        },
+        {
+          "activity": "Figma.exe｜电商详情页 - Figma",
+          "seconds": 26.55,
+          "text": "27秒"
+        },
+        {
           "activity": "chrome.exe｜bo.video | Bo by Ancher｜bo.video",
           "seconds": 18.32,
           "text": "18秒"
         },
         {
-          "activity": "Figma.exe｜电商详情页 - Figma",
-          "seconds": 10.15,
-          "text": "10秒"
-        },
-        {
-          "activity": "clash-verge.exe｜Clash Verge",
-          "seconds": 9.17,
-          "text": "9秒"
-        },
-        {
-          "activity": "explorer.exe｜Program Manager",
-          "seconds": 4.08,
-          "text": "4秒"
-        },
-        {
-          "activity": "explorer.exe",
-          "seconds": 3.02,
-          "text": "3秒"
-        },
-        {
-          "activity": "msedge.exe｜bo.video | Bo by Ancher｜bo.video",
-          "seconds": 1.01,
-          "text": "1秒"
+          "activity": "chrome.exe｜Under one roof - Google Chrome",
+          "seconds": 17.41,
+          "text": "17秒"
         }
       ],
-      "generated_at": "2026-07-02T09:35:30.984373+08:00"
+      "generated_at": "2026-07-02T09:40:31.343489+08:00"
     }
   ],
   "weeks": [
@@ -1823,7 +1825,7 @@
       "notes": [
         "最投入的一天是 2026-06-15，活跃 0秒。"
       ],
-      "generated_at": "2026-07-02T09:35:31.585969+08:00"
+      "generated_at": "2026-07-02T09:40:31.966198+08:00"
     },
     {
       "id": "2026-06-22~2026-06-28",
@@ -1918,12 +1920,12 @@
         "最投入的一天是 2026-06-28，活跃 4小时29分。",
         "前三类目合计占比 78.6%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-02T09:35:31.585969+08:00"
+      "generated_at": "2026-07-02T09:40:31.966198+08:00"
     }
   ],
   "meta": {
     "db_path": "C:\\Users\\Klh\\AppData\\Local\\activitywatch\\activitywatch\\aw-server\\peewee-sqlite.v2.db",
-    "generated_at": "2026-07-02T09:35:30.953966+08:00",
+    "generated_at": "2026-07-02T09:40:31.311077+08:00",
     "delivery_time": "19:30",
     "timezone": "中国标准时间"
   }
