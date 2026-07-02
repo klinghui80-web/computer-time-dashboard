@@ -238,7 +238,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-02T10:55:54.370888+08:00"
+      "generated_at": "2026-07-02T11:00:54.874441+08:00"
     },
     {
       "date": "2026-06-19",
@@ -298,7 +298,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-02T10:55:54.369893+08:00"
+      "generated_at": "2026-07-02T11:00:54.874441+08:00"
     },
     {
       "date": "2026-06-20",
@@ -358,7 +358,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-02T10:55:54.369893+08:00"
+      "generated_at": "2026-07-02T11:00:54.873442+08:00"
     },
     {
       "date": "2026-06-21",
@@ -418,7 +418,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-02T10:55:54.368878+08:00"
+      "generated_at": "2026-07-02T11:00:54.872442+08:00"
     },
     {
       "date": "2026-06-22",
@@ -478,7 +478,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-02T10:55:54.367883+08:00"
+      "generated_at": "2026-07-02T11:00:54.872442+08:00"
     },
     {
       "date": "2026-06-23",
@@ -538,7 +538,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-02T10:55:54.367883+08:00"
+      "generated_at": "2026-07-02T11:00:54.871443+08:00"
     },
     {
       "date": "2026-06-24",
@@ -598,7 +598,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-02T10:55:54.366893+08:00"
+      "generated_at": "2026-07-02T11:00:54.871443+08:00"
     },
     {
       "date": "2026-06-25",
@@ -658,7 +658,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-02T10:55:54.365880+08:00"
+      "generated_at": "2026-07-02T11:00:54.870440+08:00"
     },
     {
       "date": "2026-06-26",
@@ -718,7 +718,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-02T10:55:54.365880+08:00"
+      "generated_at": "2026-07-02T11:00:54.869480+08:00"
     },
     {
       "date": "2026-06-27",
@@ -889,7 +889,7 @@
           "text": "3分"
         }
       ],
-      "generated_at": "2026-07-02T10:55:54.363894+08:00"
+      "generated_at": "2026-07-02T11:00:54.868441+08:00"
     },
     {
       "date": "2026-06-28",
@@ -1071,7 +1071,7 @@
           "text": "4分"
         }
       ],
-      "generated_at": "2026-07-02T10:55:54.331542+08:00"
+      "generated_at": "2026-07-02T11:00:54.834234+08:00"
     },
     {
       "date": "2026-06-29",
@@ -1253,7 +1253,7 @@
           "text": "6分"
         }
       ],
-      "generated_at": "2026-07-02T10:55:54.275579+08:00"
+      "generated_at": "2026-07-02T11:00:54.777269+08:00"
     },
     {
       "date": "2026-06-30",
@@ -1438,7 +1438,7 @@
           "text": "19分"
         }
       ],
-      "generated_at": "2026-07-02T10:55:54.109435+08:00"
+      "generated_at": "2026-07-02T11:00:54.611585+08:00"
     },
     {
       "date": "2026-07-01",
@@ -1622,13 +1622,13 @@
           "text": "12分"
         }
       ],
-      "generated_at": "2026-07-02T10:55:53.924686+08:00"
+      "generated_at": "2026-07-02T11:00:54.425996+08:00"
     },
     {
       "date": "2026-07-02",
       "weekday": "周四",
-      "total_active_seconds": 4360.85,
-      "total_active_text": "1小时12分",
+      "total_active_seconds": 4567.24,
+      "total_active_text": "1小时16分",
       "top_categories": [
         "设计",
         "学习/信息",
@@ -1637,8 +1637,8 @@
       "categories": [
         {
           "name": "设计",
-          "seconds": 1591.6,
-          "share": 0.365,
+          "seconds": 1742.47,
+          "share": 0.3815,
           "representatives": [
             "Figma.exe｜电商详情页 - Figma"
           ],
@@ -1646,8 +1646,8 @@
         },
         {
           "name": "学习/信息",
-          "seconds": 1398.91,
-          "share": 0.3208,
+          "seconds": 1448.26,
+          "share": 0.3171,
           "representatives": [
             "chrome.exe｜Lovart | The world's first design agent for all design purposes - Google Chrome",
             "chrome.exe｜(58) Pinterest - Google Chrome",
@@ -1658,7 +1658,7 @@
         {
           "name": "其他",
           "seconds": 994.01,
-          "share": 0.2279,
+          "share": 0.2176,
           "representatives": [
             "chrome.exe｜(58) Pinterest｜www.pinterest.com",
             "chrome.exe｜Lovart | The world's first design agent for all design purposes｜www.lovart.ai",
@@ -1668,8 +1668,8 @@
         },
         {
           "name": "沟通",
-          "seconds": 233.84,
-          "share": 0.0536,
+          "seconds": 240.02,
+          "share": 0.0526,
           "representatives": [
             "Feishu.exe｜飞书",
             "Feishu.exe｜bo-ecommerce-landing.html",
@@ -1680,7 +1680,7 @@
         {
           "name": "工作/创作",
           "seconds": 120.07,
-          "share": 0.0275,
+          "share": 0.0263,
           "representatives": [
             "chrome.exe｜AI产品视觉风格｜chatgpt.com"
           ],
@@ -1689,7 +1689,7 @@
         {
           "name": "系统/维护",
           "seconds": 22.41,
-          "share": 0.0051,
+          "share": 0.0049,
           "representatives": [
             "clash-verge.exe｜Clash Verge",
             "explorer.exe｜竞品详情页 - 文件资源管理器",
@@ -1698,19 +1698,18 @@
           "color": "#8a7dff"
         }
       ],
-      "switch_count": 132,
-      "segment_count": 164,
-      "summary_line": "这一天共记录 1小时12分 的活跃电脑时间，主轴是“设计”，切换密度偏高，像是在多线程推进。",
+      "switch_count": 136,
+      "segment_count": 168,
+      "summary_line": "这一天共记录 1小时16分 的活跃电脑时间，主轴是“设计”，切换密度偏高，像是在多线程推进。",
       "notes": [
-        "主类目是“设计”，占比 36.5%，说明当天最主要的电脑注意力投向比较清晰。",
-        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。",
-        "最长连续专注块偏短，后续可重点观察是什么因素把整块时间切碎了。"
+        "主类目是“设计”，占比 38.1%，说明当天最主要的电脑注意力投向比较清晰。",
+        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。"
       ],
       "longest_focus": {
         "category": "设计",
         "activity": "Figma.exe｜电商详情页 - Figma",
-        "seconds": 598.26,
-        "text": "9分",
+        "seconds": 602.82,
+        "text": "10分",
         "range": "10:45–10:55"
       },
       "energy": {
@@ -1719,9 +1718,9 @@
         "recovery_zone": "无明显恢复区",
         "confidence": "低",
         "evidence": [
-          "总活跃时长 1小时12分",
-          "窗口切换 132 次",
-          "最长连续专注块 9分"
+          "总活跃时长 1小时16分",
+          "窗口切换 136 次",
+          "最长连续专注块 10分"
         ]
       },
       "hourly_seconds": {
@@ -1735,7 +1734,7 @@
         "7": 0.0,
         "8": 0.0,
         "9": 1171.78,
-        "10": 3189.07,
+        "10": 3395.46,
         "11": 0.0,
         "12": 0.0,
         "13": 0.0,
@@ -1753,8 +1752,8 @@
       "top_activities": [
         {
           "activity": "Figma.exe｜电商详情页 - Figma",
-          "seconds": 1591.6,
-          "text": "26分"
+          "seconds": 1742.47,
+          "text": "29分"
         },
         {
           "activity": "chrome.exe｜Lovart | The world's first design agent for all design purposes - Google Chrome",
@@ -1792,7 +1791,7 @@
           "text": "2分"
         }
       ],
-      "generated_at": "2026-07-02T10:55:53.751352+08:00"
+      "generated_at": "2026-07-02T11:00:54.247957+08:00"
     }
   ],
   "weeks": [
@@ -1845,7 +1844,7 @@
       "notes": [
         "最投入的一天是 2026-06-15，活跃 0秒。"
       ],
-      "generated_at": "2026-07-02T10:55:54.370888+08:00"
+      "generated_at": "2026-07-02T11:00:54.875442+08:00"
     },
     {
       "id": "2026-06-22~2026-06-28",
@@ -1940,12 +1939,12 @@
         "最投入的一天是 2026-06-28，活跃 4小时29分。",
         "前三类目合计占比 78.6%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-02T10:55:54.370888+08:00"
+      "generated_at": "2026-07-02T11:00:54.875442+08:00"
     }
   ],
   "meta": {
     "db_path": "C:\\Users\\Klh\\AppData\\Local\\activitywatch\\activitywatch\\aw-server\\peewee-sqlite.v2.db",
-    "generated_at": "2026-07-02T10:55:53.712794+08:00",
+    "generated_at": "2026-07-02T11:00:54.209860+08:00",
     "delivery_time": "19:30",
     "timezone": "中国标准时间"
   }
