@@ -298,7 +298,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-03T09:25:29.973951+08:00"
+      "generated_at": "2026-07-03T09:30:30.720070+08:00"
     },
     {
       "date": "2026-06-20",
@@ -358,7 +358,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-03T09:25:29.973951+08:00"
+      "generated_at": "2026-07-03T09:30:30.720070+08:00"
     },
     {
       "date": "2026-06-21",
@@ -418,7 +418,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-03T09:25:29.973951+08:00"
+      "generated_at": "2026-07-03T09:30:30.718064+08:00"
     },
     {
       "date": "2026-06-22",
@@ -478,7 +478,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-03T09:25:29.973951+08:00"
+      "generated_at": "2026-07-03T09:30:30.718064+08:00"
     },
     {
       "date": "2026-06-23",
@@ -538,7 +538,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-03T09:25:29.968830+08:00"
+      "generated_at": "2026-07-03T09:30:30.718064+08:00"
     },
     {
       "date": "2026-06-24",
@@ -598,7 +598,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-03T09:25:29.968830+08:00"
+      "generated_at": "2026-07-03T09:30:30.718064+08:00"
     },
     {
       "date": "2026-06-25",
@@ -658,7 +658,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-03T09:25:29.968830+08:00"
+      "generated_at": "2026-07-03T09:30:30.717059+08:00"
     },
     {
       "date": "2026-06-26",
@@ -718,7 +718,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-03T09:25:29.968830+08:00"
+      "generated_at": "2026-07-03T09:30:30.715053+08:00"
     },
     {
       "date": "2026-06-27",
@@ -889,7 +889,7 @@
           "text": "3分"
         }
       ],
-      "generated_at": "2026-07-03T09:25:29.968830+08:00"
+      "generated_at": "2026-07-03T09:30:30.715053+08:00"
     },
     {
       "date": "2026-06-28",
@@ -1071,7 +1071,7 @@
           "text": "4分"
         }
       ],
-      "generated_at": "2026-07-03T09:25:29.937432+08:00"
+      "generated_at": "2026-07-03T09:30:30.682472+08:00"
     },
     {
       "date": "2026-06-29",
@@ -1253,7 +1253,7 @@
           "text": "6分"
         }
       ],
-      "generated_at": "2026-07-03T09:25:29.879867+08:00"
+      "generated_at": "2026-07-03T09:30:30.627269+08:00"
     },
     {
       "date": "2026-06-30",
@@ -1438,7 +1438,7 @@
           "text": "19分"
         }
       ],
-      "generated_at": "2026-07-03T09:25:29.715166+08:00"
+      "generated_at": "2026-07-03T09:30:30.459412+08:00"
     },
     {
       "date": "2026-07-01",
@@ -1622,7 +1622,7 @@
           "text": "12分"
         }
       ],
-      "generated_at": "2026-07-03T09:25:29.540803+08:00"
+      "generated_at": "2026-07-03T09:30:30.285188+08:00"
     },
     {
       "date": "2026-07-02",
@@ -1795,23 +1795,23 @@
           "text": "7分"
         }
       ],
-      "generated_at": "2026-07-03T09:25:29.368698+08:00"
+      "generated_at": "2026-07-03T09:30:30.109848+08:00"
     },
     {
       "date": "2026-07-03",
       "weekday": "周五",
-      "total_active_seconds": 185.77,
-      "total_active_text": "3分",
+      "total_active_seconds": 464.1,
+      "total_active_text": "7分",
       "top_categories": [
         "沟通",
-        "系统/维护",
-        "其他"
+        "其他",
+        "系统/维护"
       ],
       "categories": [
         {
           "name": "沟通",
-          "seconds": 145.0,
-          "share": 0.7805,
+          "seconds": 379.36,
+          "share": 0.8174,
           "representatives": [
             "Weixin.exe｜微信",
             "Feishu.exe｜飞书",
@@ -1820,9 +1820,19 @@
           "color": "#5ad1e6"
         },
         {
+          "name": "其他",
+          "seconds": 54.2,
+          "share": 0.1168,
+          "representatives": [
+            "Weixin.exe｜Weixin",
+            "Weixin.exe｜图片和视频"
+          ],
+          "color": "#cbd5e1"
+        },
+        {
           "name": "系统/维护",
           "seconds": 22.42,
-          "share": 0.1207,
+          "share": 0.0483,
           "representatives": [
             "explorer.exe｜Program Manager",
             "ShellHost.exe｜快速设置",
@@ -1831,48 +1841,39 @@
           "color": "#8a7dff"
         },
         {
-          "name": "其他",
-          "seconds": 10.22,
-          "share": 0.055,
-          "representatives": [
-            "Weixin.exe｜Weixin"
-          ],
-          "color": "#cbd5e1"
-        },
-        {
           "name": "学习/信息",
           "seconds": 8.13,
-          "share": 0.0438,
+          "share": 0.0175,
           "representatives": [
             "msedge.exe｜新建标签页 - 个人 - Microsoft​ Edge"
           ],
           "color": "#61ddaa"
         }
       ],
-      "switch_count": 10,
-      "segment_count": 14,
-      "summary_line": "这一天共记录 3分 的活跃电脑时间，主轴是“沟通”，节奏相对稳定，存在可识别的连续工作块。",
+      "switch_count": 16,
+      "segment_count": 20,
+      "summary_line": "这一天共记录 7分 的活跃电脑时间，主轴是“沟通”，节奏相对稳定，存在可识别的连续工作块。",
       "notes": [
-        "主类目是“沟通”，占比 78.0%，说明当天最主要的电脑注意力投向比较清晰。",
+        "主类目是“沟通”，占比 81.7%，说明当天最主要的电脑注意力投向比较清晰。",
         "窗口切换不高，说明这一天的任务切换成本相对可控。",
         "最长连续专注块偏短，后续可重点观察是什么因素把整块时间切碎了。"
       ],
       "longest_focus": {
         "category": "沟通",
         "activity": "Weixin.exe｜微信",
-        "seconds": 83.98,
-        "text": "1分",
-        "range": "09:23–09:25"
+        "seconds": 168.78,
+        "text": "2分",
+        "range": "09:25–09:28"
       },
       "energy": {
         "high_zone": "沟通",
-        "fragmented_zone": "系统/维护",
+        "fragmented_zone": "其他",
         "recovery_zone": "沟通",
         "confidence": "低",
         "evidence": [
-          "总活跃时长 3分",
-          "窗口切换 10 次",
-          "最长连续专注块 1分"
+          "总活跃时长 7分",
+          "窗口切换 16 次",
+          "最长连续专注块 2分"
         ]
       },
       "hourly_seconds": {
@@ -1885,7 +1886,7 @@
         "6": 0.0,
         "7": 0.0,
         "8": 0.0,
-        "9": 185.77,
+        "9": 464.1,
         "10": 0.0,
         "11": 0.0,
         "12": 0.0,
@@ -1904,8 +1905,13 @@
       "top_activities": [
         {
           "activity": "Weixin.exe｜微信",
-          "seconds": 97.04,
-          "text": "1分"
+          "seconds": 331.39,
+          "text": "5分"
+        },
+        {
+          "activity": "Weixin.exe｜Weixin",
+          "seconds": 53.17,
+          "text": "53秒"
         },
         {
           "activity": "Feishu.exe｜飞书",
@@ -1916,11 +1922,6 @@
           "activity": "explorer.exe｜Program Manager",
           "seconds": 19.37,
           "text": "19秒"
-        },
-        {
-          "activity": "Weixin.exe｜Weixin",
-          "seconds": 10.22,
-          "text": "10秒"
         },
         {
           "activity": "msedge.exe｜新建标签页 - 个人 - Microsoft​ Edge",
@@ -1938,12 +1939,12 @@
           "text": "2秒"
         },
         {
-          "activity": "explorer.exe",
+          "activity": "Weixin.exe｜图片和视频",
           "seconds": 1.02,
           "text": "1秒"
         }
       ],
-      "generated_at": "2026-07-03T09:25:29.244628+08:00"
+      "generated_at": "2026-07-03T09:30:29.981908+08:00"
     }
   ],
   "weeks": [
@@ -1996,7 +1997,7 @@
       "notes": [
         "最投入的一天是 2026-06-15，活跃 0秒。"
       ],
-      "generated_at": "2026-07-03T09:25:29.973951+08:00"
+      "generated_at": "2026-07-03T09:30:30.720070+08:00"
     },
     {
       "id": "2026-06-22~2026-06-28",
@@ -2091,12 +2092,12 @@
         "最投入的一天是 2026-06-28，活跃 4小时29分。",
         "前三类目合计占比 78.6%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-03T09:25:29.973951+08:00"
+      "generated_at": "2026-07-03T09:30:30.720070+08:00"
     }
   ],
   "meta": {
     "db_path": "C:\\Users\\Klh\\AppData\\Local\\activitywatch\\activitywatch\\aw-server\\peewee-sqlite.v2.db",
-    "generated_at": "2026-07-03T09:25:29.206635+08:00",
+    "generated_at": "2026-07-03T09:30:29.944616+08:00",
     "delivery_time": "19:30",
     "timezone": "中国标准时间"
   }
