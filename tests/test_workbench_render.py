@@ -70,7 +70,21 @@ def test_render_html_contains_editable_task_and_review_controls():
     assert "今日重点" in html
 
 
+def test_first_screen_is_a_minimal_pending_work_overview():
+    module = load_module()
+    html = module.render_html(sample_history())
+
+    assert "overview-first-fold" in html
+    assert "statusDonutStyle" in html
+    assert "未完成事项" in html
+    assert "紧急" in html
+    assert "进行中" in html
+    assert "待办" in html
+    assert "待推进总数" in html
+
+
 if __name__ == "__main__":
     test_render_html_upgrades_time_dashboard_into_personal_workbench()
     test_render_html_contains_editable_task_and_review_controls()
+    test_first_screen_is_a_minimal_pending_work_overview()
     print("workbench render tests passed")

@@ -627,6 +627,24 @@ def render_html(history: dict[str, Any]) -> str:
     .workbench-hero { display:grid; grid-template-columns: 1.25fr .75fr; gap:16px; align-items:stretch; }
     .hero-title { font-size:42px; line-height:1.02; letter-spacing:-1.1px; margin:0 0 12px; font-weight:600; }
     .hero-copy { color:var(--muted); line-height:1.8; margin:0; max-width:780px; }
+    .overview-first-fold { min-height: calc(100vh - 150px); display:flex; flex-direction:column; justify-content:center; gap:24px; background:linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015)); }
+    .overview-top { display:flex; flex-direction:column; align-items:center; gap:18px; text-align:center; }
+    .overview-kicker { color:var(--muted); font-size:13px; letter-spacing:.08em; text-transform:uppercase; }
+    .donut { width:300px; height:300px; border-radius:50%; display:grid; place-items:center; position:relative; filter:drop-shadow(0 24px 70px rgba(0,0,0,.25)); }
+    .donut::after { content:""; position:absolute; inset:44px; border-radius:50%; background:rgba(7,17,31,.96); border:1px solid rgba(255,255,255,.08); }
+    .donut-center { position:relative; z-index:1; display:grid; gap:6px; justify-items:center; }
+    .donut-number { font-size:72px; line-height:.9; letter-spacing:-2px; font-weight:600; color:#f7f8f8; }
+    .donut-label { color:#8a8f98; font-size:15px; }
+    .status-legend { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; }
+    .legend-pill { display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.035); color:#d0d6e0; border-radius:999px; padding:8px 13px; font-size:13px; }
+    .dot { width:9px; height:9px; border-radius:50%; display:inline-block; }
+    .overview-metrics { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; }
+    .metric-card { min-height:140px; border:1px solid rgba(255,255,255,.08); border-radius:22px; background:rgba(255,255,255,.028); padding:22px; display:flex; flex-direction:column; justify-content:space-between; }
+    .metric-card label { color:#8a8f98; font-size:13px; }
+    .metric-card strong { font-size:46px; line-height:1; letter-spacing:-1px; }
+    .metric-card strong .unit { font-size:18px; color:#8a8f98; margin-left:4px; }
+    .metric-card p { margin:0; color:#d0d6e0; line-height:1.55; }
+    .next-fold { margin-top:4px; }
     .toolbar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
     .btn { border:1px solid rgba(255,255,255,0.08); color:var(--text); background:rgba(255,255,255,0.04); border-radius:10px; padding:9px 12px; cursor:pointer; font:inherit; }
     .btn.primary { background:#5e6ad2; border-color:#7170ff; color:#fff; }
@@ -667,6 +685,10 @@ def render_html(history: dict[str, Any]) -> str:
       .form-grid .wide { grid-column: span 1; }
       .review-grid .wide { grid-column: span 1; }
       .mini-stat { grid-template-columns:1fr; }
+      .overview-metrics { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .donut { width:240px; height:240px; }
+      .donut-number { font-size:58px; }
+      .overview-first-fold { min-height:auto; }
     }
   </style>
 </head>
@@ -732,7 +754,14 @@ def render_html(history: dict[str, Any]) -> str:
     const WORKBENCH_TASK_KEY = 'workbenchTasks';
     const WORKBENCH_REVIEW_KEY = 'workbenchReviews';
     const priorityRank = { P0: 0, P1: 1, P2: 2, P3: 3 };
-    const statusLabels = { todo: '未开始', doing: '进行中', waiting: '等待中', blocked: '阻塞中', done: '已完成' };
+    const statusLabels = { todo: '待办', doing: '进行中', waiting: '等待中', blocked: '阻塞中', done: '已完成' };
+    const statusStyles = {
+      urgent: { label: '紧急', color: '#c95d45' },
+      doing: { label: '进行中', color: '#4f6f92' },
+      todo: { label: '待办', color: '#b89a45' },
+      waiting: { label: '等待', color: '#4d9478' },
+      done: { label: '已完成', color: '#63627f' },
+    };
 
     const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
     const readLocal = (key, fallback) => {
@@ -758,11 +787,34 @@ def render_html(history: dict[str, Any]) -> str:
     function saveReviews(reviews) { writeLocal(WORKBENCH_REVIEW_KEY, reviews); }
     function activeTasks() { return loadTasks().filter(task => task.status !== 'done').sort((a,b) => (priorityRank[a.priority] ?? 9) - (priorityRank[b.priority] ?? 9)); }
     function taskStats(tasks) {
-      const total = tasks.length;
+      const pending = tasks.filter(t => t.status !== 'done');
       const done = tasks.filter(t => t.status === 'done').length;
-      const high = tasks.filter(t => ['P0','P1'].includes(t.priority) && t.status !== 'done').length;
-      const blocked = tasks.filter(t => t.status === 'blocked').length;
-      return { total, done, high, blocked };
+      const counts = Object.fromEntries(Object.keys(statusStyles).map(key => [key, tasks.filter(t => t.status === key).length]));
+      const isUrgent = (task) => task.priority === 'P0' || task.status === 'blocked';
+      const urgent = pending.filter(isUrgent).length;
+      const doing = pending.filter(t => !isUrgent(t) && t.status === 'doing').length;
+      const todo = pending.filter(t => !isUrgent(t) && t.status === 'todo').length;
+      const waiting = pending.filter(t => !isUrgent(t) && t.status === 'waiting').length;
+      const high = pending.filter(t => ['P0','P1'].includes(t.priority)).length;
+      const todayFocus = pending.filter(t => t.focus).length;
+      return { total: tasks.length, pending: pending.length, done, counts, urgent, high, todayFocus, blocked: tasks.filter(t => t.status === 'blocked').length, doing, todo, waiting };
+    }
+    function statusDonutStyle(stats) {
+      const total = Math.max(stats.pending, 1);
+      let cursor = 0;
+      const segments = ['urgent', 'doing', 'todo', 'waiting'].map(key => {
+        const count = stats[key] || 0;
+        const start = cursor;
+        cursor += (count / total) * 100;
+        return `${statusStyles[key].color} ${start.toFixed(2)}% ${cursor.toFixed(2)}%`;
+      });
+      if (stats.pending === 0) return 'background: conic-gradient(#63627f 0% 100%);';
+      return `background: conic-gradient(${segments.join(', ')});`;
+    }
+    function renderStatusLegend(stats) {
+      return ['urgent', 'doing', 'todo', 'waiting'].map(key => `
+        <span class="legend-pill"><i class="dot" style="background:${statusStyles[key].color}"></i>${statusStyles[key].label} ${stats[key] || 0}</span>
+      `).join('');
     }
 
     window.addTask = function addTask() {
@@ -917,28 +969,32 @@ def render_html(history: dict[str, Any]) -> str:
       const stats = taskStats(tasks);
       const reviews = loadReviews();
       const review = today ? (reviews[today.date] || {}) : {};
-      title.textContent = '个人工作台';
-      subtitle.textContent = '围绕“今日计划 → 白天推进 → 19:30 自动时间复盘 → 晚上手动任务复盘”的个人操作系统。';
-      meta.innerHTML = today ? `今日：${today.date} · ${today.weekday}<br>时间管理自动化：每日 19:30 保持不动<br>本地可编辑：待办 / 复盘` : '等待时间数据生成';
+      title.textContent = '总览';
+      subtitle.textContent = '首屏只回答一个问题：现在还有多少内容待推进。下面再继续处理任务、复盘和时间数据。';
+      meta.innerHTML = today ? `${today.date} · ${today.weekday}<br>每日 19:30 自动复盘保持不动` : '等待时间数据生成';
       content.innerHTML = `
-        <article class="card span-12 workbench-hero">
-          <div>
-            <h3 class="hero-title">今日执行面板</h3>
-            <p class="hero-copy">这里现在不只是时间看板，而是你的个人化工作台：待办分优先级、每天手动汇报推进，时间管理作为“时间与精力”板块继续保留。</p>
+        <article class="card span-12 overview-first-fold">
+          <div class="overview-top">
+            <div class="overview-kicker">Personal Workbench Overview</div>
+            <div class="donut" style="${statusDonutStyle(stats)}">
+              <div class="donut-center"><div class="donut-number">${stats.pending}</div><div class="donut-label">未完成事项</div></div>
+            </div>
+            <div class="status-legend">${renderStatusLegend(stats)}</div>
           </div>
-          <div class="mini-stat">
-            <div class="kpi"><label>待办完成</label><strong>${stats.done}/${stats.total}</strong></div>
-            <div class="kpi"><label>高优任务</label><strong>${stats.high}</strong></div>
-            <div class="kpi"><label>今日活跃</label><strong>${today?.total_active_text || '—'}</strong></div>
+          <div class="overview-metrics">
+            <div class="metric-card"><label>待推进总数</label><strong>${stats.pending}<span class="unit">项</span></strong><p>当前仍需推进</p></div>
+            <div class="metric-card"><label>紧急</label><strong style="color:${statusStyles.urgent.color}">${stats.urgent}<span class="unit">项</span></strong><p>今天或明天要处理</p></div>
+            <div class="metric-card"><label>今日重点</label><strong style="color:${statusStyles.doing.color}">${stats.todayFocus}<span class="unit">个</span></strong><p>已标记优先推进</p></div>
+            <div class="metric-card"><label>今日活跃</label><strong>${today?.total_active_text || '—'}</strong><p>时间管理板块数据</p></div>
           </div>
         </article>
-        <article class="card span-8"><h3 class="section-title">今日重点与待办中心</h3>${renderTasks(tasks)}</article>
-        <article class="card span-4"><h3 class="section-title">工作台洞察</h3>${renderInsights(today, tasks, stats)}</article>
+        <article class="card span-8 next-fold"><h3 class="section-title">今日重点与待办中心</h3>${renderTasks(tasks)}</article>
+        <article class="card span-4 next-fold"><h3 class="section-title">工作台洞察</h3>${renderInsights(today, tasks, stats)}</article>
         <article class="card span-12"><h3 class="section-title">新增待办</h3>
           <div class="form-grid">
             <label>标题<input id="taskTitle" placeholder="例如：完成首页布局" /></label>
             <label>优先级<select id="taskPriority"><option>P0</option><option selected>P1</option><option>P2</option><option>P3</option></select></label>
-            <label>状态<select id="taskStatus"><option value="todo">未开始</option><option value="doing" selected>进行中</option><option value="waiting">等待中</option><option value="blocked">阻塞中</option></select></label>
+            <label>状态<select id="taskStatus"><option value="todo">待办</option><option value="doing" selected>进行中</option><option value="waiting">等待中</option><option value="blocked">阻塞中</option></select></label>
             <label>截止<input id="taskDue" type="date" value="${today?.date || ''}" /></label>
             <label>项目<input id="taskProject" placeholder="项目/板块" value="个人工作台" /></label>
             <label class="wide">描述<input id="taskDescription" placeholder="补充下一步动作、验收标准或背景" /></label>
