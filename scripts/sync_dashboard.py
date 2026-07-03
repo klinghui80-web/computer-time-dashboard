@@ -667,8 +667,13 @@ def render_html(history: dict[str, Any]) -> str:
     .p-P2 { color:#a9c3ff; border-color:rgba(122,162,255,.35); }
     .p-P3 { color:#b9c1d6; }
     .add-task-trigger { width:100%; margin-top:14px; padding:16px; border-radius:16px; border:1px dashed rgba(122,162,255,.45); background:rgba(122,162,255,.08); color:#dfe7ff; font-weight:600; cursor:pointer; }
-    .add-task-panel { display:none; margin-top:14px; padding:16px; border-radius:18px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.025); }
-    .add-task-panel.open { display:block; }
+    .task-modal-backdrop { position:fixed; inset:0; z-index:20; display:none; place-items:center; padding:24px; background:rgba(0,0,0,.62); backdrop-filter: blur(10px); }
+    .task-modal-backdrop.open { display:grid; }
+    .task-modal { width:min(760px, 100%); border:1px solid rgba(255,255,255,.12); border-radius:24px; background:#0f1728; box-shadow:0 24px 90px rgba(0,0,0,.45); padding:22px; }
+    .task-modal-head { display:flex; align-items:start; justify-content:space-between; gap:14px; margin-bottom:16px; }
+    .task-modal-head h3 { margin:0 0 6px; }
+    .task-modal-head p { margin:0; color:var(--muted); line-height:1.6; }
+    .icon-close { width:38px; height:38px; border-radius:999px; border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.04); color:var(--text); cursor:pointer; }
     .review-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
     .review-grid .wide { grid-column:span 2; }
     .insight-list { display:grid; gap:10px; }
@@ -678,6 +683,14 @@ def render_html(history: dict[str, Any]) -> str:
     .deadline-date { color:#8a8f98; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:12px; padding-top:3px; }
     .deadline-body { border-left:2px solid rgba(113,112,255,.45); padding-left:14px; color:#d0d6e0; line-height:1.65; }
     .deadline-body strong { display:block; color:#f7f8f8; margin-bottom:5px; }
+    .view-switch { display:flex; gap:8px; margin-bottom:14px; }
+    .view-switch button { border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.035); color:#d0d6e0; border-radius:999px; padding:8px 12px; cursor:pointer; }
+    .view-switch button.active { color:#fff; border-color:rgba(122,162,255,.5); background:rgba(122,162,255,.16); }
+    .deadline-calendar { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:8px; }
+    .calendar-day { min-height:104px; border:1px solid rgba(255,255,255,.08); border-radius:14px; background:rgba(255,255,255,.025); padding:10px; }
+    .calendar-day strong { display:block; font-size:12px; color:#8a8f98; margin-bottom:8px; }
+    .calendar-task { display:block; margin-top:6px; padding:6px 8px; border-radius:10px; background:rgba(122,162,255,.12); color:#dfe7ff; font-size:12px; line-height:1.35; }
+    .calendar-task .countdown { display:block; color:#8a8f98; margin-top:3px; }
     .empty { color:var(--muted); padding:18px; border:1px dashed rgba(255,255,255,0.14); border-radius:16px; text-align:center; }
     .mini-stat { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
     @media (max-width: 1100px) {
@@ -693,6 +706,8 @@ def render_html(history: dict[str, Any]) -> str:
       .donut { width:240px; height:240px; }
       .donut-number { font-size:58px; }
       .overview-first-fold { min-height:auto; }
+      .deadline-calendar { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .task-modal { max-height:88vh; overflow:auto; }
     }
   </style>
 </head>
@@ -839,9 +854,13 @@ def render_html(history: dict[str, Any]) -> str:
       saveTasks(tasks);
       renderWorkbench();
     };
-    window.toggleTaskForm = function toggleTaskForm() {
-      const panel = document.getElementById('addTaskPanel');
-      if (panel) panel.classList.toggle('open');
+    window.openTaskModal = function openTaskModal() {
+      const modal = document.getElementById('taskModal');
+      if (modal) modal.classList.add('open');
+    };
+    window.closeTaskModal = function closeTaskModal() {
+      const modal = document.getElementById('taskModal');
+      if (modal) modal.classList.remove('open');
     };
     window.updateTaskStatus = function updateTaskStatus(id, status) {
       const tasks = loadTasks().map(task => task.id === id ? {...task, status, updatedAt: new Date().toISOString()} : task);
@@ -875,6 +894,7 @@ def render_html(history: dict[str, Any]) -> str:
 
     let mode = 'workbench';
     let currentKey = days[0]?.date || weeks[0]?.id;
+    let deadlineViewMode = localStorage.getItem('deadlineViewMode') || 'list';
 
     function switchMode(next) {
       mode = next;
@@ -957,7 +977,7 @@ def render_html(history: dict[str, Any]) -> str:
       if (diff < 0) return `已逾期 ${Math.abs(diff)} 天`;
       if (diff === 0) return '今天';
       if (diff === 1) return '明天';
-      if (diff <= 7) return `${diff} 天后`;
+      if (diff <= 30) return `${diff} 天后`;
       return due;
     }
 
@@ -977,6 +997,40 @@ def render_html(history: dict[str, Any]) -> str:
             ${task.focus ? '<span class="badge p-P1">今日重点</span>' : ''}
           </div>
         </div>`).join('')}</div>`;
+    }
+
+    function addDays(dateStr, offset) {
+      const [year, month, day] = dateStr.split('-').map(Number);
+      const date = new Date(Date.UTC(year, month - 1, day + offset));
+      return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, '0')}-${String(date.getUTCDate()).padStart(2, '0')}`;
+    }
+
+    function renderDeadlineCalendar(tasks) {
+      const pending = tasks.filter(task => task.status !== 'done');
+      const base = today?.date || new Date().toISOString().slice(0, 10);
+      const daysToShow = Array.from({length: 14}, (_, index) => addDays(base, index));
+      return `<div class="deadline-calendar">${daysToShow.map(day => {
+        const dayTasks = pending.filter(task => task.due === day).sort((a,b) => (priorityRank[a.priority] ?? 9) - (priorityRank[b.priority] ?? 9));
+        return `<div class="calendar-day"><strong>${deadlineLabel(day)} · ${day.slice(5)}</strong>${dayTasks.map(task => `
+          <span class="calendar-task"><b>${task.priority}</b> ${escapeHtml(task.title)}<span class="countdown">距截止：${deadlineLabel(task.due)}</span></span>
+        `).join('')}</div>`;
+      }).join('')}</div>`;
+    }
+
+    window.setDeadlineView = function setDeadlineView(next) {
+      deadlineViewMode = next;
+      localStorage.setItem('deadlineViewMode', next);
+      renderWorkbench();
+    };
+
+    function renderDeadlineView(tasks) {
+      return `
+        <div class="view-switch">
+          <button class="${deadlineViewMode === 'list' ? 'active' : ''}" onclick="setDeadlineView('list')">列表视图</button>
+          <button class="${deadlineViewMode === 'calendar' ? 'active' : ''}" onclick="setDeadlineView('calendar')">日历视图</button>
+        </div>
+        ${deadlineViewMode === 'calendar' ? renderDeadlineCalendar(tasks) : renderDeadlineTimeline(tasks)}
+      `;
     }
 
     function renderTaskReminders(day, tasks, stats) {
@@ -1014,8 +1068,14 @@ def render_html(history: dict[str, Any]) -> str:
           </div>
         </article>
         <article class="card span-8 next-fold"><h3 class="section-title">今日重点与待办中心</h3>${renderTasks(tasks)}
-          <button class="add-task-trigger" onclick="toggleTaskForm()">＋ 新增待办</button>
-          <div class="add-task-panel" id="addTaskPanel">
+          <button class="add-task-trigger" onclick="openTaskModal()">＋ 新增待办</button>
+        </article>
+        <div class="task-modal-backdrop" id="taskModal" onclick="if (event.target === this) closeTaskModal()">
+          <div class="task-modal" role="dialog" aria-modal="true" aria-labelledby="taskModalTitle">
+            <div class="task-modal-head">
+              <div><h3 id="taskModalTitle">新增待办</h3><p>这是一个强操作入口，填写完成后会回到待办中心。</p></div>
+              <button class="icon-close" onclick="closeTaskModal()" aria-label="关闭">×</button>
+            </div>
             <div class="form-grid">
               <label>标题<input id="taskTitle" placeholder="例如：完成首页布局" /></label>
               <label>优先级<select id="taskPriority"><option>P0</option><option selected>P1</option><option>P2</option><option>P3</option></select></label>
@@ -1024,12 +1084,12 @@ def render_html(history: dict[str, Any]) -> str:
               <label>项目<input id="taskProject" placeholder="项目/板块" value="个人工作台" /></label>
               <label class="wide">描述<input id="taskDescription" placeholder="补充下一步动作、验收标准或背景" /></label>
               <label><input id="taskFocus" type="checkbox" checked /> 今日重点</label>
-              <div class="toolbar"><button class="btn primary" onclick="addTask()">添加待办</button><button class="btn" onclick="toggleTaskForm()">收起</button></div>
+              <div class="toolbar"><button class="btn primary" onclick="addTask()">添加待办</button><button class="btn" onclick="closeTaskModal()">取消</button></div>
             </div>
           </div>
-        </article>
+        </div>
         <article class="card span-4 next-fold"><h3 class="section-title">任务提醒</h3>${renderTaskReminders(today, tasks, stats)}</article>
-        <article class="card span-6"><h3 class="section-title">任务截止时间轴</h3>${renderDeadlineTimeline(tasks)}</article>
+        <article class="card span-12"><h3 class="section-title">任务截止时间轴</h3>${renderDeadlineView(tasks)}</article>
         <article class="card span-6"><h3 class="section-title">今日复盘</h3>${renderReviewEditor(review)}</article>
         <article class="card span-12"><h3 class="section-title">时间与精力板块预览</h3><div class="kpis">
           <div class="kpi"><label>总活跃时长</label><strong>${today?.total_active_text || '—'}</strong></div>

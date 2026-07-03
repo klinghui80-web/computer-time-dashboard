@@ -83,23 +83,40 @@ def test_first_screen_is_a_minimal_pending_work_overview():
     assert "待推进总数" in html
 
 
-def test_add_task_form_is_collapsed_and_deadline_timeline_replaces_day_agenda():
+def test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda():
     module = load_module()
     html = module.render_html(sample_history())
 
-    assert "toggleTaskForm" in html
+    assert "openTaskModal" in html
+    assert "closeTaskModal" in html
+    assert "task-modal-backdrop" in html
+    assert "taskModal" in html
     assert "add-task-trigger" in html
-    assert "addTaskPanel" in html
     assert "任务截止时间轴" in html
     assert "renderDeadlineTimeline" in html
     assert "任务提醒" in html
     assert "工作台洞察" not in html
     assert "今日时间轴" not in html
+    assert "add-task-panel" not in html
+
+
+def test_deadline_view_can_toggle_between_list_and_calendar():
+    module = load_module()
+    html = module.render_html(sample_history())
+
+    assert "deadlineViewMode" in html
+    assert "setDeadlineView" in html
+    assert "renderDeadlineCalendar" in html
+    assert "deadline-calendar" in html
+    assert "日历视图" in html
+    assert "列表视图" in html
+    assert "距截止" in html
 
 
 if __name__ == "__main__":
     test_render_html_upgrades_time_dashboard_into_personal_workbench()
     test_render_html_contains_editable_task_and_review_controls()
     test_first_screen_is_a_minimal_pending_work_overview()
-    test_add_task_form_is_collapsed_and_deadline_timeline_replaces_day_agenda()
+    test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda()
+    test_deadline_view_can_toggle_between_list_and_calendar()
     print("workbench render tests passed")
