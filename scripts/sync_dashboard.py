@@ -666,14 +666,18 @@ def render_html(history: dict[str, Any]) -> str:
     .p-P1 { color:#ffd59a; border-color:rgba(255,169,64,.35); }
     .p-P2 { color:#a9c3ff; border-color:rgba(122,162,255,.35); }
     .p-P3 { color:#b9c1d6; }
+    .add-task-trigger { width:100%; margin-top:14px; padding:16px; border-radius:16px; border:1px dashed rgba(122,162,255,.45); background:rgba(122,162,255,.08); color:#dfe7ff; font-weight:600; cursor:pointer; }
+    .add-task-panel { display:none; margin-top:14px; padding:16px; border-radius:18px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.025); }
+    .add-task-panel.open { display:block; }
     .review-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
     .review-grid .wide { grid-column:span 2; }
     .insight-list { display:grid; gap:10px; }
     .insight { padding:12px; border-radius:14px; background:rgba(255,255,255,0.035); border:1px solid rgba(255,255,255,0.06); color:#d0d6e0; line-height:1.65; }
-    .day-agenda { display:grid; gap:12px; }
-    .agenda-row { display:grid; grid-template-columns:74px 1fr; gap:12px; align-items:start; }
-    .agenda-time { color:#8a8f98; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:12px; }
-    .agenda-body { border-left:2px solid rgba(113,112,255,.45); padding-left:12px; color:#d0d6e0; line-height:1.65; }
+    .deadline-timeline { display:grid; gap:12px; }
+    .deadline-row { display:grid; grid-template-columns:112px 1fr; gap:14px; align-items:start; }
+    .deadline-date { color:#8a8f98; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:12px; padding-top:3px; }
+    .deadline-body { border-left:2px solid rgba(113,112,255,.45); padding-left:14px; color:#d0d6e0; line-height:1.65; }
+    .deadline-body strong { display:block; color:#f7f8f8; margin-bottom:5px; }
     .empty { color:var(--muted); padding:18px; border:1px dashed rgba(255,255,255,0.14); border-radius:16px; text-align:center; }
     .mini-stat { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
     @media (max-width: 1100px) {
@@ -835,6 +839,10 @@ def render_html(history: dict[str, Any]) -> str:
       saveTasks(tasks);
       renderWorkbench();
     };
+    window.toggleTaskForm = function toggleTaskForm() {
+      const panel = document.getElementById('addTaskPanel');
+      if (panel) panel.classList.toggle('open');
+    };
     window.updateTaskStatus = function updateTaskStatus(id, status) {
       const tasks = loadTasks().map(task => task.id === id ? {...task, status, updatedAt: new Date().toISOString()} : task);
       saveTasks(tasks); renderWorkbench();
@@ -942,19 +950,36 @@ def render_html(history: dict[str, Any]) -> str:
         </div>`;
     }
 
-    function renderAgenda(day, tasks, review) {
-      const focusTasks = tasks.filter(task => task.focus && task.status !== 'done').slice(0, 4);
-      const rows = [
-        ['开始前', focusTasks.length ? `今日重点：${focusTasks.map(t => `${t.priority} ${escapeHtml(t.title)}`).join(' / ')}` : '先在待办中心选择 1–3 个今日重点。'],
-        ['白天', '推进任务时随手更新状态：进行中 / 等待中 / 阻塞中 / 已完成。'],
-        ['19:30', '时间与精力复盘自动生成并推送到飞书；该自动化保持不动。'],
-        ['晚上', review?.updatedAt ? `已填写今日复盘，最近保存：${new Date(review.updatedAt).toLocaleString('zh-CN')}` : '回到工作台填写完成、推进、阻塞和明日下一步。'],
-      ];
-      if (day) rows.splice(2, 0, ['时间数据', `${day.total_active_text} · 主轴：${(day.top_categories || []).slice(0,3).join(' / ') || '暂无'} · 最长专注：${day.longest_focus.text}`]);
-      return `<div class="day-agenda">${rows.map(([time, body]) => `<div class="agenda-row"><div class="agenda-time">${time}</div><div class="agenda-body">${body}</div></div>`).join('')}</div>`;
+    function deadlineLabel(due) {
+      if (!due) return '无截止';
+      const base = today?.date || new Date().toISOString().slice(0, 10);
+      const diff = Math.round((new Date(`${due}T00:00:00`) - new Date(`${base}T00:00:00`)) / 86400000);
+      if (diff < 0) return `已逾期 ${Math.abs(diff)} 天`;
+      if (diff === 0) return '今天';
+      if (diff === 1) return '明天';
+      if (diff <= 7) return `${diff} 天后`;
+      return due;
     }
 
-    function renderInsights(day, tasks, stats) {
+    function renderDeadlineTimeline(tasks) {
+      const pending = tasks
+        .filter(task => task.status !== 'done')
+        .sort((a, b) => (a.due || '9999-12-31').localeCompare(b.due || '9999-12-31') || (priorityRank[a.priority] ?? 9) - (priorityRank[b.priority] ?? 9));
+      if (!pending.length) return '<div class="empty">暂无待推进事项。可以点击待办列表底部按钮新增。</div>';
+      return `<div class="deadline-timeline">${pending.map(task => `
+        <div class="deadline-row">
+          <div class="deadline-date">${deadlineLabel(task.due)}<br>${escapeHtml(task.due || '')}</div>
+          <div class="deadline-body">
+            <strong>${escapeHtml(task.title)}</strong>
+            <span class="badge p-${task.priority}">${task.priority}</span>
+            <span class="badge">${statusLabels[task.status] || task.status}</span>
+            <span class="badge">${escapeHtml(task.project || '未归属')}</span>
+            ${task.focus ? '<span class="badge p-P1">今日重点</span>' : ''}
+          </div>
+        </div>`).join('')}</div>`;
+    }
+
+    function renderTaskReminders(day, tasks, stats) {
       const insights = [];
       if (stats.blocked) insights.push(`有 ${stats.blocked} 个阻塞任务，建议优先写清“下一步动作”或外部依赖。`);
       if (stats.high >= 3) insights.push(`P0/P1 高优任务共有 ${stats.high} 个，今天最好只选 1–3 个作为真正主线。`);
@@ -988,21 +1013,23 @@ def render_html(history: dict[str, Any]) -> str:
             <div class="metric-card"><label>今日活跃</label><strong>${today?.total_active_text || '—'}</strong><p>时间管理板块数据</p></div>
           </div>
         </article>
-        <article class="card span-8 next-fold"><h3 class="section-title">今日重点与待办中心</h3>${renderTasks(tasks)}</article>
-        <article class="card span-4 next-fold"><h3 class="section-title">工作台洞察</h3>${renderInsights(today, tasks, stats)}</article>
-        <article class="card span-12"><h3 class="section-title">新增待办</h3>
-          <div class="form-grid">
-            <label>标题<input id="taskTitle" placeholder="例如：完成首页布局" /></label>
-            <label>优先级<select id="taskPriority"><option>P0</option><option selected>P1</option><option>P2</option><option>P3</option></select></label>
-            <label>状态<select id="taskStatus"><option value="todo">待办</option><option value="doing" selected>进行中</option><option value="waiting">等待中</option><option value="blocked">阻塞中</option></select></label>
-            <label>截止<input id="taskDue" type="date" value="${today?.date || ''}" /></label>
-            <label>项目<input id="taskProject" placeholder="项目/板块" value="个人工作台" /></label>
-            <label class="wide">描述<input id="taskDescription" placeholder="补充下一步动作、验收标准或背景" /></label>
-            <label><input id="taskFocus" type="checkbox" checked /> 今日重点</label>
-            <div class="toolbar"><button class="btn primary" onclick="addTask()">添加待办</button></div>
+        <article class="card span-8 next-fold"><h3 class="section-title">今日重点与待办中心</h3>${renderTasks(tasks)}
+          <button class="add-task-trigger" onclick="toggleTaskForm()">＋ 新增待办</button>
+          <div class="add-task-panel" id="addTaskPanel">
+            <div class="form-grid">
+              <label>标题<input id="taskTitle" placeholder="例如：完成首页布局" /></label>
+              <label>优先级<select id="taskPriority"><option>P0</option><option selected>P1</option><option>P2</option><option>P3</option></select></label>
+              <label>状态<select id="taskStatus"><option value="todo">待办</option><option value="doing" selected>进行中</option><option value="waiting">等待中</option><option value="blocked">阻塞中</option></select></label>
+              <label>截止<input id="taskDue" type="date" value="${today?.date || ''}" /></label>
+              <label>项目<input id="taskProject" placeholder="项目/板块" value="个人工作台" /></label>
+              <label class="wide">描述<input id="taskDescription" placeholder="补充下一步动作、验收标准或背景" /></label>
+              <label><input id="taskFocus" type="checkbox" checked /> 今日重点</label>
+              <div class="toolbar"><button class="btn primary" onclick="addTask()">添加待办</button><button class="btn" onclick="toggleTaskForm()">收起</button></div>
+            </div>
           </div>
         </article>
-        <article class="card span-6"><h3 class="section-title">今日时间轴</h3>${renderAgenda(today, tasks, review)}</article>
+        <article class="card span-4 next-fold"><h3 class="section-title">任务提醒</h3>${renderTaskReminders(today, tasks, stats)}</article>
+        <article class="card span-6"><h3 class="section-title">任务截止时间轴</h3>${renderDeadlineTimeline(tasks)}</article>
         <article class="card span-6"><h3 class="section-title">今日复盘</h3>${renderReviewEditor(review)}</article>
         <article class="card span-12"><h3 class="section-title">时间与精力板块预览</h3><div class="kpis">
           <div class="kpi"><label>总活跃时长</label><strong>${today?.total_active_text || '—'}</strong></div>

@@ -83,8 +83,23 @@ def test_first_screen_is_a_minimal_pending_work_overview():
     assert "待推进总数" in html
 
 
+def test_add_task_form_is_collapsed_and_deadline_timeline_replaces_day_agenda():
+    module = load_module()
+    html = module.render_html(sample_history())
+
+    assert "toggleTaskForm" in html
+    assert "add-task-trigger" in html
+    assert "addTaskPanel" in html
+    assert "任务截止时间轴" in html
+    assert "renderDeadlineTimeline" in html
+    assert "任务提醒" in html
+    assert "工作台洞察" not in html
+    assert "今日时间轴" not in html
+
+
 if __name__ == "__main__":
     test_render_html_upgrades_time_dashboard_into_personal_workbench()
     test_render_html_contains_editable_task_and_review_controls()
     test_first_screen_is_a_minimal_pending_work_overview()
+    test_add_task_form_is_collapsed_and_deadline_timeline_replaces_day_agenda()
     print("workbench render tests passed")
