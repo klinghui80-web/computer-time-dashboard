@@ -86,6 +86,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--now")
     parser.add_argument("--force-date")
+    parser.add_argument("--mark-sent-date")
     parser.add_argument("--rebuild-days", type=int, default=14)
     parser.add_argument("--send-all-missed", action="store_true")
     parser.add_argument("--skip-push", action="store_true")
@@ -517,13 +518,28 @@ def mark_sent(state: dict[str, Any], day_record: dict[str, Any], week_record: di
     save_json(STATE_PATH, state)
 
 
+def mark_sent_by_date(history: dict[str, Any], state: dict[str, Any], target_date: str) -> None:
+    day_record = next((item for item in history.get("days", []) if item.get("date") == target_date), None)
+    if not day_record:
+        raise ValueError(f"未找到要标记的日期: {target_date}")
+    week_record = corresponding_week(history, day_record)
+    mark_sent(state, day_record, week_record)
+
+
+CREATE_NO_WINDOW = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+
+
+def run_hidden(args: list[str], cwd: Path | None = None) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(args, cwd=cwd, capture_output=True, text=True, creationflags=CREATE_NO_WINDOW)
+
+
 def repo_has_remote() -> bool:
-    result = subprocess.run(["git", "remote", "get-url", "origin"], cwd=ROOT, capture_output=True, text=True)
+    result = run_hidden(["git", "remote", "get-url", "origin"], cwd=ROOT)
     return result.returncode == 0 and bool(result.stdout.strip())
 
 
 def run_git(args: list[str]) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(args, cwd=ROOT, capture_output=True, text=True)
+    return run_hidden(args, cwd=ROOT)
 
 
 def maybe_commit_and_push(now: datetime, skip_push: bool) -> dict[str, Any]:
@@ -550,7 +566,8 @@ def render_html(history: dict[str, Any]) -> str:
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>电脑时间与精力分布看板</title>
+  <title>个人工作台 · 时间、任务与复盘</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #07111f;
@@ -607,11 +624,49 @@ def render_html(history: dict[str, Any]) -> str:
     th { color:var(--muted); font-size:12px; font-weight:500; }
     .note-list { margin:0; padding-left:18px; line-height:1.8; }
     .subtle { color:var(--muted); }
+    .workbench-hero { display:grid; grid-template-columns: 1.25fr .75fr; gap:16px; align-items:stretch; }
+    .hero-title { font-size:42px; line-height:1.02; letter-spacing:-1.1px; margin:0 0 12px; font-weight:600; }
+    .hero-copy { color:var(--muted); line-height:1.8; margin:0; max-width:780px; }
+    .toolbar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    .btn { border:1px solid rgba(255,255,255,0.08); color:var(--text); background:rgba(255,255,255,0.04); border-radius:10px; padding:9px 12px; cursor:pointer; font:inherit; }
+    .btn.primary { background:#5e6ad2; border-color:#7170ff; color:#fff; }
+    .btn.danger { color:#ffb4b4; border-color:rgba(255,125,125,.35); }
+    .field, select, textarea, input:not([type="checkbox"]) { width:100%; color:var(--text); background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:10px 12px; font:inherit; outline:none; }
+    input[type="checkbox"] { accent-color:#7170ff; width:16px; height:16px; margin-top:4px; }
+    textarea { min-height:86px; resize:vertical; line-height:1.6; }
+    .form-grid { display:grid; grid-template-columns: 1.2fr .55fr .55fr .7fr; gap:10px; align-items:end; }
+    .form-grid .wide { grid-column: span 2; }
+    .form-grid label, .review-grid label { display:grid; gap:6px; font-size:12px; color:var(--muted); }
+    .task-list { display:grid; gap:10px; }
+    .task-card { display:grid; grid-template-columns: auto 1fr auto; gap:12px; align-items:start; padding:14px; border:1px solid rgba(255,255,255,0.08); border-radius:16px; background:rgba(255,255,255,0.035); }
+    .task-card.done { opacity:.58; }
+    .task-main strong { display:block; margin-bottom:7px; }
+    .task-main p { margin:0; color:var(--muted); line-height:1.6; font-size:13px; }
+    .task-meta { display:flex; gap:6px; flex-wrap:wrap; margin-top:9px; }
+    .badge { display:inline-flex; align-items:center; gap:5px; border-radius:999px; padding:5px 8px; font-size:11px; color:#d0d6e0; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.035); }
+    .p-P0 { color:#ffb4b4; border-color:rgba(255,125,125,.35); }
+    .p-P1 { color:#ffd59a; border-color:rgba(255,169,64,.35); }
+    .p-P2 { color:#a9c3ff; border-color:rgba(122,162,255,.35); }
+    .p-P3 { color:#b9c1d6; }
+    .review-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .review-grid .wide { grid-column:span 2; }
+    .insight-list { display:grid; gap:10px; }
+    .insight { padding:12px; border-radius:14px; background:rgba(255,255,255,0.035); border:1px solid rgba(255,255,255,0.06); color:#d0d6e0; line-height:1.65; }
+    .day-agenda { display:grid; gap:12px; }
+    .agenda-row { display:grid; grid-template-columns:74px 1fr; gap:12px; align-items:start; }
+    .agenda-time { color:#8a8f98; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:12px; }
+    .agenda-body { border-left:2px solid rgba(113,112,255,.45); padding-left:12px; color:#d0d6e0; line-height:1.65; }
+    .empty { color:var(--muted); padding:18px; border:1px dashed rgba(255,255,255,0.14); border-radius:16px; text-align:center; }
+    .mini-stat { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
     @media (max-width: 1100px) {
       .shell { grid-template-columns: 1fr; }
       .sidebar { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--line); }
       .span-8, .span-6, .span-4 { grid-column: span 12; }
       .kpis { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .workbench-hero, .form-grid, .review-grid { grid-template-columns: 1fr; }
+      .form-grid .wide { grid-column: span 1; }
+      .review-grid .wide { grid-column: span 1; }
+      .mini-stat { grid-template-columns:1fr; }
     }
   </style>
 </head>
@@ -619,18 +674,19 @@ def render_html(history: dict[str, Any]) -> str:
   <div class="shell">
     <aside class="sidebar">
       <div class="brand">
-        <h1>电脑时间与精力分布</h1>
-        <p>每日 19:30 的复盘看板。可以查看当天、历史日期，以及每周日汇总的周节奏。若 19:30 当时电脑没开，系统会在下次 Hermes 重新运行后补发。</p>
+        <h1>个人工作台</h1>
+        <p>一个集成今日执行、待办优先级、手动复盘与时间管理的个人化工作台。原有每日 19:30 飞书复盘和时间统计自动化保持不动。</p>
       </div>
       <div class="meta-stack">
         <div class="meta-pill" id="generatedMeta"></div>
         <div class="meta-pill" id="sourceMeta"></div>
       </div>
       <div class="tabs">
-        <button class="tab active" data-tab="days">每日</button>
+        <button class="tab active" data-tab="workbench">工作台</button>
+        <button class="tab" data-tab="days">时间与精力</button>
         <button class="tab" data-tab="weeks">每周</button>
       </div>
-      <div class="list active" id="dayList"></div>
+      <div class="list" id="dayList"></div>
       <div class="list" id="weekList"></div>
     </aside>
     <main class="main">
@@ -672,8 +728,92 @@ def render_html(history: dict[str, Any]) -> str:
       return `${s}秒`;
     };
     const pct = (share) => `${(share * 100).toFixed(1)}%`;
+    const today = days[0] || null;
+    const WORKBENCH_TASK_KEY = 'workbenchTasks';
+    const WORKBENCH_REVIEW_KEY = 'workbenchReviews';
+    const priorityRank = { P0: 0, P1: 1, P2: 2, P3: 3 };
+    const statusLabels = { todo: '未开始', doing: '进行中', waiting: '等待中', blocked: '阻塞中', done: '已完成' };
 
-    let mode = 'days';
+    const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+    const readLocal = (key, fallback) => {
+      try { return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback)); }
+      catch { return fallback; }
+    };
+    const writeLocal = (key, value) => localStorage.setItem(key, JSON.stringify(value));
+    const uid = () => `task_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+
+    function loadTasks() {
+      const saved = readLocal(WORKBENCH_TASK_KEY, null);
+      if (saved && Array.isArray(saved)) return saved;
+      const defaults = [
+        { id: uid(), title: '确认个人工作台首页结构', description: '根据实际使用反馈调整今日总览、待办和复盘区块。', priority: 'P1', status: 'doing', project: '个人工作台', due: today?.date || '', focus: true, createdAt: new Date().toISOString() },
+        { id: uid(), title: '晚上填写今日复盘', description: '记录完成事项、推进情况、阻塞和明日下一步。', priority: 'P0', status: 'todo', project: '每日复盘', due: today?.date || '', focus: true, createdAt: new Date().toISOString() },
+        { id: uid(), title: '观察 19:30 飞书自动推送', description: '时间管理自动化保持不动，只观察是否稳定到达。', priority: 'P1', status: 'waiting', project: '时间管理', due: today?.date || '', focus: false, createdAt: new Date().toISOString() },
+      ];
+      writeLocal(WORKBENCH_TASK_KEY, defaults);
+      return defaults;
+    }
+    function saveTasks(tasks) { writeLocal(WORKBENCH_TASK_KEY, tasks); }
+    function loadReviews() { return readLocal(WORKBENCH_REVIEW_KEY, {}); }
+    function saveReviews(reviews) { writeLocal(WORKBENCH_REVIEW_KEY, reviews); }
+    function activeTasks() { return loadTasks().filter(task => task.status !== 'done').sort((a,b) => (priorityRank[a.priority] ?? 9) - (priorityRank[b.priority] ?? 9)); }
+    function taskStats(tasks) {
+      const total = tasks.length;
+      const done = tasks.filter(t => t.status === 'done').length;
+      const high = tasks.filter(t => ['P0','P1'].includes(t.priority) && t.status !== 'done').length;
+      const blocked = tasks.filter(t => t.status === 'blocked').length;
+      return { total, done, high, blocked };
+    }
+
+    window.addTask = function addTask() {
+      const titleInput = document.getElementById('taskTitle');
+      const title = titleInput.value.trim();
+      if (!title) return;
+      const tasks = loadTasks();
+      tasks.push({
+        id: uid(), title,
+        description: document.getElementById('taskDescription').value.trim(),
+        priority: document.getElementById('taskPriority').value,
+        status: document.getElementById('taskStatus').value,
+        project: document.getElementById('taskProject').value.trim() || '未归属',
+        due: document.getElementById('taskDue').value,
+        focus: document.getElementById('taskFocus').checked,
+        createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(),
+      });
+      saveTasks(tasks);
+      renderWorkbench();
+    };
+    window.updateTaskStatus = function updateTaskStatus(id, status) {
+      const tasks = loadTasks().map(task => task.id === id ? {...task, status, updatedAt: new Date().toISOString()} : task);
+      saveTasks(tasks); renderWorkbench();
+    };
+    window.toggleTaskFocus = function toggleTaskFocus(id) {
+      const tasks = loadTasks().map(task => task.id === id ? {...task, focus: !task.focus, updatedAt: new Date().toISOString()} : task);
+      saveTasks(tasks); renderWorkbench();
+    };
+    window.deleteTask = function deleteTask(id) {
+      if (!confirm('确认删除这条待办？')) return;
+      saveTasks(loadTasks().filter(task => task.id !== id));
+      renderWorkbench();
+    };
+    window.saveReview = function saveReview() {
+      if (!today) return;
+      const reviews = loadReviews();
+      reviews[today.date] = {
+        completed: document.getElementById('reviewCompleted').value.trim(),
+        progress: document.getElementById('reviewProgress').value.trim(),
+        blocked: document.getElementById('reviewBlocked').value.trim(),
+        tomorrow: document.getElementById('reviewTomorrow').value.trim(),
+        focusScore: document.getElementById('reviewFocus').value,
+        satisfactionScore: document.getElementById('reviewSatisfaction').value,
+        updatedAt: new Date().toISOString(),
+      };
+      saveReviews(reviews);
+      renderWorkbench();
+    };
+
+
+    let mode = 'workbench';
     let currentKey = days[0]?.date || weeks[0]?.id;
 
     function switchMode(next) {
@@ -681,7 +821,7 @@ def render_html(history: dict[str, Any]) -> str:
       tabs.forEach(tab => tab.classList.toggle('active', tab.dataset.tab === next));
       dayList.classList.toggle('active', next === 'days');
       weekList.classList.toggle('active', next === 'weeks');
-      currentKey = next === 'days' ? (days[0]?.date) : (weeks[0]?.id);
+      currentKey = next === 'days' ? (days[0]?.date) : (next === 'weeks' ? weeks[0]?.id : days[0]?.date);
       renderNav();
       renderContent();
     }
@@ -708,6 +848,113 @@ def render_html(history: dict[str, Any]) -> str:
         renderNav();
         renderContent();
       });
+    }
+
+    function renderTasks(tasks) {
+      const sorted = [...tasks].sort((a,b) => (priorityRank[a.priority] ?? 9) - (priorityRank[b.priority] ?? 9));
+      if (!sorted.length) return '<div class="empty">暂无待办。先添加今天要推进的事项。</div>';
+      return `<div class="task-list">${sorted.map(task => `
+        <div class="task-card ${task.status === 'done' ? 'done' : ''}">
+          <input type="checkbox" ${task.status === 'done' ? 'checked' : ''} onchange="updateTaskStatus('${task.id}', this.checked ? 'done' : 'doing')" />
+          <div class="task-main">
+            <strong>${escapeHtml(task.title)}</strong>
+            <p>${escapeHtml(task.description || '暂无描述')}</p>
+            <div class="task-meta">
+              <span class="badge p-${task.priority}">${task.priority}</span>
+              <span class="badge">${statusLabels[task.status] || task.status}</span>
+              <span class="badge">${escapeHtml(task.project || '未归属')}</span>
+              ${task.due ? `<span class="badge">截止 ${escapeHtml(task.due)}</span>` : ''}
+              ${task.focus ? '<span class="badge p-P1">今日重点</span>' : ''}
+            </div>
+          </div>
+          <div class="toolbar">
+            <button class="btn" onclick="toggleTaskFocus('${task.id}')">${task.focus ? '取消重点' : '设为重点'}</button>
+            <select onchange="updateTaskStatus('${task.id}', this.value)">
+              ${Object.entries(statusLabels).map(([key,label]) => `<option value="${key}" ${task.status === key ? 'selected' : ''}>${label}</option>`).join('')}
+            </select>
+            <button class="btn danger" onclick="deleteTask('${task.id}')">删除</button>
+          </div>
+        </div>`).join('')}</div>`;
+    }
+
+    function renderReviewEditor(review) {
+      return `
+        <div class="review-grid">
+          <label>今日完成<textarea id="reviewCompleted" placeholder="今天真正完成了什么？">${escapeHtml(review.completed || '')}</textarea></label>
+          <label>推进中<textarea id="reviewProgress" placeholder="推进了但还没完成的事情。">${escapeHtml(review.progress || '')}</textarea></label>
+          <label>阻塞/风险<textarea id="reviewBlocked" placeholder="卡点、风险、需要明天处理的中断。">${escapeHtml(review.blocked || '')}</textarea></label>
+          <label>明日下一步<textarea id="reviewTomorrow" placeholder="明天第一步做什么？">${escapeHtml(review.tomorrow || '')}</textarea></label>
+          <label>专注度<select id="reviewFocus">${[1,2,3,4,5].map(n => `<option value="${n}" ${String(review.focusScore || 3) === String(n) ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
+          <label>满意度<select id="reviewSatisfaction">${[1,2,3,4,5].map(n => `<option value="${n}" ${String(review.satisfactionScore || 3) === String(n) ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
+          <div class="wide toolbar"><button class="btn primary" onclick="saveReview()">保存今日复盘</button><span class="subtle">数据保存在当前浏览器 localStorage，不影响 19:30 自动推送。</span></div>
+        </div>`;
+    }
+
+    function renderAgenda(day, tasks, review) {
+      const focusTasks = tasks.filter(task => task.focus && task.status !== 'done').slice(0, 4);
+      const rows = [
+        ['开始前', focusTasks.length ? `今日重点：${focusTasks.map(t => `${t.priority} ${escapeHtml(t.title)}`).join(' / ')}` : '先在待办中心选择 1–3 个今日重点。'],
+        ['白天', '推进任务时随手更新状态：进行中 / 等待中 / 阻塞中 / 已完成。'],
+        ['19:30', '时间与精力复盘自动生成并推送到飞书；该自动化保持不动。'],
+        ['晚上', review?.updatedAt ? `已填写今日复盘，最近保存：${new Date(review.updatedAt).toLocaleString('zh-CN')}` : '回到工作台填写完成、推进、阻塞和明日下一步。'],
+      ];
+      if (day) rows.splice(2, 0, ['时间数据', `${day.total_active_text} · 主轴：${(day.top_categories || []).slice(0,3).join(' / ') || '暂无'} · 最长专注：${day.longest_focus.text}`]);
+      return `<div class="day-agenda">${rows.map(([time, body]) => `<div class="agenda-row"><div class="agenda-time">${time}</div><div class="agenda-body">${body}</div></div>`).join('')}</div>`;
+    }
+
+    function renderInsights(day, tasks, stats) {
+      const insights = [];
+      if (stats.blocked) insights.push(`有 ${stats.blocked} 个阻塞任务，建议优先写清“下一步动作”或外部依赖。`);
+      if (stats.high >= 3) insights.push(`P0/P1 高优任务共有 ${stats.high} 个，今天最好只选 1–3 个作为真正主线。`);
+      if (day?.switch_count >= 120) insights.push(`今天窗口切换 ${day.switch_count} 次，时间复盘显示上下文切换偏高。`);
+      if (day) insights.push(`今日时间主轴是“${day.top_categories[0] || '暂无'}”，可以和待办主线对照，判断是否跑偏。`);
+      if (!insights.length) insights.push('当前任务负荷可控，重点是持续记录完成情况和明日第一步。');
+      return `<div class="insight-list">${insights.map(item => `<div class="insight">${item}</div>`).join('')}</div>`;
+    }
+
+    function renderWorkbench() {
+      const tasks = loadTasks();
+      const stats = taskStats(tasks);
+      const reviews = loadReviews();
+      const review = today ? (reviews[today.date] || {}) : {};
+      title.textContent = '个人工作台';
+      subtitle.textContent = '围绕“今日计划 → 白天推进 → 19:30 自动时间复盘 → 晚上手动任务复盘”的个人操作系统。';
+      meta.innerHTML = today ? `今日：${today.date} · ${today.weekday}<br>时间管理自动化：每日 19:30 保持不动<br>本地可编辑：待办 / 复盘` : '等待时间数据生成';
+      content.innerHTML = `
+        <article class="card span-12 workbench-hero">
+          <div>
+            <h3 class="hero-title">今日执行面板</h3>
+            <p class="hero-copy">这里现在不只是时间看板，而是你的个人化工作台：待办分优先级、每天手动汇报推进，时间管理作为“时间与精力”板块继续保留。</p>
+          </div>
+          <div class="mini-stat">
+            <div class="kpi"><label>待办完成</label><strong>${stats.done}/${stats.total}</strong></div>
+            <div class="kpi"><label>高优任务</label><strong>${stats.high}</strong></div>
+            <div class="kpi"><label>今日活跃</label><strong>${today?.total_active_text || '—'}</strong></div>
+          </div>
+        </article>
+        <article class="card span-8"><h3 class="section-title">今日重点与待办中心</h3>${renderTasks(tasks)}</article>
+        <article class="card span-4"><h3 class="section-title">工作台洞察</h3>${renderInsights(today, tasks, stats)}</article>
+        <article class="card span-12"><h3 class="section-title">新增待办</h3>
+          <div class="form-grid">
+            <label>标题<input id="taskTitle" placeholder="例如：完成首页布局" /></label>
+            <label>优先级<select id="taskPriority"><option>P0</option><option selected>P1</option><option>P2</option><option>P3</option></select></label>
+            <label>状态<select id="taskStatus"><option value="todo">未开始</option><option value="doing" selected>进行中</option><option value="waiting">等待中</option><option value="blocked">阻塞中</option></select></label>
+            <label>截止<input id="taskDue" type="date" value="${today?.date || ''}" /></label>
+            <label>项目<input id="taskProject" placeholder="项目/板块" value="个人工作台" /></label>
+            <label class="wide">描述<input id="taskDescription" placeholder="补充下一步动作、验收标准或背景" /></label>
+            <label><input id="taskFocus" type="checkbox" checked /> 今日重点</label>
+            <div class="toolbar"><button class="btn primary" onclick="addTask()">添加待办</button></div>
+          </div>
+        </article>
+        <article class="card span-6"><h3 class="section-title">今日时间轴</h3>${renderAgenda(today, tasks, review)}</article>
+        <article class="card span-6"><h3 class="section-title">今日复盘</h3>${renderReviewEditor(review)}</article>
+        <article class="card span-12"><h3 class="section-title">时间与精力板块预览</h3><div class="kpis">
+          <div class="kpi"><label>总活跃时长</label><strong>${today?.total_active_text || '—'}</strong></div>
+          <div class="kpi"><label>主类目</label><strong>${today?.top_categories?.[0] || '—'}</strong></div>
+          <div class="kpi"><label>窗口切换</label><strong>${today?.switch_count ?? '—'}</strong></div>
+          <div class="kpi"><label>最长专注</label><strong>${today?.longest_focus?.text || '—'}</strong></div>
+        </div><p class="subtle" style="margin-top:14px;">完整时间详情请点击左侧“时间与精力”。每日 19:30 飞书推送逻辑未改动。</p></article>
+      `;
     }
 
     function renderDay(day) {
@@ -764,7 +1011,9 @@ def render_html(history: dict[str, Any]) -> str:
     }
 
     function renderContent() {
-      if (mode === 'days') {
+      if (mode === 'workbench') {
+        renderWorkbench();
+      } else if (mode === 'days') {
         const day = days.find(item => item.date === currentKey) || days[0];
         if (!day) return;
         renderDay(day);
@@ -815,6 +1064,9 @@ def main() -> int:
     args = parse_args()
     now = local_now(args)
     history, state = update_history(now, rebuild_days=args.rebuild_days, force_date=args.force_date)
+    if args.mark_sent_date:
+        mark_sent_by_date(history, state, args.mark_sent_date)
+        return 0
     write_site(history)
     git_status = maybe_commit_and_push(now, skip_push=args.skip_push)
     day_record = None
@@ -828,8 +1080,6 @@ def main() -> int:
             print("[SILENT]")
         return 0
     week_record = corresponding_week(history, day_record)
-    if not args.print_dry_run:
-        mark_sent(state, day_record, week_record)
     print(build_message(day_record, week_record, git_status))
     return 0
 
