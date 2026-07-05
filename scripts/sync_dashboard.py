@@ -627,23 +627,43 @@ def render_html(history: dict[str, Any]) -> str:
     .workbench-hero { display:grid; grid-template-columns: 1.25fr .75fr; gap:16px; align-items:stretch; }
     .hero-title { font-size:42px; line-height:1.02; letter-spacing:-1.1px; margin:0 0 12px; font-weight:600; }
     .hero-copy { color:var(--muted); line-height:1.8; margin:0; max-width:780px; }
-    .overview-first-fold { min-height: calc(100vh - 150px); display:flex; flex-direction:column; justify-content:center; gap:24px; background:linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015)); }
-    .overview-top { display:flex; flex-direction:column; align-items:center; gap:18px; text-align:center; }
-    .overview-kicker { color:var(--muted); font-size:13px; letter-spacing:.08em; text-transform:uppercase; }
-    .donut { width:300px; height:300px; border-radius:50%; display:grid; place-items:center; position:relative; filter:drop-shadow(0 24px 70px rgba(0,0,0,.25)); }
-    .donut::after { content:""; position:absolute; inset:44px; border-radius:50%; background:rgba(7,17,31,.96); border:1px solid rgba(255,255,255,.08); }
-    .donut-center { position:relative; z-index:1; display:grid; gap:6px; justify-items:center; }
-    .donut-number { font-size:72px; line-height:.9; letter-spacing:-2px; font-weight:600; color:#f7f8f8; }
-    .donut-label { color:#8a8f98; font-size:15px; }
-    .status-legend { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; }
-    .legend-pill { display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.035); color:#d0d6e0; border-radius:999px; padding:8px 13px; font-size:13px; }
+    .overview-first-fold { min-height: calc(100vh - 150px); display:flex; flex-direction:column; justify-content:center; gap:18px; background:radial-gradient(circle at 50% 46%, rgba(122,162,255,.16), transparent 34%), linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015)); overflow:hidden; }
+    .overview-top { display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center; }
+    .overview-kicker { color:#8a8f98; font-size:12px; letter-spacing:.12em; text-transform:uppercase; }
+    .orbit-caption { color:#d0d6e0; margin:0; font-size:15px; letter-spacing:-.16px; }
+    .overview-orbit-map { position:relative; min-height:560px; border-radius:34px; overflow:hidden; isolation:isolate; background:
+      radial-gradient(circle at 50% 50%, rgba(255,255,255,.12), transparent 2px),
+      radial-gradient(circle at 50% 50%, rgba(122,162,255,.18), transparent 20%),
+      linear-gradient(135deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08), 0 28px 90px rgba(0,0,0,.28); }
+    .overview-orbit-map::before { content:""; position:absolute; inset:18px; z-index:0; border-radius:30px; background-image: radial-gradient(rgba(255,255,255,.16) 1px, transparent 1px); background-size:18px 18px; opacity:.12; mask-image:radial-gradient(circle at center, black, transparent 72%); }
+    .overview-orbit-map::after { content:""; position:absolute; inset:0; z-index:1; background:radial-gradient(circle at center, rgba(255,255,255,.08), transparent 34%), linear-gradient(90deg, transparent, rgba(255,255,255,.05), transparent); pointer-events:none; }
+    .liquid-glass { background:rgba(12,20,36,.68); border:1px solid rgba(255,255,255,.18); backdrop-filter: blur(22px) saturate(160%); -webkit-backdrop-filter: blur(22px) saturate(160%); box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 18px 60px rgba(0,0,0,.35); }
+    .orbit-connector-layer { position:absolute; inset:0; z-index:2; opacity:.92; overflow:visible; }
+    .orbit-connector { fill:none; stroke:var(--cat-color,#7aa2ff); stroke-width:2.1; stroke-linecap:round; filter:drop-shadow(0 0 8px var(--cat-color,#7aa2ff)); stroke-dasharray:520; stroke-dashoffset:520; animation: orbit-line-draw .95s ease forwards; animation-delay:var(--delay,0ms); }
+    .orbit-core { position:absolute; left:50%; top:50%; z-index:4; width:174px; height:174px; border-radius:50%; transform:translate(-50%,-50%); display:grid; place-items:center; text-align:center; color:#fff; background:radial-gradient(circle at 38% 30%, rgba(255,255,255,.32), rgba(122,92,255,.38) 42%, rgba(37,22,75,.68)); border:1px solid rgba(255,255,255,.22); box-shadow:0 0 0 48px rgba(122,92,255,.10), 0 0 0 96px rgba(122,92,255,.045), 0 30px 100px rgba(122,92,255,.28); }
+    .orbit-core::before { content:""; position:absolute; inset:-96px; border-radius:50%; border:1px solid rgba(255,255,255,.07); }
+    .orbit-core::after { content:""; position:absolute; inset:-48px; border-radius:50%; border:1px solid rgba(255,255,255,.1); }
+    .orbit-core-inner { position:relative; z-index:1; display:grid; gap:4px; justify-items:center; }
+    .orbit-core-dot { width:44px; height:44px; border-radius:50%; display:grid; place-items:center; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.2); box-shadow:0 0 30px rgba(255,255,255,.18); }
+    .orbit-count { font-size:54px; line-height:.9; letter-spacing:-1.4px; font-weight:700; }
+    .orbit-label { color:#dfe7ff; font-size:13px; }
+    .orbit-task-card { position:absolute; left:50%; top:50%; z-index:8; width:220px; min-height:98px; border-radius:22px; padding:14px 15px; color:#f7f8f8; background:linear-gradient(135deg, rgba(17,24,39,.98), rgba(20,30,52,.92)) !important; border:1px solid color-mix(in srgb, var(--cat-color), rgba(255,255,255,.18) 40%); transform:translate(calc(-50% + var(--orbit-x)), calc(-50% + var(--orbit-y))) scale(1); animation: orbit-card-bloom .78s cubic-bezier(.2,.8,.2,1) both; animation-delay:var(--delay,0ms); box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 18px 54px rgba(0,0,0,.42), 0 0 34px color-mix(in srgb, var(--cat-color), transparent 62%); isolation:isolate; }
+    .orbit-task-card::before { content:""; position:absolute; inset:-1px; border-radius:inherit; background:linear-gradient(135deg, var(--cat-color), transparent 42%, rgba(255,255,255,.16)); opacity:.62; z-index:0; }
+    .orbit-task-card > * { position:relative; z-index:1; }
+    .orbit-task-card .orbit-task-head { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px; }
+    .orbit-task-card b { display:block; font-size:16px; line-height:1.25; letter-spacing:-.18px; text-shadow:0 1px 12px rgba(0,0,0,.45); }
+    .orbit-task-card small { color:#8a8f98; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; white-space:nowrap; }
+    .orbit-category-dot { width:9px; height:9px; border-radius:50%; background:var(--cat-color); box-shadow:0 0 16px var(--cat-color); flex:0 0 auto; }
+    .orbit-task-meta { display:flex; gap:7px; flex-wrap:wrap; margin-top:10px; color:#d0d6e0; font-size:11px; }
+    .orbit-task-meta span { border:1px solid rgba(255,255,255,.09); background:rgba(255,255,255,.05); border-radius:999px; padding:4px 7px; }
+    .orbit-legend { position:absolute; left:22px; bottom:20px; z-index:9; display:flex; gap:8px; flex-wrap:wrap; }
+    .legend-pill { display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.05); color:#d0d6e0; border-radius:999px; padding:8px 12px; font-size:12px; }
     .dot { width:9px; height:9px; border-radius:50%; display:inline-block; }
-    .overview-metrics { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; }
-    .metric-card { min-height:140px; border:1px solid rgba(255,255,255,.08); border-radius:22px; background:rgba(255,255,255,.028); padding:22px; display:flex; flex-direction:column; justify-content:space-between; }
-    .metric-card label { color:#8a8f98; font-size:13px; }
-    .metric-card strong { font-size:46px; line-height:1; letter-spacing:-1px; }
-    .metric-card strong .unit { font-size:18px; color:#8a8f98; margin-left:4px; }
-    .metric-card p { margin:0; color:#d0d6e0; line-height:1.55; }
+    .orbit-empty { position:absolute; left:50%; top:50%; z-index:4; transform:translate(-50%, 96px); color:#8a8f98; }
+    @keyframes orbit-card-bloom { from { opacity:0; transform:translate(-50%,-50%) scale(.35); filter:blur(12px); } to { opacity:1; transform:translate(calc(-50% + var(--orbit-x)), calc(-50% + var(--orbit-y))) scale(1); filter:blur(0); } }
+    @keyframes orbit-line-draw { to { stroke-dashoffset:0; } }
+    @media (prefers-reduced-motion: reduce) { .orbit-task-card, .orbit-connector { animation:none; } }
     .next-fold { margin-top:4px; }
     .toolbar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
     .btn { border:1px solid rgba(255,255,255,0.08); color:var(--text); background:rgba(255,255,255,0.04); border-radius:10px; padding:9px 12px; cursor:pointer; font:inherit; }
@@ -742,9 +762,10 @@ def render_html(history: dict[str, Any]) -> str:
       .form-grid .wide { grid-column: span 1; }
       .review-grid .wide { grid-column: span 1; }
       .mini-stat { grid-template-columns:1fr; }
-      .overview-metrics { grid-template-columns:repeat(2,minmax(0,1fr)); }
-      .donut { width:240px; height:240px; }
-      .donut-number { font-size:58px; }
+      .orbit-core { width:142px; height:142px; }
+      .orbit-task-card { position:relative; left:auto; top:auto; transform:none; width:auto; margin:10px; animation:none; }
+      .orbit-connector-layer { display:none; }
+      .overview-orbit-map { min-height:auto; padding:170px 8px 18px; display:grid; gap:10px; }
       .overview-first-fold { min-height:auto; }
       .deadline-calendar { grid-template-columns:repeat(2,minmax(0,1fr)); }
       .task-modal { max-height:88vh; overflow:auto; }
@@ -817,6 +838,8 @@ def render_html(history: dict[str, Any]) -> str:
     const priorityRank = { P0: 0, P1: 1, P2: 2, P3: 3 };
     const priorityLabels = { P0: 'P0 火烧屁股', P1: 'P1 今日必完成', P2: 'P2 常规推进', P3: 'P3 可延后' };
     const priorityStyles = { P0: '#c95d45', P1: '#c49a42', P2: '#4f6f92', P3: '#4f9b72' };
+    const categoryColors = { '生活': '#6ee7b7', '工作': '#7aa2ff', '自媒体': '#f472b6' };
+    const urgencyRadius = { P0: 245, P1: 315, P2: 390, P3: 455 };
     const taskCategories = ['生活', '工作', '自媒体'];
     const statusLabels = { todo: '待办', doing: '进行中', waiting: '等待中', blocked: '阻塞中', done: '已完成' };
     const statusStyles = {
@@ -1251,6 +1274,61 @@ def render_html(history: dict[str, Any]) -> str:
       return `<div class="insight-list">${insights.map(item => `<div class="insight">${item}</div>`).join('')}</div>`;
     }
 
+    function orbitPosition(task, index, total) {
+      const radius = urgencyRadius[task.priority] || 300;
+      const baseAngles = [-150, -28, 150, 28, -96, 96, -178, 2, -62, 62];
+      const angle = (baseAngles[index] ?? ((index * 137.5) % 360 - 180)) * Math.PI / 180;
+      return {
+        x: Math.round(Math.cos(angle) * radius * 1.10),
+        y: Math.round(Math.sin(angle) * radius * 0.68),
+      };
+    }
+
+    function renderOrbitOverview(tasks, stats) {
+      const pending = sortTasksForDisplay(tasks.filter(task => task.status !== 'done')).slice(0, 10);
+      const nodes = pending.map((task, index) => {
+        const position = orbitPosition(task, index, pending.length);
+        const category = task.category || '工作';
+        const color = categoryColors[category] || categoryColors['工作'];
+        return {...task, orbitIndex: index, orbitX: position.x, orbitY: position.y, orbitColor: color, orbitCategory: category};
+      });
+      const connectors = nodes.map(task => {
+        const midX = Math.round(task.orbitX * 0.48);
+        const midY = Math.round(task.orbitY * 0.08);
+        const endBendX = Math.round(task.orbitX * 0.82);
+        const endBendY = Math.round(task.orbitY * 0.92);
+        return `<path class="orbit-connector" style="--cat-color:${task.orbitColor}; --delay:${task.orbitIndex * 90}ms" d="M 0 0 C ${midX} ${midY}, ${endBendX} ${endBendY}, ${task.orbitX} ${task.orbitY}" />`;
+      }).join('');
+      const cards = nodes.map(task => `
+        <article class="orbit-task-card liquid-glass" style="--orbit-x:${task.orbitX}px; --orbit-y:${task.orbitY}px; --cat-color:${task.orbitColor}; --delay:${task.orbitIndex * 90}ms">
+          <div class="orbit-task-head"><span class="orbit-category-dot"></span><small>${task.priority}</small></div>
+          <b>${escapeHtml(task.title)}</b>
+          <div class="orbit-task-meta"><span>${escapeHtml(task.orbitCategory)}</span><span>${task.due ? `截止 ${escapeHtml(task.due)}` : '无截止'}</span></div>
+        </article>
+      `).join('');
+      const legend = taskCategories.map(category => {
+        const count = pending.filter(task => (task.category || '工作') === category).length;
+        return `<span class="legend-pill"><i class="dot" style="background:${categoryColors[category]}"></i>${category} ${count}</span>`;
+      }).join('');
+      return `
+        <div class="overview-top">
+          <div class="overview-kicker">Material Orbit · Liquid Glass</div>
+          <p class="orbit-caption">离中心越近，越需要优先处理；颜色区分生活、工作、自媒体。</p>
+        </div>
+        <div class="overview-orbit-map">
+          <svg class="orbit-connector-layer" viewBox="-520 -280 1040 560" preserveAspectRatio="xMidYMid meet" aria-hidden="true">${connectors}</svg>
+          <div class="orbit-core liquid-glass">
+            <div class="orbit-core-inner">
+              <div class="orbit-core-dot">✦</div>
+              <div class="orbit-count">${stats.pending}</div>
+              <div class="orbit-label">待推进原点</div>
+            </div>
+          </div>
+          ${cards || '<div class="orbit-empty">暂无待推进事项</div>'}
+          <div class="orbit-legend">${legend}</div>
+        </div>`;
+    }
+
     function renderWorkbench() {
       const tasks = loadTasks();
       const stats = taskStats(tasks);
@@ -1261,19 +1339,7 @@ def render_html(history: dict[str, Any]) -> str:
       meta.innerHTML = today ? `${today.date} · ${today.weekday}<br>每日 19:30 自动复盘保持不动` : '等待时间数据生成';
       content.innerHTML = `
         <article class="card span-12 overview-first-fold">
-          <div class="overview-top">
-            <div class="overview-kicker">Personal Workbench Overview</div>
-            <div class="donut" style="${priorityDonutStyle(stats)}">
-              <div class="donut-center"><div class="donut-number">${stats.pending}</div><div class="donut-label">优先级事项</div></div>
-            </div>
-            <div class="status-legend">${renderPriorityLegend(stats)}</div>
-          </div>
-          <div class="overview-metrics">
-            <div class="metric-card"><label>P0 火烧屁股</label><strong style="color:${priorityStyles.P0}">${stats.priorityCounts.P0}<span class="unit">项</span></strong><p>必须立即处理</p></div>
-            <div class="metric-card"><label>P1 今日必完成</label><strong style="color:${priorityStyles.P1}">${stats.priorityCounts.P1}<span class="unit">项</span></strong><p>今天要交付</p></div>
-            <div class="metric-card"><label>P2 常规推进</label><strong style="color:${priorityStyles.P2}">${stats.priorityCounts.P2}<span class="unit">项</span></strong><p>稳定推进中</p></div>
-            <div class="metric-card"><label>P3 可延后</label><strong style="color:${priorityStyles.P3}">${stats.priorityCounts.P3}<span class="unit">项</span></strong><p>有空再处理</p></div>
-          </div>
+          ${renderOrbitOverview(tasks, stats)}
         </article>
         <article class="card span-12 next-fold"><h3 class="section-title">待办中心</h3>${renderTasks(tasks)}
           <button class="add-task-trigger" onclick="openTaskModal()">＋ 新增待办</button>

@@ -70,17 +70,25 @@ def test_render_html_contains_editable_task_and_review_controls():
     assert "deleteEditingTask" in html
 
 
-def test_first_screen_is_a_minimal_priority_overview():
+def test_first_screen_is_a_radial_task_orbit_overview_not_a_donut():
     module = load_module()
     html = module.render_html(sample_history())
 
     assert "overview-first-fold" in html
-    assert "priorityDonutStyle" in html
-    assert "优先级事项" in html
-    assert "P0 火烧屁股" in html
-    assert "P1 今日必完成" in html
-    assert "P2 常规推进" in html
-    assert "P3 可延后" in html
+    assert "renderOrbitOverview" in html
+    assert "overview-orbit-map" in html
+    assert "orbit-core" in html
+    assert "orbit-task-card" in html
+    assert "orbit-connector" in html
+    assert "orbit-card-bloom" in html
+    assert "liquid-glass" in html
+    assert "backdrop-filter" in html
+    assert "categoryColors" in html
+    assert "urgencyRadius" in html
+    assert "离中心越近，越需要优先处理" in html
+    assert "生活" in html and "工作" in html and "自媒体" in html
+    assert "class=\"donut\"" not in html
+    assert "overview-metrics" not in html
 
 
 def test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda():
@@ -222,7 +230,7 @@ def test_dragging_uses_priority_lanes_with_same_priority_and_cross_priority_feed
 if __name__ == "__main__":
     test_render_html_upgrades_time_dashboard_into_personal_workbench()
     test_render_html_contains_editable_task_and_review_controls()
-    test_first_screen_is_a_minimal_priority_overview()
+    test_first_screen_is_a_radial_task_orbit_overview_not_a_donut()
     test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda()
     test_deadline_view_can_toggle_between_list_and_calendar()
     test_tasks_are_color_ranked_draggable_cards_with_progress_slider()
