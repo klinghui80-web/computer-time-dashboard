@@ -159,6 +159,25 @@ def test_visual_regressions_keep_glass_subtle_priority_colored_orbit_spacious_an
     assert ".span-7, .span-5" in html
 
 
+def test_global_nav_moves_to_top_and_history_lists_stay_left_for_time_modes():
+    module = load_module()
+    html = module.render_html(sample_history())
+
+    assert "top-nav" in html
+    assert "top-tabs" in html
+    assert "history-rail" in html
+    assert "main-layout" in html
+    assert "document.body.dataset.mode = next" in html
+    assert "mainLayout.classList.toggle('has-history', next !== 'workbench')" in html
+    assert "historyRail.setAttribute('aria-hidden', String(next === 'workbench'))" in html
+    assert "body[data-mode=\"workbench\"] .history-rail { display:none; }" in html
+    assert "body[data-mode=\"workbench\"] .main-layout { grid-template-columns:minmax(0,1fr); }" in html
+    assert "<aside class=\"sidebar\">" not in html
+    assert "首屏只回答一个问题" not in html
+    assert "下面再继续处理任务、复盘和时间数据" not in html
+    assert "title.textContent = '总览'" not in html
+
+
 def test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda():
     module = load_module()
     html = module.render_html(sample_history())
@@ -300,6 +319,7 @@ if __name__ == "__main__":
     test_render_html_contains_editable_task_and_review_controls()
     test_first_screen_is_a_radial_task_orbit_overview_not_a_donut()
     test_visual_regressions_keep_glass_subtle_priority_colored_orbit_spacious_and_weekly_unwarped()
+    test_global_nav_moves_to_top_and_history_lists_stay_left_for_time_modes()
     test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda()
     test_deadline_view_can_toggle_between_list_and_calendar()
     test_tasks_are_color_ranked_draggable_cards_with_progress_slider()

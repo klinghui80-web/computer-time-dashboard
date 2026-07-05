@@ -583,23 +583,30 @@ def render_html(history: dict[str, Any]) -> str:
     }
     * { box-sizing: border-box; }
     body { margin: 0; color: var(--text); background:#000000; font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif; }
-    .shell { display: grid; grid-template-columns: 310px 1fr; min-height: 100vh; }
-    .sidebar { padding: 24px 18px; border-right: 1px solid var(--line); background: rgba(255,255,255,0.032); backdrop-filter: blur(24px) saturate(118%); -webkit-backdrop-filter: blur(24px) saturate(118%); position: sticky; top: 0; height: 100vh; overflow: auto; }
+    .shell { min-height: 100vh; }
+    .top-nav { position:sticky; top:0; z-index:30; display:grid; grid-template-columns:minmax(220px,1fr) auto minmax(280px,1fr); gap:18px; align-items:center; padding:16px 28px; border-bottom:1px solid var(--line); background:rgba(0,0,0,.72); backdrop-filter:blur(24px) saturate(118%); -webkit-backdrop-filter:blur(24px) saturate(118%); }
     .brand h1 { margin: 0 0 8px; font-size: 24px; }
-    .brand p { margin: 0; color: var(--muted); line-height: 1.7; font-size: 13px; }
+    .brand p { display:none; }
+    .top-meta { display:flex; justify-content:flex-end; gap:10px; flex-wrap:wrap; }
     .meta-stack { display: grid; gap: 8px; margin-top: 16px; }
     .meta-pill { border: 1px solid var(--line); border-radius: 999px; padding: 8px 10px; font-size: 12px; color: var(--muted); background: rgba(255,255,255,0.03); }
-    .tabs { display: flex; gap: 8px; margin: 18px 0 16px; }
+    .tabs { display: flex; gap: 8px; }
+    .top-tabs { justify-content:center; }
     .tab { border: 1px solid var(--line); background: transparent; color: var(--text); border-radius: 999px; padding: 8px 12px; cursor: pointer; }
     .tab.active { background: rgba(122,162,255,0.16); border-color: rgba(122,162,255,0.45); }
+    .main-layout { display:grid; grid-template-columns:310px minmax(0,1fr); gap:28px; padding:28px; align-items:start; }
+    body[data-mode="workbench"] .history-rail { display:none; }
+    body[data-mode="workbench"] .main-layout { grid-template-columns:minmax(0,1fr); }
+    .history-rail { position:sticky; top:86px; max-height:calc(100vh - 110px); overflow:auto; padding:0; min-width:0; }
     .list { display: none; gap: 10px; flex-direction: column; }
     .list.active { display: flex; }
     .item { width: 100%; text-align: left; background: var(--panel-2); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; color: var(--text); cursor: pointer; }
     .item strong { display: block; font-size: 14px; }
     .item small { display: block; color: var(--muted); margin-top: 6px; line-height: 1.6; }
     .item.active { border-color: rgba(122,162,255,0.55); box-shadow: 0 0 0 1px rgba(122,162,255,0.2) inset; }
-    .main { padding: 28px; }
+    .main { padding: 0; min-width:0; }
     .header { display: flex; justify-content: space-between; gap: 16px; align-items: start; margin-bottom: 18px; }
+    body[data-mode="workbench"] .context-header { display:none; }
     .header h2 { margin: 0 0 8px; font-size: 32px; }
     .header p { margin: 0; line-height: 1.7; color: var(--muted); max-width: 760px; }
     .header .info { color: var(--muted); font-size: 13px; text-align: right; }
@@ -795,8 +802,11 @@ def render_html(history: dict[str, Any]) -> str:
     .empty { color:var(--muted); padding:18px; border:1px dashed rgba(255,255,255,0.14); border-radius:16px; text-align:center; }
     .mini-stat { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
     @media (max-width: 1100px) {
-      .shell { grid-template-columns: 1fr; }
-      .sidebar { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--line); }
+      .top-nav { grid-template-columns:1fr; justify-items:start; }
+      .top-tabs, .top-meta { justify-content:flex-start; }
+      .main-layout, .main-layout.has-history { grid-template-columns:1fr; padding:18px; }
+      .history-rail { position:static; max-height:none; }
+      body[data-mode="workbench"] .history-rail { display:none; }
       .span-8, .span-6, .span-4, .span-7, .span-5 { grid-column: span 12; }
       .kpis { grid-template-columns: repeat(2, minmax(0,1fr)); }
       .workbench-hero, .form-grid, .review-grid { grid-template-columns: 1fr; }
@@ -821,35 +831,39 @@ def render_html(history: dict[str, Any]) -> str:
     }
   </style>
 </head>
-<body>
+<body data-mode="workbench">
   <div class="shell">
-    <aside class="sidebar">
+    <header class="top-nav">
       <div class="brand">
         <h1>个人工作台</h1>
-        <p>一个集成今日执行、待办优先级、手动复盘与时间管理的个人化工作台。原有每日 19:30 飞书复盘和时间统计自动化保持不动。</p>
+        <p>个人化工作台</p>
       </div>
-      <div class="meta-stack">
-        <div class="meta-pill" id="generatedMeta"></div>
-        <div class="meta-pill" id="sourceMeta"></div>
-      </div>
-      <div class="tabs">
+      <nav class="tabs top-tabs" aria-label="主导航">
         <button class="tab active" data-tab="workbench">工作台</button>
         <button class="tab" data-tab="days">时间与精力</button>
         <button class="tab" data-tab="weeks">每周</button>
+      </nav>
+      <div class="top-meta">
+        <div class="meta-pill" id="generatedMeta"></div>
+        <div class="meta-pill" id="sourceMeta"></div>
       </div>
-      <div class="list" id="dayList"></div>
-      <div class="list" id="weekList"></div>
-    </aside>
-    <main class="main">
-      <div class="header">
-        <div>
-          <h2 id="title">加载中…</h2>
-          <p id="subtitle"></p>
+    </header>
+    <div class="main-layout" id="mainLayout">
+      <aside class="history-rail" id="historyRail" aria-hidden="true">
+        <div class="list" id="dayList"></div>
+        <div class="list" id="weekList"></div>
+      </aside>
+      <main class="main">
+        <div class="header context-header">
+          <div>
+            <h2 id="title">加载中…</h2>
+            <p id="subtitle"></p>
+          </div>
+          <div class="info" id="meta"></div>
         </div>
-        <div class="info" id="meta"></div>
-      </div>
-      <section class="grid" id="content"></section>
-    </main>
+        <section class="grid" id="content"></section>
+      </main>
+    </div>
   </div>
   <script>
     const store = __STORE_JSON__;
@@ -862,6 +876,8 @@ def render_html(history: dict[str, Any]) -> str:
     const subtitle = document.getElementById('subtitle');
     const meta = document.getElementById('meta');
     const content = document.getElementById('content');
+    const mainLayout = document.getElementById('mainLayout');
+    const historyRail = document.getElementById('historyRail');
     const generatedMeta = document.getElementById('generatedMeta');
     const sourceMeta = document.getElementById('sourceMeta');
 
@@ -1151,6 +1167,9 @@ def render_html(history: dict[str, Any]) -> str:
 
     function switchMode(next) {
       mode = next;
+      document.body.dataset.mode = next;
+      mainLayout.classList.toggle('has-history', next !== 'workbench');
+      historyRail.setAttribute('aria-hidden', String(next === 'workbench'));
       tabs.forEach(tab => tab.classList.toggle('active', tab.dataset.tab === next));
       dayList.classList.toggle('active', next === 'days');
       weekList.classList.toggle('active', next === 'weeks');
@@ -1175,6 +1194,9 @@ def render_html(history: dict[str, Any]) -> str:
       document.querySelectorAll('.item').forEach(node => node.onclick = () => {
         currentKey = node.dataset.key;
         mode = node.dataset.kind === 'day' ? 'days' : 'weeks';
+        document.body.dataset.mode = mode;
+        mainLayout.classList.toggle('has-history', mode !== 'workbench');
+        historyRail.setAttribute('aria-hidden', String(mode === 'workbench'));
         tabs.forEach(tab => tab.classList.toggle('active', tab.dataset.tab === mode));
         dayList.classList.toggle('active', mode === 'days');
         weekList.classList.toggle('active', mode === 'weeks');
@@ -1543,9 +1565,9 @@ def render_html(history: dict[str, Any]) -> str:
       const stats = taskStats(tasks);
       const reviews = loadReviews();
       const review = today ? (reviews[today.date] || {}) : {};
-      title.textContent = '总览';
-      subtitle.textContent = '首屏只回答一个问题：现在还有多少内容待推进。下面再继续处理任务、复盘和时间数据。';
-      meta.innerHTML = today ? `${today.date} · ${today.weekday}<br>每日 19:30 自动复盘保持不动` : '等待时间数据生成';
+      title.textContent = '';
+      subtitle.textContent = '';
+      meta.innerHTML = '';
       content.innerHTML = `
         <article class="card span-12 overview-first-fold">
           ${renderOrbitOverview(tasks, stats)}
