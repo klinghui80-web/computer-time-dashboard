@@ -85,10 +85,19 @@ def test_first_screen_is_a_radial_task_orbit_overview_not_a_donut():
     assert "backdrop-filter" in html
     assert "categoryColors" in html
     assert "urgencyRadius" in html
-    assert "离中心越近，越需要优先处理" in html
+    assert "connectorEndpoint" in html
+    assert "orbit-map-stage" in html
     assert "生活" in html and "工作" in html and "自媒体" in html
     assert "class=\"donut\"" not in html
     assert "overview-metrics" not in html
+    assert "overview-kicker" not in html
+    assert "orbit-caption" not in html
+    assert "Material Orbit" not in html
+    assert "离中心越近，越需要优先处理" not in html
+    assert "orbit-core-dot" not in html
+    assert "orbit-label" not in html
+    assert "待推进原点" not in html
+    assert "<div class=\"orbit-core-inner\"><div class=\"orbit-count\">" in html
 
 
 def test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda():

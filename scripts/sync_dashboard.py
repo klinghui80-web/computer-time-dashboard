@@ -627,27 +627,22 @@ def render_html(history: dict[str, Any]) -> str:
     .workbench-hero { display:grid; grid-template-columns: 1.25fr .75fr; gap:16px; align-items:stretch; }
     .hero-title { font-size:42px; line-height:1.02; letter-spacing:-1.1px; margin:0 0 12px; font-weight:600; }
     .hero-copy { color:var(--muted); line-height:1.8; margin:0; max-width:780px; }
-    .overview-first-fold { min-height: calc(100vh - 150px); display:flex; flex-direction:column; justify-content:center; gap:18px; background:radial-gradient(circle at 50% 46%, rgba(122,162,255,.16), transparent 34%), linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015)); overflow:hidden; }
-    .overview-top { display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center; }
-    .overview-kicker { color:#8a8f98; font-size:12px; letter-spacing:.12em; text-transform:uppercase; }
-    .orbit-caption { color:#d0d6e0; margin:0; font-size:15px; letter-spacing:-.16px; }
-    .overview-orbit-map { position:relative; min-height:560px; border-radius:34px; overflow:hidden; isolation:isolate; background:
+    .overview-first-fold { min-height: calc(100vh - 112px); display:flex; flex-direction:column; justify-content:center; background:radial-gradient(circle at 50% 46%, rgba(122,162,255,.16), transparent 34%), linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015)); overflow:hidden; }
+    .overview-orbit-map { position:relative; min-height:700px; height:clamp(700px, calc(100vh - 190px), 920px); border-radius:28px; overflow:hidden; isolation:isolate; background:
       radial-gradient(circle at 50% 50%, rgba(255,255,255,.12), transparent 2px),
       radial-gradient(circle at 50% 50%, rgba(122,162,255,.18), transparent 20%),
       linear-gradient(135deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08), 0 28px 90px rgba(0,0,0,.28); }
+      box-shadow:none; }
+    .orbit-map-stage { position:absolute; inset:0; z-index:2; }
     .overview-orbit-map::before { content:""; position:absolute; inset:18px; z-index:0; border-radius:30px; background-image: radial-gradient(rgba(255,255,255,.16) 1px, transparent 1px); background-size:18px 18px; opacity:.12; mask-image:radial-gradient(circle at center, black, transparent 72%); }
     .overview-orbit-map::after { content:""; position:absolute; inset:0; z-index:1; background:radial-gradient(circle at center, rgba(255,255,255,.08), transparent 34%), linear-gradient(90deg, transparent, rgba(255,255,255,.05), transparent); pointer-events:none; }
     .liquid-glass { background:rgba(12,20,36,.68); border:1px solid rgba(255,255,255,.18); backdrop-filter: blur(22px) saturate(160%); -webkit-backdrop-filter: blur(22px) saturate(160%); box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 18px 60px rgba(0,0,0,.35); }
-    .orbit-connector-layer { position:absolute; inset:0; z-index:2; opacity:.92; overflow:visible; }
-    .orbit-connector { fill:none; stroke:var(--cat-color,#7aa2ff); stroke-width:2.1; stroke-linecap:round; filter:drop-shadow(0 0 8px var(--cat-color,#7aa2ff)); stroke-dasharray:520; stroke-dashoffset:520; animation: orbit-line-draw .95s ease forwards; animation-delay:var(--delay,0ms); }
-    .orbit-core { position:absolute; left:50%; top:50%; z-index:4; width:174px; height:174px; border-radius:50%; transform:translate(-50%,-50%); display:grid; place-items:center; text-align:center; color:#fff; background:radial-gradient(circle at 38% 30%, rgba(255,255,255,.32), rgba(122,92,255,.38) 42%, rgba(37,22,75,.68)); border:1px solid rgba(255,255,255,.22); box-shadow:0 0 0 48px rgba(122,92,255,.10), 0 0 0 96px rgba(122,92,255,.045), 0 30px 100px rgba(122,92,255,.28); }
+    .orbit-connector { position:absolute; left:50%; top:50%; z-index:7; width:var(--line-len, 120px); height:3px; border-radius:999px; transform-origin:0 50%; transform:rotate(var(--line-angle, 0deg)) scaleX(1); background:linear-gradient(90deg, rgba(255,255,255,.92), var(--cat-color,#7aa2ff) 36%, var(--cat-color,#7aa2ff)); filter:drop-shadow(0 0 9px var(--cat-color,#7aa2ff)); animation: orbit-line-draw .9s ease forwards; animation-delay:var(--delay,0ms); }
+    .orbit-core { position:absolute; left:50%; top:50%; z-index:6; width:124px; height:124px; border-radius:50%; transform:translate(-50%,-50%); display:grid; place-items:center; text-align:center; color:#fff; background:radial-gradient(circle at 38% 30%, rgba(255,255,255,.34), rgba(122,92,255,.45) 42%, rgba(37,22,75,.76)); border:1px solid rgba(255,255,255,.22); box-shadow:0 0 0 54px rgba(122,92,255,.10), 0 0 0 108px rgba(122,92,255,.045), 0 30px 100px rgba(122,92,255,.28); }
     .orbit-core::before { content:""; position:absolute; inset:-96px; border-radius:50%; border:1px solid rgba(255,255,255,.07); }
     .orbit-core::after { content:""; position:absolute; inset:-48px; border-radius:50%; border:1px solid rgba(255,255,255,.1); }
-    .orbit-core-inner { position:relative; z-index:1; display:grid; gap:4px; justify-items:center; }
-    .orbit-core-dot { width:44px; height:44px; border-radius:50%; display:grid; place-items:center; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.2); box-shadow:0 0 30px rgba(255,255,255,.18); }
-    .orbit-count { font-size:54px; line-height:.9; letter-spacing:-1.4px; font-weight:700; }
-    .orbit-label { color:#dfe7ff; font-size:13px; }
+    .orbit-core-inner { position:relative; z-index:9; display:grid; place-items:center; }
+    .orbit-count { font-size:78px; line-height:.9; letter-spacing:-2px; font-weight:750; text-shadow:0 2px 26px rgba(0,0,0,.35); }
     .orbit-task-card { position:absolute; left:50%; top:50%; z-index:8; width:220px; min-height:98px; border-radius:22px; padding:14px 15px; color:#f7f8f8; background:linear-gradient(135deg, rgba(17,24,39,.98), rgba(20,30,52,.92)) !important; border:1px solid color-mix(in srgb, var(--cat-color), rgba(255,255,255,.18) 40%); transform:translate(calc(-50% + var(--orbit-x)), calc(-50% + var(--orbit-y))) scale(1); animation: orbit-card-bloom .78s cubic-bezier(.2,.8,.2,1) both; animation-delay:var(--delay,0ms); box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 18px 54px rgba(0,0,0,.42), 0 0 34px color-mix(in srgb, var(--cat-color), transparent 62%); isolation:isolate; }
     .orbit-task-card::before { content:""; position:absolute; inset:-1px; border-radius:inherit; background:linear-gradient(135deg, var(--cat-color), transparent 42%, rgba(255,255,255,.16)); opacity:.62; z-index:0; }
     .orbit-task-card > * { position:relative; z-index:1; }
@@ -662,7 +657,7 @@ def render_html(history: dict[str, Any]) -> str:
     .dot { width:9px; height:9px; border-radius:50%; display:inline-block; }
     .orbit-empty { position:absolute; left:50%; top:50%; z-index:4; transform:translate(-50%, 96px); color:#8a8f98; }
     @keyframes orbit-card-bloom { from { opacity:0; transform:translate(-50%,-50%) scale(.35); filter:blur(12px); } to { opacity:1; transform:translate(calc(-50% + var(--orbit-x)), calc(-50% + var(--orbit-y))) scale(1); filter:blur(0); } }
-    @keyframes orbit-line-draw { to { stroke-dashoffset:0; } }
+    @keyframes orbit-line-draw { from { transform:rotate(var(--line-angle, 0deg)) scaleX(0); opacity:.28; } to { transform:rotate(var(--line-angle, 0deg)) scaleX(1); opacity:1; } }
     @media (prefers-reduced-motion: reduce) { .orbit-task-card, .orbit-connector { animation:none; } }
     .next-fold { margin-top:4px; }
     .toolbar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
@@ -762,10 +757,10 @@ def render_html(history: dict[str, Any]) -> str:
       .form-grid .wide { grid-column: span 1; }
       .review-grid .wide { grid-column: span 1; }
       .mini-stat { grid-template-columns:1fr; }
-      .orbit-core { width:142px; height:142px; }
+      .orbit-core { width:124px; height:124px; }
       .orbit-task-card { position:relative; left:auto; top:auto; transform:none; width:auto; margin:10px; animation:none; }
-      .orbit-connector-layer { display:none; }
-      .overview-orbit-map { min-height:auto; padding:170px 8px 18px; display:grid; gap:10px; }
+      .orbit-connector { display:none; }
+      .overview-orbit-map { min-height:auto; height:auto; padding:150px 8px 18px; display:grid; gap:10px; }
       .overview-first-fold { min-height:auto; }
       .deadline-calendar { grid-template-columns:repeat(2,minmax(0,1fr)); }
       .task-modal { max-height:88vh; overflow:auto; }
@@ -1284,6 +1279,21 @@ def render_html(history: dict[str, Any]) -> str:
       };
     }
 
+    function connectorEndpoint(node) {
+      const cardHalfWidth = 110;
+      const cardHalfHeight = 54;
+      const distance = Math.max(Math.hypot(node.orbitX, node.orbitY), 1);
+      const unitX = node.orbitX / distance;
+      const unitY = node.orbitY / distance;
+      const xTrim = Math.abs(unitX) < 0.001 ? Infinity : cardHalfWidth / Math.abs(unitX);
+      const yTrim = Math.abs(unitY) < 0.001 ? Infinity : cardHalfHeight / Math.abs(unitY);
+      const trimToCardEdge = Math.min(xTrim, yTrim);
+      return {
+        length: Math.max(18, Math.round(distance - trimToCardEdge)),
+        angle: Math.round(Math.atan2(node.orbitY, node.orbitX) * 1800 / Math.PI) / 10,
+      };
+    }
+
     function renderOrbitOverview(tasks, stats) {
       const pending = sortTasksForDisplay(tasks.filter(task => task.status !== 'done')).slice(0, 10);
       const nodes = pending.map((task, index) => {
@@ -1293,11 +1303,8 @@ def render_html(history: dict[str, Any]) -> str:
         return {...task, orbitIndex: index, orbitX: position.x, orbitY: position.y, orbitColor: color, orbitCategory: category};
       });
       const connectors = nodes.map(task => {
-        const midX = Math.round(task.orbitX * 0.48);
-        const midY = Math.round(task.orbitY * 0.08);
-        const endBendX = Math.round(task.orbitX * 0.82);
-        const endBendY = Math.round(task.orbitY * 0.92);
-        return `<path class="orbit-connector" style="--cat-color:${task.orbitColor}; --delay:${task.orbitIndex * 90}ms" d="M 0 0 C ${midX} ${midY}, ${endBendX} ${endBendY}, ${task.orbitX} ${task.orbitY}" />`;
+        const endpoint = connectorEndpoint(task);
+        return `<span class="orbit-connector" style="--cat-color:${task.orbitColor}; --delay:${task.orbitIndex * 90}ms; --line-len:${endpoint.length}px; --line-angle:${endpoint.angle}deg"></span>`;
       }).join('');
       const cards = nodes.map(task => `
         <article class="orbit-task-card liquid-glass" style="--orbit-x:${task.orbitX}px; --orbit-y:${task.orbitY}px; --cat-color:${task.orbitColor}; --delay:${task.orbitIndex * 90}ms">
@@ -1311,21 +1318,13 @@ def render_html(history: dict[str, Any]) -> str:
         return `<span class="legend-pill"><i class="dot" style="background:${categoryColors[category]}"></i>${category} ${count}</span>`;
       }).join('');
       return `
-        <div class="overview-top">
-          <div class="overview-kicker">Material Orbit · Liquid Glass</div>
-          <p class="orbit-caption">离中心越近，越需要优先处理；颜色区分生活、工作、自媒体。</p>
-        </div>
         <div class="overview-orbit-map">
-          <svg class="orbit-connector-layer" viewBox="-520 -280 1040 560" preserveAspectRatio="xMidYMid meet" aria-hidden="true">${connectors}</svg>
-          <div class="orbit-core liquid-glass">
-            <div class="orbit-core-inner">
-              <div class="orbit-core-dot">✦</div>
-              <div class="orbit-count">${stats.pending}</div>
-              <div class="orbit-label">待推进原点</div>
-            </div>
+          <div class="orbit-map-stage">
+            ${connectors}
+            <div class="orbit-core liquid-glass"><div class="orbit-core-inner"><div class="orbit-count">${stats.pending}</div></div></div>
+            ${cards || '<div class="orbit-empty">暂无待推进事项</div>'}
+            <div class="orbit-legend">${legend}</div>
           </div>
-          ${cards || '<div class="orbit-empty">暂无待推进事项</div>'}
-          <div class="orbit-legend">${legend}</div>
         </div>`;
     }
 
