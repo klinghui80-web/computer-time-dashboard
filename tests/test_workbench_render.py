@@ -120,16 +120,30 @@ def test_tasks_are_color_ranked_draggable_cards_with_progress_slider():
     assert "priority-card-P0" in html
     assert "priority-card-P1" in html
     assert "priority-card-P2" in html
+    assert "task-drag-handle" in html
     assert "draggable=\"true\"" in html
     assert "dragTaskId" in html
     assert "reorderTasks" in html
-    assert "priorityForIndex" in html
     assert "updateTaskProgress" in html
     assert "progress-slider" in html
     assert "type=\"range\"" in html
     assert "0%" in html
     assert "100%" in html
     assert "updateTaskStatus('${task.id}', this.checked" not in html
+    assert "task-card priority-card-${task.priority} ${task.status === 'done' ? 'done' : ''}\" draggable" not in html
+
+
+def test_dragging_uses_priority_lanes_with_same_priority_and_cross_priority_feedback():
+    module = load_module()
+    html = module.render_html(sample_history())
+
+    assert "priority-lane" in html
+    assert "dropPriorityLane" in html
+    assert "dragSourcePriority" in html
+    assert "同优先级内排序" in html
+    assert "松手切换为" in html
+    assert "同一优先级可包含多个任务" in html
+    assert "priorityForIndex" not in html
 
 
 if __name__ == "__main__":
@@ -139,4 +153,5 @@ if __name__ == "__main__":
     test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda()
     test_deadline_view_can_toggle_between_list_and_calendar()
     test_tasks_are_color_ranked_draggable_cards_with_progress_slider()
+    test_dragging_uses_priority_lanes_with_same_priority_and_cross_priority_feedback()
     print("workbench render tests passed")

@@ -655,16 +655,24 @@ def render_html(history: dict[str, Any]) -> str:
     .form-grid { display:grid; grid-template-columns: 1.2fr .55fr .55fr .7fr; gap:10px; align-items:end; }
     .form-grid .wide { grid-column: span 2; }
     .form-grid label, .review-grid label { display:grid; gap:6px; font-size:12px; color:var(--muted); }
-    .task-list { display:grid; gap:12px; }
-    .task-card { display:grid; grid-template-columns: minmax(0,1fr) minmax(220px,280px); gap:16px; align-items:start; padding:18px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.035); cursor:grab; transition:transform .16s ease, border-color .16s ease, background .16s ease; }
-    .task-card:active { cursor:grabbing; }
+    .task-list { display:grid; gap:14px; }
+    .priority-lane { display:grid; gap:10px; border:1px solid rgba(255,255,255,.06); border-radius:20px; padding:12px; background:rgba(255,255,255,.018); }
+    .priority-lane.drop-same { border-color:rgba(122,162,255,.55); background:rgba(122,162,255,.06); }
+    .priority-lane.drop-cross { border-color:rgba(255,176,77,.55); background:rgba(255,176,77,.055); }
+    .priority-lane-head { display:flex; justify-content:space-between; align-items:center; gap:12px; color:#d0d6e0; font-size:12px; }
+    .priority-lane-head strong { font-size:13px; color:#f7f8f8; }
+    .drop-hint { color:#8a8f98; }
+    .priority-lane.drop-same .drop-hint::after { content:' · 松手：同优先级内排序，不变色'; color:#a9c3ff; }
+    .priority-lane.drop-cross .drop-hint::after { content:' · 松手切换为此优先级，卡片会变色'; color:#ffd59a; }
+    .task-card { display:grid; grid-template-columns: minmax(0,1fr) minmax(220px,280px); gap:16px; align-items:start; padding:18px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.035); transition:transform .16s ease, border-color .16s ease, background .16s ease; }
     .task-card.dragging { opacity:.55; transform:scale(.995); }
     .priority-card-P0 { background:linear-gradient(135deg, rgba(255,92,92,.17), rgba(255,255,255,.035)); border-color:rgba(255,112,112,.36); }
     .priority-card-P1 { background:linear-gradient(135deg, rgba(255,176,77,.15), rgba(255,255,255,.035)); border-color:rgba(255,176,77,.32); }
     .priority-card-P2 { background:linear-gradient(135deg, rgba(122,162,255,.14), rgba(255,255,255,.035)); border-color:rgba(122,162,255,.28); }
     .priority-card-P3 { background:linear-gradient(135deg, rgba(148,163,184,.10), rgba(255,255,255,.03)); border-color:rgba(148,163,184,.22); }
     .task-card.done { opacity:.58; }
-    .drag-hint { display:inline-flex; align-items:center; gap:6px; color:#8a8f98; font-size:12px; margin-bottom:8px; }
+    .task-drag-handle { display:inline-flex; align-items:center; gap:6px; width:max-content; color:#8a8f98; font-size:12px; margin-bottom:8px; cursor:grab; user-select:none; }
+    .task-drag-handle:active { cursor:grabbing; }
     .task-main strong { display:block; margin-bottom:7px; }
     .task-main p { margin:0; color:var(--muted); line-height:1.6; font-size:13px; }
     .task-meta { display:flex; gap:6px; flex-wrap:wrap; margin-top:9px; }
@@ -810,7 +818,7 @@ def render_html(history: dict[str, Any]) -> str:
       return {
         ...task,
         order: Number.isFinite(Number(task.order)) ? Number(task.order) : index,
-        priority: task.priority || priorityForIndex(index),
+        priority: task.priority || 'P3',
         progress,
         status: progress >= 100 ? 'done' : (task.status === 'done' ? 'doing' : (task.status || 'todo')),
       };
@@ -831,12 +839,6 @@ def render_html(history: dict[str, Any]) -> str:
     function saveReviews(reviews) { writeLocal(WORKBENCH_REVIEW_KEY, reviews); }
     function sortTasksForDisplay(tasks) {
       return [...tasks].sort((a,b) => (priorityRank[a.priority] ?? 9) - (priorityRank[b.priority] ?? 9) || (a.order ?? 999) - (b.order ?? 999) || String(a.createdAt || '').localeCompare(String(b.createdAt || '')));
-    }
-    function priorityForIndex(index) {
-      if (index <= 0) return 'P0';
-      if (index === 1) return 'P1';
-      if (index === 2) return 'P2';
-      return 'P3';
     }
     function activeTasks() { return sortTasksForDisplay(loadTasks().filter(task => task.status !== 'done')); }
     function taskStats(tasks) {
@@ -875,13 +877,15 @@ def render_html(history: dict[str, Any]) -> str:
       const title = titleInput.value.trim();
       if (!title) return;
       const tasks = loadTasks();
+      const priority = document.getElementById('taskPriority').value;
+      const nextOrder = Math.max(-1, ...tasks.filter(task => task.priority === priority).map(task => Number(task.order) || 0)) + 1;
       tasks.push({
         id: uid(), title,
         description: document.getElementById('taskDescription').value.trim(),
-        priority: document.getElementById('taskPriority').value,
+        priority,
         status: document.getElementById('taskStatus').value,
         progress: 0,
-        order: tasks.length,
+        order: nextOrder,
         project: document.getElementById('taskProject').value.trim() || '未归属',
         due: document.getElementById('taskDue').value,
         focus: document.getElementById('taskFocus').checked,
@@ -913,27 +917,74 @@ def render_html(history: dict[str, Any]) -> str:
       saveTasks(tasks); renderWorkbench();
     };
     let dragTaskId = null;
-    window.beginTaskDrag = function beginTaskDrag(id, event) {
+    let dragSourcePriority = null;
+    const priorityLabels = { P0: 'P0 最高优先级', P1: 'P1 高优先级', P2: 'P2 常规推进', P3: 'P3 可延后' };
+    function clearPriorityDropHints() {
+      document.querySelectorAll('.priority-lane').forEach(lane => lane.classList.remove('drop-same', 'drop-cross'));
+    }
+    window.beginTaskDrag = function beginTaskDrag(id, priority, event) {
       dragTaskId = id;
-      event.currentTarget.classList.add('dragging');
+      dragSourcePriority = priority;
+      const card = event.currentTarget.closest('.task-card');
+      if (card) card.classList.add('dragging');
       if (event.dataTransfer) event.dataTransfer.effectAllowed = 'move';
     };
     window.endTaskDrag = function endTaskDrag(event) {
-      event.currentTarget.classList.remove('dragging');
+      const card = event.currentTarget.closest('.task-card');
+      if (card) card.classList.remove('dragging');
+      clearPriorityDropHints();
     };
-    window.reorderTasks = function reorderTasks(targetId) {
+    window.markPriorityDrop = function markPriorityDrop(priority, event) {
+      event.preventDefault();
+      clearPriorityDropHints();
+      const lane = event.currentTarget.closest('.priority-lane');
+      if (lane) lane.classList.add(priority === dragSourcePriority ? 'drop-same' : 'drop-cross');
+    };
+    function applyPriorityGroupOrder(allTasks, priority, orderedIds) {
+      let next = 0;
+      const idOrder = Object.fromEntries(orderedIds.map((id, index) => [id, index]));
+      return allTasks.map(task => task.priority === priority && idOrder[task.id] !== undefined
+        ? {...task, order: idOrder[task.id], updatedAt: new Date().toISOString()}
+        : task
+      ).map(task => task.priority === priority && idOrder[task.id] === undefined
+        ? {...task, order: orderedIds.length + next++, updatedAt: new Date().toISOString()}
+        : task
+      );
+    }
+    window.reorderTasks = function reorderTasks(targetId, targetPriority, event) {
+      if (event) { event.preventDefault(); event.stopPropagation(); }
       if (!dragTaskId || dragTaskId === targetId) return;
       const allTasks = loadTasks();
-      const visible = sortTasksForDisplay(allTasks.filter(task => task.status !== 'done'));
-      const draggedIndex = visible.findIndex(task => task.id === dragTaskId);
-      const targetIndex = visible.findIndex(task => task.id === targetId);
-      if (draggedIndex < 0 || targetIndex < 0) return;
-      const [dragged] = visible.splice(draggedIndex, 1);
-      visible.splice(targetIndex, 0, dragged);
-      const reordered = visible.map((task, index) => ({...task, order: index, priority: priorityForIndex(index), updatedAt: new Date().toISOString()}));
-      const reorderedById = Object.fromEntries(reordered.map(task => [task.id, task]));
-      saveTasks(allTasks.map(task => reorderedById[task.id] || task));
+      const dragged = allTasks.find(task => task.id === dragTaskId);
+      if (!dragged) return;
+      const destinationPriority = targetPriority || dragged.priority;
+      let group = sortTasksForDisplay(allTasks.filter(task => task.status !== 'done' && task.priority === destinationPriority && task.id !== dragTaskId));
+      const targetIndex = Math.max(0, group.findIndex(task => task.id === targetId));
+      const moved = {...dragged, priority: destinationPriority, updatedAt: new Date().toISOString()};
+      group.splice(targetIndex, 0, moved);
+      const groupIds = group.map(task => task.id);
+      const movedById = Object.fromEntries(group.map((task, index) => [task.id, {...task, order: index}]));
+      let next = allTasks.map(task => movedById[task.id] || (task.id === dragTaskId ? movedById[dragTaskId] : task));
+      next = applyPriorityGroupOrder(next, destinationPriority, groupIds);
+      saveTasks(next);
       dragTaskId = null;
+      dragSourcePriority = null;
+      clearPriorityDropHints();
+      renderWorkbench();
+    };
+    window.dropPriorityLane = function dropPriorityLane(priority, event) {
+      event.preventDefault();
+      if (!dragTaskId) return;
+      const allTasks = loadTasks();
+      const dragged = allTasks.find(task => task.id === dragTaskId);
+      if (!dragged) return;
+      const group = sortTasksForDisplay(allTasks.filter(task => task.status !== 'done' && task.priority === priority && task.id !== dragTaskId));
+      group.push({...dragged, priority, updatedAt: new Date().toISOString()});
+      const movedById = Object.fromEntries(group.map((task, index) => [task.id, {...task, order: index}]));
+      saveTasks(allTasks.map(task => movedById[task.id] || task));
+      dragTaskId = null;
+      dragSourcePriority = null;
+      clearPriorityDropHints();
       renderWorkbench();
     };
     window.toggleTaskFocus = function toggleTaskFocus(id) {
@@ -1000,13 +1051,11 @@ def render_html(history: dict[str, Any]) -> str:
       });
     }
 
-    function renderTasks(tasks) {
-      const sorted = sortTasksForDisplay(tasks);
-      if (!sorted.length) return '<div class="empty">暂无待办。先添加今天要推进的事项。</div>';
-      return `<div class="task-list">${sorted.map((task, index) => `
-        <div class="task-card priority-card-${task.priority} ${task.status === 'done' ? 'done' : ''}" draggable="true" ondragstart="beginTaskDrag('${task.id}', event)" ondragend="endTaskDrag(event)" ondragover="event.preventDefault()" ondrop="reorderTasks('${task.id}')">
+    function renderTaskCard(task, index) {
+      return `
+        <div class="task-card priority-card-${task.priority} ${task.status === 'done' ? 'done' : ''}" ondragover="markPriorityDrop('${task.priority}', event)" ondrop="reorderTasks('${task.id}', '${task.priority}', event)">
           <div class="task-main">
-            <span class="drag-hint">↕ 拖动调整优先级 · 当前第 ${index + 1}</span>
+            <span class="task-drag-handle" draggable="true" ondragstart="beginTaskDrag('${task.id}', '${task.priority}', event)" ondragend="endTaskDrag(event)">↕ 拖动手柄</span>
             <strong>${escapeHtml(task.title)}</strong>
             <p>${escapeHtml(task.description || '暂无描述')}</p>
             <div class="task-meta">
@@ -1026,7 +1075,23 @@ def render_html(history: dict[str, Any]) -> str:
               <button class="btn danger" onclick="deleteTask('${task.id}')">删除</button>
             </div>
           </div>
-        </div>`).join('')}</div>`;
+        </div>`;
+    }
+
+    function renderTasks(tasks) {
+      const sorted = sortTasksForDisplay(tasks);
+      if (!sorted.length) return '<div class="empty">暂无待办。先添加今天要推进的事项。</div>';
+      const priorities = ['P0', 'P1', 'P2', 'P3'];
+      return `<div class="task-list">${priorities.map(priority => {
+        const group = sorted.filter(task => task.priority === priority);
+        return `<section class="priority-lane priority-card-${priority}" ondragover="markPriorityDrop('${priority}', event)" ondrop="dropPriorityLane('${priority}', event)">
+          <div class="priority-lane-head">
+            <strong>${priorityLabels[priority]} · ${group.length} 项</strong>
+            <span class="drop-hint" data-same="松手：同优先级内排序，不变色" data-cross="松手切换为 ${priority}，卡片会变色">同一优先级可包含多个任务</span>
+          </div>
+          ${group.length ? group.map((task, index) => renderTaskCard(task, index)).join('') : '<div class="empty">拖到这里可切换为该优先级。</div>'}
+        </section>`;
+      }).join('')}</div>`;
     }
 
     function renderReviewEditor(review) {
