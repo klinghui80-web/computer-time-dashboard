@@ -571,16 +571,20 @@ def render_html(history: dict[str, Any]) -> str:
   <style>
     :root {
       --bg: #000000;
-      --panel: rgba(255, 255, 255, 0.105);
-      --panel-2: rgba(255, 255, 255, 0.085);
-      --line: rgba(255,255,255,0.16);
+      --glass-bg: rgba(255,255,255,.072);
+      --glass-bg-strong: rgba(255,255,255,.095);
+      --glass-border: rgba(255,255,255,.13);
+      --glass-highlight: rgba(255,255,255,.105);
+      --panel: var(--glass-bg);
+      --panel-2: rgba(255,255,255,.052);
+      --line: rgba(255,255,255,.105);
       --text: #eff4ff;
       --muted: #9fb0d6;
     }
     * { box-sizing: border-box; }
     body { margin: 0; color: var(--text); background:#000000; font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif; }
     .shell { display: grid; grid-template-columns: 310px 1fr; min-height: 100vh; }
-    .sidebar { padding: 24px 18px; border-right: 1px solid var(--line); background: rgba(255,255,255,0.055); backdrop-filter: blur(28px) saturate(150%); -webkit-backdrop-filter: blur(28px) saturate(150%); position: sticky; top: 0; height: 100vh; overflow: auto; }
+    .sidebar { padding: 24px 18px; border-right: 1px solid var(--line); background: rgba(255,255,255,0.032); backdrop-filter: blur(24px) saturate(118%); -webkit-backdrop-filter: blur(24px) saturate(118%); position: sticky; top: 0; height: 100vh; overflow: auto; }
     .brand h1 { margin: 0 0 8px; font-size: 24px; }
     .brand p { margin: 0; color: var(--muted); line-height: 1.7; font-size: 13px; }
     .meta-stack { display: grid; gap: 8px; margin-top: 16px; }
@@ -600,10 +604,12 @@ def render_html(history: dict[str, Any]) -> str:
     .header p { margin: 0; line-height: 1.7; color: var(--muted); max-width: 760px; }
     .header .info { color: var(--muted); font-size: 13px; text-align: right; }
     .grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
-    .card { background: linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.055)); border: 1px solid rgba(255,255,255,.18); border-radius: 28px; padding: 20px; box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 24px 70px rgba(0,0,0,.36); backdrop-filter: blur(26px) saturate(145%); -webkit-backdrop-filter: blur(26px) saturate(145%); }
+    .card { background: linear-gradient(145deg, var(--glass-bg-strong), rgba(255,255,255,.034)); border: 1px solid var(--glass-border); border-radius: 28px; padding: 20px; box-shadow: inset 0 1px 0 var(--glass-highlight), 0 22px 58px rgba(0,0,0,.42); backdrop-filter: blur(24px) saturate(118%); -webkit-backdrop-filter: blur(24px) saturate(118%); }
     .span-12 { grid-column: span 12; }
     .span-8 { grid-column: span 8; }
     .span-6 { grid-column: span 6; }
+    .span-7 { grid-column: span 7; }
+    .span-5 { grid-column: span 5; }
     .span-4 { grid-column: span 4; }
     .kpis { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; }
     .kpi { padding: 16px; border-radius: 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); }
@@ -634,17 +640,17 @@ def render_html(history: dict[str, Any]) -> str:
     .overview-orbit-map { position:relative; min-height:700px; height:100%; border-radius:0; overflow:visible; isolation:isolate; background:transparent; box-shadow:none; }
     .overview-left-stage .orbit-map-stage { transform:translateX(-1%); }
     .orbit-map-stage { position:absolute; inset:0; z-index:2; }
-    .liquid-glass { background:rgba(12,20,36,.68); border:1px solid rgba(255,255,255,.18); backdrop-filter: blur(22px) saturate(160%); -webkit-backdrop-filter: blur(22px) saturate(160%); box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 18px 60px rgba(0,0,0,.35); }
+    .liquid-glass { background:linear-gradient(145deg, rgba(255,255,255,.082), rgba(255,255,255,.036)); border:1px solid var(--glass-border); backdrop-filter: blur(22px) saturate(118%); -webkit-backdrop-filter: blur(22px) saturate(118%); box-shadow: inset 0 1px 0 rgba(255,255,255,.10), 0 18px 54px rgba(0,0,0,.42); }
     .orbit-connector-layer { position:absolute; left:50%; top:50%; width:1px; height:1px; z-index:4; overflow:visible; pointer-events:none; }
     .orbit-connector-path { fill:none; stroke:var(--cat-color,#7aa2ff); stroke-width:3.5; stroke-linecap:round; opacity:.82; filter:drop-shadow(0 0 10px var(--cat-color,#7aa2ff)); stroke-dasharray:620; stroke-dashoffset:620; animation: orbit-line-draw .95s ease forwards; animation-delay:var(--delay,0ms); }
     .orbit-connector-particles { fill:none; stroke:rgba(255,255,255,.86); stroke-width:4.2; stroke-linecap:round; opacity:.92; filter:drop-shadow(0 0 12px var(--cat-color,#7aa2ff)); stroke-dasharray:1 13; stroke-dashoffset:96; animation: orbit-particles 2.8s linear infinite, orbit-line-draw .95s ease forwards; animation-delay:var(--delay,0ms), var(--delay,0ms); }
-    .orbit-core { position:absolute; left:50%; top:50%; z-index:6; width:124px; height:124px; border-radius:50%; transform:translate(-50%,-50%); display:grid; place-items:center; text-align:center; color:#fff; background:radial-gradient(circle at 38% 30%, rgba(255,255,255,.34), rgba(122,92,255,.45) 42%, rgba(37,22,75,.76)); border:1px solid rgba(255,255,255,.22); box-shadow:0 0 0 54px rgba(122,92,255,.10), 0 0 0 108px rgba(122,92,255,.045), 0 30px 100px rgba(122,92,255,.28); }
+    .orbit-core { position:absolute; left:50%; top:50%; z-index:6; width:124px; height:124px; border-radius:50%; transform:translate(-50%,-50%); display:grid; place-items:center; text-align:center; color:#fff; background:radial-gradient(circle at 38% 30%, rgba(255,255,255,.24), rgba(122,92,255,.38) 42%, rgba(37,22,75,.70)); border:1px solid rgba(255,255,255,.14); box-shadow:0 0 0 54px rgba(122,92,255,.08), 0 0 0 108px rgba(122,92,255,.032), 0 30px 100px rgba(122,92,255,.24); }
     .orbit-core::before { content:""; position:absolute; inset:-96px; border-radius:50%; border:1px solid rgba(255,255,255,.07); }
     .orbit-core::after { content:""; position:absolute; inset:-48px; border-radius:50%; border:1px solid rgba(255,255,255,.1); }
     .orbit-core-inner { position:relative; z-index:9; display:grid; place-items:center; }
     .orbit-count { font-size:78px; line-height:.9; letter-spacing:-2px; font-weight:750; text-shadow:0 2px 26px rgba(0,0,0,.35); }
-    .orbit-task-card { position:absolute; left:50%; top:50%; z-index:8; width:220px; min-height:98px; border-radius:22px; padding:14px 15px; color:#f7f8f8; background:linear-gradient(135deg, rgba(17,24,39,.98), rgba(20,30,52,.92)) !important; border:1px solid color-mix(in srgb, var(--cat-color), rgba(255,255,255,.18) 40%); transform:translate(calc(-50% + var(--orbit-x)), calc(-50% + var(--orbit-y))) scale(1); animation: orbit-card-bloom .78s cubic-bezier(.2,.8,.2,1) both; animation-delay:var(--delay,0ms); box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 18px 54px rgba(0,0,0,.42), 0 0 34px color-mix(in srgb, var(--cat-color), transparent 62%); isolation:isolate; }
-    .orbit-task-card::before { content:""; position:absolute; inset:-1px; border-radius:inherit; background:linear-gradient(135deg, var(--cat-color), transparent 42%, rgba(255,255,255,.16)); opacity:.62; z-index:0; }
+    .orbit-task-card { position:absolute; left:50%; top:50%; z-index:8; width:220px; min-height:98px; border-radius:22px; padding:14px 15px; color:#f7f8f8; background:linear-gradient(135deg, rgba(17,24,39,.94), rgba(20,30,52,.84)) !important; border:1px solid color-mix(in srgb, var(--cat-color), rgba(255,255,255,.14) 44%); transform:translate(calc(-50% + var(--orbit-x)), calc(-50% + var(--orbit-y))) scale(1); animation: orbit-card-bloom .78s cubic-bezier(.2,.8,.2,1) both; animation-delay:var(--delay,0ms); box-shadow: inset 0 1px 0 rgba(255,255,255,.11), 0 18px 54px rgba(0,0,0,.42), 0 0 30px color-mix(in srgb, var(--cat-color), transparent 70%); isolation:isolate; }
+    .orbit-task-card::before { content:""; position:absolute; inset:-1px; border-radius:inherit; background:linear-gradient(135deg, var(--cat-color), transparent 42%, rgba(255,255,255,.10)); opacity:.50; z-index:0; }
     .orbit-task-card > * { position:relative; z-index:1; }
     .orbit-task-card .orbit-task-head { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px; }
     .orbit-task-card b { display:block; font-size:16px; line-height:1.25; letter-spacing:-.18px; text-shadow:0 1px 12px rgba(0,0,0,.45); }
@@ -661,8 +667,8 @@ def render_html(history: dict[str, Any]) -> str:
     @keyframes orbit-particles { to { stroke-dashoffset:-180; } }
     @media (prefers-reduced-motion: reduce) { .orbit-task-card, .orbit-connector-path, .orbit-connector-particles { animation:none; } }
     .overview-side-panel { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:290px 210px auto; gap:16px; min-height:720px; }
-    .glass-card { position:relative; overflow:hidden; border-radius:26px; padding:20px; background:linear-gradient(145deg, rgba(255,255,255,.22), rgba(255,255,255,.075)); border:1px solid rgba(255,255,255,.22); box-shadow:inset 0 1px 0 rgba(255,255,255,.28), 0 24px 70px rgba(0,0,0,.26); backdrop-filter: blur(26px) saturate(145%); -webkit-backdrop-filter: blur(26px) saturate(145%); color:#f7f8f8; }
-    .glass-card::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 20% 8%, rgba(255,255,255,.25), transparent 30%), linear-gradient(135deg, rgba(255,255,255,.12), transparent 46%); pointer-events:none; }
+    .glass-card { position:relative; overflow:hidden; border-radius:26px; padding:20px; background:linear-gradient(145deg, var(--glass-bg-strong), rgba(255,255,255,.038)); border:1px solid var(--glass-border); box-shadow:inset 0 1px 0 var(--glass-highlight), 0 22px 58px rgba(0,0,0,.40); backdrop-filter: blur(24px) saturate(118%); -webkit-backdrop-filter: blur(24px) saturate(118%); color:#f7f8f8; }
+    .glass-card::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 20% 8%, rgba(255,255,255,.12), transparent 30%), linear-gradient(135deg, rgba(255,255,255,.06), transparent 46%); pointer-events:none; }
     .glass-card > * { position:relative; z-index:1; }
     .side-card-wide { grid-column:span 2; }
     .glass-card h4 { margin:0; font-size:15px; letter-spacing:-.12px; color:#eef4ff; }
@@ -670,11 +676,11 @@ def render_html(history: dict[str, Any]) -> str:
     .calendar-card { min-height:290px; }
     .calendar-head { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:18px; }
     .calendar-month-title { flex:1; text-align:center; font-size:24px; line-height:1; font-weight:780; letter-spacing:-.6px; }
-    .calendar-nav { width:34px; height:34px; border-radius:999px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.16); background:rgba(0,0,0,.18); color:#fff; font-size:24px; line-height:1; }
+    .calendar-nav { width:34px; height:34px; border-radius:999px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.12); background:rgba(0,0,0,.18); color:#fff; font-size:24px; line-height:1; }
     .calendar-weekdays { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:6px; color:rgba(255,255,255,.42); font-size:12px; font-weight:700; text-align:center; margin-bottom:10px; }
     .calendar-month-grid { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:7px 6px; }
     .calendar-day-cell { height:28px; border-radius:999px; display:grid; place-items:center; color:#fff; font-size:16px; font-weight:650; }
-    .calendar-day-cell.muted { color:rgba(255,255,255,.22); }
+    .calendar-day-cell.muted { color:rgba(255,255,255,.20); }
     .calendar-day-cell.active { background:linear-gradient(135deg, #8b5cf6, #6d5dfc); box-shadow:0 10px 28px rgba(139,92,246,.40); }
     .time-line-card, .category-donut-card { min-height:0; height:210px; }
     .line-chart-svg { width:100%; height:74px; margin-top:8px; overflow:visible; }
@@ -727,7 +733,11 @@ def render_html(history: dict[str, Any]) -> str:
     .priority-card-P1 { background:linear-gradient(135deg, rgba(255,176,77,.10), rgba(255,255,255,.028)); border-color:rgba(255,176,77,.26); }
     .priority-card-P2 { background:linear-gradient(135deg, rgba(122,162,255,.10), rgba(255,255,255,.028)); border-color:rgba(122,162,255,.23); }
     .priority-card-P3 { background:linear-gradient(135deg, rgba(148,163,184,.075), rgba(255,255,255,.024)); border-color:rgba(148,163,184,.18); }
-    .global-glass-surface, .item, .meta-pill, .kpi, .plane-view-toolbar, .priority-lane, .task-card, .insight, .deadline-body, .calendar-day, .task-modal, .field, select, textarea, input:not([type="checkbox"]) { background:linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.055)); border-color:rgba(255,255,255,.18); box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 18px 50px rgba(0,0,0,.30); backdrop-filter:blur(22px) saturate(145%); -webkit-backdrop-filter:blur(22px) saturate(145%); }
+    .global-glass-surface, .item, .meta-pill, .kpi, .plane-view-toolbar, .priority-lane, .task-card, .insight, .deadline-body, .calendar-day, .task-modal, .field, select, textarea, input:not([type="checkbox"]) { background:linear-gradient(145deg, var(--glass-bg), rgba(255,255,255,.030)); border-color:var(--glass-border); box-shadow:inset 0 1px 0 rgba(255,255,255,.085), 0 18px 48px rgba(0,0,0,.34); backdrop-filter:blur(20px) saturate(112%); -webkit-backdrop-filter:blur(20px) saturate(112%); }
+    .task-card.priority-card-P0 { --priority-color:#ff705d; background:linear-gradient(135deg, color-mix(in srgb, var(--priority-color), transparent 90%), rgba(255,255,255,.028)); border-color:color-mix(in srgb, var(--priority-color), rgba(255,255,255,.12) 58%); }
+    .task-card.priority-card-P1 { --priority-color:#f0b84d; background:linear-gradient(135deg, color-mix(in srgb, var(--priority-color), transparent 92%), rgba(255,255,255,.026)); border-color:color-mix(in srgb, var(--priority-color), rgba(255,255,255,.12) 58%); }
+    .task-card.priority-card-P2 { --priority-color:#7aa2ff; background:linear-gradient(135deg, color-mix(in srgb, var(--priority-color), transparent 92%), rgba(255,255,255,.026)); border-color:color-mix(in srgb, var(--priority-color), rgba(255,255,255,.12) 58%); }
+    .task-card.priority-card-P3 { --priority-color:#94a3b8; background:linear-gradient(135deg, color-mix(in srgb, var(--priority-color), transparent 94%), rgba(255,255,255,.024)); border-color:color-mix(in srgb, var(--priority-color), rgba(255,255,255,.12) 58%); }
     .priority-accent { width:4px; align-self:stretch; border-radius:999px; background:var(--priority-color, #7aa2ff); opacity:.9; }
     .task-card.done { opacity:.58; }
     .task-drag-handle { display:inline-flex; align-items:center; gap:6px; width:max-content; color:#8a8f98; font-size:12px; margin-bottom:8px; cursor:grab; user-select:none; }
@@ -787,7 +797,7 @@ def render_html(history: dict[str, Any]) -> str:
     @media (max-width: 1100px) {
       .shell { grid-template-columns: 1fr; }
       .sidebar { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--line); }
-      .span-8, .span-6, .span-4 { grid-column: span 12; }
+      .span-8, .span-6, .span-4, .span-7, .span-5 { grid-column: span 12; }
       .kpis { grid-template-columns: repeat(2, minmax(0,1fr)); }
       .workbench-hero, .form-grid, .review-grid { grid-template-columns: 1fr; }
       .form-grid .wide { grid-column: span 1; }
@@ -1315,12 +1325,47 @@ def render_html(history: dict[str, Any]) -> str:
     function orbitPosition(task, index, total) {
       const radius = urgencyRadius[task.priority] || 300;
       const baseAngles = [-150, -28, 150, 28, -96, 96, -178, 2, -62, 62];
-      const angle = (baseAngles[index] ?? ((index * 137.5) % 360 - 180)) * Math.PI / 180;
+      const angleDegrees = baseAngles[index] ?? ((index * 137.5) % 360 - 180);
+      const angle = angleDegrees * Math.PI / 180;
       return {
         x: Math.round(Math.cos(angle) * radius * 0.62),
         y: Math.round(Math.sin(angle) * radius * 0.68),
+        angle: angleDegrees,
+        radius,
       };
     }
+
+    function orbitConnectorPath(x, y, index) {
+      const node = { orbitX:x, orbitY:y, orbitIndex:index };
+      return wavyConnectorPath(node, connectorEndpoint(node));
+    }
+
+    function layoutOrbitOverview() {
+      document.querySelectorAll('.overview-left-stage .orbit-map-stage').forEach(stage => {
+        const box = stage.getBoundingClientRect();
+        if (!box.width || !box.height) return;
+        const spreadX = Math.max(240, (box.width - 320) / 2);
+        const spreadY = Math.max(190, (box.height - 260) / 2);
+        stage.style.setProperty('--orbit-spread-x', `${Math.round(spreadX)}px`);
+        stage.style.setProperty('--orbit-spread-y', `${Math.round(spreadY)}px`);
+        stage.querySelectorAll('.orbit-task-card').forEach((card, index) => {
+          const angle = Number(card.dataset.orbitAngle || 0) * Math.PI / 180;
+          const radius = Number(card.dataset.orbitRadius || 300);
+          const ratio = Math.min(1, Math.max(.52, radius / 370));
+          const x = Math.round(Math.cos(angle) * spreadX * ratio);
+          const y = Math.round(Math.sin(angle) * spreadY * ratio);
+          card.style.setProperty('--orbit-x', `${x}px`);
+          card.style.setProperty('--orbit-y', `${y}px`);
+          const connector = stage.querySelector(`.orbit-connector[data-connector-index="${index}"]`);
+          if (connector) {
+            const path = orbitConnectorPath(x, y, index);
+            connector.querySelectorAll('path').forEach(element => element.setAttribute('d', path));
+          }
+        });
+      });
+    }
+
+    window.addEventListener('resize', layoutOrbitOverview);
 
     function connectorEndpoint(node) {
       const cardHalfWidth = 110;
@@ -1413,7 +1458,7 @@ def render_html(history: dict[str, Any]) -> str:
         const start = cursor;
         cursor += (Number(cat.share) || 0) * 100;
         return `${cat.color || '#7aa2ff'} ${start.toFixed(2)}% ${cursor.toFixed(2)}%`;
-      }) : ['rgba(255,255,255,.16) 0% 100%'];
+      }) : ['rgba(255,255,255,.14) 0% 100%'];
       return `<section class="glass-card category-donut-card">
         <h4>昨日时间比例</h4>
         <div class="side-donut-wrap">
@@ -1454,19 +1499,19 @@ def render_html(history: dict[str, Any]) -> str:
         const position = orbitPosition(task, index, pending.length);
         const category = task.category || '工作';
         const color = categoryColors[category] || categoryColors['工作'];
-        return {...task, orbitIndex: index, orbitX: position.x, orbitY: position.y, orbitColor: color, orbitCategory: category};
+        return {...task, orbitIndex: index, orbitX: position.x, orbitY: position.y, orbitAngle: position.angle, orbitRadius: position.radius, orbitColor: color, orbitCategory: category};
       });
       const connectors = nodes.map(task => {
         const endpoint = connectorEndpoint(task);
         const path = wavyConnectorPath(task, endpoint);
         return `
-          <g class="orbit-connector" style="--cat-color:${task.orbitColor}; --delay:${task.orbitIndex * 90}ms">
+          <g class="orbit-connector" data-connector-index="${task.orbitIndex}" style="--cat-color:${task.orbitColor}; --delay:${task.orbitIndex * 90}ms">
             <path class="orbit-connector-path" d="${path}" />
             <path class="orbit-connector-particles" d="${path}" />
           </g>`;
       }).join('');
       const cards = nodes.map(task => `
-        <article class="orbit-task-card liquid-glass" style="--orbit-x:${task.orbitX}px; --orbit-y:${task.orbitY}px; --cat-color:${task.orbitColor}; --delay:${task.orbitIndex * 90}ms">
+        <article class="orbit-task-card liquid-glass" data-orbit-angle="${task.orbitAngle}" data-orbit-radius="${task.orbitRadius}" style="--orbit-x:${task.orbitX}px; --orbit-y:${task.orbitY}px; --cat-color:${task.orbitColor}; --delay:${task.orbitIndex * 90}ms">
           <div class="orbit-task-head"><span class="orbit-category-dot"></span><small>${task.priority}</small></div>
           <b>${escapeHtml(task.title)}</b>
           <div class="orbit-task-meta"><span>${escapeHtml(task.orbitCategory)}</span><span>${task.due ? `截止 ${escapeHtml(task.due)}` : '无截止'}</span></div>
@@ -1534,6 +1579,7 @@ def render_html(history: dict[str, Any]) -> str:
           <div class="kpi"><label>最长专注</label><strong>${today?.longest_focus?.text || '—'}</strong></div>
         </div><p class="subtle" style="margin-top:14px;">完整时间详情请点击左侧“时间与精力”。每日 19:30 飞书推送逻辑未改动。</p></article>
       `;
+      requestAnimationFrame(layoutOrbitOverview);
     }
 
     function renderDay(day) {

@@ -135,6 +135,30 @@ def test_first_screen_is_a_radial_task_orbit_overview_not_a_donut():
     assert "global-glass-surface" in html
 
 
+def test_visual_regressions_keep_glass_subtle_priority_colored_orbit_spacious_and_weekly_unwarped():
+    module = load_module()
+    html = module.render_html(sample_history())
+
+    assert "--glass-bg: rgba(255,255,255,.072)" in html
+    assert "--glass-bg-strong: rgba(255,255,255,.095)" in html
+    assert "rgba(255,255,255,.16)" not in html
+    assert "rgba(255,255,255,.22)" not in html
+    assert ".task-card.priority-card-P0" in html
+    assert ".task-card.priority-card-P1" in html
+    assert ".task-card.priority-card-P2" in html
+    assert ".task-card.priority-card-P3" in html
+    assert "border-color:color-mix(in srgb, var(--priority-color), rgba(255,255,255,.12) 58%)" in html
+    assert "layoutOrbitOverview" in html
+    assert "data-orbit-angle" in html
+    assert "data-orbit-radius" in html
+    assert "--orbit-spread-x" in html
+    assert "--orbit-spread-y" in html
+    assert "window.addEventListener('resize', layoutOrbitOverview)" in html
+    assert ".span-7 { grid-column: span 7; }" in html
+    assert ".span-5 { grid-column: span 5; }" in html
+    assert ".span-7, .span-5" in html
+
+
 def test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda():
     module = load_module()
     html = module.render_html(sample_history())
@@ -275,6 +299,7 @@ if __name__ == "__main__":
     test_render_html_upgrades_time_dashboard_into_personal_workbench()
     test_render_html_contains_editable_task_and_review_controls()
     test_first_screen_is_a_radial_task_orbit_overview_not_a_donut()
+    test_visual_regressions_keep_glass_subtle_priority_colored_orbit_spacious_and_weekly_unwarped()
     test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda()
     test_deadline_view_can_toggle_between_list_and_calendar()
     test_tasks_are_color_ranked_draggable_cards_with_progress_slider()
