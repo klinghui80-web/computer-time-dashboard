@@ -661,8 +661,9 @@ def render_html(history: dict[str, Any]) -> str:
     .view-title { display:flex; align-items:center; gap:10px; color:#f7f8f8; font-weight:650; letter-spacing:-.18px; }
     .view-title .view-icon { width:30px; height:30px; display:grid; place-items:center; border-radius:9px; background:rgba(122,162,255,.12); border:1px solid rgba(122,162,255,.22); color:#a9c3ff; }
     .view-chips { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
-    .view-chip { border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.03); color:#8a8f98; border-radius:9px; padding:7px 10px; font-size:12px; }
-    .view-chip.active { color:#f7f8f8; background:rgba(122,162,255,.14); border-color:rgba(122,162,255,.4); }
+    .view-chip { border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.03); color:#8a8f98; border-radius:9px; padding:7px 10px; font-size:12px; font:inherit; cursor:pointer; }
+    .view-chip.active, .view-chip[aria-pressed="true"] { color:#f7f8f8; background:rgba(122,162,255,.14); border-color:rgba(122,162,255,.4); }
+    .view-chip:hover { color:#f7f8f8; border-color:rgba(122,162,255,.34); }
     .priority-lane { display:grid; gap:10px; border:1px solid rgba(255,255,255,.06); border-radius:20px; padding:12px; background:rgba(255,255,255,.018); }
     .priority-lane.drop-same { border-color:rgba(122,162,255,.55); background:rgba(122,162,255,.06); }
     .priority-lane.drop-cross { border-color:rgba(255,176,77,.55); background:rgba(255,176,77,.055); }
@@ -1069,6 +1070,13 @@ def render_html(history: dict[str, Any]) -> str:
     let mode = 'workbench';
     let currentKey = days[0]?.date || weeks[0]?.id;
     let deadlineViewMode = localStorage.getItem('deadlineViewMode') || 'list';
+    let taskCategoryFilter = localStorage.getItem('taskCategoryFilter') || 'all';
+
+    window.setTaskCategoryFilter = function setTaskCategoryFilter(category) {
+      taskCategoryFilter = category === 'all' || taskCategories.includes(category) ? category : 'all';
+      localStorage.setItem('taskCategoryFilter', taskCategoryFilter);
+      renderWorkbench();
+    };
 
     function switchMode(next) {
       mode = next;
@@ -1135,20 +1143,21 @@ def render_html(history: dict[str, Any]) -> str:
 
     function renderTasks(tasks) {
       const sorted = sortTasksForDisplay(tasks);
+      const visibleTasks = taskCategoryFilter === 'all' ? sorted : sorted.filter(task => (task.category || '工作') === taskCategoryFilter);
       const priorities = ['P0', 'P1', 'P2', 'P3'];
+      const categoryButtons = taskCategories.map(category => `<button type="button" class="view-chip task-category-filter ${taskCategoryFilter === category ? 'active' : ''}" onclick="setTaskCategoryFilter('${category}')" aria-pressed="${taskCategoryFilter === category}">${category}</button>`).join('');
       const toolbar = `<div class="plane-view-toolbar">
-        <div class="view-title"><span class="view-icon">▦</span><span>工作项视图</span><small>${sorted.length} 个待推进项</small></div>
+        <div class="view-title"><span class="view-icon">▦</span><span>工作项视图</span><small>${visibleTasks.length} 个待推进项</small></div>
         <div class="view-chips">
-          <span class="view-chip active">按优先级</span>
-          <span class="view-chip">生活</span>
-          <span class="view-chip">工作</span>
-          <span class="view-chip">自媒体</span>
+          <button type="button" class="view-chip ${taskCategoryFilter === 'all' ? 'active' : ''}" onclick="setTaskCategoryFilter('all')" aria-pressed="${taskCategoryFilter === 'all'}">按优先级</button>
+          ${categoryButtons}
         </div>
       </div>`;
       if (!sorted.length) return `${toolbar}<div class="empty">暂无待办。先添加今天要推进的事项。</div>`;
-      const sequenceById = new Map(sorted.map((task, index) => [task.id, index]));
+      if (!visibleTasks.length) return `${toolbar}<div class="empty">当前分类暂无待办。可以切回“按优先级”查看全部任务。</div>`;
+      const sequenceById = new Map(visibleTasks.map((task, index) => [task.id, index]));
       return `${toolbar}<div class="task-list">${priorities.map(priority => {
-        const group = sorted.filter(task => task.priority === priority);
+        const group = visibleTasks.filter(task => task.priority === priority);
         return `<section class="priority-lane priority-card-${priority}" ondragover="markPriorityDrop('${priority}', event)" ondrop="dropPriorityLane('${priority}', event)">
           <div class="priority-lane-head">
             <strong>${priorityLabels[priority]} · ${group.length} 项</strong>

@@ -160,7 +160,7 @@ def test_tasks_are_color_ranked_draggable_cards_with_progress_slider():
     assert ".task-modal { width:min(980px, 100%);" in html
     assert "plane-view-toolbar" in html
     assert "工作项视图" in html
-    assert "view-chip active" in html
+    assert "aria-pressed" in html
     assert "PWB-${String(index + 1).padStart(3, '0')}" in html
     assert "work-item-key" in html
     assert "property-pill" in html
@@ -168,6 +168,23 @@ def test_tasks_are_color_ranked_draggable_cards_with_progress_slider():
     assert "--progress:${task.progress || 0}%" in html
     assert "input.style.setProperty('--progress'" in html
     assert "priority-accent" in html
+
+
+def test_task_category_chips_are_clickable_filters_that_preserve_priority_lanes():
+    module = load_module()
+    html = module.render_html(sample_history())
+
+    assert "let taskCategoryFilter = localStorage.getItem('taskCategoryFilter') || 'all'" in html
+    assert "setTaskCategoryFilter" in html
+    assert "taskCategories.map(category" in html
+    assert "setTaskCategoryFilter('${category}')" in html
+    assert "onclick=\"setTaskCategoryFilter('all')\"" in html
+    assert "task-category-filter" in html
+    assert "aria-pressed=\"${taskCategoryFilter === category}\"" in html
+    assert "const visibleTasks = taskCategoryFilter === 'all' ? sorted : sorted.filter(task => (task.category || '工作') === taskCategoryFilter);" in html
+    assert "visibleTasks.length" in html
+    assert "const group = visibleTasks.filter(task => task.priority === priority);" in html
+    assert "当前分类暂无待办" in html
 
 
 def test_workbench_overview_is_priority_based_not_status_or_focus_based():
@@ -209,6 +226,7 @@ if __name__ == "__main__":
     test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda()
     test_deadline_view_can_toggle_between_list_and_calendar()
     test_tasks_are_color_ranked_draggable_cards_with_progress_slider()
+    test_task_category_chips_are_clickable_filters_that_preserve_priority_lanes()
     test_workbench_overview_is_priority_based_not_status_or_focus_based()
     test_dragging_uses_priority_lanes_with_same_priority_and_cross_priority_feedback()
     print("workbench render tests passed")
