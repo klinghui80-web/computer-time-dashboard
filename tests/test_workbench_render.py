@@ -197,7 +197,19 @@ def test_workbench_second_fold_pairs_reminders_and_time_preview_on_the_right():
     assert html.index(todo_article) < html.index(reminder_article)
     assert html.index(review_article) < html.index(preview_article)
     assert ".todo-center-card .task-card { grid-template-columns:4px 46px minmax(180px,1fr) 74px minmax(210px,280px);" in html
-    assert ".task-reminder-card, .time-preview-card { align-self:start; }" in html
+    assert ".task-reminder-card { align-self:start; }" in html
+    assert ".review-card, .time-preview-card { align-self:stretch; }" in html
+    assert ".time-preview-card { display:flex; flex-direction:column; }" in html
+    assert ".time-preview-card .kpis { grid-template-columns:repeat(2,minmax(0,1fr)); }" in html
+
+
+def test_dropdown_menus_keep_options_readable_on_native_light_popups():
+    module = load_module()
+    html = module.render_html(sample_history())
+
+    assert "select option { color:#111827; background:#ffffff; }" in html
+    assert "select option:checked { color:#ffffff; background:#2563eb; }" in html
+    assert "select option:hover { color:#111827; background:#dbeafe; }" in html
 
 
 def test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda():
@@ -343,6 +355,7 @@ if __name__ == "__main__":
     test_visual_regressions_keep_glass_subtle_priority_colored_orbit_spacious_and_weekly_unwarped()
     test_global_nav_moves_to_top_and_history_lists_stay_left_for_time_modes()
     test_workbench_second_fold_pairs_reminders_and_time_preview_on_the_right()
+    test_dropdown_menus_keep_options_readable_on_native_light_popups()
     test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda()
     test_deadline_view_can_toggle_between_list_and_calendar()
     test_tasks_are_color_ranked_draggable_cards_with_progress_slider()

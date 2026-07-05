@@ -713,6 +713,9 @@ def render_html(history: dict[str, Any]) -> str:
     .btn.primary { background:#5e6ad2; border-color:#7170ff; color:#fff; }
     .btn.danger { color:#ffb4b4; border-color:rgba(255,125,125,.35); }
     .field, select, textarea, input:not([type="checkbox"]) { width:100%; color:var(--text); background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:10px 12px; font:inherit; outline:none; }
+    select option { color:#111827; background:#ffffff; }
+    select option:checked { color:#ffffff; background:#2563eb; }
+    select option:hover { color:#111827; background:#dbeafe; }
     input[type="checkbox"] { accent-color:#7170ff; width:16px; height:16px; margin-top:4px; }
     textarea { min-height:86px; resize:vertical; line-height:1.6; }
     .form-grid { display:grid; grid-template-columns: 1.2fr .55fr .55fr .7fr; gap:10px; align-items:end; }
@@ -801,7 +804,10 @@ def render_html(history: dict[str, Any]) -> str:
     .calendar-task .countdown { display:block; color:#8a8f98; margin-top:3px; }
     .empty { color:var(--muted); padding:18px; border:1px dashed rgba(255,255,255,0.14); border-radius:16px; text-align:center; }
     .mini-stat { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
-    .task-reminder-card, .time-preview-card { align-self:start; }
+    .task-reminder-card { align-self:start; }
+    .review-card, .time-preview-card { align-self:stretch; }
+    .time-preview-card { display:flex; flex-direction:column; }
+    .time-preview-card .kpis { flex:1; align-content:start; }
     .todo-center-card .task-card { grid-template-columns:4px 46px minmax(180px,1fr) 74px minmax(210px,280px); gap:12px; padding:18px 16px; }
     .todo-center-card .task-main h4 { font-size:20px; }
     .todo-center-card .task-main p { font-size:14px; }
