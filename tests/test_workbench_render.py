@@ -176,6 +176,28 @@ def test_global_nav_moves_to_top_and_history_lists_stay_left_for_time_modes():
     assert "首屏只回答一个问题" not in html
     assert "下面再继续处理任务、复盘和时间数据" not in html
     assert "title.textContent = '总览'" not in html
+    assert "<h1>令辉的工作台</h1>" in html
+    assert "data-tab=\"workbench\">任务面板</button>" in html
+    assert "data-tab=\"workbench\">工作台</button>" not in html
+
+
+def test_workbench_second_fold_pairs_reminders_and_time_preview_on_the_right():
+    module = load_module()
+    html = module.render_html(sample_history())
+
+    todo_article = "<article class=\"card span-8 next-fold todo-center-card\"><h3 class=\"section-title\">待办中心</h3>"
+    reminder_article = "<article class=\"card span-4 next-fold task-reminder-card\"><h3 class=\"section-title\">任务提醒</h3>"
+    review_article = "<article class=\"card span-6 review-card\"><h3 class=\"section-title\">今日复盘</h3>"
+    preview_article = "<article class=\"card span-6 time-preview-card\"><h3 class=\"section-title\">时间与精力板块预览</h3>"
+
+    assert todo_article in html
+    assert reminder_article in html
+    assert review_article in html
+    assert preview_article in html
+    assert html.index(todo_article) < html.index(reminder_article)
+    assert html.index(review_article) < html.index(preview_article)
+    assert ".todo-center-card .task-card { grid-template-columns:4px 46px minmax(180px,1fr) 74px minmax(210px,280px);" in html
+    assert ".task-reminder-card, .time-preview-card { align-self:start; }" in html
 
 
 def test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda():
@@ -320,6 +342,7 @@ if __name__ == "__main__":
     test_first_screen_is_a_radial_task_orbit_overview_not_a_donut()
     test_visual_regressions_keep_glass_subtle_priority_colored_orbit_spacious_and_weekly_unwarped()
     test_global_nav_moves_to_top_and_history_lists_stay_left_for_time_modes()
+    test_workbench_second_fold_pairs_reminders_and_time_preview_on_the_right()
     test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda()
     test_deadline_view_can_toggle_between_list_and_calendar()
     test_tasks_are_color_ranked_draggable_cards_with_progress_slider()

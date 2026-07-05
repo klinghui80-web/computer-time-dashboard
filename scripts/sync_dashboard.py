@@ -801,6 +801,13 @@ def render_html(history: dict[str, Any]) -> str:
     .calendar-task .countdown { display:block; color:#8a8f98; margin-top:3px; }
     .empty { color:var(--muted); padding:18px; border:1px dashed rgba(255,255,255,0.14); border-radius:16px; text-align:center; }
     .mini-stat { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+    .task-reminder-card, .time-preview-card { align-self:start; }
+    .todo-center-card .task-card { grid-template-columns:4px 46px minmax(180px,1fr) 74px minmax(210px,280px); gap:12px; padding:18px 16px; }
+    .todo-center-card .task-main h4 { font-size:20px; }
+    .todo-center-card .task-main p { font-size:14px; }
+    .todo-center-card .progress-head { font-size:13px; }
+    .todo-center-card .grip-lines { width:46px; }
+    .time-preview-card .kpis { grid-template-columns:repeat(2,minmax(0,1fr)); }
     @media (max-width: 1100px) {
       .top-nav { grid-template-columns:1fr; justify-items:start; }
       .top-tabs, .top-meta { justify-content:flex-start; }
@@ -835,11 +842,11 @@ def render_html(history: dict[str, Any]) -> str:
   <div class="shell">
     <header class="top-nav">
       <div class="brand">
-        <h1>个人工作台</h1>
+        <h1>令辉的工作台</h1>
         <p>个人化工作台</p>
       </div>
       <nav class="tabs top-tabs" aria-label="主导航">
-        <button class="tab active" data-tab="workbench">工作台</button>
+        <button class="tab active" data-tab="workbench">任务面板</button>
         <button class="tab" data-tab="days">时间与精力</button>
         <button class="tab" data-tab="weeks">每周</button>
       </nav>
@@ -1572,7 +1579,7 @@ def render_html(history: dict[str, Any]) -> str:
         <article class="card span-12 overview-first-fold">
           ${renderOrbitOverview(tasks, stats)}
         </article>
-        <article class="card span-12 next-fold"><h3 class="section-title">待办中心</h3>${renderTasks(tasks)}
+        <article class="card span-8 next-fold todo-center-card"><h3 class="section-title">待办中心</h3>${renderTasks(tasks)}
           <button class="add-task-trigger" onclick="openTaskModal()">＋ 新增待办</button>
         </article>
         <div class="task-modal-backdrop" id="taskModal" onclick="if (event.target === this) closeTaskModal()">
@@ -1591,10 +1598,10 @@ def render_html(history: dict[str, Any]) -> str:
             </div>
           </div>
         </div>
-        <article class="card span-4 next-fold"><h3 class="section-title">任务提醒</h3>${renderTaskReminders(today, tasks, stats)}</article>
+        <article class="card span-4 next-fold task-reminder-card"><h3 class="section-title">任务提醒</h3>${renderTaskReminders(today, tasks, stats)}</article>
         <article class="card span-12"><h3 class="section-title">任务截止时间轴</h3>${renderDeadlineView(tasks)}</article>
-        <article class="card span-6"><h3 class="section-title">今日复盘</h3>${renderReviewEditor(review)}</article>
-        <article class="card span-12"><h3 class="section-title">时间与精力板块预览</h3><div class="kpis">
+        <article class="card span-6 review-card"><h3 class="section-title">今日复盘</h3>${renderReviewEditor(review)}</article>
+        <article class="card span-6 time-preview-card"><h3 class="section-title">时间与精力板块预览</h3><div class="kpis">
           <div class="kpi"><label>总活跃时长</label><strong>${today?.total_active_text || '—'}</strong></div>
           <div class="kpi"><label>主类目</label><strong>${today?.top_categories?.[0] || '—'}</strong></div>
           <div class="kpi"><label>窗口切换</label><strong>${today?.switch_count ?? '—'}</strong></div>
