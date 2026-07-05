@@ -107,6 +107,21 @@ def test_first_screen_is_a_radial_task_orbit_overview_not_a_donut():
     assert "orbit-label" not in html
     assert "待推进原点" not in html
     assert "<div class=\"orbit-core-inner\"><div class=\"orbit-count\">" in html
+    assert "overview-dashboard" in html
+    assert "overview-left-stage" in html
+    assert "overview-greeting" in html
+    assert "令辉" in html
+    assert "overview-side-panel" in html
+    assert "glass-card calendar-card" in html
+    assert "renderOverviewSidePanel" in html
+    assert "renderOverviewCalendar" in html
+    assert "renderYesterdayLineChart" in html
+    assert "renderYesterdayCategoryDonut" in html
+    assert "renderYesterdayCarryover" in html
+    assert "昨日电脑使用" in html
+    assert "昨日时间比例" in html
+    assert "昨日遗留任务" in html
+    assert "translateX(-" in html
 
 
 def test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda():

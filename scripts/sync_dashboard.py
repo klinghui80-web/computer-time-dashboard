@@ -627,8 +627,12 @@ def render_html(history: dict[str, Any]) -> str:
     .workbench-hero { display:grid; grid-template-columns: 1.25fr .75fr; gap:16px; align-items:stretch; }
     .hero-title { font-size:42px; line-height:1.02; letter-spacing:-1.1px; margin:0 0 12px; font-weight:600; }
     .hero-copy { color:var(--muted); line-height:1.8; margin:0; max-width:780px; }
-    .overview-first-fold { min-height: calc(100vh - 112px); display:flex; flex-direction:column; justify-content:center; background:radial-gradient(circle at 50% 46%, rgba(122,162,255,.16), transparent 34%), linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015)); overflow:hidden; }
-    .overview-orbit-map { position:relative; min-height:700px; height:clamp(700px, calc(100vh - 190px), 920px); border-radius:0; overflow:visible; isolation:isolate; background:transparent; box-shadow:none; }
+    .overview-first-fold { min-height: calc(100vh - 112px); display:flex; flex-direction:column; justify-content:center; background:radial-gradient(circle at 42% 46%, rgba(122,162,255,.16), transparent 34%), linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015)); overflow:hidden; }
+    .overview-dashboard { min-height:720px; display:grid; grid-template-columns:minmax(0,1.05fr) minmax(430px,.78fr); gap:26px; align-items:stretch; }
+    .overview-left-stage { position:relative; min-height:720px; }
+    .overview-greeting { position:absolute; z-index:11; left:24px; top:18px; margin:0; font-size:44px; line-height:1.08; letter-spacing:-1.2px; font-weight:780; color:#f7f8f8; text-shadow:0 10px 40px rgba(0,0,0,.34); }
+    .overview-orbit-map { position:relative; min-height:700px; height:100%; border-radius:0; overflow:visible; isolation:isolate; background:transparent; box-shadow:none; }
+    .overview-left-stage .orbit-map-stage { transform:translateX(-3%); }
     .orbit-map-stage { position:absolute; inset:0; z-index:2; }
     .liquid-glass { background:rgba(12,20,36,.68); border:1px solid rgba(255,255,255,.18); backdrop-filter: blur(22px) saturate(160%); -webkit-backdrop-filter: blur(22px) saturate(160%); box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 18px 60px rgba(0,0,0,.35); }
     .orbit-connector-layer { position:absolute; left:50%; top:50%; width:1px; height:1px; z-index:4; overflow:visible; pointer-events:none; }
@@ -656,6 +660,39 @@ def render_html(history: dict[str, Any]) -> str:
     @keyframes orbit-line-draw { to { stroke-dashoffset:0; } }
     @keyframes orbit-particles { to { stroke-dashoffset:-180; } }
     @media (prefers-reduced-motion: reduce) { .orbit-task-card, .orbit-connector-path, .orbit-connector-particles { animation:none; } }
+    .overview-side-panel { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:1.1fr .82fr 1fr; gap:16px; min-height:720px; }
+    .glass-card { position:relative; overflow:hidden; border-radius:26px; padding:20px; background:linear-gradient(145deg, rgba(255,255,255,.22), rgba(255,255,255,.075)); border:1px solid rgba(255,255,255,.22); box-shadow:inset 0 1px 0 rgba(255,255,255,.28), 0 24px 70px rgba(0,0,0,.26); backdrop-filter: blur(26px) saturate(145%); -webkit-backdrop-filter: blur(26px) saturate(145%); color:#f7f8f8; }
+    .glass-card::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 20% 8%, rgba(255,255,255,.25), transparent 30%), linear-gradient(135deg, rgba(255,255,255,.12), transparent 46%); pointer-events:none; }
+    .glass-card > * { position:relative; z-index:1; }
+    .side-card-wide { grid-column:span 2; }
+    .glass-card h4 { margin:0; font-size:15px; letter-spacing:-.12px; color:#eef4ff; }
+    .glass-card .glass-subtitle { color:rgba(223,231,255,.68); font-size:12px; margin-top:4px; }
+    .calendar-card { min-height:206px; }
+    .calendar-head { display:flex; justify-content:space-between; align-items:start; gap:12px; margin-bottom:16px; }
+    .calendar-date { text-align:right; font-size:34px; line-height:1; font-weight:760; letter-spacing:-1px; }
+    .calendar-date span { display:block; margin-top:6px; color:rgba(223,231,255,.68); font-size:12px; font-weight:500; letter-spacing:0; }
+    .calendar-strip { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:8px; }
+    .calendar-chip { min-height:58px; border-radius:16px; display:grid; place-items:center; gap:3px; background:rgba(255,255,255,.09); color:rgba(223,231,255,.72); }
+    .calendar-chip strong { color:#fff; font-size:18px; }
+    .calendar-chip.active { background:rgba(122,162,255,.34); box-shadow:0 12px 36px rgba(122,162,255,.20); }
+    .time-line-card, .category-donut-card { min-height:176px; }
+    .line-chart-svg { width:100%; height:92px; margin-top:12px; overflow:visible; }
+    .line-chart-fill { fill:rgba(122,162,255,.16); }
+    .line-chart-path { fill:none; stroke:#77b7ff; stroke-width:4; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 0 10px rgba(119,183,255,.42)); }
+    .line-chart-axis { stroke:rgba(255,255,255,.12); stroke-width:1; }
+    .glass-big-number { font-size:28px; line-height:1; margin-top:10px; font-weight:760; letter-spacing:-.8px; }
+    .side-donut-wrap { display:flex; align-items:center; gap:16px; margin-top:14px; }
+    .side-donut { width:96px; height:96px; border-radius:50%; display:grid; place-items:center; background:conic-gradient(#7aa2ff 0% 100%); box-shadow:inset 0 0 0 16px rgba(255,255,255,.09), 0 16px 38px rgba(0,0,0,.24); }
+    .side-donut::after { content:""; width:54px; height:54px; border-radius:50%; background:rgba(16,24,40,.78); border:1px solid rgba(255,255,255,.1); }
+    .side-legend { display:grid; gap:7px; flex:1; min-width:0; }
+    .side-legend-row { display:flex; align-items:center; justify-content:space-between; gap:8px; color:rgba(223,231,255,.78); font-size:12px; }
+    .side-legend-row span { display:flex; align-items:center; min-width:0; white-space:nowrap; }
+    .side-legend-row b { white-space:nowrap; }
+    .side-legend-row i { width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:6px; }
+    .carryover-card { min-height:188px; }
+    .carryover-list { display:grid; gap:10px; margin-top:14px; }
+    .carryover-item { border-radius:15px; padding:11px 12px; background:rgba(255,255,255,.075); border:1px solid rgba(255,255,255,.09); color:#eef4ff; }
+    .carryover-item small { display:block; margin-top:5px; color:rgba(223,231,255,.6); }
     .next-fold { margin-top:4px; }
     .toolbar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
     .btn { border:1px solid rgba(255,255,255,0.08); color:var(--text); background:rgba(255,255,255,0.04); border-radius:10px; padding:9px 12px; cursor:pointer; font:inherit; }
@@ -754,9 +791,15 @@ def render_html(history: dict[str, Any]) -> str:
       .form-grid .wide { grid-column: span 1; }
       .review-grid .wide { grid-column: span 1; }
       .mini-stat { grid-template-columns:1fr; }
+      .overview-dashboard { grid-template-columns:1fr; min-height:auto; }
+      .overview-left-stage { min-height:auto; }
+      .overview-greeting { position:relative; left:auto; top:auto; margin:0 0 18px; font-size:34px; }
+      .overview-left-stage .orbit-map-stage { transform:none; }
+      .overview-side-panel { grid-template-columns:1fr; grid-template-rows:auto; min-height:auto; }
+      .side-card-wide { grid-column:span 1; }
       .orbit-core { width:124px; height:124px; }
       .orbit-task-card { position:relative; left:auto; top:auto; transform:none; width:auto; margin:10px; animation:none; }
-      .orbit-connector { display:none; }
+      .orbit-connector-layer { display:none; }
       .overview-orbit-map { min-height:auto; height:auto; padding:150px 8px 18px; display:grid; gap:10px; }
       .overview-first-fold { min-height:auto; }
       .deadline-calendar { grid-template-columns:repeat(2,minmax(0,1fr)); }
@@ -831,7 +874,8 @@ def render_html(history: dict[str, Any]) -> str:
     const priorityLabels = { P0: 'P0 火烧屁股', P1: 'P1 今日必完成', P2: 'P2 常规推进', P3: 'P3 可延后' };
     const priorityStyles = { P0: '#c95d45', P1: '#c49a42', P2: '#4f6f92', P3: '#4f9b72' };
     const categoryColors = { '生活': '#6ee7b7', '工作': '#7aa2ff', '自媒体': '#f472b6' };
-    const urgencyRadius = { P0: 245, P1: 315, P2: 390, P3: 455 };
+    const urgencyRadius = { P0: 190, P1: 225, P2: 260, P3: 295 };
+    const overviewEncouragements = ['开启美好的一天吧！', '今天也向前推进一点点。', '保持节奏，把重要的事做漂亮。', '灵感在线，稳稳推进。'];
     const taskCategories = ['生活', '工作', '自媒体'];
     const statusLabels = { todo: '待办', doing: '进行中', waiting: '等待中', blocked: '阻塞中', done: '已完成' };
     const statusStyles = {
@@ -1271,7 +1315,7 @@ def render_html(history: dict[str, Any]) -> str:
       const baseAngles = [-150, -28, 150, 28, -96, 96, -178, 2, -62, 62];
       const angle = (baseAngles[index] ?? ((index * 137.5) % 360 - 180)) * Math.PI / 180;
       return {
-        x: Math.round(Math.cos(angle) * radius * 1.10),
+        x: Math.round(Math.cos(angle) * radius * 0.55),
         y: Math.round(Math.sin(angle) * radius * 0.68),
       };
     }
@@ -1310,6 +1354,92 @@ def render_html(history: dict[str, Any]) -> str:
       return `M 0 0 C ${controlA.x} ${controlA.y}, ${controlB.x} ${controlB.y}, ${endpoint.x} ${endpoint.y}`;
     }
 
+    function overviewGreeting() {
+      const index = Math.floor(Math.random() * overviewEncouragements.length);
+      return `令辉，${overviewEncouragements[index]}`;
+    }
+
+    function previousDayRecord() {
+      if (!today) return days[1] || null;
+      return days.find(day => day.date < today.date) || days[1] || null;
+    }
+
+    function renderOverviewCalendar() {
+      const base = today?.date || new Date().toISOString().slice(0, 10);
+      const activeDay = Number(base.slice(8, 10));
+      const monthText = new Date(`${base}T00:00:00`).toLocaleDateString('zh-CN', { month: 'long', day: 'numeric' });
+      const week = Array.from({length: 7}, (_, index) => addDays(base, index - 3));
+      return `<section class="glass-card calendar-card side-card-wide">
+        <div class="calendar-head">
+          <div><h4>日历</h4><div class="glass-subtitle">今天的节奏从这里开始</div></div>
+          <div class="calendar-date">${activeDay}<span>${monthText}</span></div>
+        </div>
+        <div class="calendar-strip">${week.map(day => {
+          const date = new Date(`${day}T00:00:00`);
+          const weekday = date.toLocaleDateString('zh-CN', { weekday: 'short' }).replace('周', '');
+          return `<div class="calendar-chip ${day === base ? 'active' : ''}"><span>${weekday}</span><strong>${Number(day.slice(8, 10))}</strong></div>`;
+        }).join('')}</div>
+      </section>`;
+    }
+
+    function renderYesterdayLineChart(day) {
+      const values = Array.from({length: 24}, (_, hour) => Number(day?.hourly_seconds?.[String(hour)] || 0));
+      const max = Math.max(...values, 1);
+      const points = values.map((value, index) => `${Math.round((index / 23) * 240)},${Math.round(82 - (value / max) * 68)}`).join(' ');
+      const fillPoints = `0,92 ${points} 240,92`;
+      return `<section class="glass-card time-line-card">
+        <h4>昨日电脑使用</h4>
+        <div class="glass-big-number">${day ? fmtDuration(day.total_active_seconds) : '暂无数据'}</div>
+        <svg class="line-chart-svg" viewBox="0 0 240 96" preserveAspectRatio="none" aria-hidden="true">
+          <line class="line-chart-axis" x1="0" y1="92" x2="240" y2="92" />
+          <polygon class="line-chart-fill" points="${fillPoints}" />
+          <polyline class="line-chart-path" points="${points}" />
+        </svg>
+      </section>`;
+    }
+
+    function renderYesterdayCategoryDonut(day) {
+      const categories = (day?.categories || []).slice(0, 4);
+      let cursor = 0;
+      const segments = categories.length ? categories.map(cat => {
+        const start = cursor;
+        cursor += (Number(cat.share) || 0) * 100;
+        return `${cat.color || '#7aa2ff'} ${start.toFixed(2)}% ${cursor.toFixed(2)}%`;
+      }) : ['rgba(255,255,255,.16) 0% 100%'];
+      return `<section class="glass-card category-donut-card">
+        <h4>昨日时间比例</h4>
+        <div class="side-donut-wrap">
+          <div class="side-donut" style="background:conic-gradient(${segments.join(', ')});"></div>
+          <div class="side-legend">${(categories.length ? categories : [{name:'暂无数据', share:1, color:'#8a8f98'}]).map(cat => `
+            <div class="side-legend-row"><span><i style="background:${cat.color || '#8a8f98'}"></i>${escapeHtml(cat.name)}</span><b>${pct(Number(cat.share) || 0)}</b></div>
+          `).join('')}</div>
+        </div>
+      </section>`;
+    }
+
+    function renderYesterdayCarryover(tasks, day) {
+      const pending = sortTasksForDisplay(tasks.filter(task => task.status !== 'done'));
+      const carryover = pending.filter(task => day?.date && task.due && task.due <= day.date);
+      const items = (carryover.length ? carryover : pending).slice(0, 3);
+      return `<section class="glass-card carryover-card side-card-wide">
+        <h4>昨日遗留任务</h4>
+        <div class="glass-subtitle">优先处理这些还没有收口的事项</div>
+        <div class="carryover-list">${items.length ? items.map(task => `
+          <div class="carryover-item"><strong>${escapeHtml(task.title)}</strong><small>${priorityLabels[task.priority] || task.priority} · ${escapeHtml(task.category || '工作')} · ${task.due ? `截止 ${escapeHtml(task.due)}` : '无截止'}</small></div>
+        `).join('') : '<div class="empty">暂无昨日遗留任务。</div>'}</div>
+      </section>`;
+    }
+
+    function renderOverviewSidePanel(tasks) {
+      const yesterday = previousDayRecord();
+      return `<aside class="overview-side-panel">
+        ${renderOverviewCalendar()}
+        ${renderYesterdayLineChart(yesterday)}
+        ${renderYesterdayCategoryDonut(yesterday)}
+        ${renderYesterdayCarryover(tasks, yesterday)}
+      </aside>`;
+    }
+
     function renderOrbitOverview(tasks, stats) {
       const pending = sortTasksForDisplay(tasks.filter(task => task.status !== 'done')).slice(0, 10);
       const nodes = pending.map((task, index) => {
@@ -1339,13 +1469,19 @@ def render_html(history: dict[str, Any]) -> str:
         return `<span class="legend-pill"><i class="dot" style="background:${categoryColors[category]}"></i>${category} ${count}</span>`;
       }).join('');
       return `
-        <div class="overview-orbit-map">
-          <div class="orbit-map-stage">
-            <svg class="orbit-connector-layer" aria-hidden="true">${connectors}</svg>
-            <div class="orbit-core liquid-glass"><div class="orbit-core-inner"><div class="orbit-count">${stats.pending}</div></div></div>
-            ${cards || '<div class="orbit-empty">暂无待推进事项</div>'}
-            <div class="orbit-legend">${legend}</div>
+        <div class="overview-dashboard">
+          <div class="overview-left-stage">
+            <h2 class="overview-greeting">${overviewGreeting()}</h2>
+            <div class="overview-orbit-map">
+              <div class="orbit-map-stage">
+                <svg class="orbit-connector-layer" aria-hidden="true">${connectors}</svg>
+                <div class="orbit-core liquid-glass"><div class="orbit-core-inner"><div class="orbit-count">${stats.pending}</div></div></div>
+                ${cards || '<div class="orbit-empty">暂无待推进事项</div>'}
+                <div class="orbit-legend">${legend}</div>
+              </div>
+            </div>
           </div>
+          ${renderOverviewSidePanel(tasks)}
         </div>`;
     }
 
