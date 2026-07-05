@@ -66,21 +66,21 @@ def test_render_html_contains_editable_task_and_review_controls():
     assert "addTask" in html
     assert "saveReview" in html
     assert "priority" in html
-    assert "status" in html
-    assert "今日重点" in html
+    assert "openTaskModal('${task.id}')" in html
+    assert "deleteEditingTask" in html
 
 
-def test_first_screen_is_a_minimal_pending_work_overview():
+def test_first_screen_is_a_minimal_priority_overview():
     module = load_module()
     html = module.render_html(sample_history())
 
     assert "overview-first-fold" in html
-    assert "statusDonutStyle" in html
-    assert "未完成事项" in html
-    assert "紧急" in html
-    assert "进行中" in html
-    assert "待办" in html
-    assert "待推进总数" in html
+    assert "priorityDonutStyle" in html
+    assert "优先级事项" in html
+    assert "P0 火烧屁股" in html
+    assert "P1 今日必完成" in html
+    assert "P2 常规推进" in html
+    assert "P3 可延后" in html
 
 
 def test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda():
@@ -123,6 +123,8 @@ def test_tasks_are_color_ranked_draggable_cards_with_progress_slider():
     assert "task-drag-zone" in html
     assert "grip-lines" in html
     assert html.count("grip-line") >= 3
+    assert "task-drag-zone:hover" not in html
+    assert ".task-drag-zone { min-height:100%; width:100%; justify-self:stretch; display:grid; place-content:center;" in html
     assert "draggable=\"true\"" in html
     assert "dragTaskId" in html
     assert "reorderTasks" in html
@@ -137,6 +139,27 @@ def test_tasks_are_color_ranked_draggable_cards_with_progress_slider():
     assert "100%" in html
     assert "updateTaskStatus('${task.id}', this.checked" not in html
     assert "task-card priority-card-${task.priority} ${task.status === 'done' ? 'done' : ''}\" draggable" not in html
+    assert "<span class=\"badge p-${task.priority}\">${task.priority}</span>" not in html
+    assert "<span class=\"badge\">${statusLabels[task.status] || task.status}</span>" not in html
+    assert "taskFocus" not in html
+    assert "toggleTaskFocus" not in html
+    assert "edit-task-btn" in html
+    assert "openTaskModal('${task.id}')" in html
+
+
+def test_workbench_overview_is_priority_based_not_status_or_focus_based():
+    module = load_module()
+    html = module.render_html(sample_history())
+
+    assert "priorityDonutStyle" in html
+    assert "renderPriorityLegend" in html
+    assert "P0 火烧屁股" in html
+    assert "P1 今日必完成" in html
+    assert "P2 常规推进" in html
+    assert "P3 可延后" in html
+    assert "待办 0" not in html
+    assert "进行中 1" not in html
+    assert "今日重点" not in html
 
 
 def test_dragging_uses_priority_lanes_with_same_priority_and_cross_priority_feedback():
@@ -159,9 +182,10 @@ def test_dragging_uses_priority_lanes_with_same_priority_and_cross_priority_feed
 if __name__ == "__main__":
     test_render_html_upgrades_time_dashboard_into_personal_workbench()
     test_render_html_contains_editable_task_and_review_controls()
-    test_first_screen_is_a_minimal_pending_work_overview()
+    test_first_screen_is_a_minimal_priority_overview()
     test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda()
     test_deadline_view_can_toggle_between_list_and_calendar()
     test_tasks_are_color_ranked_draggable_cards_with_progress_slider()
+    test_workbench_overview_is_priority_based_not_status_or_focus_based()
     test_dragging_uses_priority_lanes_with_same_priority_and_cross_priority_feedback()
     print("workbench render tests passed")

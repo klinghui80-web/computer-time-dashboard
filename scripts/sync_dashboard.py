@@ -664,7 +664,7 @@ def render_html(history: dict[str, Any]) -> str:
     .drop-hint { color:#8a8f98; }
     .priority-lane.drop-same .drop-hint::after { content:' · 松手：同优先级内排序，不变色'; color:#a9c3ff; }
     .priority-lane.drop-cross .drop-hint::after { content:' · 松手切换为此优先级，卡片会变色'; color:#ffd59a; }
-    .task-card { display:grid; grid-template-columns: minmax(240px,1fr) minmax(150px,.9fr) minmax(240px,300px); gap:16px; align-items:stretch; padding:18px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.035); transition:transform .16s ease, border-color .16s ease, background .16s ease; }
+    .task-card { display:grid; grid-template-columns: minmax(240px,1fr) minmax(240px,1.1fr) minmax(260px,320px); gap:16px; align-items:stretch; padding:18px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.035); transition:transform .16s ease, border-color .16s ease, background .16s ease; }
     .task-card.dragging { opacity:.55; transform:scale(.995); }
     .priority-card-P0 { background:linear-gradient(135deg, rgba(255,92,92,.17), rgba(255,255,255,.035)); border-color:rgba(255,112,112,.36); }
     .priority-card-P1 { background:linear-gradient(135deg, rgba(255,176,77,.15), rgba(255,255,255,.035)); border-color:rgba(255,176,77,.32); }
@@ -673,8 +673,7 @@ def render_html(history: dict[str, Any]) -> str:
     .task-card.done { opacity:.58; }
     .task-drag-handle { display:inline-flex; align-items:center; gap:6px; width:max-content; color:#8a8f98; font-size:12px; margin-bottom:8px; cursor:grab; user-select:none; }
     .task-drag-handle:active { cursor:grabbing; }
-    .task-drag-zone { min-height:120px; border-radius:14px; display:grid; place-items:center; cursor:grab; user-select:none; border:1px solid transparent; background:rgba(255,255,255,.01); }
-    .task-drag-zone:hover { border-color:rgba(255,255,255,.08); background:rgba(255,255,255,.025); }
+    .task-drag-zone { min-height:100%; width:100%; justify-self:stretch; display:grid; place-content:center; cursor:grab; user-select:none; }
     .task-drag-zone:active { cursor:grabbing; }
     .grip-lines { display:grid; gap:7px; width:54px; opacity:.75; }
     .grip-line { height:3px; border-radius:999px; background:rgba(203,213,225,.62); box-shadow:0 0 10px rgba(203,213,225,.08); }
@@ -685,8 +684,11 @@ def render_html(history: dict[str, Any]) -> str:
     .progress-head { display:flex; align-items:center; justify-content:space-between; gap:10px; color:#d0d6e0; font-size:13px; }
     .progress-value { font-family:'JetBrains Mono', ui-monospace, monospace; color:#f7f8f8; }
     .progress-slider { width:100%; accent-color:#7aa2ff; cursor:pointer; }
+    .progress-slider::-webkit-slider-thumb { width:22px; height:22px; }
+    .progress-slider::-moz-range-thumb { width:22px; height:22px; border-radius:50%; }
     .progress-scale { display:flex; justify-content:space-between; color:#62666d; font-size:11px; font-family:'JetBrains Mono', ui-monospace, monospace; }
     .task-actions { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+    .edit-task-btn { width:38px; height:38px; border-radius:999px; border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.04); color:#dfe7ff; cursor:pointer; font-size:17px; }
     .badge { display:inline-flex; align-items:center; gap:5px; border-radius:999px; padding:5px 8px; font-size:11px; color:#d0d6e0; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.035); }
     .p-P0 { color:#ffb4b4; border-color:rgba(255,125,125,.35); }
     .p-P1 { color:#ffd59a; border-color:rgba(255,169,64,.35); }
@@ -801,6 +803,8 @@ def render_html(history: dict[str, Any]) -> str:
     const WORKBENCH_TASK_KEY = 'workbenchTasks';
     const WORKBENCH_REVIEW_KEY = 'workbenchReviews';
     const priorityRank = { P0: 0, P1: 1, P2: 2, P3: 3 };
+    const priorityLabels = { P0: 'P0 火烧屁股', P1: 'P1 今日必完成', P2: 'P2 常规推进', P3: 'P3 可延后' };
+    const priorityStyles = { P0: '#c95d45', P1: '#c49a42', P2: '#4f6f92', P3: '#4f9b72' };
     const statusLabels = { todo: '待办', doing: '进行中', waiting: '等待中', blocked: '阻塞中', done: '已完成' };
     const statusStyles = {
       urgent: { label: '紧急', color: '#c95d45' },
@@ -850,62 +854,77 @@ def render_html(history: dict[str, Any]) -> str:
       const pending = tasks.filter(t => t.status !== 'done');
       const done = tasks.filter(t => t.status === 'done').length;
       const counts = Object.fromEntries(Object.keys(statusStyles).map(key => [key, tasks.filter(t => t.status === key).length]));
-      const isUrgent = (task) => task.priority === 'P0' || task.status === 'blocked';
-      const urgent = pending.filter(isUrgent).length;
-      const doing = pending.filter(t => !isUrgent(t) && t.status === 'doing').length;
-      const todo = pending.filter(t => !isUrgent(t) && t.status === 'todo').length;
-      const waiting = pending.filter(t => !isUrgent(t) && t.status === 'waiting').length;
+      const priorityCounts = Object.fromEntries(Object.keys(priorityRank).map(key => [key, pending.filter(t => t.priority === key).length]));
       const high = pending.filter(t => ['P0','P1'].includes(t.priority)).length;
-      const todayFocus = pending.filter(t => t.focus).length;
-      return { total: tasks.length, pending: pending.length, done, counts, urgent, high, todayFocus, blocked: tasks.filter(t => t.status === 'blocked').length, doing, todo, waiting };
+      return { total: tasks.length, pending: pending.length, done, counts, priorityCounts, high, blocked: tasks.filter(t => t.status === 'blocked').length };
     }
-    function statusDonutStyle(stats) {
+    function priorityDonutStyle(stats) {
       const total = Math.max(stats.pending, 1);
       let cursor = 0;
-      const segments = ['urgent', 'doing', 'todo', 'waiting'].map(key => {
-        const count = stats[key] || 0;
+      const segments = ['P0', 'P1', 'P2', 'P3'].map(key => {
+        const count = stats.priorityCounts[key] || 0;
         const start = cursor;
         cursor += (count / total) * 100;
-        return `${statusStyles[key].color} ${start.toFixed(2)}% ${cursor.toFixed(2)}%`;
+        return `${priorityStyles[key]} ${start.toFixed(2)}% ${cursor.toFixed(2)}%`;
       });
       if (stats.pending === 0) return 'background: conic-gradient(#63627f 0% 100%);';
       return `background: conic-gradient(${segments.join(', ')});`;
     }
-    function renderStatusLegend(stats) {
-      return ['urgent', 'doing', 'todo', 'waiting'].map(key => `
-        <span class="legend-pill"><i class="dot" style="background:${statusStyles[key].color}"></i>${statusStyles[key].label} ${stats[key] || 0}</span>
+    function renderPriorityLegend(stats) {
+      return ['P0', 'P1', 'P2', 'P3'].map(key => `
+        <span class="legend-pill"><i class="dot" style="background:${priorityStyles[key]}"></i>${priorityLabels[key]} ${stats.priorityCounts[key] || 0}</span>
       `).join('');
     }
 
+    let editingTaskId = null;
     window.addTask = function addTask() {
       const titleInput = document.getElementById('taskTitle');
       const title = titleInput.value.trim();
       if (!title) return;
       const tasks = loadTasks();
       const priority = document.getElementById('taskPriority').value;
-      const nextOrder = Math.max(-1, ...tasks.filter(task => task.priority === priority).map(task => Number(task.order) || 0)) + 1;
-      tasks.push({
-        id: uid(), title,
+      const existing = editingTaskId ? tasks.find(task => task.id === editingTaskId) : null;
+      const nextOrder = Math.max(-1, ...tasks.filter(task => task.priority === priority && task.id !== editingTaskId).map(task => Number(task.order) || 0)) + 1;
+      const payload = {
+        title,
         description: document.getElementById('taskDescription').value.trim(),
         priority,
-        status: document.getElementById('taskStatus').value,
-        progress: 0,
-        order: nextOrder,
+        order: existing?.priority === priority ? existing.order : nextOrder,
         project: document.getElementById('taskProject').value.trim() || '未归属',
         due: document.getElementById('taskDue').value,
-        focus: document.getElementById('taskFocus').checked,
-        createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(),
-      });
-      saveTasks(tasks);
+        updatedAt: new Date().toISOString(),
+      };
+      const next = existing
+        ? tasks.map(task => task.id === editingTaskId ? {...task, ...payload} : task)
+        : [...tasks, { id: uid(), ...payload, status: 'todo', progress: 0, createdAt: new Date().toISOString() }];
+      saveTasks(next);
+      closeTaskModal();
       renderWorkbench();
     };
-    window.openTaskModal = function openTaskModal() {
+    window.openTaskModal = function openTaskModal(id = null) {
+      editingTaskId = id;
       const modal = document.getElementById('taskModal');
+      const task = id ? loadTasks().find(item => item.id === id) : null;
+      const title = document.getElementById('taskModalTitle');
+      const intro = document.getElementById('taskModalIntro');
+      const action = document.getElementById('taskModalAction');
+      const deleteButton = document.getElementById('taskModalDelete');
+      if (title) title.textContent = task ? '编辑待办' : '新增待办';
+      if (intro) intro.textContent = task ? '调整标题、描述、优先级、截止日期或删除这张卡片。' : '这是一个强操作入口，填写完成后会回到待办中心。';
+      if (action) action.textContent = task ? '保存修改' : '添加待办';
+      if (deleteButton) deleteButton.style.display = task ? 'inline-flex' : 'none';
+      const setValue = (field, value) => { const node = document.getElementById(field); if (node) node.value = value || ''; };
+      setValue('taskTitle', task?.title || '');
+      setValue('taskPriority', task?.priority || 'P1');
+      setValue('taskDue', task?.due || today?.date || '');
+      setValue('taskProject', task?.project || '个人工作台');
+      setValue('taskDescription', task?.description || '');
       if (modal) modal.classList.add('open');
     };
     window.closeTaskModal = function closeTaskModal() {
       const modal = document.getElementById('taskModal');
       if (modal) modal.classList.remove('open');
+      editingTaskId = null;
     };
     window.updateTaskStatus = function updateTaskStatus(id, status) {
       const tasks = loadTasks().map(task => task.id === id ? {...task, status, updatedAt: new Date().toISOString()} : task);
@@ -930,7 +949,6 @@ def render_html(history: dict[str, Any]) -> str:
     window.updateTaskProgress = window.commitTaskProgress;
     let dragTaskId = null;
     let dragSourcePriority = null;
-    const priorityLabels = { P0: 'P0 火烧屁股', P1: 'P1 今日必完成', P2: 'P2 常规推进', P3: 'P3 可延后' };
     function clearPriorityDropHints() {
       document.querySelectorAll('.priority-lane').forEach(lane => lane.classList.remove('drop-same', 'drop-cross'));
     }
@@ -999,14 +1017,15 @@ def render_html(history: dict[str, Any]) -> str:
       clearPriorityDropHints();
       renderWorkbench();
     };
-    window.toggleTaskFocus = function toggleTaskFocus(id) {
-      const tasks = loadTasks().map(task => task.id === id ? {...task, focus: !task.focus, updatedAt: new Date().toISOString()} : task);
-      saveTasks(tasks); renderWorkbench();
+    window.deleteEditingTask = function deleteEditingTask() {
+      if (!editingTaskId) return;
+      if (deleteTask(editingTaskId)) closeTaskModal();
     };
     window.deleteTask = function deleteTask(id) {
-      if (!confirm('确认删除这条待办？')) return;
+      if (!confirm('确认删除这条待办？')) return false;
       saveTasks(loadTasks().filter(task => task.id !== id));
       renderWorkbench();
+      return true;
     };
     window.saveReview = function saveReview() {
       if (!today) return;
@@ -1070,11 +1089,8 @@ def render_html(history: dict[str, Any]) -> str:
             <strong>${escapeHtml(task.title)}</strong>
             <p>${escapeHtml(task.description || '暂无描述')}</p>
             <div class="task-meta">
-              <span class="badge p-${task.priority}">${task.priority}</span>
-              <span class="badge">${statusLabels[task.status] || task.status}</span>
               <span class="badge">${escapeHtml(task.project || '未归属')}</span>
               ${task.due ? `<span class="badge">截止 ${escapeHtml(task.due)}</span>` : ''}
-              ${task.focus ? '<span class="badge p-P1">今日重点</span>' : ''}
             </div>
           </div>
           <div class="task-drag-zone task-drag-handle" draggable="true" ondragstart="beginTaskDrag('${task.id}', '${task.priority}', event)" ondragend="endTaskDrag(event)" aria-label="拖动调整任务顺序或优先级">
@@ -1085,8 +1101,7 @@ def render_html(history: dict[str, Any]) -> str:
             <input class="progress-slider" type="range" min="0" max="100" step="1" value="${task.progress || 0}" oninput="previewTaskProgress(this)" onchange="commitTaskProgress('${task.id}', this.value)" aria-label="${escapeHtml(task.title)} 推进程度" />
             <div class="progress-scale"><span>0%</span><span>100%</span></div>
             <div class="task-actions">
-              <button class="btn" onclick="toggleTaskFocus('${task.id}')">${task.focus ? '取消重点' : '设为重点'}</button>
-              <button class="btn danger" onclick="deleteTask('${task.id}')">删除</button>
+              <button class="edit-task-btn" onclick="openTaskModal('${task.id}')" aria-label="编辑 ${escapeHtml(task.title)}">✎</button>
             </div>
           </div>
         </div>`;
@@ -1142,10 +1157,8 @@ def render_html(history: dict[str, Any]) -> str:
           <div class="deadline-date">${deadlineLabel(task.due)}<br>${escapeHtml(task.due || '')}</div>
           <div class="deadline-body">
             <strong>${escapeHtml(task.title)}</strong>
-            <span class="badge p-${task.priority}">${task.priority}</span>
-            <span class="badge">${statusLabels[task.status] || task.status}</span>
+            <span class="badge p-${task.priority}">${priorityLabels[task.priority]}</span>
             <span class="badge">${escapeHtml(task.project || '未归属')}</span>
-            ${task.focus ? '<span class="badge p-P1">今日重点</span>' : ''}
           </div>
         </div>`).join('')}</div>`;
     }
@@ -1206,36 +1219,34 @@ def render_html(history: dict[str, Any]) -> str:
         <article class="card span-12 overview-first-fold">
           <div class="overview-top">
             <div class="overview-kicker">Personal Workbench Overview</div>
-            <div class="donut" style="${statusDonutStyle(stats)}">
-              <div class="donut-center"><div class="donut-number">${stats.pending}</div><div class="donut-label">未完成事项</div></div>
+            <div class="donut" style="${priorityDonutStyle(stats)}">
+              <div class="donut-center"><div class="donut-number">${stats.pending}</div><div class="donut-label">优先级事项</div></div>
             </div>
-            <div class="status-legend">${renderStatusLegend(stats)}</div>
+            <div class="status-legend">${renderPriorityLegend(stats)}</div>
           </div>
           <div class="overview-metrics">
-            <div class="metric-card"><label>待推进总数</label><strong>${stats.pending}<span class="unit">项</span></strong><p>当前仍需推进</p></div>
-            <div class="metric-card"><label>紧急</label><strong style="color:${statusStyles.urgent.color}">${stats.urgent}<span class="unit">项</span></strong><p>今天或明天要处理</p></div>
-            <div class="metric-card"><label>今日重点</label><strong style="color:${statusStyles.doing.color}">${stats.todayFocus}<span class="unit">个</span></strong><p>已标记优先推进</p></div>
-            <div class="metric-card"><label>今日活跃</label><strong>${today?.total_active_text || '—'}</strong><p>时间管理板块数据</p></div>
+            <div class="metric-card"><label>P0 火烧屁股</label><strong style="color:${priorityStyles.P0}">${stats.priorityCounts.P0}<span class="unit">项</span></strong><p>必须立即处理</p></div>
+            <div class="metric-card"><label>P1 今日必完成</label><strong style="color:${priorityStyles.P1}">${stats.priorityCounts.P1}<span class="unit">项</span></strong><p>今天要交付</p></div>
+            <div class="metric-card"><label>P2 常规推进</label><strong style="color:${priorityStyles.P2}">${stats.priorityCounts.P2}<span class="unit">项</span></strong><p>稳定推进中</p></div>
+            <div class="metric-card"><label>P3 可延后</label><strong style="color:${priorityStyles.P3}">${stats.priorityCounts.P3}<span class="unit">项</span></strong><p>有空再处理</p></div>
           </div>
         </article>
-        <article class="card span-12 next-fold"><h3 class="section-title">今日重点与待办中心</h3>${renderTasks(tasks)}
+        <article class="card span-12 next-fold"><h3 class="section-title">待办中心</h3>${renderTasks(tasks)}
           <button class="add-task-trigger" onclick="openTaskModal()">＋ 新增待办</button>
         </article>
         <div class="task-modal-backdrop" id="taskModal" onclick="if (event.target === this) closeTaskModal()">
           <div class="task-modal" role="dialog" aria-modal="true" aria-labelledby="taskModalTitle">
             <div class="task-modal-head">
-              <div><h3 id="taskModalTitle">新增待办</h3><p>这是一个强操作入口，填写完成后会回到待办中心。</p></div>
+              <div><h3 id="taskModalTitle">新增待办</h3><p id="taskModalIntro">这是一个强操作入口，填写完成后会回到待办中心。</p></div>
               <button class="icon-close" onclick="closeTaskModal()" aria-label="关闭">×</button>
             </div>
             <div class="form-grid">
               <label>标题<input id="taskTitle" placeholder="例如：完成首页布局" /></label>
               <label>优先级<select id="taskPriority"><option>P0</option><option selected>P1</option><option>P2</option><option>P3</option></select></label>
-              <label>状态<select id="taskStatus"><option value="todo">待办</option><option value="doing" selected>进行中</option><option value="waiting">等待中</option><option value="blocked">阻塞中</option></select></label>
               <label>截止<input id="taskDue" type="date" value="${today?.date || ''}" /></label>
               <label>项目<input id="taskProject" placeholder="项目/板块" value="个人工作台" /></label>
               <label class="wide">描述<input id="taskDescription" placeholder="补充下一步动作、验收标准或背景" /></label>
-              <label><input id="taskFocus" type="checkbox" checked /> 今日重点</label>
-              <div class="toolbar"><button class="btn primary" onclick="addTask()">添加待办</button><button class="btn" onclick="closeTaskModal()">取消</button></div>
+              <div class="toolbar"><button class="btn primary" id="taskModalAction" onclick="addTask()">添加待办</button><button class="btn danger" id="taskModalDelete" onclick="deleteEditingTask()" style="display:none;">删除卡片</button><button class="btn" onclick="closeTaskModal()">取消</button></div>
             </div>
           </div>
         </div>
