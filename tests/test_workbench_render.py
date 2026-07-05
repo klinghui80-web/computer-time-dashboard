@@ -87,9 +87,18 @@ def test_first_screen_is_a_radial_task_orbit_overview_not_a_donut():
     assert "urgencyRadius" in html
     assert "connectorEndpoint" in html
     assert "orbit-map-stage" in html
+    assert "orbit-connector-path" in html
+    assert "orbit-connector-particles" in html
+    assert "wavyConnectorPath" in html
+    assert "stroke-dasharray:1 13" in html
+    assert ".orbit-connector-layer { position:absolute; left:50%; top:50%; width:1px; height:1px; z-index:4" in html
+    assert ".orbit-core { position:absolute; left:50%; top:50%; z-index:6" in html
+    assert "background:transparent;" in html
     assert "生活" in html and "工作" in html and "自媒体" in html
     assert "class=\"donut\"" not in html
     assert "overview-metrics" not in html
+    assert "overview-orbit-map::before" not in html
+    assert "overview-orbit-map::after" not in html
     assert "overview-kicker" not in html
     assert "orbit-caption" not in html
     assert "Material Orbit" not in html

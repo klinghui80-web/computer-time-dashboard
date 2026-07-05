@@ -628,16 +628,12 @@ def render_html(history: dict[str, Any]) -> str:
     .hero-title { font-size:42px; line-height:1.02; letter-spacing:-1.1px; margin:0 0 12px; font-weight:600; }
     .hero-copy { color:var(--muted); line-height:1.8; margin:0; max-width:780px; }
     .overview-first-fold { min-height: calc(100vh - 112px); display:flex; flex-direction:column; justify-content:center; background:radial-gradient(circle at 50% 46%, rgba(122,162,255,.16), transparent 34%), linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015)); overflow:hidden; }
-    .overview-orbit-map { position:relative; min-height:700px; height:clamp(700px, calc(100vh - 190px), 920px); border-radius:28px; overflow:hidden; isolation:isolate; background:
-      radial-gradient(circle at 50% 50%, rgba(255,255,255,.12), transparent 2px),
-      radial-gradient(circle at 50% 50%, rgba(122,162,255,.18), transparent 20%),
-      linear-gradient(135deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
-      box-shadow:none; }
+    .overview-orbit-map { position:relative; min-height:700px; height:clamp(700px, calc(100vh - 190px), 920px); border-radius:0; overflow:visible; isolation:isolate; background:transparent; box-shadow:none; }
     .orbit-map-stage { position:absolute; inset:0; z-index:2; }
-    .overview-orbit-map::before { content:""; position:absolute; inset:18px; z-index:0; border-radius:30px; background-image: radial-gradient(rgba(255,255,255,.16) 1px, transparent 1px); background-size:18px 18px; opacity:.12; mask-image:radial-gradient(circle at center, black, transparent 72%); }
-    .overview-orbit-map::after { content:""; position:absolute; inset:0; z-index:1; background:radial-gradient(circle at center, rgba(255,255,255,.08), transparent 34%), linear-gradient(90deg, transparent, rgba(255,255,255,.05), transparent); pointer-events:none; }
     .liquid-glass { background:rgba(12,20,36,.68); border:1px solid rgba(255,255,255,.18); backdrop-filter: blur(22px) saturate(160%); -webkit-backdrop-filter: blur(22px) saturate(160%); box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 18px 60px rgba(0,0,0,.35); }
-    .orbit-connector { position:absolute; left:50%; top:50%; z-index:7; width:var(--line-len, 120px); height:3px; border-radius:999px; transform-origin:0 50%; transform:rotate(var(--line-angle, 0deg)) scaleX(1); background:linear-gradient(90deg, rgba(255,255,255,.92), var(--cat-color,#7aa2ff) 36%, var(--cat-color,#7aa2ff)); filter:drop-shadow(0 0 9px var(--cat-color,#7aa2ff)); animation: orbit-line-draw .9s ease forwards; animation-delay:var(--delay,0ms); }
+    .orbit-connector-layer { position:absolute; left:50%; top:50%; width:1px; height:1px; z-index:4; overflow:visible; pointer-events:none; }
+    .orbit-connector-path { fill:none; stroke:var(--cat-color,#7aa2ff); stroke-width:3.5; stroke-linecap:round; opacity:.82; filter:drop-shadow(0 0 10px var(--cat-color,#7aa2ff)); stroke-dasharray:620; stroke-dashoffset:620; animation: orbit-line-draw .95s ease forwards; animation-delay:var(--delay,0ms); }
+    .orbit-connector-particles { fill:none; stroke:rgba(255,255,255,.86); stroke-width:4.2; stroke-linecap:round; opacity:.92; filter:drop-shadow(0 0 12px var(--cat-color,#7aa2ff)); stroke-dasharray:1 13; stroke-dashoffset:96; animation: orbit-particles 2.8s linear infinite, orbit-line-draw .95s ease forwards; animation-delay:var(--delay,0ms), var(--delay,0ms); }
     .orbit-core { position:absolute; left:50%; top:50%; z-index:6; width:124px; height:124px; border-radius:50%; transform:translate(-50%,-50%); display:grid; place-items:center; text-align:center; color:#fff; background:radial-gradient(circle at 38% 30%, rgba(255,255,255,.34), rgba(122,92,255,.45) 42%, rgba(37,22,75,.76)); border:1px solid rgba(255,255,255,.22); box-shadow:0 0 0 54px rgba(122,92,255,.10), 0 0 0 108px rgba(122,92,255,.045), 0 30px 100px rgba(122,92,255,.28); }
     .orbit-core::before { content:""; position:absolute; inset:-96px; border-radius:50%; border:1px solid rgba(255,255,255,.07); }
     .orbit-core::after { content:""; position:absolute; inset:-48px; border-radius:50%; border:1px solid rgba(255,255,255,.1); }
@@ -657,8 +653,9 @@ def render_html(history: dict[str, Any]) -> str:
     .dot { width:9px; height:9px; border-radius:50%; display:inline-block; }
     .orbit-empty { position:absolute; left:50%; top:50%; z-index:4; transform:translate(-50%, 96px); color:#8a8f98; }
     @keyframes orbit-card-bloom { from { opacity:0; transform:translate(-50%,-50%) scale(.35); filter:blur(12px); } to { opacity:1; transform:translate(calc(-50% + var(--orbit-x)), calc(-50% + var(--orbit-y))) scale(1); filter:blur(0); } }
-    @keyframes orbit-line-draw { from { transform:rotate(var(--line-angle, 0deg)) scaleX(0); opacity:.28; } to { transform:rotate(var(--line-angle, 0deg)) scaleX(1); opacity:1; } }
-    @media (prefers-reduced-motion: reduce) { .orbit-task-card, .orbit-connector { animation:none; } }
+    @keyframes orbit-line-draw { to { stroke-dashoffset:0; } }
+    @keyframes orbit-particles { to { stroke-dashoffset:-180; } }
+    @media (prefers-reduced-motion: reduce) { .orbit-task-card, .orbit-connector-path, .orbit-connector-particles { animation:none; } }
     .next-fold { margin-top:4px; }
     .toolbar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
     .btn { border:1px solid rgba(255,255,255,0.08); color:var(--text); background:rgba(255,255,255,0.04); border-radius:10px; padding:9px 12px; cursor:pointer; font:inherit; }
@@ -1288,10 +1285,29 @@ def render_html(history: dict[str, Any]) -> str:
       const xTrim = Math.abs(unitX) < 0.001 ? Infinity : cardHalfWidth / Math.abs(unitX);
       const yTrim = Math.abs(unitY) < 0.001 ? Infinity : cardHalfHeight / Math.abs(unitY);
       const trimToCardEdge = Math.min(xTrim, yTrim);
+      const length = Math.max(18, distance - trimToCardEdge);
       return {
-        length: Math.max(18, Math.round(distance - trimToCardEdge)),
+        x: Math.round(unitX * length),
+        y: Math.round(unitY * length),
+        length: Math.round(length),
         angle: Math.round(Math.atan2(node.orbitY, node.orbitX) * 1800 / Math.PI) / 10,
       };
+    }
+
+    function wavyConnectorPath(node, endpoint) {
+      const normalLength = Math.max(Math.hypot(endpoint.x, endpoint.y), 1);
+      const normalX = -endpoint.y / normalLength;
+      const normalY = endpoint.x / normalLength;
+      const wave = (node.orbitIndex % 2 === 0 ? 1 : -1) * Math.min(58, Math.max(24, normalLength * 0.14));
+      const controlA = {
+        x: Math.round(endpoint.x * 0.30 + normalX * wave),
+        y: Math.round(endpoint.y * 0.30 + normalY * wave),
+      };
+      const controlB = {
+        x: Math.round(endpoint.x * 0.68 - normalX * wave * 0.72),
+        y: Math.round(endpoint.y * 0.68 - normalY * wave * 0.72),
+      };
+      return `M 0 0 C ${controlA.x} ${controlA.y}, ${controlB.x} ${controlB.y}, ${endpoint.x} ${endpoint.y}`;
     }
 
     function renderOrbitOverview(tasks, stats) {
@@ -1304,7 +1320,12 @@ def render_html(history: dict[str, Any]) -> str:
       });
       const connectors = nodes.map(task => {
         const endpoint = connectorEndpoint(task);
-        return `<span class="orbit-connector" style="--cat-color:${task.orbitColor}; --delay:${task.orbitIndex * 90}ms; --line-len:${endpoint.length}px; --line-angle:${endpoint.angle}deg"></span>`;
+        const path = wavyConnectorPath(task, endpoint);
+        return `
+          <g class="orbit-connector" style="--cat-color:${task.orbitColor}; --delay:${task.orbitIndex * 90}ms">
+            <path class="orbit-connector-path" d="${path}" />
+            <path class="orbit-connector-particles" d="${path}" />
+          </g>`;
       }).join('');
       const cards = nodes.map(task => `
         <article class="orbit-task-card liquid-glass" style="--orbit-x:${task.orbitX}px; --orbit-y:${task.orbitY}px; --cat-color:${task.orbitColor}; --delay:${task.orbitIndex * 90}ms">
@@ -1320,7 +1341,7 @@ def render_html(history: dict[str, Any]) -> str:
       return `
         <div class="overview-orbit-map">
           <div class="orbit-map-stage">
-            ${connectors}
+            <svg class="orbit-connector-layer" aria-hidden="true">${connectors}</svg>
             <div class="orbit-core liquid-glass"><div class="orbit-core-inner"><div class="orbit-count">${stats.pending}</div></div></div>
             ${cards || '<div class="orbit-empty">暂无待推进事项</div>'}
             <div class="orbit-legend">${legend}</div>
