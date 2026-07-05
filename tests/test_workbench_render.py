@@ -113,10 +113,30 @@ def test_deadline_view_can_toggle_between_list_and_calendar():
     assert "距截止" in html
 
 
+def test_tasks_are_color_ranked_draggable_cards_with_progress_slider():
+    module = load_module()
+    html = module.render_html(sample_history())
+
+    assert "priority-card-P0" in html
+    assert "priority-card-P1" in html
+    assert "priority-card-P2" in html
+    assert "draggable=\"true\"" in html
+    assert "dragTaskId" in html
+    assert "reorderTasks" in html
+    assert "priorityForIndex" in html
+    assert "updateTaskProgress" in html
+    assert "progress-slider" in html
+    assert "type=\"range\"" in html
+    assert "0%" in html
+    assert "100%" in html
+    assert "updateTaskStatus('${task.id}', this.checked" not in html
+
+
 if __name__ == "__main__":
     test_render_html_upgrades_time_dashboard_into_personal_workbench()
     test_render_html_contains_editable_task_and_review_controls()
     test_first_screen_is_a_minimal_pending_work_overview()
     test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda()
     test_deadline_view_can_toggle_between_list_and_calendar()
+    test_tasks_are_color_ranked_draggable_cards_with_progress_slider()
     print("workbench render tests passed")

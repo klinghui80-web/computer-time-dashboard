@@ -655,12 +655,25 @@ def render_html(history: dict[str, Any]) -> str:
     .form-grid { display:grid; grid-template-columns: 1.2fr .55fr .55fr .7fr; gap:10px; align-items:end; }
     .form-grid .wide { grid-column: span 2; }
     .form-grid label, .review-grid label { display:grid; gap:6px; font-size:12px; color:var(--muted); }
-    .task-list { display:grid; gap:10px; }
-    .task-card { display:grid; grid-template-columns: auto 1fr auto; gap:12px; align-items:start; padding:14px; border:1px solid rgba(255,255,255,0.08); border-radius:16px; background:rgba(255,255,255,0.035); }
+    .task-list { display:grid; gap:12px; }
+    .task-card { display:grid; grid-template-columns: minmax(0,1fr) minmax(220px,280px); gap:16px; align-items:start; padding:18px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.035); cursor:grab; transition:transform .16s ease, border-color .16s ease, background .16s ease; }
+    .task-card:active { cursor:grabbing; }
+    .task-card.dragging { opacity:.55; transform:scale(.995); }
+    .priority-card-P0 { background:linear-gradient(135deg, rgba(255,92,92,.17), rgba(255,255,255,.035)); border-color:rgba(255,112,112,.36); }
+    .priority-card-P1 { background:linear-gradient(135deg, rgba(255,176,77,.15), rgba(255,255,255,.035)); border-color:rgba(255,176,77,.32); }
+    .priority-card-P2 { background:linear-gradient(135deg, rgba(122,162,255,.14), rgba(255,255,255,.035)); border-color:rgba(122,162,255,.28); }
+    .priority-card-P3 { background:linear-gradient(135deg, rgba(148,163,184,.10), rgba(255,255,255,.03)); border-color:rgba(148,163,184,.22); }
     .task-card.done { opacity:.58; }
+    .drag-hint { display:inline-flex; align-items:center; gap:6px; color:#8a8f98; font-size:12px; margin-bottom:8px; }
     .task-main strong { display:block; margin-bottom:7px; }
     .task-main p { margin:0; color:var(--muted); line-height:1.6; font-size:13px; }
     .task-meta { display:flex; gap:6px; flex-wrap:wrap; margin-top:9px; }
+    .task-progress { display:grid; gap:10px; justify-items:stretch; }
+    .progress-head { display:flex; align-items:center; justify-content:space-between; gap:10px; color:#d0d6e0; font-size:13px; }
+    .progress-value { font-family:'JetBrains Mono', ui-monospace, monospace; color:#f7f8f8; }
+    .progress-slider { width:100%; accent-color:#7aa2ff; cursor:pointer; }
+    .progress-scale { display:flex; justify-content:space-between; color:#62666d; font-size:11px; font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .task-actions { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
     .badge { display:inline-flex; align-items:center; gap:5px; border-radius:999px; padding:5px 8px; font-size:11px; color:#d0d6e0; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.035); }
     .p-P0 { color:#ffb4b4; border-color:rgba(255,125,125,.35); }
     .p-P1 { color:#ffd59a; border-color:rgba(255,169,64,.35); }
@@ -708,6 +721,8 @@ def render_html(history: dict[str, Any]) -> str:
       .overview-first-fold { min-height:auto; }
       .deadline-calendar { grid-template-columns:repeat(2,minmax(0,1fr)); }
       .task-modal { max-height:88vh; overflow:auto; }
+      .task-card { grid-template-columns:1fr; }
+      .task-actions { justify-content:flex-start; }
     }
   </style>
 </head>
@@ -790,21 +805,40 @@ def render_html(history: dict[str, Any]) -> str:
     const writeLocal = (key, value) => localStorage.setItem(key, JSON.stringify(value));
     const uid = () => `task_${Date.now()}_${Math.random().toString(16).slice(2)}`;
 
+    function normalizeTask(task, index) {
+      const progress = Number.isFinite(Number(task.progress)) ? Math.min(100, Math.max(0, Number(task.progress))) : (task.status === 'done' ? 100 : 0);
+      return {
+        ...task,
+        order: Number.isFinite(Number(task.order)) ? Number(task.order) : index,
+        priority: task.priority || priorityForIndex(index),
+        progress,
+        status: progress >= 100 ? 'done' : (task.status === 'done' ? 'doing' : (task.status || 'todo')),
+      };
+    }
     function loadTasks() {
       const saved = readLocal(WORKBENCH_TASK_KEY, null);
-      if (saved && Array.isArray(saved)) return saved;
+      if (saved && Array.isArray(saved)) return saved.map(normalizeTask);
       const defaults = [
-        { id: uid(), title: '确认个人工作台首页结构', description: '根据实际使用反馈调整今日总览、待办和复盘区块。', priority: 'P1', status: 'doing', project: '个人工作台', due: today?.date || '', focus: true, createdAt: new Date().toISOString() },
-        { id: uid(), title: '晚上填写今日复盘', description: '记录完成事项、推进情况、阻塞和明日下一步。', priority: 'P0', status: 'todo', project: '每日复盘', due: today?.date || '', focus: true, createdAt: new Date().toISOString() },
-        { id: uid(), title: '观察 19:30 飞书自动推送', description: '时间管理自动化保持不动，只观察是否稳定到达。', priority: 'P1', status: 'waiting', project: '时间管理', due: today?.date || '', focus: false, createdAt: new Date().toISOString() },
-      ];
+        { id: uid(), title: '确认个人工作台首页结构', description: '根据实际使用反馈调整今日总览、待办和复盘区块。', priority: 'P1', status: 'doing', progress: 45, order: 1, project: '个人工作台', due: today?.date || '', focus: true, createdAt: new Date().toISOString() },
+        { id: uid(), title: '晚上填写今日复盘', description: '记录完成事项、推进情况、阻塞和明日下一步。', priority: 'P0', status: 'todo', progress: 15, order: 0, project: '每日复盘', due: today?.date || '', focus: true, createdAt: new Date().toISOString() },
+        { id: uid(), title: '观察 19:30 飞书自动推送', description: '时间管理自动化保持不动，只观察是否稳定到达。', priority: 'P2', status: 'waiting', progress: 20, order: 2, project: '时间管理', due: today?.date || '', focus: false, createdAt: new Date().toISOString() },
+      ].map(normalizeTask);
       writeLocal(WORKBENCH_TASK_KEY, defaults);
       return defaults;
     }
-    function saveTasks(tasks) { writeLocal(WORKBENCH_TASK_KEY, tasks); }
+    function saveTasks(tasks) { writeLocal(WORKBENCH_TASK_KEY, tasks.map(normalizeTask)); }
     function loadReviews() { return readLocal(WORKBENCH_REVIEW_KEY, {}); }
     function saveReviews(reviews) { writeLocal(WORKBENCH_REVIEW_KEY, reviews); }
-    function activeTasks() { return loadTasks().filter(task => task.status !== 'done').sort((a,b) => (priorityRank[a.priority] ?? 9) - (priorityRank[b.priority] ?? 9)); }
+    function sortTasksForDisplay(tasks) {
+      return [...tasks].sort((a,b) => (priorityRank[a.priority] ?? 9) - (priorityRank[b.priority] ?? 9) || (a.order ?? 999) - (b.order ?? 999) || String(a.createdAt || '').localeCompare(String(b.createdAt || '')));
+    }
+    function priorityForIndex(index) {
+      if (index <= 0) return 'P0';
+      if (index === 1) return 'P1';
+      if (index === 2) return 'P2';
+      return 'P3';
+    }
+    function activeTasks() { return sortTasksForDisplay(loadTasks().filter(task => task.status !== 'done')); }
     function taskStats(tasks) {
       const pending = tasks.filter(t => t.status !== 'done');
       const done = tasks.filter(t => t.status === 'done').length;
@@ -846,6 +880,8 @@ def render_html(history: dict[str, Any]) -> str:
         description: document.getElementById('taskDescription').value.trim(),
         priority: document.getElementById('taskPriority').value,
         status: document.getElementById('taskStatus').value,
+        progress: 0,
+        order: tasks.length,
         project: document.getElementById('taskProject').value.trim() || '未归属',
         due: document.getElementById('taskDue').value,
         focus: document.getElementById('taskFocus').checked,
@@ -865,6 +901,40 @@ def render_html(history: dict[str, Any]) -> str:
     window.updateTaskStatus = function updateTaskStatus(id, status) {
       const tasks = loadTasks().map(task => task.id === id ? {...task, status, updatedAt: new Date().toISOString()} : task);
       saveTasks(tasks); renderWorkbench();
+    };
+    window.updateTaskProgress = function updateTaskProgress(id, progress) {
+      const value = Math.min(100, Math.max(0, Number(progress) || 0));
+      const tasks = loadTasks().map(task => task.id === id ? {
+        ...task,
+        progress: value,
+        status: value >= 100 ? 'done' : (task.status === 'done' ? 'doing' : task.status),
+        updatedAt: new Date().toISOString(),
+      } : task);
+      saveTasks(tasks); renderWorkbench();
+    };
+    let dragTaskId = null;
+    window.beginTaskDrag = function beginTaskDrag(id, event) {
+      dragTaskId = id;
+      event.currentTarget.classList.add('dragging');
+      if (event.dataTransfer) event.dataTransfer.effectAllowed = 'move';
+    };
+    window.endTaskDrag = function endTaskDrag(event) {
+      event.currentTarget.classList.remove('dragging');
+    };
+    window.reorderTasks = function reorderTasks(targetId) {
+      if (!dragTaskId || dragTaskId === targetId) return;
+      const allTasks = loadTasks();
+      const visible = sortTasksForDisplay(allTasks.filter(task => task.status !== 'done'));
+      const draggedIndex = visible.findIndex(task => task.id === dragTaskId);
+      const targetIndex = visible.findIndex(task => task.id === targetId);
+      if (draggedIndex < 0 || targetIndex < 0) return;
+      const [dragged] = visible.splice(draggedIndex, 1);
+      visible.splice(targetIndex, 0, dragged);
+      const reordered = visible.map((task, index) => ({...task, order: index, priority: priorityForIndex(index), updatedAt: new Date().toISOString()}));
+      const reorderedById = Object.fromEntries(reordered.map(task => [task.id, task]));
+      saveTasks(allTasks.map(task => reorderedById[task.id] || task));
+      dragTaskId = null;
+      renderWorkbench();
     };
     window.toggleTaskFocus = function toggleTaskFocus(id) {
       const tasks = loadTasks().map(task => task.id === id ? {...task, focus: !task.focus, updatedAt: new Date().toISOString()} : task);
@@ -931,12 +1001,12 @@ def render_html(history: dict[str, Any]) -> str:
     }
 
     function renderTasks(tasks) {
-      const sorted = [...tasks].sort((a,b) => (priorityRank[a.priority] ?? 9) - (priorityRank[b.priority] ?? 9));
+      const sorted = sortTasksForDisplay(tasks);
       if (!sorted.length) return '<div class="empty">暂无待办。先添加今天要推进的事项。</div>';
-      return `<div class="task-list">${sorted.map(task => `
-        <div class="task-card ${task.status === 'done' ? 'done' : ''}">
-          <input type="checkbox" ${task.status === 'done' ? 'checked' : ''} onchange="updateTaskStatus('${task.id}', this.checked ? 'done' : 'doing')" />
+      return `<div class="task-list">${sorted.map((task, index) => `
+        <div class="task-card priority-card-${task.priority} ${task.status === 'done' ? 'done' : ''}" draggable="true" ondragstart="beginTaskDrag('${task.id}', event)" ondragend="endTaskDrag(event)" ondragover="event.preventDefault()" ondrop="reorderTasks('${task.id}')">
           <div class="task-main">
+            <span class="drag-hint">↕ 拖动调整优先级 · 当前第 ${index + 1}</span>
             <strong>${escapeHtml(task.title)}</strong>
             <p>${escapeHtml(task.description || '暂无描述')}</p>
             <div class="task-meta">
@@ -947,12 +1017,14 @@ def render_html(history: dict[str, Any]) -> str:
               ${task.focus ? '<span class="badge p-P1">今日重点</span>' : ''}
             </div>
           </div>
-          <div class="toolbar">
-            <button class="btn" onclick="toggleTaskFocus('${task.id}')">${task.focus ? '取消重点' : '设为重点'}</button>
-            <select onchange="updateTaskStatus('${task.id}', this.value)">
-              ${Object.entries(statusLabels).map(([key,label]) => `<option value="${key}" ${task.status === key ? 'selected' : ''}>${label}</option>`).join('')}
-            </select>
-            <button class="btn danger" onclick="deleteTask('${task.id}')">删除</button>
+          <div class="task-progress">
+            <div class="progress-head"><span>推进程度</span><strong class="progress-value">${task.progress || 0}%</strong></div>
+            <input class="progress-slider" type="range" min="0" max="100" step="5" value="${task.progress || 0}" oninput="updateTaskProgress('${task.id}', this.value)" aria-label="${escapeHtml(task.title)} 推进程度" />
+            <div class="progress-scale"><span>0%</span><span>100%</span></div>
+            <div class="task-actions">
+              <button class="btn" onclick="toggleTaskFocus('${task.id}')">${task.focus ? '取消重点' : '设为重点'}</button>
+              <button class="btn danger" onclick="deleteTask('${task.id}')">删除</button>
+            </div>
           </div>
         </div>`).join('')}</div>`;
     }
