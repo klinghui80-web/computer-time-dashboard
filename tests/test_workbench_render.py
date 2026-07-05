@@ -122,6 +122,17 @@ def test_first_screen_is_a_radial_task_orbit_overview_not_a_donut():
     assert "昨日时间比例" in html
     assert "昨日遗留任务" in html
     assert "translateX(-" in html
+    assert "--bg: #000000" in html
+    assert "body { margin: 0; color: var(--text); background:#000000" in html
+    assert "grid-template-columns:minmax(0,1fr) minmax(340px,.38fr)" in html
+    assert "grid-template-rows:290px 210px auto" in html
+    assert "time-line-card, .category-donut-card { min-height:0; height:210px" in html
+    assert "calendar-month-title" in html
+    assert "calendar-month-grid" in html
+    assert "calendar-weekdays" in html
+    assert "calendar-day-cell active" in html
+    assert "一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日" in html
+    assert "global-glass-surface" in html
 
 
 def test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda():

@@ -570,17 +570,17 @@ def render_html(history: dict[str, Any]) -> str:
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #07111f;
-      --panel: rgba(13, 22, 42, 0.88);
-      --panel-2: rgba(17, 28, 54, 0.9);
-      --line: rgba(255,255,255,0.08);
+      --bg: #000000;
+      --panel: rgba(255, 255, 255, 0.105);
+      --panel-2: rgba(255, 255, 255, 0.085);
+      --line: rgba(255,255,255,0.16);
       --text: #eff4ff;
       --muted: #9fb0d6;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; color: var(--text); background: radial-gradient(circle at top, #12203e, var(--bg) 42%); font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif; }
+    body { margin: 0; color: var(--text); background:#000000; font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif; }
     .shell { display: grid; grid-template-columns: 310px 1fr; min-height: 100vh; }
-    .sidebar { padding: 24px 18px; border-right: 1px solid var(--line); background: rgba(6, 11, 24, 0.78); backdrop-filter: blur(20px); position: sticky; top: 0; height: 100vh; overflow: auto; }
+    .sidebar { padding: 24px 18px; border-right: 1px solid var(--line); background: rgba(255,255,255,0.055); backdrop-filter: blur(28px) saturate(150%); -webkit-backdrop-filter: blur(28px) saturate(150%); position: sticky; top: 0; height: 100vh; overflow: auto; }
     .brand h1 { margin: 0 0 8px; font-size: 24px; }
     .brand p { margin: 0; color: var(--muted); line-height: 1.7; font-size: 13px; }
     .meta-stack { display: grid; gap: 8px; margin-top: 16px; }
@@ -600,7 +600,7 @@ def render_html(history: dict[str, Any]) -> str:
     .header p { margin: 0; line-height: 1.7; color: var(--muted); max-width: 760px; }
     .header .info { color: var(--muted); font-size: 13px; text-align: right; }
     .grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
-    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 24px; padding: 20px; box-shadow: 0 18px 60px rgba(0,0,0,0.18); }
+    .card { background: linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.055)); border: 1px solid rgba(255,255,255,.18); border-radius: 28px; padding: 20px; box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 24px 70px rgba(0,0,0,.36); backdrop-filter: blur(26px) saturate(145%); -webkit-backdrop-filter: blur(26px) saturate(145%); }
     .span-12 { grid-column: span 12; }
     .span-8 { grid-column: span 8; }
     .span-6 { grid-column: span 6; }
@@ -627,12 +627,12 @@ def render_html(history: dict[str, Any]) -> str:
     .workbench-hero { display:grid; grid-template-columns: 1.25fr .75fr; gap:16px; align-items:stretch; }
     .hero-title { font-size:42px; line-height:1.02; letter-spacing:-1.1px; margin:0 0 12px; font-weight:600; }
     .hero-copy { color:var(--muted); line-height:1.8; margin:0; max-width:780px; }
-    .overview-first-fold { min-height: calc(100vh - 112px); display:flex; flex-direction:column; justify-content:center; background:radial-gradient(circle at 42% 46%, rgba(122,162,255,.16), transparent 34%), linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015)); overflow:hidden; }
-    .overview-dashboard { min-height:720px; display:grid; grid-template-columns:minmax(0,1.05fr) minmax(430px,.78fr); gap:26px; align-items:stretch; }
+    .overview-first-fold { min-height: calc(100vh - 112px); display:flex; flex-direction:column; justify-content:center; background:radial-gradient(circle at 34% 48%, rgba(122,92,255,.13), transparent 34%), linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); overflow:hidden; }
+    .overview-dashboard { min-height:720px; display:grid; grid-template-columns:minmax(0,1fr) minmax(340px,.38fr); gap:22px; align-items:stretch; }
     .overview-left-stage { position:relative; min-height:720px; }
     .overview-greeting { position:absolute; z-index:11; left:24px; top:18px; margin:0; font-size:44px; line-height:1.08; letter-spacing:-1.2px; font-weight:780; color:#f7f8f8; text-shadow:0 10px 40px rgba(0,0,0,.34); }
     .overview-orbit-map { position:relative; min-height:700px; height:100%; border-radius:0; overflow:visible; isolation:isolate; background:transparent; box-shadow:none; }
-    .overview-left-stage .orbit-map-stage { transform:translateX(-3%); }
+    .overview-left-stage .orbit-map-stage { transform:translateX(-1%); }
     .orbit-map-stage { position:absolute; inset:0; z-index:2; }
     .liquid-glass { background:rgba(12,20,36,.68); border:1px solid rgba(255,255,255,.18); backdrop-filter: blur(22px) saturate(160%); -webkit-backdrop-filter: blur(22px) saturate(160%); box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 18px 60px rgba(0,0,0,.35); }
     .orbit-connector-layer { position:absolute; left:50%; top:50%; width:1px; height:1px; z-index:4; overflow:visible; pointer-events:none; }
@@ -660,32 +660,33 @@ def render_html(history: dict[str, Any]) -> str:
     @keyframes orbit-line-draw { to { stroke-dashoffset:0; } }
     @keyframes orbit-particles { to { stroke-dashoffset:-180; } }
     @media (prefers-reduced-motion: reduce) { .orbit-task-card, .orbit-connector-path, .orbit-connector-particles { animation:none; } }
-    .overview-side-panel { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:1.1fr .82fr 1fr; gap:16px; min-height:720px; }
+    .overview-side-panel { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:290px 210px auto; gap:16px; min-height:720px; }
     .glass-card { position:relative; overflow:hidden; border-radius:26px; padding:20px; background:linear-gradient(145deg, rgba(255,255,255,.22), rgba(255,255,255,.075)); border:1px solid rgba(255,255,255,.22); box-shadow:inset 0 1px 0 rgba(255,255,255,.28), 0 24px 70px rgba(0,0,0,.26); backdrop-filter: blur(26px) saturate(145%); -webkit-backdrop-filter: blur(26px) saturate(145%); color:#f7f8f8; }
     .glass-card::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 20% 8%, rgba(255,255,255,.25), transparent 30%), linear-gradient(135deg, rgba(255,255,255,.12), transparent 46%); pointer-events:none; }
     .glass-card > * { position:relative; z-index:1; }
     .side-card-wide { grid-column:span 2; }
     .glass-card h4 { margin:0; font-size:15px; letter-spacing:-.12px; color:#eef4ff; }
     .glass-card .glass-subtitle { color:rgba(223,231,255,.68); font-size:12px; margin-top:4px; }
-    .calendar-card { min-height:206px; }
-    .calendar-head { display:flex; justify-content:space-between; align-items:start; gap:12px; margin-bottom:16px; }
-    .calendar-date { text-align:right; font-size:34px; line-height:1; font-weight:760; letter-spacing:-1px; }
-    .calendar-date span { display:block; margin-top:6px; color:rgba(223,231,255,.68); font-size:12px; font-weight:500; letter-spacing:0; }
-    .calendar-strip { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:8px; }
-    .calendar-chip { min-height:58px; border-radius:16px; display:grid; place-items:center; gap:3px; background:rgba(255,255,255,.09); color:rgba(223,231,255,.72); }
-    .calendar-chip strong { color:#fff; font-size:18px; }
-    .calendar-chip.active { background:rgba(122,162,255,.34); box-shadow:0 12px 36px rgba(122,162,255,.20); }
-    .time-line-card, .category-donut-card { min-height:176px; }
-    .line-chart-svg { width:100%; height:92px; margin-top:12px; overflow:visible; }
+    .calendar-card { min-height:290px; }
+    .calendar-head { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:18px; }
+    .calendar-month-title { flex:1; text-align:center; font-size:24px; line-height:1; font-weight:780; letter-spacing:-.6px; }
+    .calendar-nav { width:34px; height:34px; border-radius:999px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.16); background:rgba(0,0,0,.18); color:#fff; font-size:24px; line-height:1; }
+    .calendar-weekdays { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:6px; color:rgba(255,255,255,.42); font-size:12px; font-weight:700; text-align:center; margin-bottom:10px; }
+    .calendar-month-grid { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:7px 6px; }
+    .calendar-day-cell { height:28px; border-radius:999px; display:grid; place-items:center; color:#fff; font-size:16px; font-weight:650; }
+    .calendar-day-cell.muted { color:rgba(255,255,255,.22); }
+    .calendar-day-cell.active { background:linear-gradient(135deg, #8b5cf6, #6d5dfc); box-shadow:0 10px 28px rgba(139,92,246,.40); }
+    .time-line-card, .category-donut-card { min-height:0; height:210px; }
+    .line-chart-svg { width:100%; height:74px; margin-top:8px; overflow:visible; }
     .line-chart-fill { fill:rgba(122,162,255,.16); }
     .line-chart-path { fill:none; stroke:#77b7ff; stroke-width:4; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 0 10px rgba(119,183,255,.42)); }
     .line-chart-axis { stroke:rgba(255,255,255,.12); stroke-width:1; }
-    .glass-big-number { font-size:28px; line-height:1; margin-top:10px; font-weight:760; letter-spacing:-.8px; }
-    .side-donut-wrap { display:flex; align-items:center; gap:16px; margin-top:14px; }
-    .side-donut { width:96px; height:96px; border-radius:50%; display:grid; place-items:center; background:conic-gradient(#7aa2ff 0% 100%); box-shadow:inset 0 0 0 16px rgba(255,255,255,.09), 0 16px 38px rgba(0,0,0,.24); }
-    .side-donut::after { content:""; width:54px; height:54px; border-radius:50%; background:rgba(16,24,40,.78); border:1px solid rgba(255,255,255,.1); }
+    .glass-big-number { font-size:24px; line-height:1; margin-top:10px; font-weight:760; letter-spacing:-.8px; white-space:nowrap; }
+    .side-donut-wrap { display:flex; align-items:center; gap:8px; margin-top:14px; }
+    .side-donut { width:72px; height:72px; border-radius:50%; display:grid; place-items:center; background:conic-gradient(#7aa2ff 0% 100%); box-shadow:inset 0 0 0 12px rgba(255,255,255,.09), 0 16px 38px rgba(0,0,0,.24); flex:0 0 72px; }
+    .side-donut::after { content:""; width:40px; height:40px; border-radius:50%; background:rgba(16,24,40,.78); border:1px solid rgba(255,255,255,.1); }
     .side-legend { display:grid; gap:7px; flex:1; min-width:0; }
-    .side-legend-row { display:flex; align-items:center; justify-content:space-between; gap:8px; color:rgba(223,231,255,.78); font-size:12px; }
+    .side-legend-row { display:flex; align-items:center; justify-content:space-between; gap:6px; color:rgba(223,231,255,.78); font-size:10px; }
     .side-legend-row span { display:flex; align-items:center; min-width:0; white-space:nowrap; }
     .side-legend-row b { white-space:nowrap; }
     .side-legend-row i { width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:6px; }
@@ -726,6 +727,7 @@ def render_html(history: dict[str, Any]) -> str:
     .priority-card-P1 { background:linear-gradient(135deg, rgba(255,176,77,.10), rgba(255,255,255,.028)); border-color:rgba(255,176,77,.26); }
     .priority-card-P2 { background:linear-gradient(135deg, rgba(122,162,255,.10), rgba(255,255,255,.028)); border-color:rgba(122,162,255,.23); }
     .priority-card-P3 { background:linear-gradient(135deg, rgba(148,163,184,.075), rgba(255,255,255,.024)); border-color:rgba(148,163,184,.18); }
+    .global-glass-surface, .item, .meta-pill, .kpi, .plane-view-toolbar, .priority-lane, .task-card, .insight, .deadline-body, .calendar-day, .task-modal, .field, select, textarea, input:not([type="checkbox"]) { background:linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.055)); border-color:rgba(255,255,255,.18); box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 18px 50px rgba(0,0,0,.30); backdrop-filter:blur(22px) saturate(145%); -webkit-backdrop-filter:blur(22px) saturate(145%); }
     .priority-accent { width:4px; align-self:stretch; border-radius:999px; background:var(--priority-color, #7aa2ff); opacity:.9; }
     .task-card.done { opacity:.58; }
     .task-drag-handle { display:inline-flex; align-items:center; gap:6px; width:max-content; color:#8a8f98; font-size:12px; margin-bottom:8px; cursor:grab; user-select:none; }
@@ -874,7 +876,7 @@ def render_html(history: dict[str, Any]) -> str:
     const priorityLabels = { P0: 'P0 火烧屁股', P1: 'P1 今日必完成', P2: 'P2 常规推进', P3: 'P3 可延后' };
     const priorityStyles = { P0: '#c95d45', P1: '#c49a42', P2: '#4f6f92', P3: '#4f9b72' };
     const categoryColors = { '生活': '#6ee7b7', '工作': '#7aa2ff', '自媒体': '#f472b6' };
-    const urgencyRadius = { P0: 190, P1: 225, P2: 260, P3: 295 };
+    const urgencyRadius = { P0: 220, P1: 270, P2: 325, P3: 370 };
     const overviewEncouragements = ['开启美好的一天吧！', '今天也向前推进一点点。', '保持节奏，把重要的事做漂亮。', '灵感在线，稳稳推进。'];
     const taskCategories = ['生活', '工作', '自媒体'];
     const statusLabels = { todo: '待办', doing: '进行中', waiting: '等待中', blocked: '阻塞中', done: '已完成' };
@@ -1315,7 +1317,7 @@ def render_html(history: dict[str, Any]) -> str:
       const baseAngles = [-150, -28, 150, 28, -96, 96, -178, 2, -62, 62];
       const angle = (baseAngles[index] ?? ((index * 137.5) % 360 - 180)) * Math.PI / 180;
       return {
-        x: Math.round(Math.cos(angle) * radius * 0.55),
+        x: Math.round(Math.cos(angle) * radius * 0.62),
         y: Math.round(Math.sin(angle) * radius * 0.68),
       };
     }
@@ -1366,19 +1368,25 @@ def render_html(history: dict[str, Any]) -> str:
 
     function renderOverviewCalendar() {
       const base = today?.date || new Date().toISOString().slice(0, 10);
-      const activeDay = Number(base.slice(8, 10));
-      const monthText = new Date(`${base}T00:00:00`).toLocaleDateString('zh-CN', { month: 'long', day: 'numeric' });
-      const week = Array.from({length: 7}, (_, index) => addDays(base, index - 3));
+      const [year, month, activeDay] = base.split('-').map(Number);
+      const monthStart = new Date(Date.UTC(year, month - 1, 1));
+      const startOffset = (monthStart.getUTCDay() + 6) % 7;
+      const gridStart = new Date(Date.UTC(year, month - 1, 1 - startOffset));
+      const cells = Array.from({length: 35}, (_, index) => {
+        const date = new Date(Date.UTC(gridStart.getUTCFullYear(), gridStart.getUTCMonth(), gridStart.getUTCDate() + index));
+        const dateStr = `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, '0')}-${String(date.getUTCDate()).padStart(2, '0')}`;
+        const inMonth = date.getUTCMonth() === month - 1;
+        const classes = dateStr === base ? 'calendar-day-cell active' : `calendar-day-cell${inMonth ? '' : ' muted'}`;
+        return `<span class="${classes}">${date.getUTCDate()}</span>`;
+      }).join('');
       return `<section class="glass-card calendar-card side-card-wide">
         <div class="calendar-head">
-          <div><h4>日历</h4><div class="glass-subtitle">今天的节奏从这里开始</div></div>
-          <div class="calendar-date">${activeDay}<span>${monthText}</span></div>
+          <span class="calendar-nav" aria-hidden="true">‹</span>
+          <h4 class="calendar-month-title">${year}年${month}月</h4>
+          <span class="calendar-nav" aria-hidden="true">›</span>
         </div>
-        <div class="calendar-strip">${week.map(day => {
-          const date = new Date(`${day}T00:00:00`);
-          const weekday = date.toLocaleDateString('zh-CN', { weekday: 'short' }).replace('周', '');
-          return `<div class="calendar-chip ${day === base ? 'active' : ''}"><span>${weekday}</span><strong>${Number(day.slice(8, 10))}</strong></div>`;
-        }).join('')}</div>
+        <div class="calendar-weekdays"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>
+        <div class="calendar-month-grid">${cells}</div>
       </section>`;
     }
 
