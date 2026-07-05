@@ -120,13 +120,19 @@ def test_tasks_are_color_ranked_draggable_cards_with_progress_slider():
     assert "priority-card-P0" in html
     assert "priority-card-P1" in html
     assert "priority-card-P2" in html
-    assert "task-drag-handle" in html
+    assert "task-drag-zone" in html
+    assert "grip-lines" in html
+    assert html.count("grip-line") >= 3
     assert "draggable=\"true\"" in html
     assert "dragTaskId" in html
     assert "reorderTasks" in html
-    assert "updateTaskProgress" in html
+    assert "previewTaskProgress" in html
+    assert "commitTaskProgress" in html
     assert "progress-slider" in html
     assert "type=\"range\"" in html
+    assert "step=\"1\"" in html
+    assert "oninput=\"previewTaskProgress" in html
+    assert "onchange=\"commitTaskProgress" in html
     assert "0%" in html
     assert "100%" in html
     assert "updateTaskStatus('${task.id}', this.checked" not in html
@@ -143,6 +149,10 @@ def test_dragging_uses_priority_lanes_with_same_priority_and_cross_priority_feed
     assert "同优先级内排序" in html
     assert "松手切换为" in html
     assert "同一优先级可包含多个任务" in html
+    assert "P0 火烧屁股" in html
+    assert "P1 今日必完成" in html
+    assert "P0 最高优先级" not in html
+    assert "P1 高优先级" not in html
     assert "priorityForIndex" not in html
 
 

@@ -664,7 +664,7 @@ def render_html(history: dict[str, Any]) -> str:
     .drop-hint { color:#8a8f98; }
     .priority-lane.drop-same .drop-hint::after { content:' · 松手：同优先级内排序，不变色'; color:#a9c3ff; }
     .priority-lane.drop-cross .drop-hint::after { content:' · 松手切换为此优先级，卡片会变色'; color:#ffd59a; }
-    .task-card { display:grid; grid-template-columns: minmax(0,1fr) minmax(220px,280px); gap:16px; align-items:start; padding:18px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.035); transition:transform .16s ease, border-color .16s ease, background .16s ease; }
+    .task-card { display:grid; grid-template-columns: minmax(240px,1fr) minmax(150px,.9fr) minmax(240px,300px); gap:16px; align-items:stretch; padding:18px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.035); transition:transform .16s ease, border-color .16s ease, background .16s ease; }
     .task-card.dragging { opacity:.55; transform:scale(.995); }
     .priority-card-P0 { background:linear-gradient(135deg, rgba(255,92,92,.17), rgba(255,255,255,.035)); border-color:rgba(255,112,112,.36); }
     .priority-card-P1 { background:linear-gradient(135deg, rgba(255,176,77,.15), rgba(255,255,255,.035)); border-color:rgba(255,176,77,.32); }
@@ -673,6 +673,11 @@ def render_html(history: dict[str, Any]) -> str:
     .task-card.done { opacity:.58; }
     .task-drag-handle { display:inline-flex; align-items:center; gap:6px; width:max-content; color:#8a8f98; font-size:12px; margin-bottom:8px; cursor:grab; user-select:none; }
     .task-drag-handle:active { cursor:grabbing; }
+    .task-drag-zone { min-height:120px; border-radius:14px; display:grid; place-items:center; cursor:grab; user-select:none; border:1px solid transparent; background:rgba(255,255,255,.01); }
+    .task-drag-zone:hover { border-color:rgba(255,255,255,.08); background:rgba(255,255,255,.025); }
+    .task-drag-zone:active { cursor:grabbing; }
+    .grip-lines { display:grid; gap:7px; width:54px; opacity:.75; }
+    .grip-line { height:3px; border-radius:999px; background:rgba(203,213,225,.62); box-shadow:0 0 10px rgba(203,213,225,.08); }
     .task-main strong { display:block; margin-bottom:7px; }
     .task-main p { margin:0; color:var(--muted); line-height:1.6; font-size:13px; }
     .task-meta { display:flex; gap:6px; flex-wrap:wrap; margin-top:9px; }
@@ -906,7 +911,13 @@ def render_html(history: dict[str, Any]) -> str:
       const tasks = loadTasks().map(task => task.id === id ? {...task, status, updatedAt: new Date().toISOString()} : task);
       saveTasks(tasks); renderWorkbench();
     };
-    window.updateTaskProgress = function updateTaskProgress(id, progress) {
+    window.previewTaskProgress = function previewTaskProgress(input) {
+      const value = Math.min(100, Math.max(0, Number(input.value) || 0));
+      const panel = input.closest('.task-progress');
+      const label = panel?.querySelector('.progress-value');
+      if (label) label.textContent = `${value}%`;
+    };
+    window.commitTaskProgress = function commitTaskProgress(id, progress) {
       const value = Math.min(100, Math.max(0, Number(progress) || 0));
       const tasks = loadTasks().map(task => task.id === id ? {
         ...task,
@@ -916,9 +927,10 @@ def render_html(history: dict[str, Any]) -> str:
       } : task);
       saveTasks(tasks); renderWorkbench();
     };
+    window.updateTaskProgress = window.commitTaskProgress;
     let dragTaskId = null;
     let dragSourcePriority = null;
-    const priorityLabels = { P0: 'P0 最高优先级', P1: 'P1 高优先级', P2: 'P2 常规推进', P3: 'P3 可延后' };
+    const priorityLabels = { P0: 'P0 火烧屁股', P1: 'P1 今日必完成', P2: 'P2 常规推进', P3: 'P3 可延后' };
     function clearPriorityDropHints() {
       document.querySelectorAll('.priority-lane').forEach(lane => lane.classList.remove('drop-same', 'drop-cross'));
     }
@@ -1055,7 +1067,6 @@ def render_html(history: dict[str, Any]) -> str:
       return `
         <div class="task-card priority-card-${task.priority} ${task.status === 'done' ? 'done' : ''}" ondragover="markPriorityDrop('${task.priority}', event)" ondrop="reorderTasks('${task.id}', '${task.priority}', event)">
           <div class="task-main">
-            <span class="task-drag-handle" draggable="true" ondragstart="beginTaskDrag('${task.id}', '${task.priority}', event)" ondragend="endTaskDrag(event)">↕ 拖动手柄</span>
             <strong>${escapeHtml(task.title)}</strong>
             <p>${escapeHtml(task.description || '暂无描述')}</p>
             <div class="task-meta">
@@ -1066,9 +1077,12 @@ def render_html(history: dict[str, Any]) -> str:
               ${task.focus ? '<span class="badge p-P1">今日重点</span>' : ''}
             </div>
           </div>
+          <div class="task-drag-zone task-drag-handle" draggable="true" ondragstart="beginTaskDrag('${task.id}', '${task.priority}', event)" ondragend="endTaskDrag(event)" aria-label="拖动调整任务顺序或优先级">
+            <div class="grip-lines" aria-hidden="true"><span class="grip-line"></span><span class="grip-line"></span><span class="grip-line"></span></div>
+          </div>
           <div class="task-progress">
             <div class="progress-head"><span>推进程度</span><strong class="progress-value">${task.progress || 0}%</strong></div>
-            <input class="progress-slider" type="range" min="0" max="100" step="5" value="${task.progress || 0}" oninput="updateTaskProgress('${task.id}', this.value)" aria-label="${escapeHtml(task.title)} 推进程度" />
+            <input class="progress-slider" type="range" min="0" max="100" step="1" value="${task.progress || 0}" oninput="previewTaskProgress(this)" onchange="commitTaskProgress('${task.id}', this.value)" aria-label="${escapeHtml(task.title)} 推进程度" />
             <div class="progress-scale"><span>0%</span><span>100%</span></div>
             <div class="task-actions">
               <button class="btn" onclick="toggleTaskFocus('${task.id}')">${task.focus ? '取消重点' : '设为重点'}</button>
@@ -1204,7 +1218,7 @@ def render_html(history: dict[str, Any]) -> str:
             <div class="metric-card"><label>今日活跃</label><strong>${today?.total_active_text || '—'}</strong><p>时间管理板块数据</p></div>
           </div>
         </article>
-        <article class="card span-8 next-fold"><h3 class="section-title">今日重点与待办中心</h3>${renderTasks(tasks)}
+        <article class="card span-12 next-fold"><h3 class="section-title">今日重点与待办中心</h3>${renderTasks(tasks)}
           <button class="add-task-trigger" onclick="openTaskModal()">＋ 新增待办</button>
         </article>
         <div class="task-modal-backdrop" id="taskModal" onclick="if (event.target === this) closeTaskModal()">
