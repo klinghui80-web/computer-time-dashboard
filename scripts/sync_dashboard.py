@@ -657,6 +657,12 @@ def render_html(history: dict[str, Any]) -> str:
     .form-grid .wide { grid-column: span 2; }
     .form-grid label, .review-grid label { display:grid; gap:6px; font-size:12px; color:var(--muted); }
     .task-list { display:grid; gap:14px; }
+    .plane-view-toolbar { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:16px; padding:10px 12px; border:1px solid rgba(255,255,255,.07); border-radius:16px; background:rgba(255,255,255,.025); }
+    .view-title { display:flex; align-items:center; gap:10px; color:#f7f8f8; font-weight:650; letter-spacing:-.18px; }
+    .view-title .view-icon { width:30px; height:30px; display:grid; place-items:center; border-radius:9px; background:rgba(122,162,255,.12); border:1px solid rgba(122,162,255,.22); color:#a9c3ff; }
+    .view-chips { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+    .view-chip { border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.03); color:#8a8f98; border-radius:9px; padding:7px 10px; font-size:12px; }
+    .view-chip.active { color:#f7f8f8; background:rgba(122,162,255,.14); border-color:rgba(122,162,255,.4); }
     .priority-lane { display:grid; gap:10px; border:1px solid rgba(255,255,255,.06); border-radius:20px; padding:12px; background:rgba(255,255,255,.018); }
     .priority-lane.drop-same { border-color:rgba(122,162,255,.55); background:rgba(122,162,255,.06); }
     .priority-lane.drop-cross { border-color:rgba(255,176,77,.55); background:rgba(255,176,77,.055); }
@@ -664,12 +670,13 @@ def render_html(history: dict[str, Any]) -> str:
     .priority-lane-head strong { font-size:15px; color:#f7f8f8; letter-spacing:-.18px; }
     .priority-lane.drop-same .priority-lane-head::after { content:'松手：同优先级内排序，不变色'; color:#a9c3ff; margin-left:auto; font-size:12px; }
     .priority-lane.drop-cross .priority-lane-head::after { content:'松手切换到该优先级，卡片会变色'; color:#ffd59a; margin-left:auto; font-size:12px; }
-    .task-card { display:grid; grid-template-columns: 52px minmax(260px,1fr) minmax(100px,.45fr) minmax(300px,360px); gap:16px; align-items:center; padding:20px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.035); transition:transform .16s ease, border-color .16s ease, background .16s ease; }
+    .task-card { display:grid; grid-template-columns: 4px 52px minmax(260px,1fr) minmax(100px,.45fr) minmax(300px,360px); gap:16px; align-items:center; padding:20px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.035); transition:transform .16s ease, border-color .16s ease, background .16s ease; }
     .task-card.dragging { opacity:.55; transform:scale(.995); }
-    .priority-card-P0 { background:linear-gradient(135deg, rgba(255,92,92,.17), rgba(255,255,255,.035)); border-color:rgba(255,112,112,.36); }
-    .priority-card-P1 { background:linear-gradient(135deg, rgba(255,176,77,.15), rgba(255,255,255,.035)); border-color:rgba(255,176,77,.32); }
-    .priority-card-P2 { background:linear-gradient(135deg, rgba(122,162,255,.14), rgba(255,255,255,.035)); border-color:rgba(122,162,255,.28); }
-    .priority-card-P3 { background:linear-gradient(135deg, rgba(148,163,184,.10), rgba(255,255,255,.03)); border-color:rgba(148,163,184,.22); }
+    .priority-card-P0 { background:linear-gradient(135deg, rgba(255,92,92,.11), rgba(255,255,255,.028)); border-color:rgba(255,112,112,.28); }
+    .priority-card-P1 { background:linear-gradient(135deg, rgba(255,176,77,.10), rgba(255,255,255,.028)); border-color:rgba(255,176,77,.26); }
+    .priority-card-P2 { background:linear-gradient(135deg, rgba(122,162,255,.10), rgba(255,255,255,.028)); border-color:rgba(122,162,255,.23); }
+    .priority-card-P3 { background:linear-gradient(135deg, rgba(148,163,184,.075), rgba(255,255,255,.024)); border-color:rgba(148,163,184,.18); }
+    .priority-accent { width:4px; align-self:stretch; border-radius:999px; background:var(--priority-color, #7aa2ff); opacity:.9; }
     .task-card.done { opacity:.58; }
     .task-drag-handle { display:inline-flex; align-items:center; gap:6px; width:max-content; color:#8a8f98; font-size:12px; margin-bottom:8px; cursor:grab; user-select:none; }
     .task-drag-handle:active { cursor:grabbing; }
@@ -678,14 +685,17 @@ def render_html(history: dict[str, Any]) -> str:
     .grip-lines { display:grid; gap:7px; width:54px; opacity:.75; }
     .grip-line { height:3px; border-radius:999px; background:rgba(203,213,225,.62); box-shadow:0 0 10px rgba(203,213,225,.08); }
     .task-edit-cell { display:grid; place-items:start center; align-self:stretch; padding-top:2px; }
-    .task-main h4 { margin:0 0 10px; color:#f7f8f8; font-size:23px; line-height:1.2; letter-spacing:-.32px; font-weight:650; }
+    .task-title-row { display:flex; align-items:center; gap:10px; margin-bottom:9px; }
+    .work-item-key { font-family:'JetBrains Mono', ui-monospace, monospace; font-size:12px; color:#8a8f98; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.03); border-radius:8px; padding:4px 7px; white-space:nowrap; }
+    .task-main h4 { margin:0; color:#f7f8f8; font-size:23px; line-height:1.2; letter-spacing:-.32px; font-weight:650; }
     .task-main p { margin:0; color:#a9c3ff; line-height:1.55; font-size:15px; max-width:68ch; }
     .task-meta { display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; }
-    .task-category { font-size:12px; padding:7px 11px; color:#dfe7ff; background:rgba(255,255,255,.055); }
+    .property-pill, .task-category { font-size:12px; padding:7px 11px; color:#dfe7ff; background:rgba(255,255,255,.055); }
     .task-progress { display:grid; gap:14px; justify-items:stretch; }
     .progress-head { display:flex; align-items:center; justify-content:space-between; gap:12px; color:#d0d6e0; font-size:15px; }
     .progress-value { font-family:'JetBrains Mono', ui-monospace, monospace; color:#f7f8f8; }
-    .progress-slider { width:100%; height:34px; accent-color:#7aa2ff; cursor:pointer; }
+    .progress-track { height:6px; border-radius:999px; background:linear-gradient(90deg, #7aa2ff var(--progress, 0%), rgba(255,255,255,.18) var(--progress, 0%)); box-shadow:inset 0 0 0 1px rgba(255,255,255,.04); }
+    .progress-slider { width:100%; height:34px; accent-color:#7aa2ff; cursor:pointer; background:linear-gradient(90deg, #7aa2ff var(--progress, 0%), rgba(255,255,255,.18) var(--progress, 0%)); border-radius:999px; }
     .progress-slider::-webkit-slider-thumb { width:30px; height:30px; }
     .progress-slider::-moz-range-thumb { width:30px; height:30px; border-radius:50%; }
     .progress-scale { display:flex; justify-content:space-between; color:#62666d; font-size:12px; font-family:'JetBrains Mono', ui-monospace, monospace; }
@@ -945,6 +955,8 @@ def render_html(history: dict[str, Any]) -> str:
       const panel = input.closest('.task-progress');
       const label = panel?.querySelector('.progress-value');
       if (label) label.textContent = `${value}%`;
+      input.style.setProperty('--progress', `${value}%`);
+      panel?.querySelector('.progress-track')?.style.setProperty('--progress', `${value}%`);
     };
     window.commitTaskProgress = function commitTaskProgress(id, progress) {
       const value = Math.min(100, Math.max(0, Number(progress) || 0));
@@ -1093,25 +1105,29 @@ def render_html(history: dict[str, Any]) -> str:
     }
 
     function renderTaskCard(task, index) {
+      const workItemKey = `PWB-${String(index + 1).padStart(3, '0')}`;
+      const progress = Math.min(100, Math.max(0, Number(task.progress) || 0));
       return `
-        <div class="task-card priority-card-${task.priority} ${task.status === 'done' ? 'done' : ''}" ondragover="markPriorityDrop('${task.priority}', event)" ondrop="reorderTasks('${task.id}', '${task.priority}', event)">
+        <div class="task-card priority-card-${task.priority} ${task.status === 'done' ? 'done' : ''}" style="--priority-color:${priorityStyles[task.priority] || '#7aa2ff'}" ondragover="markPriorityDrop('${task.priority}', event)" ondrop="reorderTasks('${task.id}', '${task.priority}', event)">
+          <div class="priority-accent" aria-hidden="true"></div>
           <div class="task-edit-cell">
             <button class="edit-task-btn" onclick="openTaskModal('${task.id}')" aria-label="编辑 ${escapeHtml(task.title)}">✎</button>
           </div>
           <div class="task-main">
-            <h4>${escapeHtml(task.title)}</h4>
+            <div class="task-title-row"><span class="work-item-key">${workItemKey}</span><h4>${escapeHtml(task.title)}</h4></div>
             <p>${escapeHtml(task.description || '暂无描述')}</p>
             <div class="task-meta">
-              <span class="badge task-category">${escapeHtml(task.category || '工作')}</span>
-              ${task.due ? `<span class="badge">截止 ${escapeHtml(task.due)}</span>` : ''}
+              <span class="badge property-pill task-category">${escapeHtml(task.category || '工作')}</span>
+              ${task.due ? `<span class="badge property-pill">截止 ${escapeHtml(task.due)}</span>` : ''}
             </div>
           </div>
           <div class="task-drag-zone task-drag-handle" draggable="true" ondragstart="beginTaskDrag('${task.id}', '${task.priority}', event)" ondragend="endTaskDrag(event)" aria-label="拖动调整任务顺序或优先级">
             <div class="grip-lines" aria-hidden="true"><span class="grip-line"></span><span class="grip-line"></span><span class="grip-line"></span></div>
           </div>
           <div class="task-progress">
-            <div class="progress-head"><span>推进程度</span><strong class="progress-value">${task.progress || 0}%</strong></div>
-            <input class="progress-slider" type="range" min="0" max="100" step="1" value="${task.progress || 0}" oninput="previewTaskProgress(this)" onchange="commitTaskProgress('${task.id}', this.value)" aria-label="${escapeHtml(task.title)} 推进程度" />
+            <div class="progress-head"><span>推进程度</span><strong class="progress-value">${progress}%</strong></div>
+            <div class="progress-track" style="--progress:${task.progress || 0}%"></div>
+            <input class="progress-slider" type="range" min="0" max="100" step="1" value="${progress}" style="--progress:${task.progress || 0}%" oninput="previewTaskProgress(this)" onchange="commitTaskProgress('${task.id}', this.value)" aria-label="${escapeHtml(task.title)} 推进程度" />
             <div class="progress-scale"><span>0%</span><span>100%</span></div>
           </div>
         </div>`;
@@ -1119,15 +1135,25 @@ def render_html(history: dict[str, Any]) -> str:
 
     function renderTasks(tasks) {
       const sorted = sortTasksForDisplay(tasks);
-      if (!sorted.length) return '<div class="empty">暂无待办。先添加今天要推进的事项。</div>';
       const priorities = ['P0', 'P1', 'P2', 'P3'];
-      return `<div class="task-list">${priorities.map(priority => {
+      const toolbar = `<div class="plane-view-toolbar">
+        <div class="view-title"><span class="view-icon">▦</span><span>工作项视图</span><small>${sorted.length} 个待推进项</small></div>
+        <div class="view-chips">
+          <span class="view-chip active">按优先级</span>
+          <span class="view-chip">生活</span>
+          <span class="view-chip">工作</span>
+          <span class="view-chip">自媒体</span>
+        </div>
+      </div>`;
+      if (!sorted.length) return `${toolbar}<div class="empty">暂无待办。先添加今天要推进的事项。</div>`;
+      const sequenceById = new Map(sorted.map((task, index) => [task.id, index]));
+      return `${toolbar}<div class="task-list">${priorities.map(priority => {
         const group = sorted.filter(task => task.priority === priority);
         return `<section class="priority-lane priority-card-${priority}" ondragover="markPriorityDrop('${priority}', event)" ondrop="dropPriorityLane('${priority}', event)">
           <div class="priority-lane-head">
             <strong>${priorityLabels[priority]} · ${group.length} 项</strong>
           </div>
-          ${group.length ? group.map((task, index) => renderTaskCard(task, index)).join('') : '<div class="empty">拖到这里可切换为该优先级。</div>'}
+          ${group.length ? group.map(task => renderTaskCard(task, sequenceById.get(task.id) || 0)).join('') : '<div class="empty">拖到这里可切换为该优先级。</div>'}
         </section>`;
       }).join('')}</div>`;
     }

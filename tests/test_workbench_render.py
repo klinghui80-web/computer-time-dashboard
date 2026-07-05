@@ -158,6 +158,16 @@ def test_tasks_are_color_ranked_draggable_cards_with_progress_slider():
     assert ".progress-slider { width:100%; height:34px;" in html
     assert ".progress-slider::-webkit-slider-thumb { width:30px; height:30px;" in html
     assert ".task-modal { width:min(980px, 100%);" in html
+    assert "plane-view-toolbar" in html
+    assert "工作项视图" in html
+    assert "view-chip active" in html
+    assert "PWB-${String(index + 1).padStart(3, '0')}" in html
+    assert "work-item-key" in html
+    assert "property-pill" in html
+    assert "progress-track" in html
+    assert "--progress:${task.progress || 0}%" in html
+    assert "input.style.setProperty('--progress'" in html
+    assert "priority-accent" in html
 
 
 def test_workbench_overview_is_priority_based_not_status_or_focus_based():
