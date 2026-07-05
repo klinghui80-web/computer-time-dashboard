@@ -145,6 +145,19 @@ def test_tasks_are_color_ranked_draggable_cards_with_progress_slider():
     assert "toggleTaskFocus" not in html
     assert "edit-task-btn" in html
     assert "openTaskModal('${task.id}')" in html
+    assert "task-edit-cell" in html
+    assert "task-main h4" in html
+    assert "task-category" in html
+    assert "生活" in html
+    assert "工作" in html
+    assert "自媒体" in html
+    assert "task.project || '未归属'" not in html
+    assert "taskProject" not in html
+    assert "同一优先级可包含多个任务" not in html
+    assert "drop-hint" not in html
+    assert ".progress-slider { width:100%; height:34px;" in html
+    assert ".progress-slider::-webkit-slider-thumb { width:30px; height:30px;" in html
+    assert ".task-modal { width:min(980px, 100%);" in html
 
 
 def test_workbench_overview_is_priority_based_not_status_or_focus_based():
@@ -170,8 +183,8 @@ def test_dragging_uses_priority_lanes_with_same_priority_and_cross_priority_feed
     assert "dropPriorityLane" in html
     assert "dragSourcePriority" in html
     assert "同优先级内排序" in html
-    assert "松手切换为" in html
-    assert "同一优先级可包含多个任务" in html
+    assert "松手切换" in html
+    assert "同一优先级可包含多个任务" not in html
     assert "P0 火烧屁股" in html
     assert "P1 今日必完成" in html
     assert "P0 最高优先级" not in html

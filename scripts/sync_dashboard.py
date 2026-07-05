@@ -653,18 +653,18 @@ def render_html(history: dict[str, Any]) -> str:
     input[type="checkbox"] { accent-color:#7170ff; width:16px; height:16px; margin-top:4px; }
     textarea { min-height:86px; resize:vertical; line-height:1.6; }
     .form-grid { display:grid; grid-template-columns: 1.2fr .55fr .55fr .7fr; gap:10px; align-items:end; }
+    .task-modal .form-grid { grid-template-columns:1.3fr .65fr .65fr .75fr; gap:14px; }
     .form-grid .wide { grid-column: span 2; }
     .form-grid label, .review-grid label { display:grid; gap:6px; font-size:12px; color:var(--muted); }
     .task-list { display:grid; gap:14px; }
     .priority-lane { display:grid; gap:10px; border:1px solid rgba(255,255,255,.06); border-radius:20px; padding:12px; background:rgba(255,255,255,.018); }
     .priority-lane.drop-same { border-color:rgba(122,162,255,.55); background:rgba(122,162,255,.06); }
     .priority-lane.drop-cross { border-color:rgba(255,176,77,.55); background:rgba(255,176,77,.055); }
-    .priority-lane-head { display:flex; justify-content:space-between; align-items:center; gap:12px; color:#d0d6e0; font-size:12px; }
-    .priority-lane-head strong { font-size:13px; color:#f7f8f8; }
-    .drop-hint { color:#8a8f98; }
-    .priority-lane.drop-same .drop-hint::after { content:' · 松手：同优先级内排序，不变色'; color:#a9c3ff; }
-    .priority-lane.drop-cross .drop-hint::after { content:' · 松手切换为此优先级，卡片会变色'; color:#ffd59a; }
-    .task-card { display:grid; grid-template-columns: minmax(240px,1fr) minmax(240px,1.1fr) minmax(260px,320px); gap:16px; align-items:stretch; padding:18px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.035); transition:transform .16s ease, border-color .16s ease, background .16s ease; }
+    .priority-lane-head { display:flex; align-items:center; gap:12px; color:#d0d6e0; font-size:12px; }
+    .priority-lane-head strong { font-size:15px; color:#f7f8f8; letter-spacing:-.18px; }
+    .priority-lane.drop-same .priority-lane-head::after { content:'松手：同优先级内排序，不变色'; color:#a9c3ff; margin-left:auto; font-size:12px; }
+    .priority-lane.drop-cross .priority-lane-head::after { content:'松手切换到该优先级，卡片会变色'; color:#ffd59a; margin-left:auto; font-size:12px; }
+    .task-card { display:grid; grid-template-columns: 52px minmax(260px,1fr) minmax(100px,.45fr) minmax(300px,360px); gap:16px; align-items:center; padding:20px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.035); transition:transform .16s ease, border-color .16s ease, background .16s ease; }
     .task-card.dragging { opacity:.55; transform:scale(.995); }
     .priority-card-P0 { background:linear-gradient(135deg, rgba(255,92,92,.17), rgba(255,255,255,.035)); border-color:rgba(255,112,112,.36); }
     .priority-card-P1 { background:linear-gradient(135deg, rgba(255,176,77,.15), rgba(255,255,255,.035)); border-color:rgba(255,176,77,.32); }
@@ -677,18 +677,19 @@ def render_html(history: dict[str, Any]) -> str:
     .task-drag-zone:active { cursor:grabbing; }
     .grip-lines { display:grid; gap:7px; width:54px; opacity:.75; }
     .grip-line { height:3px; border-radius:999px; background:rgba(203,213,225,.62); box-shadow:0 0 10px rgba(203,213,225,.08); }
-    .task-main strong { display:block; margin-bottom:7px; }
-    .task-main p { margin:0; color:var(--muted); line-height:1.6; font-size:13px; }
-    .task-meta { display:flex; gap:6px; flex-wrap:wrap; margin-top:9px; }
-    .task-progress { display:grid; gap:10px; justify-items:stretch; }
-    .progress-head { display:flex; align-items:center; justify-content:space-between; gap:10px; color:#d0d6e0; font-size:13px; }
+    .task-edit-cell { display:grid; place-items:start center; align-self:stretch; padding-top:2px; }
+    .task-main h4 { margin:0 0 10px; color:#f7f8f8; font-size:23px; line-height:1.2; letter-spacing:-.32px; font-weight:650; }
+    .task-main p { margin:0; color:#a9c3ff; line-height:1.55; font-size:15px; max-width:68ch; }
+    .task-meta { display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; }
+    .task-category { font-size:12px; padding:7px 11px; color:#dfe7ff; background:rgba(255,255,255,.055); }
+    .task-progress { display:grid; gap:14px; justify-items:stretch; }
+    .progress-head { display:flex; align-items:center; justify-content:space-between; gap:12px; color:#d0d6e0; font-size:15px; }
     .progress-value { font-family:'JetBrains Mono', ui-monospace, monospace; color:#f7f8f8; }
-    .progress-slider { width:100%; accent-color:#7aa2ff; cursor:pointer; }
-    .progress-slider::-webkit-slider-thumb { width:22px; height:22px; }
-    .progress-slider::-moz-range-thumb { width:22px; height:22px; border-radius:50%; }
-    .progress-scale { display:flex; justify-content:space-between; color:#62666d; font-size:11px; font-family:'JetBrains Mono', ui-monospace, monospace; }
-    .task-actions { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
-    .edit-task-btn { width:38px; height:38px; border-radius:999px; border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.04); color:#dfe7ff; cursor:pointer; font-size:17px; }
+    .progress-slider { width:100%; height:34px; accent-color:#7aa2ff; cursor:pointer; }
+    .progress-slider::-webkit-slider-thumb { width:30px; height:30px; }
+    .progress-slider::-moz-range-thumb { width:30px; height:30px; border-radius:50%; }
+    .progress-scale { display:flex; justify-content:space-between; color:#62666d; font-size:12px; font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .edit-task-btn { width:46px; height:46px; border-radius:999px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.055); color:#dfe7ff; cursor:pointer; font-size:18px; }
     .badge { display:inline-flex; align-items:center; gap:5px; border-radius:999px; padding:5px 8px; font-size:11px; color:#d0d6e0; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.035); }
     .p-P0 { color:#ffb4b4; border-color:rgba(255,125,125,.35); }
     .p-P1 { color:#ffd59a; border-color:rgba(255,169,64,.35); }
@@ -697,7 +698,7 @@ def render_html(history: dict[str, Any]) -> str:
     .add-task-trigger { width:100%; margin-top:14px; padding:16px; border-radius:16px; border:1px dashed rgba(122,162,255,.45); background:rgba(122,162,255,.08); color:#dfe7ff; font-weight:600; cursor:pointer; }
     .task-modal-backdrop { position:fixed; inset:0; z-index:20; display:none; place-items:center; padding:24px; background:rgba(0,0,0,.62); backdrop-filter: blur(10px); }
     .task-modal-backdrop.open { display:grid; }
-    .task-modal { width:min(760px, 100%); border:1px solid rgba(255,255,255,.12); border-radius:24px; background:#0f1728; box-shadow:0 24px 90px rgba(0,0,0,.45); padding:22px; }
+    .task-modal { width:min(980px, 100%); border:1px solid rgba(255,255,255,.12); border-radius:28px; background:#0f1728; box-shadow:0 24px 90px rgba(0,0,0,.45); padding:30px; }
     .task-modal-head { display:flex; align-items:start; justify-content:space-between; gap:14px; margin-bottom:16px; }
     .task-modal-head h3 { margin:0 0 6px; }
     .task-modal-head p { margin:0; color:var(--muted); line-height:1.6; }
@@ -805,6 +806,7 @@ def render_html(history: dict[str, Any]) -> str:
     const priorityRank = { P0: 0, P1: 1, P2: 2, P3: 3 };
     const priorityLabels = { P0: 'P0 火烧屁股', P1: 'P1 今日必完成', P2: 'P2 常规推进', P3: 'P3 可延后' };
     const priorityStyles = { P0: '#c95d45', P1: '#c49a42', P2: '#4f6f92', P3: '#4f9b72' };
+    const taskCategories = ['生活', '工作', '自媒体'];
     const statusLabels = { todo: '待办', doing: '进行中', waiting: '等待中', blocked: '阻塞中', done: '已完成' };
     const statusStyles = {
       urgent: { label: '紧急', color: '#c95d45' },
@@ -822,12 +824,20 @@ def render_html(history: dict[str, Any]) -> str:
     const writeLocal = (key, value) => localStorage.setItem(key, JSON.stringify(value));
     const uid = () => `task_${Date.now()}_${Math.random().toString(16).slice(2)}`;
 
+    function inferTaskCategory(task) {
+      if (taskCategories.includes(task.category)) return task.category;
+      const text = `${task.project || ''} ${task.title || ''} ${task.description || ''}`;
+      if (/自媒体|内容|视频|小红书|公众号|抖音|B站/i.test(text)) return '自媒体';
+      if (/生活|复盘|健康|家庭|个人/i.test(text)) return '生活';
+      return '工作';
+    }
     function normalizeTask(task, index) {
       const progress = Number.isFinite(Number(task.progress)) ? Math.min(100, Math.max(0, Number(task.progress))) : (task.status === 'done' ? 100 : 0);
       return {
         ...task,
         order: Number.isFinite(Number(task.order)) ? Number(task.order) : index,
         priority: task.priority || 'P3',
+        category: inferTaskCategory(task),
         progress,
         status: progress >= 100 ? 'done' : (task.status === 'done' ? 'doing' : (task.status || 'todo')),
       };
@@ -836,9 +846,9 @@ def render_html(history: dict[str, Any]) -> str:
       const saved = readLocal(WORKBENCH_TASK_KEY, null);
       if (saved && Array.isArray(saved)) return saved.map(normalizeTask);
       const defaults = [
-        { id: uid(), title: '确认个人工作台首页结构', description: '根据实际使用反馈调整今日总览、待办和复盘区块。', priority: 'P1', status: 'doing', progress: 45, order: 1, project: '个人工作台', due: today?.date || '', focus: true, createdAt: new Date().toISOString() },
-        { id: uid(), title: '晚上填写今日复盘', description: '记录完成事项、推进情况、阻塞和明日下一步。', priority: 'P0', status: 'todo', progress: 15, order: 0, project: '每日复盘', due: today?.date || '', focus: true, createdAt: new Date().toISOString() },
-        { id: uid(), title: '观察 19:30 飞书自动推送', description: '时间管理自动化保持不动，只观察是否稳定到达。', priority: 'P2', status: 'waiting', progress: 20, order: 2, project: '时间管理', due: today?.date || '', focus: false, createdAt: new Date().toISOString() },
+        { id: uid(), title: '确认个人工作台首页结构', description: '根据实际使用反馈调整今日总览、待办和复盘区块。', priority: 'P1', status: 'doing', progress: 45, order: 1, category: '工作', due: today?.date || '', focus: true, createdAt: new Date().toISOString() },
+        { id: uid(), title: '晚上填写今日复盘', description: '记录完成事项、推进情况、阻塞和明日下一步。', priority: 'P0', status: 'todo', progress: 15, order: 0, category: '生活', due: today?.date || '', focus: true, createdAt: new Date().toISOString() },
+        { id: uid(), title: '观察 19:30 飞书自动推送', description: '时间管理自动化保持不动，只观察是否稳定到达。', priority: 'P2', status: 'waiting', progress: 20, order: 2, category: '工作', due: today?.date || '', focus: false, createdAt: new Date().toISOString() },
       ].map(normalizeTask);
       writeLocal(WORKBENCH_TASK_KEY, defaults);
       return defaults;
@@ -890,7 +900,7 @@ def render_html(history: dict[str, Any]) -> str:
         description: document.getElementById('taskDescription').value.trim(),
         priority,
         order: existing?.priority === priority ? existing.order : nextOrder,
-        project: document.getElementById('taskProject').value.trim() || '未归属',
+        category: document.getElementById('taskCategory').value,
         due: document.getElementById('taskDue').value,
         updatedAt: new Date().toISOString(),
       };
@@ -916,8 +926,8 @@ def render_html(history: dict[str, Any]) -> str:
       const setValue = (field, value) => { const node = document.getElementById(field); if (node) node.value = value || ''; };
       setValue('taskTitle', task?.title || '');
       setValue('taskPriority', task?.priority || 'P1');
+      setValue('taskCategory', task?.category || '工作');
       setValue('taskDue', task?.due || today?.date || '');
-      setValue('taskProject', task?.project || '个人工作台');
       setValue('taskDescription', task?.description || '');
       if (modal) modal.classList.add('open');
     };
@@ -1085,11 +1095,14 @@ def render_html(history: dict[str, Any]) -> str:
     function renderTaskCard(task, index) {
       return `
         <div class="task-card priority-card-${task.priority} ${task.status === 'done' ? 'done' : ''}" ondragover="markPriorityDrop('${task.priority}', event)" ondrop="reorderTasks('${task.id}', '${task.priority}', event)">
+          <div class="task-edit-cell">
+            <button class="edit-task-btn" onclick="openTaskModal('${task.id}')" aria-label="编辑 ${escapeHtml(task.title)}">✎</button>
+          </div>
           <div class="task-main">
-            <strong>${escapeHtml(task.title)}</strong>
+            <h4>${escapeHtml(task.title)}</h4>
             <p>${escapeHtml(task.description || '暂无描述')}</p>
             <div class="task-meta">
-              <span class="badge">${escapeHtml(task.project || '未归属')}</span>
+              <span class="badge task-category">${escapeHtml(task.category || '工作')}</span>
               ${task.due ? `<span class="badge">截止 ${escapeHtml(task.due)}</span>` : ''}
             </div>
           </div>
@@ -1100,9 +1113,6 @@ def render_html(history: dict[str, Any]) -> str:
             <div class="progress-head"><span>推进程度</span><strong class="progress-value">${task.progress || 0}%</strong></div>
             <input class="progress-slider" type="range" min="0" max="100" step="1" value="${task.progress || 0}" oninput="previewTaskProgress(this)" onchange="commitTaskProgress('${task.id}', this.value)" aria-label="${escapeHtml(task.title)} 推进程度" />
             <div class="progress-scale"><span>0%</span><span>100%</span></div>
-            <div class="task-actions">
-              <button class="edit-task-btn" onclick="openTaskModal('${task.id}')" aria-label="编辑 ${escapeHtml(task.title)}">✎</button>
-            </div>
           </div>
         </div>`;
     }
@@ -1116,7 +1126,6 @@ def render_html(history: dict[str, Any]) -> str:
         return `<section class="priority-lane priority-card-${priority}" ondragover="markPriorityDrop('${priority}', event)" ondrop="dropPriorityLane('${priority}', event)">
           <div class="priority-lane-head">
             <strong>${priorityLabels[priority]} · ${group.length} 项</strong>
-            <span class="drop-hint" data-same="松手：同优先级内排序，不变色" data-cross="松手切换为 ${priority}，卡片会变色">同一优先级可包含多个任务</span>
           </div>
           ${group.length ? group.map((task, index) => renderTaskCard(task, index)).join('') : '<div class="empty">拖到这里可切换为该优先级。</div>'}
         </section>`;
@@ -1158,7 +1167,7 @@ def render_html(history: dict[str, Any]) -> str:
           <div class="deadline-body">
             <strong>${escapeHtml(task.title)}</strong>
             <span class="badge p-${task.priority}">${priorityLabels[task.priority]}</span>
-            <span class="badge">${escapeHtml(task.project || '未归属')}</span>
+            <span class="badge">${escapeHtml(task.category || '工作')}</span>
           </div>
         </div>`).join('')}</div>`;
     }
@@ -1243,8 +1252,8 @@ def render_html(history: dict[str, Any]) -> str:
             <div class="form-grid">
               <label>标题<input id="taskTitle" placeholder="例如：完成首页布局" /></label>
               <label>优先级<select id="taskPriority"><option>P0</option><option selected>P1</option><option>P2</option><option>P3</option></select></label>
+              <label>分类<select id="taskCategory"><option>生活</option><option selected>工作</option><option>自媒体</option></select></label>
               <label>截止<input id="taskDue" type="date" value="${today?.date || ''}" /></label>
-              <label>项目<input id="taskProject" placeholder="项目/板块" value="个人工作台" /></label>
               <label class="wide">描述<input id="taskDescription" placeholder="补充下一步动作、验收标准或背景" /></label>
               <div class="toolbar"><button class="btn primary" id="taskModalAction" onclick="addTask()">添加待办</button><button class="btn danger" id="taskModalDelete" onclick="deleteEditingTask()" style="display:none;">删除卡片</button><button class="btn" onclick="closeTaskModal()">取消</button></div>
             </div>
