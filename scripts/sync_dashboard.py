@@ -595,11 +595,17 @@ def render_html(history: dict[str, Any]) -> str:
     .tab { border: 1px solid var(--line); background: transparent; color: var(--text); border-radius: 999px; padding: 8px 12px; cursor: pointer; }
     .tab.active { background: rgba(122,162,255,0.16); border-color: rgba(122,162,255,0.45); }
     .main-layout { display:grid; grid-template-columns:310px minmax(0,1fr); gap:28px; padding:28px; align-items:start; }
+    body[data-mode="overview"] .history-rail { display:none; }
+    body[data-mode="overview"] .main-layout { grid-template-columns:minmax(0,1fr); }
     body[data-mode="workbench"] .history-rail { display:none; }
     body[data-mode="workbench"] .main-layout { grid-template-columns:minmax(0,1fr); }
     .history-rail { position:sticky; top:86px; max-height:calc(100vh - 110px); overflow:auto; padding:0; min-width:0; }
     .list { display: none; gap: 10px; flex-direction: column; }
     .list.active { display: flex; }
+    .time-mode-switch { display:none; gap:8px; margin-bottom:12px; }
+    .time-mode-switch.active { display:flex; }
+    .time-section-button { flex:1; border:1px solid var(--line); background:rgba(255,255,255,.035); color:var(--muted); border-radius:999px; padding:8px 10px; cursor:pointer; }
+    .time-section-button.active { color:#fff; border-color:rgba(122,162,255,.45); background:rgba(122,162,255,.16); }
     .item { width: 100%; text-align: left; background: var(--panel-2); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; color: var(--text); cursor: pointer; }
     .item strong { display: block; font-size: 14px; }
     .item small { display: block; color: var(--muted); margin-top: 6px; line-height: 1.6; }
@@ -844,7 +850,7 @@ def render_html(history: dict[str, Any]) -> str:
     }
   </style>
 </head>
-<body data-mode="workbench">
+<body data-mode="overview">
   <div class="shell">
     <header class="top-nav">
       <div class="brand">
@@ -852,9 +858,9 @@ def render_html(history: dict[str, Any]) -> str:
         <p>个人化工作台</p>
       </div>
       <nav class="tabs top-tabs" aria-label="主导航">
-        <button class="tab active" data-tab="workbench">任务面板</button>
-        <button class="tab" data-tab="days">时间与精力</button>
-        <button class="tab" data-tab="weeks">每周</button>
+        <button class="tab active" data-tab="overview">总览</button>
+        <button class="tab" data-tab="workbench">任务面板</button>
+        <button class="tab" data-tab="days">时间/精力管理</button>
       </nav>
       <div class="top-meta">
         <div class="meta-pill" id="generatedMeta"></div>
@@ -863,6 +869,7 @@ def render_html(history: dict[str, Any]) -> str:
     </header>
     <div class="main-layout" id="mainLayout">
       <aside class="history-rail" id="historyRail" aria-hidden="true">
+        <div class="time-mode-switch" id="timeModeSwitch"></div>
         <div class="list" id="dayList"></div>
         <div class="list" id="weekList"></div>
       </aside>
@@ -883,6 +890,7 @@ def render_html(history: dict[str, Any]) -> str:
     const days = [...store.days].filter(day => (day.total_active_seconds || 0) > 0).sort((a, b) => b.date.localeCompare(a.date));
     const weeks = [...store.weeks].filter(week => (week.total_active_seconds || 0) > 0).sort((a, b) => b.end_date.localeCompare(a.end_date));
     const tabs = document.querySelectorAll('.tab');
+    const timeModeSwitch = document.getElementById('timeModeSwitch');
     const dayList = document.getElementById('dayList');
     const weekList = document.getElementById('weekList');
     const title = document.getElementById('title');
@@ -1167,7 +1175,7 @@ def render_html(history: dict[str, Any]) -> str:
     };
 
 
-    let mode = 'workbench';
+    let mode = 'overview';
     let currentKey = days[0]?.date || weeks[0]?.id;
     let deadlineViewMode = localStorage.getItem('deadlineViewMode') || 'list';
     let taskCategoryFilter = localStorage.getItem('taskCategoryFilter') || 'all';
@@ -1179,19 +1187,25 @@ def render_html(history: dict[str, Any]) -> str:
     };
 
     function switchMode(next) {
-      mode = next;
-      document.body.dataset.mode = next;
-      mainLayout.classList.toggle('has-history', next !== 'workbench');
-      historyRail.setAttribute('aria-hidden', String(next === 'workbench'));
-      tabs.forEach(tab => tab.classList.toggle('active', tab.dataset.tab === next));
-      dayList.classList.toggle('active', next === 'days');
-      weekList.classList.toggle('active', next === 'weeks');
-      currentKey = next === 'days' ? (days[0]?.date) : (next === 'weeks' ? weeks[0]?.id : days[0]?.date);
+      mode = next === 'weeks' ? 'weeks' : (next === 'days' ? 'days' : (next === 'workbench' ? 'workbench' : 'overview'));
+      document.body.dataset.mode = mode;
+      const showingTimeHistory = mode === 'days' || mode === 'weeks';
+      mainLayout.classList.toggle('has-history', showingTimeHistory);
+      historyRail.setAttribute('aria-hidden', String(!showingTimeHistory));
+      tabs.forEach(tab => tab.classList.toggle('active', tab.dataset.tab === (mode === 'overview' ? 'overview' : (mode === 'workbench' ? 'workbench' : 'days'))));
+      timeModeSwitch.classList.toggle('active', showingTimeHistory);
+      dayList.classList.toggle('active', mode === 'days');
+      weekList.classList.toggle('active', mode === 'weeks');
+      currentKey = mode === 'days' ? (days[0]?.date) : (mode === 'weeks' ? weeks[0]?.id : currentKey);
       renderNav();
       renderContent();
     }
 
     function renderNav() {
+      timeModeSwitch.innerHTML = `
+        <button class="time-section-button ${mode === 'days' ? 'active' : ''}" data-kind="time-section" data-key="days">每天</button>
+        <button class="time-section-button ${mode === 'weeks' ? 'active' : ''}" data-kind="time-section" data-key="weeks">每周</button>
+      `;
       dayList.innerHTML = days.map(day => `
         <button class="item ${currentKey === day.date && mode === 'days' ? 'active' : ''}" data-kind="day" data-key="${day.date}">
           <strong>${day.date} · ${day.weekday}</strong>
@@ -1204,13 +1218,20 @@ def render_html(history: dict[str, Any]) -> str:
           <small>${week.total_active_text} · ${(week.categories || []).slice(0,3).map(c => c.name).join(' / ') || '暂无分类'}</small>
         </button>
       `).join('');
-      document.querySelectorAll('.item').forEach(node => node.onclick = () => {
-        currentKey = node.dataset.key;
-        mode = node.dataset.kind === 'day' ? 'days' : 'weeks';
+      document.querySelectorAll('.item, .time-section-button').forEach(node => node.onclick = () => {
+        if (node.dataset.kind === 'time-section') {
+          mode = node.dataset.key === 'weeks' ? 'weeks' : 'days';
+          currentKey = mode === 'weeks' ? (weeks[0]?.id) : (days[0]?.date);
+        } else {
+          currentKey = node.dataset.key;
+          mode = node.dataset.kind === 'day' ? 'days' : 'weeks';
+        }
         document.body.dataset.mode = mode;
-        mainLayout.classList.toggle('has-history', mode !== 'workbench');
-        historyRail.setAttribute('aria-hidden', String(mode === 'workbench'));
-        tabs.forEach(tab => tab.classList.toggle('active', tab.dataset.tab === mode));
+        const showingTimeHistory = mode === 'days' || mode === 'weeks';
+        mainLayout.classList.toggle('has-history', showingTimeHistory);
+        historyRail.setAttribute('aria-hidden', String(!showingTimeHistory));
+        tabs.forEach(tab => tab.classList.toggle('active', tab.dataset.tab === (mode === 'overview' ? 'overview' : (mode === 'workbench' ? 'workbench' : 'days'))));
+        timeModeSwitch.classList.toggle('active', showingTimeHistory);
         dayList.classList.toggle('active', mode === 'days');
         weekList.classList.toggle('active', mode === 'weeks');
         renderNav();
@@ -1573,6 +1594,21 @@ def render_html(history: dict[str, Any]) -> str:
         </div>`;
     }
 
+    function renderOverview() {
+      const tasks = loadTasks();
+      const stats = taskStats(tasks);
+      title.textContent = '';
+      subtitle.textContent = '';
+      meta.innerHTML = '';
+      content.innerHTML = `
+        <article class="card span-12 overview-first-fold">
+          ${renderOrbitOverview(tasks, stats)}
+        </article>
+        <article class="card span-12 overview-deadline-card"><h3 class="section-title">任务截止时间轴</h3>${renderDeadlineView(tasks)}</article>
+      `;
+      requestAnimationFrame(layoutOrbitOverview);
+    }
+
     function renderWorkbench() {
       const tasks = loadTasks();
       const stats = taskStats(tasks);
@@ -1582,9 +1618,6 @@ def render_html(history: dict[str, Any]) -> str:
       subtitle.textContent = '';
       meta.innerHTML = '';
       content.innerHTML = `
-        <article class="card span-12 overview-first-fold">
-          ${renderOrbitOverview(tasks, stats)}
-        </article>
         <article class="card span-8 next-fold todo-center-card"><h3 class="section-title">待办中心</h3>${renderTasks(tasks)}
           <button class="add-task-trigger" onclick="openTaskModal()">＋ 新增待办</button>
         </article>
@@ -1605,16 +1638,14 @@ def render_html(history: dict[str, Any]) -> str:
           </div>
         </div>
         <article class="card span-4 next-fold task-reminder-card"><h3 class="section-title">任务提醒</h3>${renderTaskReminders(today, tasks, stats)}</article>
-        <article class="card span-12"><h3 class="section-title">任务截止时间轴</h3>${renderDeadlineView(tasks)}</article>
         <article class="card span-6 review-card"><h3 class="section-title">今日复盘</h3>${renderReviewEditor(review)}</article>
         <article class="card span-6 time-preview-card"><h3 class="section-title">时间与精力板块预览</h3><div class="kpis">
           <div class="kpi"><label>总活跃时长</label><strong>${today?.total_active_text || '—'}</strong></div>
           <div class="kpi"><label>主类目</label><strong>${today?.top_categories?.[0] || '—'}</strong></div>
           <div class="kpi"><label>窗口切换</label><strong>${today?.switch_count ?? '—'}</strong></div>
           <div class="kpi"><label>最长专注</label><strong>${today?.longest_focus?.text || '—'}</strong></div>
-        </div><p class="subtle" style="margin-top:14px;">完整时间详情请点击左侧“时间与精力”。每日 19:30 飞书推送逻辑未改动。</p></article>
+        </div><p class="subtle" style="margin-top:14px;">完整时间详情请点击左侧“时间/精力管理”。每日 19:30 飞书推送逻辑未改动。</p></article>
       `;
-      requestAnimationFrame(layoutOrbitOverview);
     }
 
     function renderDay(day) {
@@ -1671,7 +1702,9 @@ def render_html(history: dict[str, Any]) -> str:
     }
 
     function renderContent() {
-      if (mode === 'workbench') {
+      if (mode === 'overview') {
+        renderOverview();
+      } else if (mode === 'workbench') {
         renderWorkbench();
       } else if (mode === 'days') {
         const day = days.find(item => item.date === currentKey) || days[0];
@@ -1684,7 +1717,7 @@ def render_html(history: dict[str, Any]) -> str:
       }
     }
 
-    tabs.forEach(tab => tab.onclick = () => switchMode(tab.dataset.tab));
+    tabs.forEach(tab => tab.onclick = () => tab.dataset.tab === 'days' ? switchMode('days') : switchMode(tab.dataset.tab));
     renderNav();
     renderContent();
   </script>

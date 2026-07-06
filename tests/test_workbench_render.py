@@ -159,7 +159,7 @@ def test_visual_regressions_keep_glass_subtle_priority_colored_orbit_spacious_an
     assert ".span-7, .span-5" in html
 
 
-def test_global_nav_moves_to_top_and_history_lists_stay_left_for_time_modes():
+def test_top_nav_has_overview_task_panel_and_time_energy_management():
     module = load_module()
     html = module.render_html(sample_history())
 
@@ -167,18 +167,53 @@ def test_global_nav_moves_to_top_and_history_lists_stay_left_for_time_modes():
     assert "top-tabs" in html
     assert "history-rail" in html
     assert "main-layout" in html
-    assert "document.body.dataset.mode = next" in html
-    assert "mainLayout.classList.toggle('has-history', next !== 'workbench')" in html
-    assert "historyRail.setAttribute('aria-hidden', String(next === 'workbench'))" in html
-    assert "body[data-mode=\"workbench\"] .history-rail { display:none; }" in html
-    assert "body[data-mode=\"workbench\"] .main-layout { grid-template-columns:minmax(0,1fr); }" in html
+    assert "document.body.dataset.mode = mode" in html
     assert "<aside class=\"sidebar\">" not in html
     assert "首屏只回答一个问题" not in html
     assert "下面再继续处理任务、复盘和时间数据" not in html
-    assert "title.textContent = '总览'" not in html
     assert "<h1>令辉的工作台</h1>" in html
+    assert "data-tab=\"overview\">总览</button>" in html
     assert "data-tab=\"workbench\">任务面板</button>" in html
+    assert "data-tab=\"days\">时间/精力管理</button>" in html
     assert "data-tab=\"workbench\">工作台</button>" not in html
+    assert "data-tab=\"days\">时间与精力</button>" not in html
+    assert "data-tab=\"weeks\">每周</button>" not in html
+    assert "body[data-mode=\"overview\"] .history-rail { display:none; }" in html
+    assert "body[data-mode=\"workbench\"] .history-rail { display:none; }" in html
+
+
+def test_time_weekly_is_nested_under_time_energy_management_left_nav():
+    module = load_module()
+    html = module.render_html(sample_history())
+
+    assert "timeModeSwitch" in html
+    assert "data-kind=\"time-section\" data-key=\"days\"" in html
+    assert "data-kind=\"time-section\" data-key=\"weeks\"" in html
+    assert ">每天</button>" in html
+    assert ">每周</button>" in html
+    assert "tabs.forEach(tab => tab.classList.toggle('active', tab.dataset.tab === (mode === 'overview' ? 'overview' : (mode === 'workbench' ? 'workbench' : 'days'))))" in html
+    assert "if (node.dataset.kind === 'time-section')" in html
+    assert "mode = node.dataset.key === 'weeks' ? 'weeks' : 'days';" in html
+    assert "switchMode('days')" in html
+
+
+def test_overview_top_nav_page_contains_deadline_timeline_not_task_panel():
+    module = load_module()
+    html = module.render_html(sample_history())
+
+    assert "renderOverview" in html
+    assert "overview-deadline-card" in html
+    assert "任务截止时间轴" in html
+    assert "function renderOverview()" in html
+    assert "function renderWorkbench()" in html
+    deadline_article = "<article class=\"card span-12 overview-deadline-card\"><h3 class=\"section-title\">任务截止时间轴</h3>"
+    todo_article = "<article class=\"card span-8 next-fold todo-center-card\"><h3 class=\"section-title\">待办中心</h3>"
+    assert deadline_article in html
+    assert todo_article in html
+    assert html.index(deadline_article) < html.index(todo_article)
+    assert "workbenchList" not in html
+    assert "workbenchSection" not in html
+    assert "data-kind=\"workbench-section\"" not in html
 
 
 def test_workbench_second_fold_pairs_reminders_and_time_preview_on_the_right():
@@ -353,7 +388,9 @@ if __name__ == "__main__":
     test_render_html_contains_editable_task_and_review_controls()
     test_first_screen_is_a_radial_task_orbit_overview_not_a_donut()
     test_visual_regressions_keep_glass_subtle_priority_colored_orbit_spacious_and_weekly_unwarped()
-    test_global_nav_moves_to_top_and_history_lists_stay_left_for_time_modes()
+    test_top_nav_has_overview_task_panel_and_time_energy_management()
+    test_time_weekly_is_nested_under_time_energy_management_left_nav()
+    test_overview_top_nav_page_contains_deadline_timeline_not_task_panel()
     test_workbench_second_fold_pairs_reminders_and_time_preview_on_the_right()
     test_dropdown_menus_keep_options_readable_on_native_light_popups()
     test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda()
