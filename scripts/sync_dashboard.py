@@ -1596,17 +1596,12 @@ def render_html(history: dict[str, Any]) -> str:
 
     function renderOverview() {
       const tasks = loadTasks();
-      const stats = taskStats(tasks);
       title.textContent = '';
       subtitle.textContent = '';
       meta.innerHTML = '';
       content.innerHTML = `
-        <article class="card span-12 overview-first-fold">
-          ${renderOrbitOverview(tasks, stats)}
-        </article>
         <article class="card span-12 overview-deadline-card"><h3 class="section-title">任务截止时间轴</h3>${renderDeadlineView(tasks)}</article>
       `;
-      requestAnimationFrame(layoutOrbitOverview);
     }
 
     function renderWorkbench() {
@@ -1618,6 +1613,9 @@ def render_html(history: dict[str, Any]) -> str:
       subtitle.textContent = '';
       meta.innerHTML = '';
       content.innerHTML = `
+        <article class="card span-12 overview-first-fold">
+          ${renderOrbitOverview(tasks, stats)}
+        </article>
         <article class="card span-8 next-fold todo-center-card"><h3 class="section-title">待办中心</h3>${renderTasks(tasks)}
           <button class="add-task-trigger" onclick="openTaskModal()">＋ 新增待办</button>
         </article>
@@ -1646,6 +1644,7 @@ def render_html(history: dict[str, Any]) -> str:
           <div class="kpi"><label>最长专注</label><strong>${today?.longest_focus?.text || '—'}</strong></div>
         </div><p class="subtle" style="margin-top:14px;">完整时间详情请点击左侧“时间/精力管理”。每日 19:30 飞书推送逻辑未改动。</p></article>
       `;
+      requestAnimationFrame(layoutOrbitOverview);
     }
 
     function renderDay(day) {

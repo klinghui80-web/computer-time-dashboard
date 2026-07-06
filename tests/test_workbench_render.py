@@ -210,13 +210,28 @@ def test_overview_top_nav_page_contains_deadline_timeline_not_task_panel():
     todo_article = "<article class=\"card span-8 next-fold todo-center-card\"><h3 class=\"section-title\">待办中心</h3>"
     assert deadline_article in html
     assert todo_article in html
-    assert html.index(deadline_article) < html.index(todo_article)
+    assert "function renderOverview()" in html
+    assert "function renderWorkbench()" in html
+    render_overview_block = html[html.index("function renderOverview()"):html.index("function renderWorkbench()")]
+    assert "overview-deadline-card" in render_overview_block
+    assert "overview-first-fold" not in render_overview_block
     assert "workbenchList" not in html
     assert "workbenchSection" not in html
     assert "data-kind=\"workbench-section\"" not in html
 
 
-def test_workbench_second_fold_pairs_reminders_and_time_preview_on_the_right():
+def test_workbench_keeps_large_overview_card_in_original_first_position():
+    module = load_module()
+    html = module.render_html(sample_history())
+
+    render_workbench_block = html[html.index("function renderWorkbench()"):html.index("function renderDay(day)")]
+    assert "overview-first-fold" in render_workbench_block
+    assert "${renderOrbitOverview(tasks, stats)}" in render_workbench_block
+    assert render_workbench_block.index("overview-first-fold") < render_workbench_block.index("todo-center-card")
+    assert "overview-deadline-card" not in render_workbench_block
+
+
+def test_workbench_second_fold_pairs_reminders_and_time_preview_on_the_right(): 
     module = load_module()
     html = module.render_html(sample_history())
 
@@ -391,6 +406,7 @@ if __name__ == "__main__":
     test_top_nav_has_overview_task_panel_and_time_energy_management()
     test_time_weekly_is_nested_under_time_energy_management_left_nav()
     test_overview_top_nav_page_contains_deadline_timeline_not_task_panel()
+    test_workbench_keeps_large_overview_card_in_original_first_position()
     test_workbench_second_fold_pairs_reminders_and_time_preview_on_the_right()
     test_dropdown_menus_keep_options_readable_on_native_light_popups()
     test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda()
