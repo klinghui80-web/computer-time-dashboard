@@ -478,7 +478,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-06T18:20:28.242980+08:00"
+      "generated_at": "2026-07-06T18:25:28.649774+08:00"
     },
     {
       "date": "2026-06-23",
@@ -538,7 +538,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-06T18:20:28.226736+08:00"
+      "generated_at": "2026-07-06T18:25:28.649774+08:00"
     },
     {
       "date": "2026-06-24",
@@ -598,7 +598,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-06T18:20:28.226736+08:00"
+      "generated_at": "2026-07-06T18:25:28.649774+08:00"
     },
     {
       "date": "2026-06-25",
@@ -658,7 +658,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-06T18:20:28.226736+08:00"
+      "generated_at": "2026-07-06T18:25:28.649774+08:00"
     },
     {
       "date": "2026-06-26",
@@ -718,7 +718,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-06T18:20:28.226736+08:00"
+      "generated_at": "2026-07-06T18:25:28.649774+08:00"
     },
     {
       "date": "2026-06-27",
@@ -889,7 +889,7 @@
           "text": "3分"
         }
       ],
-      "generated_at": "2026-07-06T18:20:28.226736+08:00"
+      "generated_at": "2026-07-06T18:25:28.648838+08:00"
     },
     {
       "date": "2026-06-28",
@@ -1071,7 +1071,7 @@
           "text": "4分"
         }
       ],
-      "generated_at": "2026-07-06T18:20:28.198862+08:00"
+      "generated_at": "2026-07-06T18:25:28.607054+08:00"
     },
     {
       "date": "2026-06-29",
@@ -1253,7 +1253,7 @@
           "text": "6分"
         }
       ],
-      "generated_at": "2026-07-06T18:20:28.135260+08:00"
+      "generated_at": "2026-07-06T18:25:28.546724+08:00"
     },
     {
       "date": "2026-06-30",
@@ -1438,7 +1438,7 @@
           "text": "19分"
         }
       ],
-      "generated_at": "2026-07-06T18:20:27.957498+08:00"
+      "generated_at": "2026-07-06T18:25:28.375930+08:00"
     },
     {
       "date": "2026-07-01",
@@ -1622,7 +1622,7 @@
           "text": "12分"
         }
       ],
-      "generated_at": "2026-07-06T18:20:27.763205+08:00"
+      "generated_at": "2026-07-06T18:25:28.193851+08:00"
     },
     {
       "date": "2026-07-02",
@@ -1795,7 +1795,7 @@
           "text": "7分"
         }
       ],
-      "generated_at": "2026-07-06T18:20:27.580702+08:00"
+      "generated_at": "2026-07-06T18:25:28.016428+08:00"
     },
     {
       "date": "2026-07-03",
@@ -1977,7 +1977,7 @@
           "text": "6分"
         }
       ],
-      "generated_at": "2026-07-06T18:20:27.442920+08:00"
+      "generated_at": "2026-07-06T18:25:27.877389+08:00"
     },
     {
       "date": "2026-07-04",
@@ -2037,7 +2037,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-06T18:20:27.347053+08:00"
+      "generated_at": "2026-07-06T18:25:27.787096+08:00"
     },
     {
       "date": "2026-07-05",
@@ -2220,13 +2220,13 @@
           "text": "10分"
         }
       ],
-      "generated_at": "2026-07-06T18:20:27.344067+08:00"
+      "generated_at": "2026-07-06T18:25:27.785101+08:00"
     },
     {
       "date": "2026-07-06",
       "weekday": "周一",
-      "total_active_seconds": 27202.23,
-      "total_active_text": "7小时33分",
+      "total_active_seconds": 27425.11,
+      "total_active_text": "7小时37分",
       "top_categories": [
         "沟通",
         "工作/创作",
@@ -2235,19 +2235,19 @@
       "categories": [
         {
           "name": "沟通",
-          "seconds": 8645.42,
-          "share": 0.3178,
+          "seconds": 8726.69,
+          "share": 0.3182,
           "representatives": [
             "Weixin.exe｜微信",
-            "Feishu.exe｜飞书",
-            "WeChatAppEx.exe｜微信"
+            "WeChatAppEx.exe｜微信",
+            "Feishu.exe｜飞书"
           ],
           "color": "#5ad1e6"
         },
         {
           "name": "工作/创作",
           "seconds": 6980.95,
-          "share": 0.2566,
+          "share": 0.2545,
           "representatives": [
             "Hermes.exe｜Hermes",
             "chrome.exe｜ChatGPT - Google Chrome",
@@ -2257,8 +2257,8 @@
         },
         {
           "name": "其他",
-          "seconds": 5902.42,
-          "share": 0.217,
+          "seconds": 6019.26,
+          "share": 0.2195,
           "representatives": [
             "chrome.exe｜Typeless | 实际智能的AI语音听写｜www.typeless.com",
             "chrome.exe｜Wispr Flow | Effortless Voice Dictation｜wisprflow.ai",
@@ -2268,8 +2268,8 @@
         },
         {
           "name": "学习/信息",
-          "seconds": 3433.45,
-          "share": 0.1262,
+          "seconds": 3458.14,
+          "share": 0.1261,
           "representatives": [
             "chrome.exe｜(60) Pinterest - Google Chrome",
             "chrome.exe｜个人工作台 · 时间、任务与复盘 - Google Chrome",
@@ -2280,7 +2280,7 @@
         {
           "name": "设计",
           "seconds": 1290.55,
-          "share": 0.0474,
+          "share": 0.0471,
           "representatives": [
             "Figma.exe｜APP 详情页 - Figma",
             "Figma.exe｜商品图-详情页 - Figma",
@@ -2290,8 +2290,8 @@
         },
         {
           "name": "系统/维护",
-          "seconds": 631.96,
-          "share": 0.0232,
+          "seconds": 632.02,
+          "share": 0.023,
           "representatives": [
             "explorer.exe｜暂时不用 - 文件资源管理器",
             "explorer.exe｜Program Manager",
@@ -2302,7 +2302,7 @@
         {
           "name": "娱乐",
           "seconds": 317.5,
-          "share": 0.0117,
+          "share": 0.0116,
           "representatives": [
             "chrome.exe｜gpt plus免费没有visa卡 - YouTube｜www.youtube.com",
             "steamwebhelper.exe｜登录方面的帮助",
@@ -2311,9 +2311,9 @@
           "color": "#ff7d7d"
         }
       ],
-      "switch_count": 1032,
-      "segment_count": 1305,
-      "summary_line": "这一天共记录 7小时33分 的活跃电脑时间，主轴是“沟通”，切换密度偏高，像是在多线程推进。",
+      "switch_count": 1043,
+      "segment_count": 1317,
+      "summary_line": "这一天共记录 7小时37分 的活跃电脑时间，主轴是“沟通”，切换密度偏高，像是在多线程推进。",
       "notes": [
         "主类目是“沟通”，占比 31.8%，说明当天最主要的电脑注意力投向比较清晰。",
         "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。"
@@ -2331,8 +2331,8 @@
         "recovery_zone": "沟通",
         "confidence": "中",
         "evidence": [
-          "总活跃时长 7小时33分",
-          "窗口切换 1032 次",
+          "总活跃时长 7小时37分",
+          "窗口切换 1043 次",
           "最长连续专注块 17分"
         ]
       },
@@ -2355,7 +2355,7 @@
         "15": 2856.42,
         "16": 3144.65,
         "17": 3002.14,
-        "18": 1081.84,
+        "18": 1304.71,
         "19": 0.0,
         "20": 0.0,
         "21": 0.0,
@@ -2365,8 +2365,8 @@
       "top_activities": [
         {
           "activity": "Weixin.exe｜微信",
-          "seconds": 6832.16,
-          "text": "1小时53分"
+          "seconds": 6862.0,
+          "text": "1小时54分"
         },
         {
           "activity": "Hermes.exe｜Hermes",
@@ -2404,7 +2404,7 @@
           "text": "10分"
         }
       ],
-      "generated_at": "2026-07-06T18:20:27.179698+08:00"
+      "generated_at": "2026-07-06T18:25:27.644736+08:00"
     }
   ],
   "weeks": [
@@ -2457,7 +2457,7 @@
       "notes": [
         "最投入的一天是 2026-06-15，活跃 0秒。"
       ],
-      "generated_at": "2026-07-06T18:20:28.242980+08:00"
+      "generated_at": "2026-07-06T18:25:28.653881+08:00"
     },
     {
       "id": "2026-06-22~2026-06-28",
@@ -2552,7 +2552,7 @@
         "最投入的一天是 2026-06-28，活跃 4小时29分。",
         "前三类目合计占比 78.6%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-06T18:20:28.242980+08:00"
+      "generated_at": "2026-07-06T18:25:28.653881+08:00"
     },
     {
       "id": "2026-06-29~2026-07-05",
@@ -2654,12 +2654,12 @@
         "周末占比 14.9%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 74.0%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-06T18:20:28.243978+08:00"
+      "generated_at": "2026-07-06T18:25:28.653881+08:00"
     }
   ],
   "meta": {
     "db_path": "C:\\Users\\Klh\\AppData\\Local\\activitywatch\\activitywatch\\aw-server\\peewee-sqlite.v2.db",
-    "generated_at": "2026-07-06T18:20:26.885373+08:00",
+    "generated_at": "2026-07-06T18:25:27.376109+08:00",
     "delivery_time": "19:30",
     "timezone": "中国标准时间"
   }
