@@ -598,7 +598,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-08T09:25:46.023145+08:00"
+      "generated_at": "2026-07-08T09:30:47.101344+08:00"
     },
     {
       "date": "2026-06-25",
@@ -658,7 +658,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-08T09:25:46.021718+08:00"
+      "generated_at": "2026-07-08T09:30:47.101344+08:00"
     },
     {
       "date": "2026-06-26",
@@ -718,7 +718,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-08T09:25:46.021718+08:00"
+      "generated_at": "2026-07-08T09:30:47.101344+08:00"
     },
     {
       "date": "2026-06-27",
@@ -889,7 +889,7 @@
           "text": "3分"
         }
       ],
-      "generated_at": "2026-07-08T09:25:46.019697+08:00"
+      "generated_at": "2026-07-08T09:30:47.101344+08:00"
     },
     {
       "date": "2026-06-28",
@@ -1071,7 +1071,7 @@
           "text": "4分"
         }
       ],
-      "generated_at": "2026-07-08T09:25:45.980936+08:00"
+      "generated_at": "2026-07-08T09:30:47.067790+08:00"
     },
     {
       "date": "2026-06-29",
@@ -1253,7 +1253,7 @@
           "text": "6分"
         }
       ],
-      "generated_at": "2026-07-08T09:25:45.914339+08:00"
+      "generated_at": "2026-07-08T09:30:47.004748+08:00"
     },
     {
       "date": "2026-06-30",
@@ -1438,7 +1438,7 @@
           "text": "19分"
         }
       ],
-      "generated_at": "2026-07-08T09:25:45.746492+08:00"
+      "generated_at": "2026-07-08T09:30:46.831685+08:00"
     },
     {
       "date": "2026-07-01",
@@ -1622,7 +1622,7 @@
           "text": "12分"
         }
       ],
-      "generated_at": "2026-07-08T09:25:45.561735+08:00"
+      "generated_at": "2026-07-08T09:30:46.631617+08:00"
     },
     {
       "date": "2026-07-02",
@@ -1795,7 +1795,7 @@
           "text": "7分"
         }
       ],
-      "generated_at": "2026-07-08T09:25:45.379267+08:00"
+      "generated_at": "2026-07-08T09:30:46.448225+08:00"
     },
     {
       "date": "2026-07-03",
@@ -1977,7 +1977,7 @@
           "text": "6分"
         }
       ],
-      "generated_at": "2026-07-08T09:25:45.241545+08:00"
+      "generated_at": "2026-07-08T09:30:46.315827+08:00"
     },
     {
       "date": "2026-07-04",
@@ -2037,7 +2037,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-08T09:25:45.143918+08:00"
+      "generated_at": "2026-07-08T09:30:46.212902+08:00"
     },
     {
       "date": "2026-07-05",
@@ -2220,7 +2220,7 @@
           "text": "10分"
         }
       ],
-      "generated_at": "2026-07-08T09:25:45.141904+08:00"
+      "generated_at": "2026-07-08T09:30:46.210889+08:00"
     },
     {
       "date": "2026-07-06",
@@ -2404,7 +2404,7 @@
           "text": "10分"
         }
       ],
-      "generated_at": "2026-07-08T09:25:45.005346+08:00"
+      "generated_at": "2026-07-08T09:30:46.069235+08:00"
     },
     {
       "date": "2026-07-07",
@@ -2598,43 +2598,44 @@
           "text": "14分"
         }
       ],
-      "generated_at": "2026-07-08T09:25:44.724415+08:00"
+      "generated_at": "2026-07-08T09:30:45.760938+08:00"
     },
     {
       "date": "2026-07-08",
       "weekday": "周三",
-      "total_active_seconds": 496.36,
-      "total_active_text": "8分",
+      "total_active_seconds": 781.79,
+      "total_active_text": "13分",
       "top_categories": [
-        "其他",
         "学习/信息",
+        "其他",
         "系统/维护"
       ],
       "categories": [
         {
-          "name": "其他",
-          "seconds": 187.11,
-          "share": 0.377,
-          "representatives": [
-            "chrome.exe｜新标签页｜newtab"
-          ],
-          "color": "#cbd5e1"
-        },
-        {
           "name": "学习/信息",
-          "seconds": 186.25,
-          "share": 0.3752,
+          "seconds": 464.54,
+          "share": 0.5942,
           "representatives": [
+            "chrome.exe｜(61) Pinterest - Google Chrome",
             "chrome.exe｜CloudHub | SaaS Responsive Website Design | CIPHERSLAB - Google Chrome",
-            "chrome.exe｜收藏到 Portfolio - Google Chrome",
-            "chrome.exe｜收藏到 灵感画面 - Google Chrome"
+            "chrome.exe｜产品演示动画设计 - Google Chrome"
           ],
           "color": "#61ddaa"
         },
         {
+          "name": "其他",
+          "seconds": 190.18,
+          "share": 0.2433,
+          "representatives": [
+            "chrome.exe｜新标签页｜newtab",
+            "chrome.exe｜(61) Pinterest｜www.pinterest.com"
+          ],
+          "color": "#cbd5e1"
+        },
+        {
           "name": "系统/维护",
           "seconds": 110.73,
-          "share": 0.2231,
+          "share": 0.1416,
           "representatives": [
             "clash-verge.exe｜Clash Verge",
             "explorer.exe"
@@ -2643,38 +2644,39 @@
         },
         {
           "name": "工作/创作",
-          "seconds": 12.27,
-          "share": 0.0247,
+          "seconds": 16.34,
+          "share": 0.0209,
           "representatives": [
             "chrome.exe｜AI 工作空间，你的智能助手。| Notion｜www.notion.com",
+            "chrome.exe｜ChatGPT - Google Chrome",
             "msedge.exe｜AI 工作空间，你的智能助手。| Notion｜www.notion.com"
           ],
           "color": "#7aa2ff"
         }
       ],
-      "switch_count": 10,
-      "segment_count": 19,
-      "summary_line": "这一天共记录 8分 的活跃电脑时间，主轴是“其他”，节奏相对稳定，存在可识别的连续工作块。",
+      "switch_count": 23,
+      "segment_count": 32,
+      "summary_line": "这一天共记录 13分 的活跃电脑时间，主轴是“学习/信息”，节奏相对稳定，存在可识别的连续工作块。",
       "notes": [
-        "主类目是“其他”，占比 37.7%，说明当天最主要的电脑注意力投向比较清晰。",
+        "主类目是“学习/信息”，占比 59.4%，说明当天最主要的电脑注意力投向比较清晰。",
         "窗口切换不高，说明这一天的任务切换成本相对可控。",
         "最长连续专注块偏短，后续可重点观察是什么因素把整块时间切碎了。"
       ],
       "longest_focus": {
-        "category": "其他",
-        "activity": "chrome.exe｜新标签页｜newtab",
-        "seconds": 155.22,
+        "category": "学习/信息",
+        "activity": "chrome.exe｜(61) Pinterest - Google Chrome",
+        "seconds": 175.17,
         "text": "2分",
-        "range": "09:19–09:22"
+        "range": "09:26–09:29"
       },
       "energy": {
-        "high_zone": "其他",
-        "fragmented_zone": "学习/信息",
-        "recovery_zone": "系统/维护",
+        "high_zone": "学习/信息",
+        "fragmented_zone": "其他",
+        "recovery_zone": "无明显恢复区",
         "confidence": "低",
         "evidence": [
-          "总活跃时长 8分",
-          "窗口切换 10 次",
+          "总活跃时长 13分",
+          "窗口切换 23 次",
           "最长连续专注块 2分"
         ]
       },
@@ -2688,7 +2690,7 @@
         "6": 0.0,
         "7": 0.0,
         "8": 0.0,
-        "9": 496.36,
+        "9": 781.79,
         "10": 0.0,
         "11": 0.0,
         "12": 0.0,
@@ -2711,8 +2713,13 @@
           "text": "3分"
         },
         {
+          "activity": "chrome.exe｜(61) Pinterest - Google Chrome",
+          "seconds": 175.17,
+          "text": "2分"
+        },
+        {
           "activity": "chrome.exe｜CloudHub | SaaS Responsive Website Design | CIPHERSLAB - Google Chrome",
-          "seconds": 122.87,
+          "seconds": 124.93,
           "text": "2分"
         },
         {
@@ -2721,32 +2728,27 @@
           "text": "1分"
         },
         {
+          "activity": "chrome.exe｜产品演示动画设计 - Google Chrome",
+          "seconds": 47.03,
+          "text": "47秒"
+        },
+        {
           "activity": "chrome.exe｜收藏到 Portfolio - Google Chrome",
-          "seconds": 42.9,
-          "text": "43秒"
+          "seconds": 47.03,
+          "text": "47秒"
+        },
+        {
+          "activity": "chrome.exe｜分支 · 产品演示动画设计 - Google Chrome",
+          "seconds": 31.44,
+          "text": "31秒"
         },
         {
           "activity": "chrome.exe｜收藏到 灵感画面 - Google Chrome",
-          "seconds": 13.32,
-          "text": "13秒"
-        },
-        {
-          "activity": "chrome.exe｜AI 工作空间，你的智能助手。| Notion｜www.notion.com",
-          "seconds": 10.24,
-          "text": "10秒"
-        },
-        {
-          "activity": "chrome.exe｜GE_rvxeXEAAHuAL (2048×2048) - Google Chrome",
-          "seconds": 7.15,
-          "text": "7秒"
-        },
-        {
-          "activity": "explorer.exe",
-          "seconds": 3.09,
-          "text": "3秒"
+          "seconds": 16.4,
+          "text": "16秒"
         }
       ],
-      "generated_at": "2026-07-08T09:25:44.217383+08:00"
+      "generated_at": "2026-07-08T09:30:45.242866+08:00"
     }
   ],
   "weeks": [
@@ -2799,7 +2801,7 @@
       "notes": [
         "最投入的一天是 2026-06-15，活跃 0秒。"
       ],
-      "generated_at": "2026-07-08T09:25:46.023554+08:00"
+      "generated_at": "2026-07-08T09:30:47.131499+08:00"
     },
     {
       "id": "2026-06-22~2026-06-28",
@@ -2894,7 +2896,7 @@
         "最投入的一天是 2026-06-28，活跃 4小时29分。",
         "前三类目合计占比 78.6%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-08T09:25:46.023554+08:00"
+      "generated_at": "2026-07-08T09:30:47.131499+08:00"
     },
     {
       "id": "2026-06-29~2026-07-05",
@@ -2996,12 +2998,12 @@
         "周末占比 14.9%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 74.0%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-08T09:25:46.023554+08:00"
+      "generated_at": "2026-07-08T09:30:47.131499+08:00"
     }
   ],
   "meta": {
     "db_path": "C:\\Users\\Klh\\AppData\\Local\\activitywatch\\activitywatch\\aw-server\\peewee-sqlite.v2.db",
-    "generated_at": "2026-07-08T09:25:44.139727+08:00",
+    "generated_at": "2026-07-08T09:30:45.103813+08:00",
     "delivery_time": "19:30",
     "timezone": "中国标准时间"
   }
