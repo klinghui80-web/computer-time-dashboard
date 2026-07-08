@@ -598,7 +598,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-08T15:40:18.669093+08:00"
+      "generated_at": "2026-07-08T15:45:19.212642+08:00"
     },
     {
       "date": "2026-06-25",
@@ -658,7 +658,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-08T15:40:18.668054+08:00"
+      "generated_at": "2026-07-08T15:45:19.212642+08:00"
     },
     {
       "date": "2026-06-26",
@@ -718,7 +718,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-08T15:40:18.667057+08:00"
+      "generated_at": "2026-07-08T15:45:19.212642+08:00"
     },
     {
       "date": "2026-06-27",
@@ -889,7 +889,7 @@
           "text": "3分"
         }
       ],
-      "generated_at": "2026-07-08T15:40:18.665155+08:00"
+      "generated_at": "2026-07-08T15:45:19.212642+08:00"
     },
     {
       "date": "2026-06-28",
@@ -1071,7 +1071,7 @@
           "text": "4分"
         }
       ],
-      "generated_at": "2026-07-08T15:40:18.620462+08:00"
+      "generated_at": "2026-07-08T15:45:19.167853+08:00"
     },
     {
       "date": "2026-06-29",
@@ -1253,7 +1253,7 @@
           "text": "6分"
         }
       ],
-      "generated_at": "2026-07-08T15:40:18.546335+08:00"
+      "generated_at": "2026-07-08T15:45:19.097788+08:00"
     },
     {
       "date": "2026-06-30",
@@ -1438,7 +1438,7 @@
           "text": "19分"
         }
       ],
-      "generated_at": "2026-07-08T15:40:18.371027+08:00"
+      "generated_at": "2026-07-08T15:45:18.910554+08:00"
     },
     {
       "date": "2026-07-01",
@@ -1622,7 +1622,7 @@
           "text": "12分"
         }
       ],
-      "generated_at": "2026-07-08T15:40:18.167987+08:00"
+      "generated_at": "2026-07-08T15:45:18.708391+08:00"
     },
     {
       "date": "2026-07-02",
@@ -1795,7 +1795,7 @@
           "text": "7分"
         }
       ],
-      "generated_at": "2026-07-08T15:40:17.976473+08:00"
+      "generated_at": "2026-07-08T15:45:18.512284+08:00"
     },
     {
       "date": "2026-07-03",
@@ -1977,7 +1977,7 @@
           "text": "6分"
         }
       ],
-      "generated_at": "2026-07-08T15:40:17.825781+08:00"
+      "generated_at": "2026-07-08T15:45:18.332673+08:00"
     },
     {
       "date": "2026-07-04",
@@ -2037,7 +2037,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-08T15:40:17.711723+08:00"
+      "generated_at": "2026-07-08T15:45:18.222219+08:00"
     },
     {
       "date": "2026-07-05",
@@ -2220,7 +2220,7 @@
           "text": "10分"
         }
       ],
-      "generated_at": "2026-07-08T15:40:17.711723+08:00"
+      "generated_at": "2026-07-08T15:45:18.219210+08:00"
     },
     {
       "date": "2026-07-06",
@@ -2404,7 +2404,7 @@
           "text": "10分"
         }
       ],
-      "generated_at": "2026-07-08T15:40:17.555068+08:00"
+      "generated_at": "2026-07-08T15:45:18.066935+08:00"
     },
     {
       "date": "2026-07-07",
@@ -2598,13 +2598,13 @@
           "text": "14分"
         }
       ],
-      "generated_at": "2026-07-08T15:40:17.269049+08:00"
+      "generated_at": "2026-07-08T15:45:17.764822+08:00"
     },
     {
       "date": "2026-07-08",
       "weekday": "周三",
-      "total_active_seconds": 16328.74,
-      "total_active_text": "4小时32分",
+      "total_active_seconds": 16600.77,
+      "total_active_text": "4小时36分",
       "top_categories": [
         "工作/创作",
         "设计",
@@ -2613,8 +2613,8 @@
       "categories": [
         {
           "name": "工作/创作",
-          "seconds": 5766.79,
-          "share": 0.3532,
+          "seconds": 5924.82,
+          "share": 0.3569,
           "representatives": [
             "Codex.exe｜Codex",
             "chrome.exe｜3D手机界面生成器｜chatgpt.com",
@@ -2625,7 +2625,7 @@
         {
           "name": "设计",
           "seconds": 4409.22,
-          "share": 0.27,
+          "share": 0.2656,
           "representatives": [
             "Figma.exe｜APP 详情页 - Figma",
             "Figma.exe｜选择文件夹",
@@ -2635,8 +2635,8 @@
         },
         {
           "name": "其他",
-          "seconds": 2937.16,
-          "share": 0.1799,
+          "seconds": 2976.26,
+          "share": 0.1793,
           "representatives": [
             "chrome.exe｜Typeless | 实际智能的AI语音听写｜localhost:3000",
             "chrome.exe｜Typeless | 实际智能的AI语音听写｜www.typeless.com",
@@ -2646,8 +2646,8 @@
         },
         {
           "name": "学习/信息",
-          "seconds": 2399.43,
-          "share": 0.1469,
+          "seconds": 2401.48,
+          "share": 0.1447,
           "representatives": [
             "chrome.exe｜Typeless | 实际智能的AI语音听写 - Google Chrome",
             "chrome.exe｜(61) Pinterest - Google Chrome",
@@ -2656,33 +2656,33 @@
           "color": "#61ddaa"
         },
         {
-          "name": "系统/维护",
-          "seconds": 420.27,
-          "share": 0.0257,
-          "representatives": [
-            "explorer.exe",
-            "clash-verge.exe｜Clash Verge",
-            "explorer.exe｜Program Manager"
-          ],
-          "color": "#8a7dff"
-        },
-        {
           "name": "沟通",
-          "seconds": 395.87,
-          "share": 0.0242,
+          "seconds": 468.73,
+          "share": 0.0282,
           "representatives": [
             "Weixin.exe｜微信",
             "dwm.exe｜微信 (未响应)",
             "chrome.exe｜Slack - Google 搜索｜www.google.com.hk"
           ],
           "color": "#5ad1e6"
+        },
+        {
+          "name": "系统/维护",
+          "seconds": 420.27,
+          "share": 0.0253,
+          "representatives": [
+            "explorer.exe",
+            "clash-verge.exe｜Clash Verge",
+            "explorer.exe｜Program Manager"
+          ],
+          "color": "#8a7dff"
         }
       ],
-      "switch_count": 592,
-      "segment_count": 812,
-      "summary_line": "这一天共记录 4小时32分 的活跃电脑时间，主轴是“工作/创作”，切换密度偏高，像是在多线程推进。",
+      "switch_count": 604,
+      "segment_count": 826,
+      "summary_line": "这一天共记录 4小时36分 的活跃电脑时间，主轴是“工作/创作”，切换密度偏高，像是在多线程推进。",
       "notes": [
-        "主类目是“工作/创作”，占比 35.3%，说明当天最主要的电脑注意力投向比较清晰。",
+        "主类目是“工作/创作”，占比 35.7%，说明当天最主要的电脑注意力投向比较清晰。",
         "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。"
       ],
       "longest_focus": {
@@ -2698,8 +2698,8 @@
         "recovery_zone": "无明显恢复区",
         "confidence": "中",
         "evidence": [
-          "总活跃时长 4小时32分",
-          "窗口切换 592 次",
+          "总活跃时长 4小时36分",
+          "窗口切换 604 次",
           "最长连续专注块 13分"
         ]
       },
@@ -2719,7 +2719,7 @@
         "12": 1114.01,
         "13": 2273.23,
         "14": 2977.06,
-        "15": 2251.71,
+        "15": 2523.73,
         "16": 0.0,
         "17": 0.0,
         "18": 0.0,
@@ -2732,8 +2732,8 @@
       "top_activities": [
         {
           "activity": "Codex.exe｜Codex",
-          "seconds": 4365.23,
-          "text": "1小时12分"
+          "seconds": 4523.26,
+          "text": "1小时15分"
         },
         {
           "activity": "Figma.exe｜APP 详情页 - Figma",
@@ -2742,8 +2742,8 @@
         },
         {
           "activity": "chrome.exe｜Typeless | 实际智能的AI语音听写｜localhost:3000",
-          "seconds": 1243.07,
-          "text": "20分"
+          "seconds": 1279.09,
+          "text": "21分"
         },
         {
           "activity": "chrome.exe｜Typeless | 实际智能的AI语音听写 - Google Chrome",
@@ -2756,6 +2756,11 @@
           "text": "7分"
         },
         {
+          "activity": "Weixin.exe｜微信",
+          "seconds": 418.8,
+          "text": "6分"
+        },
+        {
           "activity": "chrome.exe｜分支 · 产品演示动画设计｜chatgpt.com",
           "seconds": 363.69,
           "text": "6分"
@@ -2764,14 +2769,9 @@
           "activity": "chrome.exe｜Typeless | 实际智能的AI语音听写｜www.typeless.com",
           "seconds": 349.72,
           "text": "5分"
-        },
-        {
-          "activity": "Weixin.exe｜微信",
-          "seconds": 345.95,
-          "text": "5分"
         }
       ],
-      "generated_at": "2026-07-08T15:40:16.737101+08:00"
+      "generated_at": "2026-07-08T15:45:17.231062+08:00"
     }
   ],
   "weeks": [
@@ -2824,7 +2824,7 @@
       "notes": [
         "最投入的一天是 2026-06-15，活跃 0秒。"
       ],
-      "generated_at": "2026-07-08T15:40:18.671060+08:00"
+      "generated_at": "2026-07-08T15:45:19.218907+08:00"
     },
     {
       "id": "2026-06-22~2026-06-28",
@@ -2919,7 +2919,7 @@
         "最投入的一天是 2026-06-28，活跃 4小时29分。",
         "前三类目合计占比 78.6%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-08T15:40:18.671060+08:00"
+      "generated_at": "2026-07-08T15:45:19.218907+08:00"
     },
     {
       "id": "2026-06-29~2026-07-05",
@@ -3021,12 +3021,12 @@
         "周末占比 14.9%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 74.0%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-08T15:40:18.671060+08:00"
+      "generated_at": "2026-07-08T15:45:19.218907+08:00"
     }
   ],
   "meta": {
     "db_path": "C:\\Users\\Klh\\AppData\\Local\\activitywatch\\activitywatch\\aw-server\\peewee-sqlite.v2.db",
-    "generated_at": "2026-07-08T15:40:16.547104+08:00",
+    "generated_at": "2026-07-08T15:45:17.037539+08:00",
     "delivery_time": "19:30",
     "timezone": "中国标准时间"
   }
