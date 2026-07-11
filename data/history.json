@@ -1071,7 +1071,7 @@
           "text": "4分"
         }
       ],
-      "generated_at": "2026-07-12T00:00:15.800012+08:00"
+      "generated_at": "2026-07-12T00:05:16.573350+08:00"
     },
     {
       "date": "2026-06-29",
@@ -1253,7 +1253,7 @@
           "text": "6分"
         }
       ],
-      "generated_at": "2026-07-12T00:00:15.596265+08:00"
+      "generated_at": "2026-07-12T00:05:16.343159+08:00"
     },
     {
       "date": "2026-06-30",
@@ -1438,7 +1438,7 @@
           "text": "19分"
         }
       ],
-      "generated_at": "2026-07-12T00:00:15.079972+08:00"
+      "generated_at": "2026-07-12T00:05:15.846384+08:00"
     },
     {
       "date": "2026-07-01",
@@ -1622,7 +1622,7 @@
           "text": "12分"
         }
       ],
-      "generated_at": "2026-07-12T00:00:14.575440+08:00"
+      "generated_at": "2026-07-12T00:05:15.319662+08:00"
     },
     {
       "date": "2026-07-02",
@@ -1795,7 +1795,7 @@
           "text": "7分"
         }
       ],
-      "generated_at": "2026-07-12T00:00:14.381436+08:00"
+      "generated_at": "2026-07-12T00:05:14.953426+08:00"
     },
     {
       "date": "2026-07-03",
@@ -1977,7 +1977,7 @@
           "text": "6分"
         }
       ],
-      "generated_at": "2026-07-12T00:00:14.238818+08:00"
+      "generated_at": "2026-07-12T00:05:14.819790+08:00"
     },
     {
       "date": "2026-07-04",
@@ -2037,7 +2037,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-12T00:00:14.137478+08:00"
+      "generated_at": "2026-07-12T00:05:14.718481+08:00"
     },
     {
       "date": "2026-07-05",
@@ -2220,7 +2220,7 @@
           "text": "10分"
         }
       ],
-      "generated_at": "2026-07-12T00:00:14.133940+08:00"
+      "generated_at": "2026-07-12T00:05:14.715495+08:00"
     },
     {
       "date": "2026-07-06",
@@ -2404,7 +2404,7 @@
           "text": "10分"
         }
       ],
-      "generated_at": "2026-07-12T00:00:13.990175+08:00"
+      "generated_at": "2026-07-12T00:05:14.564157+08:00"
     },
     {
       "date": "2026-07-07",
@@ -2598,7 +2598,7 @@
           "text": "14分"
         }
       ],
-      "generated_at": "2026-07-12T00:00:13.691262+08:00"
+      "generated_at": "2026-07-12T00:05:14.269800+08:00"
     },
     {
       "date": "2026-07-08",
@@ -2782,7 +2782,7 @@
           "text": "6分"
         }
       ],
-      "generated_at": "2026-07-12T00:00:13.182396+08:00"
+      "generated_at": "2026-07-12T00:05:13.765274+08:00"
     },
     {
       "date": "2026-07-09",
@@ -2965,7 +2965,7 @@
           "text": "12分"
         }
       ],
-      "generated_at": "2026-07-12T00:00:12.831676+08:00"
+      "generated_at": "2026-07-12T00:05:13.404341+08:00"
     },
     {
       "date": "2026-07-10",
@@ -3149,12 +3149,12 @@
           "text": "15分"
         }
       ],
-      "generated_at": "2026-07-12T00:00:12.365922+08:00"
+      "generated_at": "2026-07-12T00:05:12.953280+08:00"
     },
     {
       "date": "2026-07-11",
       "weekday": "周六",
-      "total_active_seconds": 11241.09,
+      "total_active_seconds": 11243.86,
       "total_active_text": "3小时7分",
       "top_categories": [
         "娱乐",
@@ -3165,7 +3165,7 @@
         {
           "name": "娱乐",
           "seconds": 10254.43,
-          "share": 0.9122,
+          "share": 0.912,
           "representatives": [
             "douyin.exe｜抖音",
             "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
@@ -3208,8 +3208,8 @@
         },
         {
           "name": "工作/创作",
-          "seconds": 47.41,
-          "share": 0.0042,
+          "seconds": 50.18,
+          "share": 0.0045,
           "representatives": [
             "ChatGPT.exe｜ChatGPT",
             "msedge.exe｜appo8jahz3e4635.h5.xet.pomoho.com/xe.learn-mini-program.login?code=xiaoetong:9b9bb073b757a000f478dfc07dadf9ee&gray_app_id=appo8JaHz3E4635 和另外 3 个页面 - 个人 - Microsoft​ Edge",
@@ -3256,7 +3256,7 @@
         ]
       },
       "hourly_seconds": {
-        "0": 0.0,
+        "0": 2.28,
         "1": 0.0,
         "2": 0.0,
         "3": 0.0,
@@ -3279,7 +3279,7 @@
         "20": 1821.89,
         "21": 55.04,
         "22": 0.0,
-        "23": 515.24
+        "23": 515.74
       },
       "top_activities": [
         {
@@ -3323,41 +3323,87 @@
           "text": "54秒"
         }
       ],
-      "generated_at": "2026-07-12T00:00:11.932056+08:00"
+      "generated_at": "2026-07-12T00:05:12.553145+08:00"
     },
     {
       "date": "2026-07-12",
       "weekday": "周日",
-      "total_active_seconds": 0,
-      "total_active_text": "0秒",
-      "top_categories": [],
-      "categories": [],
-      "switch_count": 0,
-      "segment_count": 0,
-      "summary_line": "这一天没有读到有效的电脑活跃记录。",
+      "total_active_seconds": 232.68,
+      "total_active_text": "3分",
+      "top_categories": [
+        "娱乐",
+        "工作/创作",
+        "设计"
+      ],
+      "categories": [
+        {
+          "name": "娱乐",
+          "seconds": 166.01,
+          "share": 0.7135,
+          "representatives": [
+            "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+            "哔哩哔哩.exe｜【中字】海外博主揭秘：20分钟掌握苹果级丝滑动效",
+            "哔哩哔哩.exe｜拒绝 AI 廉价感，如何开发一个好看 App？AI Coding 实录，从原型到上架的全流程分享【B站AI创造公开赛】"
+          ],
+          "color": "#ff7d7d"
+        },
+        {
+          "name": "工作/创作",
+          "seconds": 37.89,
+          "share": 0.1629,
+          "representatives": [
+            "ChatGPT.exe｜ChatGPT"
+          ],
+          "color": "#7aa2ff"
+        },
+        {
+          "name": "设计",
+          "seconds": 24.68,
+          "share": 0.106,
+          "representatives": [
+            "哔哩哔哩.exe｜掌握Apple风格的UI动画设计｜After Effects教程"
+          ],
+          "color": "#f6bd16"
+        },
+        {
+          "name": "系统/维护",
+          "seconds": 4.1,
+          "share": 0.0176,
+          "representatives": [
+            "explorer.exe｜主文件夹 - 文件资源管理器",
+            "explorer.exe"
+          ],
+          "color": "#8a7dff"
+        }
+      ],
+      "switch_count": 19,
+      "segment_count": 21,
+      "summary_line": "这一天共记录 3分 的活跃电脑时间，主轴是“娱乐”，节奏相对稳定，存在可识别的连续工作块。",
       "notes": [
-        "今天没有足够的数据生成复盘提示。"
+        "主类目是“娱乐”，占比 71.4%，说明当天最主要的电脑注意力投向比较清晰。",
+        "窗口切换不高，说明这一天的任务切换成本相对可控。",
+        "最长连续专注块偏短，后续可重点观察是什么因素把整块时间切碎了。"
       ],
       "longest_focus": {
-        "category": "无",
-        "activity": "无",
-        "seconds": 0,
-        "text": "0秒",
-        "range": "—"
+        "category": "工作/创作",
+        "activity": "ChatGPT.exe｜ChatGPT",
+        "seconds": 34.82,
+        "text": "35秒",
+        "range": "23:59–00:00"
       },
       "energy": {
-        "high_zone": "无",
-        "fragmented_zone": "无",
-        "recovery_zone": "无明显恢复区",
+        "high_zone": "娱乐",
+        "fragmented_zone": "工作/创作",
+        "recovery_zone": "娱乐",
         "confidence": "低",
         "evidence": [
-          "总活跃时长 0秒",
-          "窗口切换 0 次",
-          "最长连续专注块 0秒"
+          "总活跃时长 3分",
+          "窗口切换 19 次",
+          "最长连续专注块 35秒"
         ]
       },
       "hourly_seconds": {
-        "0": 0.0,
+        "0": 200.14,
         "1": 0.0,
         "2": 0.0,
         "3": 0.0,
@@ -3380,10 +3426,51 @@
         "20": 0.0,
         "21": 0.0,
         "22": 0.0,
-        "23": 0.0
+        "23": 32.54
       },
-      "top_activities": [],
-      "generated_at": "2026-07-12T00:00:11.819796+08:00"
+      "top_activities": [
+        {
+          "activity": "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+          "seconds": 57.38,
+          "text": "57秒"
+        },
+        {
+          "activity": "哔哩哔哩.exe｜【中字】海外博主揭秘：20分钟掌握苹果级丝滑动效",
+          "seconds": 41.02,
+          "text": "41秒"
+        },
+        {
+          "activity": "ChatGPT.exe｜ChatGPT",
+          "seconds": 37.89,
+          "text": "38秒"
+        },
+        {
+          "activity": "哔哩哔哩.exe｜拒绝 AI 廉价感，如何开发一个好看 App？AI Coding 实录，从原型到上架的全流程分享【B站AI创造公开赛】",
+          "seconds": 30.73,
+          "text": "31秒"
+        },
+        {
+          "activity": "哔哩哔哩.exe｜掌握Apple风格的UI动画设计｜After Effects教程",
+          "seconds": 24.68,
+          "text": "25秒"
+        },
+        {
+          "activity": "哔哩哔哩.exe｜【UI交互动画】别拿录屏糊弄人，试试高阶UI交互动画",
+          "seconds": 21.54,
+          "text": "22秒"
+        },
+        {
+          "activity": "哔哩哔哩.exe｜【UI交互动画】从UI到动画：让你的产品界面动得有灵魂✨",
+          "seconds": 9.22,
+          "text": "9秒"
+        },
+        {
+          "activity": "哔哩哔哩.exe｜【UI交互动画】一条交互动画，帮产品省掉很多解释",
+          "seconds": 3.08,
+          "text": "3秒"
+        }
+      ],
+      "generated_at": "2026-07-12T00:05:12.437535+08:00"
     }
   ],
   "weeks": [
@@ -3436,7 +3523,7 @@
       "notes": [
         "最投入的一天是 2026-06-15，活跃 0秒。"
       ],
-      "generated_at": "2026-07-12T00:00:15.812398+08:00"
+      "generated_at": "2026-07-12T00:05:16.573995+08:00"
     },
     {
       "id": "2026-06-22~2026-06-28",
@@ -3531,7 +3618,7 @@
         "最投入的一天是 2026-06-28，活跃 4小时29分。",
         "前三类目合计占比 78.6%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-12T00:00:15.812398+08:00"
+      "generated_at": "2026-07-12T00:05:16.573995+08:00"
     },
     {
       "id": "2026-06-29~2026-07-05",
@@ -3633,55 +3720,55 @@
         "周末占比 14.9%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 74.0%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-12T00:00:15.813415+08:00"
+      "generated_at": "2026-07-12T00:05:16.573995+08:00"
     },
     {
       "id": "2026-07-06~2026-07-12",
       "start_date": "2026-07-06",
       "end_date": "2026-07-12",
       "label": "07/06 - 07/12",
-      "total_active_seconds": 156686.52,
-      "total_active_text": "43小时31分",
+      "total_active_seconds": 156921.97,
+      "total_active_text": "43小时35分",
       "categories": [
         {
           "name": "工作/创作",
-          "seconds": 45346.28,
-          "share": 0.2894,
+          "seconds": 45386.94,
+          "share": 0.2892,
           "color": "#7aa2ff"
         },
         {
           "name": "其他",
           "seconds": 32564.65,
-          "share": 0.2078,
+          "share": 0.2075,
           "color": "#cbd5e1"
         },
         {
           "name": "学习/信息",
           "seconds": 26228.79,
-          "share": 0.1674,
+          "share": 0.1671,
           "color": "#61ddaa"
         },
         {
           "name": "沟通",
           "seconds": 17001.21,
-          "share": 0.1085,
+          "share": 0.1083,
           "color": "#5ad1e6"
         },
         {
           "name": "设计",
-          "seconds": 14007.7,
+          "seconds": 14032.38,
           "share": 0.0894,
           "color": "#f6bd16"
         },
         {
           "name": "娱乐",
-          "seconds": 13534.53,
-          "share": 0.0864,
+          "seconds": 13700.54,
+          "share": 0.0873,
           "color": "#ff7d7d"
         },
         {
           "name": "系统/维护",
-          "seconds": 7810.26,
+          "seconds": 7814.36,
           "share": 0.0498,
           "color": "#8a7dff"
         },
@@ -3720,27 +3807,27 @@
         },
         {
           "date": "2026-07-11",
-          "seconds": 11241.09,
+          "seconds": 11243.86,
           "text": "3小时7分"
         },
         {
           "date": "2026-07-12",
-          "seconds": 0,
-          "text": "0秒"
+          "seconds": 232.68,
+          "text": "3分"
         }
       ],
-      "summary_line": "本周累计 43小时31分，主轴是“工作/创作”。",
+      "summary_line": "本周累计 43小时35分，主轴是“工作/创作”。",
       "notes": [
         "最投入的一天是 2026-07-10，活跃 9小时。",
-        "周末占比 7.2%，可用来观察休息日是否也被工作/信息流挤占。",
-        "前三类目合计占比 66.5%，说明这一周的电脑使用主线集中度。"
+        "周末占比 7.3%，可用来观察休息日是否也被工作/信息流挤占。",
+        "前三类目合计占比 66.4%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-12T00:00:15.813415+08:00"
+      "generated_at": "2026-07-12T00:05:16.573995+08:00"
     }
   ],
   "meta": {
     "db_path": "C:\\Users\\Klh\\AppData\\Local\\activitywatch\\activitywatch\\aw-server\\peewee-sqlite.v2.db",
-    "generated_at": "2026-07-12T00:00:11.807158+08:00",
+    "generated_at": "2026-07-12T00:05:12.236557+08:00",
     "delivery_time": "19:30",
     "timezone": "中国标准时间"
   }
