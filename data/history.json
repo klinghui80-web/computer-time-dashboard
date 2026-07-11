@@ -889,7 +889,7 @@
           "text": "3分"
         }
       ],
-      "generated_at": "2026-07-11T18:35:17.264191+08:00"
+      "generated_at": "2026-07-11T18:40:17.952736+08:00"
     },
     {
       "date": "2026-06-28",
@@ -1071,7 +1071,7 @@
           "text": "4分"
         }
       ],
-      "generated_at": "2026-07-11T18:35:17.150316+08:00"
+      "generated_at": "2026-07-11T18:40:17.813165+08:00"
     },
     {
       "date": "2026-06-29",
@@ -1253,7 +1253,7 @@
           "text": "6分"
         }
       ],
-      "generated_at": "2026-07-11T18:35:16.906451+08:00"
+      "generated_at": "2026-07-11T18:40:17.610000+08:00"
     },
     {
       "date": "2026-06-30",
@@ -1438,7 +1438,7 @@
           "text": "19分"
         }
       ],
-      "generated_at": "2026-07-11T18:35:16.421890+08:00"
+      "generated_at": "2026-07-11T18:40:17.074377+08:00"
     },
     {
       "date": "2026-07-01",
@@ -1622,7 +1622,7 @@
           "text": "12分"
         }
       ],
-      "generated_at": "2026-07-11T18:35:16.147751+08:00"
+      "generated_at": "2026-07-11T18:40:16.696843+08:00"
     },
     {
       "date": "2026-07-02",
@@ -1795,7 +1795,7 @@
           "text": "7分"
         }
       ],
-      "generated_at": "2026-07-11T18:35:15.961297+08:00"
+      "generated_at": "2026-07-11T18:40:16.501476+08:00"
     },
     {
       "date": "2026-07-03",
@@ -1977,7 +1977,7 @@
           "text": "6分"
         }
       ],
-      "generated_at": "2026-07-11T18:35:15.820129+08:00"
+      "generated_at": "2026-07-11T18:40:16.361595+08:00"
     },
     {
       "date": "2026-07-04",
@@ -2037,7 +2037,7 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-11T18:35:15.721241+08:00"
+      "generated_at": "2026-07-11T18:40:16.263359+08:00"
     },
     {
       "date": "2026-07-05",
@@ -2220,7 +2220,7 @@
           "text": "10分"
         }
       ],
-      "generated_at": "2026-07-11T18:35:15.718241+08:00"
+      "generated_at": "2026-07-11T18:40:16.260359+08:00"
     },
     {
       "date": "2026-07-06",
@@ -2404,7 +2404,7 @@
           "text": "10分"
         }
       ],
-      "generated_at": "2026-07-11T18:35:15.574909+08:00"
+      "generated_at": "2026-07-11T18:40:16.120305+08:00"
     },
     {
       "date": "2026-07-07",
@@ -2598,7 +2598,7 @@
           "text": "14分"
         }
       ],
-      "generated_at": "2026-07-11T18:35:15.277153+08:00"
+      "generated_at": "2026-07-11T18:40:15.828394+08:00"
     },
     {
       "date": "2026-07-08",
@@ -2782,7 +2782,7 @@
           "text": "6分"
         }
       ],
-      "generated_at": "2026-07-11T18:35:14.777736+08:00"
+      "generated_at": "2026-07-11T18:40:15.331906+08:00"
     },
     {
       "date": "2026-07-09",
@@ -2965,7 +2965,7 @@
           "text": "12分"
         }
       ],
-      "generated_at": "2026-07-11T18:35:14.433048+08:00"
+      "generated_at": "2026-07-11T18:40:14.980204+08:00"
     },
     {
       "date": "2026-07-10",
@@ -3149,23 +3149,23 @@
           "text": "15分"
         }
       ],
-      "generated_at": "2026-07-11T18:35:13.985070+08:00"
+      "generated_at": "2026-07-11T18:40:14.507572+08:00"
     },
     {
       "date": "2026-07-11",
       "weekday": "周六",
-      "total_active_seconds": 5374.88,
-      "total_active_text": "1小时29分",
+      "total_active_seconds": 5638.01,
+      "total_active_text": "1小时33分",
       "top_categories": [
         "娱乐",
-        "系统/维护",
+        "学习/信息",
         "沟通"
       ],
       "categories": [
         {
           "name": "娱乐",
-          "seconds": 5208.56,
-          "share": 0.9691,
+          "seconds": 5227.04,
+          "share": 0.9271,
           "representatives": [
             "douyin.exe｜抖音",
             "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili"
@@ -3173,20 +3173,20 @@
           "color": "#ff7d7d"
         },
         {
-          "name": "系统/维护",
-          "seconds": 68.21,
-          "share": 0.0127,
+          "name": "学习/信息",
+          "seconds": 200.43,
+          "share": 0.0355,
           "representatives": [
-            "explorer.exe",
-            "explorer.exe｜Program Manager",
-            "clash-verge.exe｜Clash Verge"
+            "msedge.exe｜且曼学院 和另外 3 个页面 - 个人 - Microsoft​ Edge",
+            "msedge.exe｜小鹅通-鹅圈子-登录页 和另外 3 个页面 - 个人 - Microsoft​ Edge",
+            "msedge.exe｜小鹅通学员版线上学习-小鹅通学员版-小鹅通 和另外 1 个页面 - 个人 - Microsoft​ Edge"
           ],
-          "color": "#8a7dff"
+          "color": "#61ddaa"
         },
         {
           "name": "沟通",
-          "seconds": 53.14,
-          "share": 0.0099,
+          "seconds": 129.0,
+          "share": 0.0229,
           "representatives": [
             "Weixin.exe｜微信",
             "WeChatAppEx.exe｜微信",
@@ -3195,40 +3195,43 @@
           "color": "#5ad1e6"
         },
         {
-          "name": "学习/信息",
-          "seconds": 42.94,
-          "share": 0.008,
+          "name": "系统/维护",
+          "seconds": 68.21,
+          "share": 0.0121,
           "representatives": [
-            "msedge.exe｜小鹅通学员版线上学习-小鹅通学员版-小鹅通 和另外 1 个页面 - 个人 - Microsoft​ Edge",
-            "msedge.exe｜小鹅通用户登录-小鹅通C端用户登录-小鹅通 和另外 1 个页面 - 个人 - Microsoft​ Edge",
-            "msedge.exe｜新建标签页 - 个人 - Microsoft​ Edge"
+            "explorer.exe",
+            "explorer.exe｜Program Manager",
+            "clash-verge.exe｜Clash Verge"
           ],
-          "color": "#61ddaa"
-        },
-        {
-          "name": "工作/创作",
-          "seconds": 1.02,
-          "share": 0.0002,
-          "representatives": [
-            "msedge.exe｜appo8jahz3e4635.h5.xet.pomoho.com/xe.learn-mini-program.login?code=xiaoetong:b7020ddaff57f9ec36ef3bd7e45b4ef9&gray_app_id=appo8JaHz3E4635 和另外 2 个页面 - 个人 - Microsoft​ Edge"
-          ],
-          "color": "#7aa2ff"
+          "color": "#8a7dff"
         },
         {
           "name": "其他",
-          "seconds": 1.01,
-          "share": 0.0002,
+          "seconds": 9.22,
+          "share": 0.0016,
           "representatives": [
-            "Snipaste.exe｜Snipper - Snipaste"
+            "Snipaste.exe｜Snipper - Snipaste",
+            "Weixin.exe｜图片和视频"
           ],
           "color": "#cbd5e1"
+        },
+        {
+          "name": "工作/创作",
+          "seconds": 4.1,
+          "share": 0.0007,
+          "representatives": [
+            "msedge.exe｜appo8jahz3e4635.h5.xet.pomoho.com/xe.learn-mini-program.login?code=xiaoetong:9b9bb073b757a000f478dfc07dadf9ee&gray_app_id=appo8JaHz3E4635 和另外 3 个页面 - 个人 - Microsoft​ Edge",
+            "msedge.exe｜appo8jahz3e4635.h5.xet.pomoho.com/xe.learn-mini-program.login?code=xiaoetong:6ce840053872a0a5906dad7a48c7e9c1&gray_app_id=appo8JaHz3E4635 和另外 4 个页面 - 个人 - Microsoft​ Edge",
+            "msedge.exe｜appo8jahz3e4635.h5.xet.pomoho.com/xe.learn-mini-program.login?code=xiaoetong:b7020ddaff57f9ec36ef3bd7e45b4ef9&gray_app_id=appo8JaHz3E4635 和另外 2 个页面 - 个人 - Microsoft​ Edge"
+          ],
+          "color": "#7aa2ff"
         }
       ],
-      "switch_count": 50,
-      "segment_count": 59,
-      "summary_line": "这一天共记录 1小时29分 的活跃电脑时间，主轴是“娱乐”，节奏相对稳定，存在可识别的连续工作块。",
+      "switch_count": 81,
+      "segment_count": 90,
+      "summary_line": "这一天共记录 1小时33分 的活跃电脑时间，主轴是“娱乐”，节奏中等，主线明确但中间有若干打断。",
       "notes": [
-        "主类目是“娱乐”，占比 96.9%，说明当天最主要的电脑注意力投向比较清晰。",
+        "主类目是“娱乐”，占比 92.7%，说明当天最主要的电脑注意力投向比较清晰。",
         "出现了 1小时 的长专注块，可以回看这段前后的环境条件并尝试复用。"
       ],
       "longest_focus": {
@@ -3240,12 +3243,12 @@
       },
       "energy": {
         "high_zone": "娱乐",
-        "fragmented_zone": "系统/维护",
+        "fragmented_zone": "学习/信息",
         "recovery_zone": "娱乐",
-        "confidence": "低",
+        "confidence": "中",
         "evidence": [
-          "总活跃时长 1小时29分",
-          "窗口切换 50 次",
+          "总活跃时长 1小时33分",
+          "窗口切换 81 次",
           "最长连续专注块 1小时"
         ]
       },
@@ -3268,7 +3271,7 @@
         "15": 0.0,
         "16": 0.0,
         "17": 3547.82,
-        "18": 1827.05,
+        "18": 2090.19,
         "19": 0.0,
         "20": 0.0,
         "21": 0.0,
@@ -3278,23 +3281,33 @@
       "top_activities": [
         {
           "activity": "douyin.exe｜抖音",
-          "seconds": 5070.51,
+          "seconds": 5071.54,
           "text": "1小时24分"
         },
         {
           "activity": "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
-          "seconds": 138.05,
+          "seconds": 155.5,
           "text": "2分"
         },
         {
           "activity": "Weixin.exe｜微信",
-          "seconds": 44.96,
-          "text": "45秒"
+          "seconds": 120.83,
+          "text": "2分"
+        },
+        {
+          "activity": "msedge.exe｜且曼学院 和另外 3 个页面 - 个人 - Microsoft​ Edge",
+          "seconds": 105.32,
+          "text": "1分"
         },
         {
           "activity": "explorer.exe",
           "seconds": 41.73,
           "text": "42秒"
+        },
+        {
+          "activity": "msedge.exe｜小鹅通-鹅圈子-登录页 和另外 3 个页面 - 个人 - Microsoft​ Edge",
+          "seconds": 27.6,
+          "text": "28秒"
         },
         {
           "activity": "msedge.exe｜小鹅通学员版线上学习-小鹅通学员版-小鹅通 和另外 1 个页面 - 个人 - Microsoft​ Edge",
@@ -3305,19 +3318,9 @@
           "activity": "explorer.exe｜Program Manager",
           "seconds": 13.15,
           "text": "13秒"
-        },
-        {
-          "activity": "msedge.exe｜小鹅通用户登录-小鹅通C端用户登录-小鹅通 和另外 1 个页面 - 个人 - Microsoft​ Edge",
-          "seconds": 10.2,
-          "text": "10秒"
-        },
-        {
-          "activity": "clash-verge.exe｜Clash Verge",
-          "seconds": 8.23,
-          "text": "8秒"
         }
       ],
-      "generated_at": "2026-07-11T18:35:13.576188+08:00"
+      "generated_at": "2026-07-11T18:40:14.085771+08:00"
     }
   ],
   "weeks": [
@@ -3370,7 +3373,7 @@
       "notes": [
         "最投入的一天是 2026-06-15，活跃 0秒。"
       ],
-      "generated_at": "2026-07-11T18:35:17.280466+08:00"
+      "generated_at": "2026-07-11T18:40:17.955833+08:00"
     },
     {
       "id": "2026-06-22~2026-06-28",
@@ -3465,7 +3468,7 @@
         "最投入的一天是 2026-06-28，活跃 4小时29分。",
         "前三类目合计占比 78.6%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-11T18:35:17.280466+08:00"
+      "generated_at": "2026-07-11T18:40:17.955833+08:00"
     },
     {
       "id": "2026-06-29~2026-07-05",
@@ -3567,12 +3570,12 @@
         "周末占比 14.9%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 74.0%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-11T18:35:17.281576+08:00"
+      "generated_at": "2026-07-11T18:40:17.957673+08:00"
     }
   ],
   "meta": {
     "db_path": "C:\\Users\\Klh\\AppData\\Local\\activitywatch\\activitywatch\\aw-server\\peewee-sqlite.v2.db",
-    "generated_at": "2026-07-11T18:35:13.457379+08:00",
+    "generated_at": "2026-07-11T18:40:13.957524+08:00",
     "delivery_time": "19:30",
     "timezone": "中国标准时间"
   }
