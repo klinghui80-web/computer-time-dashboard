@@ -1800,18 +1800,18 @@
     {
       "date": "2026-07-03",
       "weekday": "周五",
-      "total_active_seconds": 25018.18,
-      "total_active_text": "6小时56分",
+      "total_active_seconds": 11473.52,
+      "total_active_text": "3小时11分",
       "top_categories": [
         "设计",
-        "沟通",
-        "工作/创作"
+        "工作/创作",
+        "沟通"
       ],
       "categories": [
         {
           "name": "设计",
-          "seconds": 12876.87,
-          "share": 0.5147,
+          "seconds": 5922.89,
+          "share": 0.5162,
           "representatives": [
             "Figma.exe｜电商详情页 - Figma",
             "Figma.exe｜商品图-详情页 - Figma",
@@ -1820,20 +1820,9 @@
           "color": "#f6bd16"
         },
         {
-          "name": "沟通",
-          "seconds": 4342.57,
-          "share": 0.1736,
-          "representatives": [
-            "Weixin.exe｜微信",
-            "Feishu.exe｜飞书",
-            "Feishu.exe｜bo-ecommerce-landing.html"
-          ],
-          "color": "#5ad1e6"
-        },
-        {
           "name": "工作/创作",
-          "seconds": 3312.77,
-          "share": 0.1324,
+          "seconds": 1601.38,
+          "share": 0.1396,
           "representatives": [
             "Hermes.exe｜Hermes",
             "chrome.exe｜生成大头针样式｜chatgpt.com",
@@ -1842,129 +1831,126 @@
           "color": "#7aa2ff"
         },
         {
-          "name": "其他",
-          "seconds": 2463.62,
-          "share": 0.0985,
+          "name": "沟通",
+          "seconds": 1464.52,
+          "share": 0.1276,
           "representatives": [
-            "Snipaste.exe｜Snipper - Snipaste",
+            "Weixin.exe｜微信",
+            "Feishu.exe｜飞书",
+            "Feishu.exe｜bo-ecommerce-landing.html"
+          ],
+          "color": "#5ad1e6"
+        },
+        {
+          "name": "其他",
+          "seconds": 1240.21,
+          "share": 0.1081,
+          "representatives": [
             "chrome.exe｜个人工作台 · 时间、任务与复盘",
-            "Weixin.exe｜Weixin"
+            "LegionZone.exe｜LegionZone",
+            "chrome.exe｜empty｜www.pinterest.com"
           ],
           "color": "#cbd5e1"
         },
         {
           "name": "学习/信息",
-          "seconds": 1302.78,
-          "share": 0.0521,
+          "seconds": 647.79,
+          "share": 0.0565,
           "representatives": [
-            "chrome.exe｜bo.video | Bo by Ancher - Google Chrome",
             "chrome.exe｜个人工作台 · 时间、任务与复盘 - Google Chrome",
-            "chrome.exe｜生成大头针样式 - Google Chrome"
+            "chrome.exe｜生成大头针样式 - Google Chrome",
+            "chrome.exe｜bo.video | Bo by Ancher - Google Chrome"
           ],
           "color": "#61ddaa"
         },
         {
           "name": "系统/维护",
-          "seconds": 700.1,
-          "share": 0.028,
+          "seconds": 581.35,
+          "share": 0.0507,
           "representatives": [
             "explorer.exe｜高清版 - 文件资源管理器",
-            "explorer.exe",
-            "explorer.exe｜Program Manager"
+            "explorer.exe｜Program Manager",
+            "explorer.exe"
           ],
           "color": "#8a7dff"
         },
         {
           "name": "生活/杂务",
-          "seconds": 19.46,
-          "share": 0.0008,
+          "seconds": 15.38,
+          "share": 0.0013,
           "representatives": [
             "chrome.exe｜Shop Offers｜www.adobe.com"
           ],
           "color": "#ffa940"
         }
       ],
-      "switch_count": 1114,
-      "segment_count": 1215,
-      "summary_line": "这一天共记录 6小时56分 的活跃电脑时间，主轴是“设计”，切换密度偏高，像是在多线程推进。",
+      "switch_count": 634,
+      "segment_count": 698,
+      "summary_line": "这一天共记录 3小时11分 的活跃电脑时间，主轴是“设计”，切换密度偏高，像是在多线程推进。",
       "notes": [
-        "主类目是“设计”，占比 51.5%，说明当天最主要的电脑注意力投向比较清晰。",
-        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。"
+        "主类目是“设计”，占比 51.6%，说明当天最主要的电脑注意力投向比较清晰。",
+        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。",
+        "最长连续专注块偏短，后续可重点观察是什么因素把整块时间切碎了。"
       ],
       "longest_focus": {
         "category": "设计",
         "activity": "Figma.exe｜电商详情页 - Figma",
-        "seconds": 817.86,
-        "text": "13分",
-        "range": "14:07–14:20"
+        "seconds": 400.13,
+        "text": "6分",
+        "range": "01:52–01:59"
       },
       "energy": {
         "high_zone": "设计",
-        "fragmented_zone": "沟通",
+        "fragmented_zone": "工作/创作",
         "recovery_zone": "沟通",
         "confidence": "中",
         "evidence": [
-          "总活跃时长 6小时56分",
-          "窗口切换 1114 次",
-          "最长连续专注块 13分"
+          "总活跃时长 3小时11分",
+          "窗口切换 634 次",
+          "最长连续专注块 6分"
         ]
       },
       "hourly_seconds": {
-        "0": 0.0,
-        "1": 0.0,
-        "2": 0.0,
-        "3": 0.0,
+        "0": 3103.4,
+        "1": 3450.16,
+        "2": 3077.82,
+        "3": 1835.67,
         "4": 0.0,
         "5": 0.0,
         "6": 0.0,
         "7": 0.0,
         "8": 0.0,
-        "9": 2138.52,
-        "10": 3409.68,
-        "11": 3345.51,
-        "12": 691.7,
-        "13": 502.54,
-        "14": 3463.19,
-        "15": 3103.4,
-        "16": 3450.16,
-        "17": 3077.82,
-        "18": 1835.67,
+        "9": 0.0,
+        "10": 0.0,
+        "11": 0.0,
+        "12": 0.0,
+        "13": 0.0,
+        "14": 0.0,
+        "15": 0.0,
+        "16": 0.0,
+        "17": 0.0,
+        "18": 0.0,
         "19": 0.0,
         "20": 0.0,
         "21": 0.0,
         "22": 0.0,
-        "23": 0.0
+        "23": 6.48
       },
       "top_activities": [
         {
           "activity": "Figma.exe｜电商详情页 - Figma",
-          "seconds": 12341.48,
-          "text": "3小时25分"
+          "seconds": 5387.5,
+          "text": "1小时29分"
         },
         {
           "activity": "Hermes.exe｜Hermes",
-          "seconds": 3121.25,
-          "text": "52分"
+          "seconds": 1410.88,
+          "text": "23分"
         },
         {
           "activity": "Weixin.exe｜微信",
-          "seconds": 1834.37,
-          "text": "30分"
-        },
-        {
-          "activity": "Feishu.exe｜飞书",
-          "seconds": 1166.26,
-          "text": "19分"
-        },
-        {
-          "activity": "Feishu.exe｜bo-ecommerce-landing.html",
-          "seconds": 517.57,
-          "text": "8分"
-        },
-        {
-          "activity": "Snipaste.exe｜Snipper - Snipaste",
-          "seconds": 491.01,
-          "text": "8分"
+          "seconds": 645.68,
+          "text": "10分"
         },
         {
           "activity": "explorer.exe｜高清版 - 文件资源管理器",
@@ -1972,12 +1958,27 @@
           "text": "7分"
         },
         {
-          "activity": "WeChatAppEx.exe｜微信",
-          "seconds": 395.46,
+          "activity": "Feishu.exe｜飞书",
+          "seconds": 407.33,
           "text": "6分"
+        },
+        {
+          "activity": "Feishu.exe｜bo-ecommerce-landing.html",
+          "seconds": 394.14,
+          "text": "6分"
+        },
+        {
+          "activity": "chrome.exe｜个人工作台 · 时间、任务与复盘 - Google Chrome",
+          "seconds": 347.32,
+          "text": "5分"
+        },
+        {
+          "activity": "chrome.exe｜个人工作台 · 时间、任务与复盘",
+          "seconds": 299.1,
+          "text": "4分"
         }
       ],
-      "generated_at": "2026-07-17T23:02:45.476289+08:00"
+      "generated_at": "2026-07-17T19:40:08.870606-07:00"
     },
     {
       "date": "2026-07-04",
@@ -2037,13 +2038,13 @@
         "23": 0.0
       },
       "top_activities": [],
-      "generated_at": "2026-07-18T10:35:11.538967+08:00"
+      "generated_at": "2026-07-17T19:40:08.789940-07:00"
     },
     {
       "date": "2026-07-05",
       "weekday": "周日",
-      "total_active_seconds": 26279.57,
-      "total_active_text": "7小时18分",
+      "total_active_seconds": 23444.75,
+      "total_active_text": "6小时30分",
       "top_categories": [
         "工作/创作",
         "学习/信息",
@@ -2052,8 +2053,8 @@
       "categories": [
         {
           "name": "工作/创作",
-          "seconds": 10289.91,
-          "share": 0.3916,
+          "seconds": 10333.36,
+          "share": 0.4408,
           "representatives": [
             "Hermes.exe｜Hermes",
             "Codex.exe｜Codex",
@@ -2063,8 +2064,8 @@
         },
         {
           "name": "学习/信息",
-          "seconds": 4751.93,
-          "share": 0.1808,
+          "seconds": 4750.25,
+          "share": 0.2026,
           "representatives": [
             "chrome.exe｜个人工作台 · 时间、任务与复盘 - Google Chrome",
             "chrome.exe｜收藏到 Visualization design - Google Chrome",
@@ -2074,8 +2075,8 @@
         },
         {
           "name": "其他",
-          "seconds": 3634.17,
-          "share": 0.1383,
+          "seconds": 3719.78,
+          "share": 0.1587,
           "representatives": [
             "chrome.exe｜个人工作台 · 时间、任务与复盘",
             "Snipaste.exe｜Snipper - Snipaste",
@@ -2085,8 +2086,8 @@
         },
         {
           "name": "沟通",
-          "seconds": 2866.21,
-          "share": 0.1091,
+          "seconds": 3669.11,
+          "share": 0.1565,
           "representatives": [
             "Feishu.exe｜飞书会议",
             "Weixin.exe｜微信",
@@ -2095,1171 +2096,251 @@
           "color": "#5ad1e6"
         },
         {
-          "name": "娱乐",
-          "seconds": 2130.85,
-          "share": 0.0811,
-          "representatives": [
-            "ApplicationFrameHost.exe｜媒体播放器",
-            "douyin.exe｜抖音",
-            "chrome.exe｜社媒助手 - 小红书、抖音、哔哩哔哩、快手、TikTok数据采集工具 - Chrome 应用商店｜chromewebstore.google.com"
-          ],
-          "color": "#ff7d7d"
-        },
-        {
-          "name": "系统/维护",
-          "seconds": 2018.78,
-          "share": 0.0768,
-          "representatives": [
-            "explorer.exe",
-            "ShellHost.exe｜快速设置",
-            "explorer.exe｜Program Manager"
-          ],
-          "color": "#8a7dff"
-        },
-        {
           "name": "设计",
           "seconds": 587.71,
-          "share": 0.0224,
+          "share": 0.0251,
           "representatives": [
             "chrome.exe｜Sprrrint - Framer and Figma Templates, Component Library - Google Chrome",
             "chrome.exe｜Sprrrint - Framer and Figma Templates, Component Library｜www.pinterest.com"
           ],
           "color": "#f6bd16"
-        }
-      ],
-      "switch_count": 695,
-      "segment_count": 862,
-      "summary_line": "这一天共记录 7小时18分 的活跃电脑时间，主轴是“工作/创作”，切换密度偏高，像是在多线程推进。",
-      "notes": [
-        "主类目是“工作/创作”，占比 39.2%，说明当天最主要的电脑注意力投向比较清晰。",
-        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。"
-      ],
-      "longest_focus": {
-        "category": "系统/维护",
-        "activity": "explorer.exe",
-        "seconds": 1170.45,
-        "text": "19分",
-        "range": "14:12–14:17"
-      },
-      "energy": {
-        "high_zone": "工作/创作",
-        "fragmented_zone": "学习/信息",
-        "recovery_zone": "娱乐",
-        "confidence": "中",
-        "evidence": [
-          "总活跃时长 7小时18分",
-          "窗口切换 695 次",
-          "最长连续专注块 19分"
-        ]
-      },
-      "hourly_seconds": {
-        "0": 0.0,
-        "1": 0.0,
-        "2": 0.0,
-        "3": 0.0,
-        "4": 0.0,
-        "5": 0.0,
-        "6": 0.0,
-        "7": 0.0,
-        "8": 0.0,
-        "9": 0.0,
-        "10": 0.0,
-        "11": 0.0,
-        "12": 118.83,
-        "13": 2014.72,
-        "14": 2664.19,
-        "15": 3589.47,
-        "16": 2652.14,
-        "17": 2976.94,
-        "18": 1117.92,
-        "19": 2303.81,
-        "20": 2228.99,
-        "21": 3236.45,
-        "22": 1404.95,
-        "23": 1971.13
-      },
-      "top_activities": [
-        {
-          "activity": "Hermes.exe｜Hermes",
-          "seconds": 8599.65,
-          "text": "2小时23分"
-        },
-        {
-          "activity": "chrome.exe｜个人工作台 · 时间、任务与复盘 - Google Chrome",
-          "seconds": 3909.15,
-          "text": "1小时5分"
-        },
-        {
-          "activity": "Feishu.exe｜飞书会议",
-          "seconds": 2261.67,
-          "text": "37分"
-        },
-        {
-          "activity": "ApplicationFrameHost.exe｜媒体播放器",
-          "seconds": 1699.87,
-          "text": "28分"
-        },
-        {
-          "activity": "chrome.exe｜个人工作台 · 时间、任务与复盘",
-          "seconds": 1377.1,
-          "text": "22分"
-        },
-        {
-          "activity": "explorer.exe",
-          "seconds": 1352.54,
-          "text": "22分"
-        },
-        {
-          "activity": "Snipaste.exe｜Snipper - Snipaste",
-          "seconds": 688.46,
-          "text": "11分"
-        },
-        {
-          "activity": "chrome.exe｜App interfaces, dashboards, widgets｜www.pinterest.com",
-          "seconds": 615.03,
-          "text": "10分"
-        }
-      ],
-      "generated_at": "2026-07-18T10:35:11.538967+08:00"
-    },
-    {
-      "date": "2026-07-06",
-      "weekday": "周一",
-      "total_active_seconds": 28330.61,
-      "total_active_text": "7小时52分",
-      "top_categories": [
-        "沟通",
-        "工作/创作",
-        "其他"
-      ],
-      "categories": [
-        {
-          "name": "沟通",
-          "seconds": 8770.8,
-          "share": 0.3096,
-          "representatives": [
-            "Weixin.exe｜微信",
-            "WeChatAppEx.exe｜微信",
-            "Feishu.exe｜飞书"
-          ],
-          "color": "#5ad1e6"
-        },
-        {
-          "name": "工作/创作",
-          "seconds": 7432.5,
-          "share": 0.2623,
-          "representatives": [
-            "Hermes.exe｜Hermes",
-            "Codex.exe｜Codex",
-            "chrome.exe｜ChatGPT - Google Chrome"
-          ],
-          "color": "#7aa2ff"
-        },
-        {
-          "name": "其他",
-          "seconds": 6121.33,
-          "share": 0.2161,
-          "representatives": [
-            "chrome.exe｜Typeless | 实际智能的AI语音听写｜www.typeless.com",
-            "chrome.exe｜Wispr Flow | Effortless Voice Dictation｜wisprflow.ai",
-            "chrome.exe｜(60) Pinterest｜www.pinterest.com"
-          ],
-          "color": "#cbd5e1"
-        },
-        {
-          "name": "学习/信息",
-          "seconds": 3471.54,
-          "share": 0.1225,
-          "representatives": [
-            "chrome.exe｜(60) Pinterest - Google Chrome",
-            "chrome.exe｜个人工作台 · 时间、任务与复盘 - Google Chrome",
-            "chrome.exe｜翻译 - Google 搜索｜www.google.com"
-          ],
-          "color": "#61ddaa"
-        },
-        {
-          "name": "设计",
-          "seconds": 1296.73,
-          "share": 0.0458,
-          "representatives": [
-            "Figma.exe｜APP 详情页 - Figma",
-            "Figma.exe｜商品图-详情页 - Figma",
-            "AfterFX.exe｜Adobe After Effects 2020 - 无标题项目.aep"
-          ],
-          "color": "#f6bd16"
         },
         {
           "name": "系统/维护",
-          "seconds": 813.04,
-          "share": 0.0287,
+          "seconds": 373.24,
+          "share": 0.0159,
           "representatives": [
-            "explorer.exe｜暂时不用 - 文件资源管理器",
             "explorer.exe｜Program Manager",
-            "explorer.exe"
+            "explorer.exe",
+            "ShellHost.exe｜快速设置"
           ],
           "color": "#8a7dff"
         },
         {
           "name": "娱乐",
-          "seconds": 424.67,
-          "share": 0.015,
+          "seconds": 11.3,
+          "share": 0.0005,
           "representatives": [
-            "steamwebhelper.exe｜登录 Steam",
-            "steamwebhelper.exe｜登录方面的帮助",
-            "chrome.exe｜gpt plus免费没有visa卡 - YouTube｜www.youtube.com"
+            "ApplicationFrameHost.exe｜媒体播放器",
+            "chrome.exe｜社媒助手 - 小红书、抖音、哔哩哔哩、快手、TikTok数据采集工具 - Chrome 应用商店｜chromewebstore.google.com"
           ],
           "color": "#ff7d7d"
         }
       ],
-      "switch_count": 1108,
-      "segment_count": 1387,
-      "summary_line": "这一天共记录 7小时52分 的活跃电脑时间，主轴是“沟通”，切换密度偏高，像是在多线程推进。",
+      "switch_count": 701,
+      "segment_count": 844,
+      "summary_line": "这一天共记录 6小时30分 的活跃电脑时间，主轴是“工作/创作”，切换密度偏高，像是在多线程推进。",
       "notes": [
-        "主类目是“沟通”，占比 31.0%，说明当天最主要的电脑注意力投向比较清晰。",
+        "主类目是“工作/创作”，占比 44.1%，说明当天最主要的电脑注意力投向比较清晰。",
         "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。"
       ],
       "longest_focus": {
         "category": "工作/创作",
-        "activity": "chrome.exe｜ChatGPT - Google Chrome",
-        "seconds": 1065.08,
-        "text": "17分",
-        "range": "13:28–13:42"
+        "activity": "Hermes.exe｜Hermes",
+        "seconds": 778.44,
+        "text": "12分",
+        "range": "01:50–01:53"
       },
       "energy": {
-        "high_zone": "沟通",
-        "fragmented_zone": "工作/创作",
+        "high_zone": "工作/创作",
+        "fragmented_zone": "学习/信息",
         "recovery_zone": "沟通",
         "confidence": "中",
         "evidence": [
-          "总活跃时长 7小时52分",
-          "窗口切换 1108 次",
-          "最长连续专注块 17分"
+          "总活跃时长 6小时30分",
+          "窗口切换 701 次",
+          "最长连续专注块 12分"
         ]
       },
       "hourly_seconds": {
-        "0": 1958.57,
-        "1": 0.0,
-        "2": 0.0,
-        "3": 0.0,
-        "4": 0.0,
-        "5": 0.0,
-        "6": 0.0,
-        "7": 0.0,
-        "8": 0.0,
-        "9": 1956.81,
-        "10": 3408.37,
-        "11": 3386.34,
-        "12": 1468.3,
-        "13": 1603.98,
-        "14": 3334.8,
-        "15": 2856.42,
-        "16": 3144.65,
-        "17": 3002.14,
-        "18": 2210.22,
+        "0": 3589.47,
+        "1": 2652.14,
+        "2": 2976.94,
+        "3": 1117.92,
+        "4": 2303.81,
+        "5": 2228.99,
+        "6": 3236.45,
+        "7": 1404.95,
+        "8": 1971.13,
+        "9": 1958.57,
+        "10": 0.0,
+        "11": 0.0,
+        "12": 0.0,
+        "13": 0.0,
+        "14": 0.0,
+        "15": 0.0,
+        "16": 0.0,
+        "17": 0.0,
+        "18": 0.0,
         "19": 0.0,
         "20": 0.0,
         "21": 0.0,
         "22": 0.0,
-        "23": 0.0
+        "23": 4.35
       },
       "top_activities": [
-        {
-          "activity": "Weixin.exe｜微信",
-          "seconds": 6869.19,
-          "text": "1小时54分"
-        },
         {
           "activity": "Hermes.exe｜Hermes",
-          "seconds": 2094.87,
-          "text": "34分"
+          "seconds": 8577.01,
+          "text": "2小时22分"
         },
         {
-          "activity": "Codex.exe｜Codex",
-          "seconds": 1311.99,
+          "activity": "chrome.exe｜个人工作台 · 时间、任务与复盘 - Google Chrome",
+          "seconds": 3907.48,
+          "text": "1小时5分"
+        },
+        {
+          "activity": "Feishu.exe｜飞书会议",
+          "seconds": 2275.04,
+          "text": "37分"
+        },
+        {
+          "activity": "chrome.exe｜个人工作台 · 时间、任务与复盘",
+          "seconds": 1315.11,
           "text": "21分"
-        },
-        {
-          "activity": "chrome.exe｜ChatGPT - Google Chrome",
-          "seconds": 1294.01,
-          "text": "21分"
-        },
-        {
-          "activity": "chrome.exe｜(60) Pinterest - Google Chrome",
-          "seconds": 1214.15,
-          "text": "20分"
-        },
-        {
-          "activity": "Figma.exe｜APP 详情页 - Figma",
-          "seconds": 826.73,
-          "text": "13分"
-        },
-        {
-          "activity": "chrome.exe｜Typeless | 实际智能的AI语音听写｜www.typeless.com",
-          "seconds": 640.01,
-          "text": "10分"
-        },
-        {
-          "activity": "chrome.exe｜Wispr Flow | Effortless Voice Dictation｜wisprflow.ai",
-          "seconds": 639.61,
-          "text": "10分"
-        }
-      ],
-      "generated_at": "2026-07-18T10:35:11.105692+08:00"
-    },
-    {
-      "date": "2026-07-07",
-      "weekday": "周二",
-      "total_active_seconds": 31705.64,
-      "total_active_text": "8小时48分",
-      "top_categories": [
-        "工作/创作",
-        "其他",
-        "学习/信息"
-      ],
-      "categories": [
-        {
-          "name": "工作/创作",
-          "seconds": 11114.9,
-          "share": 0.3506,
-          "representatives": [
-            "Codex.exe｜Codex",
-            "chrome.exe｜HTML与CMS关系解释｜chatgpt.com",
-            "chrome.exe｜Pencil – Design on canvas. Land in code.｜www.pencil.dev"
-          ],
-          "color": "#7aa2ff"
-        },
-        {
-          "name": "其他",
-          "seconds": 8991.4,
-          "share": 0.2836,
-          "representatives": [
-            "chrome.exe｜Typeless | 实际智能的AI语音听写｜localhost:3000",
-            "chrome.exe｜(60) Pinterest｜www.pinterest.com",
-            "chrome.exe｜Best Note Taking App - Organize Your Notes with Evernote｜evernote.com"
-          ],
-          "color": "#cbd5e1"
-        },
-        {
-          "name": "学习/信息",
-          "seconds": 5448.73,
-          "share": 0.1719,
-          "representatives": [
-            "chrome.exe｜(60) Pinterest - Google Chrome",
-            "chrome.exe｜Typeless | 实际智能的AI语音听写 - Google Chrome",
-            "chrome.exe｜个人工作台 · 时间、任务与复盘 - Google Chrome"
-          ],
-          "color": "#61ddaa"
-        },
-        {
-          "name": "系统/维护",
-          "seconds": 3901.11,
-          "share": 0.123,
-          "representatives": [
-            "explorer.exe｜新加卷 (E:) - 文件资源管理器",
-            "explorer.exe｜Program Manager",
-            "explorer.exe"
-          ],
-          "color": "#8a7dff"
-        },
-        {
-          "name": "沟通",
-          "seconds": 1459.76,
-          "share": 0.046,
-          "representatives": [
-            "Weixin.exe｜微信",
-            "Feishu.exe｜飞书",
-            "WeChatAppEx.exe｜微信"
-          ],
-          "color": "#5ad1e6"
-        },
-        {
-          "name": "设计",
-          "seconds": 545.32,
-          "share": 0.0172,
-          "representatives": [
-            "chrome.exe｜键盘 – Figma｜www.figma.com",
-            "chrome.exe｜Just a quick share for everyone! I’ve gathered a couple of the best portfolio designs from Canva that can really help aspiring Virtual Assistants and freelancers get started or level up their personal branding. If you’re struggling on how to present your skills or don’t know where to begin, this might give you some inspiration and direction 💻 Remember, your portfolio is your first impression make it count! Stay tuned, I’ll be sharing more soon 👀check comment section - Google Chrome",
-            "Figma.exe｜APP 详情页 - Figma"
-          ],
-          "color": "#f6bd16"
-        },
-        {
-          "name": "生活/杂务",
-          "seconds": 173.54,
-          "share": 0.0055,
-          "representatives": [
-            "chrome.exe｜Workshops visual | Creative Ads Visual for LinkedIn | Linkedist Social Media Design｜www.pinterest.com"
-          ],
-          "color": "#ffa940"
-        },
-        {
-          "name": "娱乐",
-          "seconds": 70.88,
-          "share": 0.0022,
-          "representatives": [
-            "ApplicationFrameHost.exe｜媒体播放器",
-            "explorer.exe｜深造播放器 - 文件资源管理器",
-            "explorer.exe｜CloudMusic - 文件资源管理器"
-          ],
-          "color": "#ff7d7d"
-        }
-      ],
-      "switch_count": 1458,
-      "segment_count": 1805,
-      "summary_line": "这一天共记录 8小时48分 的活跃电脑时间，主轴是“工作/创作”，切换密度偏高，像是在多线程推进。",
-      "notes": [
-        "主类目是“工作/创作”，占比 35.1%，说明当天最主要的电脑注意力投向比较清晰。",
-        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。",
-        "最长连续专注块偏短，后续可重点观察是什么因素把整块时间切碎了。"
-      ],
-      "longest_focus": {
-        "category": "系统/维护",
-        "activity": "explorer.exe｜Program Manager",
-        "seconds": 378.41,
-        "text": "6分",
-        "range": "12:37–12:39"
-      },
-      "energy": {
-        "high_zone": "工作/创作",
-        "fragmented_zone": "其他",
-        "recovery_zone": "无明显恢复区",
-        "confidence": "中",
-        "evidence": [
-          "总活跃时长 8小时48分",
-          "窗口切换 1458 次",
-          "最长连续专注块 6分"
-        ]
-      },
-      "hourly_seconds": {
-        "0": 0.0,
-        "1": 0.0,
-        "2": 0.0,
-        "3": 0.0,
-        "4": 0.0,
-        "5": 0.0,
-        "6": 0.0,
-        "7": 0.0,
-        "8": 0.0,
-        "9": 2266.05,
-        "10": 3143.35,
-        "11": 3372.19,
-        "12": 2034.45,
-        "13": 2933.81,
-        "14": 2379.03,
-        "15": 3226.94,
-        "16": 3322.03,
-        "17": 3366.07,
-        "18": 2984.27,
-        "19": 2525.41,
-        "20": 152.04,
-        "21": 0.0,
-        "22": 0.0,
-        "23": 0.0
-      },
-      "top_activities": [
-        {
-          "activity": "Codex.exe｜Codex",
-          "seconds": 6969.08,
-          "text": "1小时56分"
-        },
-        {
-          "activity": "chrome.exe｜Typeless | 实际智能的AI语音听写｜localhost:3000",
-          "seconds": 3051.73,
-          "text": "50分"
-        },
-        {
-          "activity": "chrome.exe｜(60) Pinterest - Google Chrome",
-          "seconds": 1590.91,
-          "text": "26分"
-        },
-        {
-          "activity": "explorer.exe｜新加卷 (E:) - 文件资源管理器",
-          "seconds": 1381.12,
-          "text": "23分"
-        },
-        {
-          "activity": "explorer.exe｜Program Manager",
-          "seconds": 1190.86,
-          "text": "19分"
-        },
-        {
-          "activity": "chrome.exe｜(60) Pinterest｜www.pinterest.com",
-          "seconds": 1019.4,
-          "text": "16分"
-        },
-        {
-          "activity": "chrome.exe｜Typeless | 实际智能的AI语音听写 - Google Chrome",
-          "seconds": 950.45,
-          "text": "15分"
-        },
-        {
-          "activity": "chrome.exe｜HTML与CMS关系解释｜chatgpt.com",
-          "seconds": 893.97,
-          "text": "14分"
-        }
-      ],
-      "generated_at": "2026-07-18T10:35:10.292476+08:00"
-    },
-    {
-      "date": "2026-07-08",
-      "weekday": "周三",
-      "total_active_seconds": 26267.04,
-      "total_active_text": "7小时17分",
-      "top_categories": [
-        "工作/创作",
-        "其他",
-        "设计"
-      ],
-      "categories": [
-        {
-          "name": "工作/创作",
-          "seconds": 10522.31,
-          "share": 0.4006,
-          "representatives": [
-            "Codex.exe｜Codex",
-            "chrome.exe｜分支 · 产品演示动画设计｜chatgpt.com",
-            "chrome.exe｜3D手机界面生成器｜chatgpt.com"
-          ],
-          "color": "#7aa2ff"
-        },
-        {
-          "name": "其他",
-          "seconds": 4986.96,
-          "share": 0.1899,
-          "representatives": [
-            "chrome.exe｜Typeless | 实际智能的AI语音听写｜localhost:3000",
-            "chrome.exe｜定价 | 实际智能的AI语音听写｜www.typeless.com",
-            "chrome.exe｜新标签页｜newtab"
-          ],
-          "color": "#cbd5e1"
-        },
-        {
-          "name": "设计",
-          "seconds": 4757.02,
-          "share": 0.1811,
-          "representatives": [
-            "Figma.exe｜APP 详情页 - Figma",
-            "Figma.exe｜选择文件夹",
-            "Figma.exe｜另存为"
-          ],
-          "color": "#f6bd16"
-        },
-        {
-          "name": "学习/信息",
-          "seconds": 4260.35,
-          "share": 0.1622,
-          "representatives": [
-            "chrome.exe｜Typeless | 实际智能的AI语音听写 - Google Chrome",
-            "chrome.exe｜(61) Pinterest - Google Chrome",
-            "chrome.exe｜花瓣 - Google 搜索｜www.google.com.hk"
-          ],
-          "color": "#61ddaa"
-        },
-        {
-          "name": "系统/维护",
-          "seconds": 653.88,
-          "share": 0.0249,
-          "representatives": [
-            "explorer.exe",
-            "clash-verge.exe｜Clash Verge",
-            "explorer.exe｜Program Manager"
-          ],
-          "color": "#8a7dff"
-        },
-        {
-          "name": "沟通",
-          "seconds": 598.11,
-          "share": 0.0228,
-          "representatives": [
-            "Weixin.exe｜微信",
-            "Feishu.exe｜飞书",
-            "dwm.exe｜微信 (未响应)"
-          ],
-          "color": "#5ad1e6"
-        },
-        {
-          "name": "娱乐",
-          "seconds": 488.41,
-          "share": 0.0186,
-          "representatives": [
-            "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
-            "哔哩哔哩.exe｜如何快速让 AI 复刻任何网页设计？",
-            "哔哩哔哩.exe｜3招拯救Vibecoding丑设计！拥有大厂级 UI"
-          ],
-          "color": "#ff7d7d"
-        }
-      ],
-      "switch_count": 1016,
-      "segment_count": 1368,
-      "summary_line": "这一天共记录 7小时17分 的活跃电脑时间，主轴是“工作/创作”，切换密度偏高，像是在多线程推进。",
-      "notes": [
-        "主类目是“工作/创作”，占比 40.1%，说明当天最主要的电脑注意力投向比较清晰。",
-        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。"
-      ],
-      "longest_focus": {
-        "category": "设计",
-        "activity": "Figma.exe｜APP 详情页 - Figma",
-        "seconds": 800.4,
-        "text": "13分",
-        "range": "09:49–10:03"
-      },
-      "energy": {
-        "high_zone": "工作/创作",
-        "fragmented_zone": "其他",
-        "recovery_zone": "无明显恢复区",
-        "confidence": "中",
-        "evidence": [
-          "总活跃时长 7小时17分",
-          "窗口切换 1016 次",
-          "最长连续专注块 13分"
-        ]
-      },
-      "hourly_seconds": {
-        "0": 0.0,
-        "1": 0.0,
-        "2": 0.0,
-        "3": 0.0,
-        "4": 0.0,
-        "5": 0.0,
-        "6": 0.0,
-        "7": 0.0,
-        "8": 0.0,
-        "9": 2395.17,
-        "10": 2380.03,
-        "11": 2937.54,
-        "12": 1114.01,
-        "13": 2273.23,
-        "14": 2977.06,
-        "15": 3354.93,
-        "16": 2761.94,
-        "17": 2569.71,
-        "18": 3273.39,
-        "19": 230.04,
-        "20": 0.0,
-        "21": 0.0,
-        "22": 0.0,
-        "23": 0.0
-      },
-      "top_activities": [
-        {
-          "activity": "Codex.exe｜Codex",
-          "seconds": 8044.9,
-          "text": "2小时14分"
-        },
-        {
-          "activity": "Figma.exe｜APP 详情页 - Figma",
-          "seconds": 4707.65,
-          "text": "1小时18分"
-        },
-        {
-          "activity": "chrome.exe｜Typeless | 实际智能的AI语音听写｜localhost:3000",
-          "seconds": 1785.69,
-          "text": "29分"
-        },
-        {
-          "activity": "chrome.exe｜Typeless | 实际智能的AI语音听写 - Google Chrome",
-          "seconds": 1435.12,
-          "text": "23分"
-        },
-        {
-          "activity": "chrome.exe｜分支 · 产品演示动画设计｜chatgpt.com",
-          "seconds": 860.38,
-          "text": "14分"
         },
         {
           "activity": "Weixin.exe｜微信",
-          "seconds": 496.77,
-          "text": "8分"
-        },
-        {
-          "activity": "chrome.exe｜3D手机界面生成器｜chatgpt.com",
-          "seconds": 420.38,
-          "text": "7分"
-        },
-        {
-          "activity": "chrome.exe｜定价 | 实际智能的AI语音听写｜www.typeless.com",
-          "seconds": 399.57,
-          "text": "6分"
-        }
-      ],
-      "generated_at": "2026-07-18T10:35:08.922650+08:00"
-    },
-    {
-      "date": "2026-07-09",
-      "weekday": "周四",
-      "total_active_seconds": 26729.84,
-      "total_active_text": "7小时25分",
-      "top_categories": [
-        "工作/创作",
-        "其他",
-        "学习/信息"
-      ],
-      "categories": [
-        {
-          "name": "工作/创作",
-          "seconds": 9937.77,
-          "share": 0.3718,
-          "representatives": [
-            "Codex.exe｜Codex",
-            "chrome.exe｜详情页文案生成｜chatgpt.com",
-            "chrome.exe｜灵感网站推荐｜chatgpt.com"
-          ],
-          "color": "#7aa2ff"
-        },
-        {
-          "name": "其他",
-          "seconds": 6185.53,
-          "share": 0.2314,
-          "representatives": [
-            "chrome.exe｜嘴替键盘 | AI聊天回复键盘｜127.0.0.1:3001",
-            "Snipaste.exe｜Snipper - Snipaste",
-            "chrome.exe｜Higher Europe – Framer｜framer.com"
-          ],
-          "color": "#cbd5e1"
-        },
-        {
-          "name": "学习/信息",
-          "seconds": 4957.96,
-          "share": 0.1855,
-          "representatives": [
-            "chrome.exe｜嘴替键盘 | AI聊天回复键盘 - Google Chrome",
-            "chrome.exe｜Typeless | 实际智能的AI语音听写 - Google Chrome",
-            "chrome.exe｜(62) Pinterest - Google Chrome"
-          ],
-          "color": "#61ddaa"
-        },
-        {
-          "name": "设计",
-          "seconds": 2866.56,
-          "share": 0.1072,
-          "representatives": [
-            "Figma.exe｜APP 详情页 - Figma",
-            "Figma.exe｜选择文件夹",
-            "Figma.exe｜Replace Existing Files"
-          ],
-          "color": "#f6bd16"
-        },
-        {
-          "name": "沟通",
-          "seconds": 2277.41,
-          "share": 0.0852,
-          "representatives": [
-            "Feishu.exe｜飞书",
-            "Weixin.exe｜微信",
-            "chrome.exe｜Proton Mail: Get a free email account with privacy and encryption | Proton - Google Chrome"
-          ],
-          "color": "#5ad1e6"
-        },
-        {
-          "name": "系统/维护",
-          "seconds": 485.05,
-          "share": 0.0181,
-          "representatives": [
-            "explorer.exe",
-            "explorer.exe｜Program Manager",
-            "explorer.exe｜新加卷 (E:) - 文件资源管理器"
-          ],
-          "color": "#8a7dff"
-        },
-        {
-          "name": "生活/杂务",
-          "seconds": 19.55,
-          "share": 0.0007,
-          "representatives": [
-            "chrome.exe｜美团 - 帮大家吃得更好，生活更好｜www.meituan.com"
-          ],
-          "color": "#ffa940"
-        }
-      ],
-      "switch_count": 1303,
-      "segment_count": 1645,
-      "summary_line": "这一天共记录 7小时25分 的活跃电脑时间，主轴是“工作/创作”，切换密度偏高，像是在多线程推进。",
-      "notes": [
-        "主类目是“工作/创作”，占比 37.2%，说明当天最主要的电脑注意力投向比较清晰。",
-        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。",
-        "最长连续专注块偏短，后续可重点观察是什么因素把整块时间切碎了。"
-      ],
-      "longest_focus": {
-        "category": "其他",
-        "activity": "chrome.exe｜嘴替键盘 | AI聊天回复键盘｜127.0.0.1:3001",
-        "seconds": 591.82,
-        "text": "9分",
-        "range": "17:26–17:36"
-      },
-      "energy": {
-        "high_zone": "工作/创作",
-        "fragmented_zone": "其他",
-        "recovery_zone": "无明显恢复区",
-        "confidence": "中",
-        "evidence": [
-          "总活跃时长 7小时25分",
-          "窗口切换 1303 次",
-          "最长连续专注块 9分"
-        ]
-      },
-      "hourly_seconds": {
-        "0": 0.0,
-        "1": 0.0,
-        "2": 0.0,
-        "3": 0.0,
-        "4": 0.0,
-        "5": 0.0,
-        "6": 0.0,
-        "7": 0.0,
-        "8": 0.0,
-        "9": 1094.06,
-        "10": 3130.55,
-        "11": 3121.7,
-        "12": 2990.34,
-        "13": 1283.68,
-        "14": 3321.91,
-        "15": 3353.06,
-        "16": 3265.44,
-        "17": 3203.84,
-        "18": 1965.25,
-        "19": 0.0,
-        "20": 0.0,
-        "21": 0.0,
-        "22": 0.0,
-        "23": 0.0
-      },
-      "top_activities": [
-        {
-          "activity": "Codex.exe｜Codex",
-          "seconds": 7324.2,
-          "text": "2小时2分"
-        },
-        {
-          "activity": "Figma.exe｜APP 详情页 - Figma",
-          "seconds": 2862.44,
-          "text": "47分"
-        },
-        {
-          "activity": "chrome.exe｜嘴替键盘 | AI聊天回复键盘 - Google Chrome",
-          "seconds": 1700.15,
-          "text": "28分"
-        },
-        {
-          "activity": "chrome.exe｜嘴替键盘 | AI聊天回复键盘｜127.0.0.1:3001",
-          "seconds": 1615.47,
-          "text": "26分"
-        },
-        {
-          "activity": "Feishu.exe｜飞书",
-          "seconds": 1325.11,
-          "text": "22分"
-        },
-        {
-          "activity": "chrome.exe｜Typeless | 实际智能的AI语音听写 - Google Chrome",
-          "seconds": 1193.05,
-          "text": "19分"
-        },
-        {
-          "activity": "chrome.exe｜详情页文案生成｜chatgpt.com",
-          "seconds": 794.3,
-          "text": "13分"
+          "seconds": 1218.07,
+          "text": "20分"
         },
         {
           "activity": "Snipaste.exe｜Snipper - Snipaste",
-          "seconds": 725.81,
-          "text": "12分"
+          "seconds": 683.33,
+          "text": "11分"
+        },
+        {
+          "activity": "chrome.exe｜App interfaces, dashboards, widgets｜www.pinterest.com",
+          "seconds": 633.63,
+          "text": "10分"
+        },
+        {
+          "activity": "chrome.exe｜收藏到 Visualization design - Google Chrome",
+          "seconds": 512.51,
+          "text": "8分"
         }
       ],
-      "generated_at": "2026-07-18T10:35:08.520803+08:00"
+      "generated_at": "2026-07-17T19:40:08.789940-07:00"
     },
     {
-      "date": "2026-07-10",
-      "weekday": "周五",
-      "total_active_seconds": 32412.3,
-      "total_active_text": "9小时",
+      "date": "2026-07-06",
+      "weekday": "周一",
+      "total_active_seconds": 11213.43,
+      "total_active_text": "3小时6分",
       "top_categories": [
-        "学习/信息",
-        "工作/创作",
-        "其他"
+        "沟通",
+        "其他",
+        "工作/创作"
       ],
       "categories": [
         {
-          "name": "学习/信息",
-          "seconds": 7729.33,
-          "share": 0.2385,
+          "name": "沟通",
+          "seconds": 4806.03,
+          "share": 0.4286,
           "representatives": [
-            "chrome.exe｜嘴替键盘 | AI聊天回复键盘 - Google Chrome",
-            "chrome.exe｜(63) Pinterest - Google Chrome",
-            "chrome.exe｜收藏到 app store screenshots - Google Chrome"
+            "Weixin.exe｜微信",
+            "WeChatAppEx.exe｜微信",
+            "chrome.exe｜Base App｜qcnnv0ahl6aw.feishu.cn"
           ],
-          "color": "#61ddaa"
-        },
-        {
-          "name": "工作/创作",
-          "seconds": 6291.39,
-          "share": 0.1941,
-          "representatives": [
-            "ChatGPT.exe｜ChatGPT",
-            "msedge.exe｜Work模式与Codex额度｜chatgpt.com",
-            "msedge.exe｜chatgpt - Google 搜索｜www.google.com.hk"
-          ],
-          "color": "#7aa2ff"
+          "color": "#5ad1e6"
         },
         {
           "name": "其他",
-          "seconds": 6266.23,
-          "share": 0.1933,
+          "seconds": 2203.59,
+          "share": 0.1965,
           "representatives": [
-            "chrome.exe｜嘴替键盘 | AI聊天回复键盘｜127.0.0.1:3001",
-            "chrome.exe｜(63) Pinterest｜www.pinterest.com",
-            "Snipaste.exe｜Snipper - Snipaste"
+            "chrome.exe｜Wispr Flow | Effortless Voice Dictation｜wisprflow.ai",
+            "chrome.exe｜Webflow: The agentic web platform for modern businesses｜webflow.com",
+            "chrome.exe｜Typeless | 实际智能的AI语音听写｜www.typeless.com"
           ],
           "color": "#cbd5e1"
         },
         {
-          "name": "设计",
-          "seconds": 4542.07,
-          "share": 0.1401,
+          "name": "工作/创作",
+          "seconds": 2118.65,
+          "share": 0.1889,
           "representatives": [
-            "Figma.exe｜APP 详情页 - Figma",
-            "哔哩哔哩.exe｜猫Sir | figma交互 弹窗还可以这样弹？",
-            "哔哩哔哩.exe｜猫sir | figma交互 下拉列表下拉菜单效果"
+            "Codex.exe｜Codex",
+            "chrome.exe｜优秀产品Landing Page推荐｜chatgpt.com",
+            "chrome.exe｜web-clone-prompt — Build-ready prompts for web clone work｜xiaopu-ai.github.io"
           ],
-          "color": "#f6bd16"
-        },
-        {
-          "name": "沟通",
-          "seconds": 3497.52,
-          "share": 0.1079,
-          "representatives": [
-            "Weixin.exe｜微信",
-            "Feishu.exe｜飞书",
-            "Feishu.exe｜图片"
-          ],
-          "color": "#5ad1e6"
-        },
-        {
-          "name": "娱乐",
-          "seconds": 2296.14,
-          "share": 0.0708,
-          "representatives": [
-            "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
-            "哔哩哔哩.exe｜武亮能够代替张雪峰吗？解析为何大众这么抵制他的深层原因…",
-            "哔哩哔哩.exe｜董路怒斥孙继海拿着踢球的光环来搞青训，一场对外比赛都不踢，纯粹扯淡！"
-          ],
-          "color": "#ff7d7d"
-        },
-        {
-          "name": "系统/维护",
-          "seconds": 1789.62,
-          "share": 0.0552,
-          "representatives": [
-            "explorer.exe",
-            "explorer.exe｜Program Manager",
-            "explorer.exe｜新加卷 (E:) - 文件资源管理器"
-          ],
-          "color": "#8a7dff"
-        }
-      ],
-      "switch_count": 1532,
-      "segment_count": 1780,
-      "summary_line": "这一天共记录 9小时 的活跃电脑时间，主轴是“学习/信息”，切换密度偏高，像是在多线程推进。",
-      "notes": [
-        "主类目是“学习/信息”，占比 23.8%，说明当天最主要的电脑注意力投向比较清晰。",
-        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。"
-      ],
-      "longest_focus": {
-        "category": "娱乐",
-        "activity": "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
-        "seconds": 649.89,
-        "text": "10分",
-        "range": "19:52–20:03"
-      },
-      "energy": {
-        "high_zone": "学习/信息",
-        "fragmented_zone": "工作/创作",
-        "recovery_zone": "无明显恢复区",
-        "confidence": "中",
-        "evidence": [
-          "总活跃时长 9小时",
-          "窗口切换 1532 次",
-          "最长连续专注块 10分"
-        ]
-      },
-      "hourly_seconds": {
-        "0": 0.0,
-        "1": 0.0,
-        "2": 0.0,
-        "3": 0.0,
-        "4": 0.0,
-        "5": 0.0,
-        "6": 0.0,
-        "7": 0.0,
-        "8": 0.0,
-        "9": 1989.23,
-        "10": 3035.4,
-        "11": 3152.53,
-        "12": 1324.64,
-        "13": 1575.47,
-        "14": 3052.25,
-        "15": 2787.14,
-        "16": 3215.67,
-        "17": 1528.7,
-        "18": 0.0,
-        "19": 1604.13,
-        "20": 3299.39,
-        "21": 2421.78,
-        "22": 2980.03,
-        "23": 445.95
-      },
-      "top_activities": [
-        {
-          "activity": "ChatGPT.exe｜ChatGPT",
-          "seconds": 5463.45,
-          "text": "1小时31分"
-        },
-        {
-          "activity": "Figma.exe｜APP 详情页 - Figma",
-          "seconds": 4472.08,
-          "text": "1小时14分"
-        },
-        {
-          "activity": "chrome.exe｜嘴替键盘 | AI聊天回复键盘 - Google Chrome",
-          "seconds": 2350.42,
-          "text": "39分"
-        },
-        {
-          "activity": "chrome.exe｜嘴替键盘 | AI聊天回复键盘｜127.0.0.1:3001",
-          "seconds": 2082.15,
-          "text": "34分"
-        },
-        {
-          "activity": "Weixin.exe｜微信",
-          "seconds": 1782.11,
-          "text": "29分"
-        },
-        {
-          "activity": "Feishu.exe｜飞书",
-          "seconds": 1559.04,
-          "text": "25分"
-        },
-        {
-          "activity": "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
-          "seconds": 1259.03,
-          "text": "20分"
-        },
-        {
-          "activity": "explorer.exe",
-          "seconds": 905.23,
-          "text": "15分"
-        }
-      ],
-      "generated_at": "2026-07-18T10:35:08.063064+08:00"
-    },
-    {
-      "date": "2026-07-11",
-      "weekday": "周六",
-      "total_active_seconds": 11243.86,
-      "total_active_text": "3小时7分",
-      "top_categories": [
-        "娱乐",
-        "沟通",
-        "学习/信息"
-      ],
-      "categories": [
-        {
-          "name": "娱乐",
-          "seconds": 10254.43,
-          "share": 0.912,
-          "representatives": [
-            "douyin.exe｜抖音",
-            "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
-            "哔哩哔哩.exe｜拒绝 AI 廉价感，如何开发一个好看 App？AI Coding 实录，从原型到上架的全流程分享【B站AI创造公开赛】"
-          ],
-          "color": "#ff7d7d"
-        },
-        {
-          "name": "沟通",
-          "seconds": 397.61,
-          "share": 0.0354,
-          "representatives": [
-            "Weixin.exe｜微信",
-            "WeChatAppEx.exe｜微信",
-            "WeChatAppEx.exe"
-          ],
-          "color": "#5ad1e6"
+          "color": "#7aa2ff"
         },
         {
           "name": "学习/信息",
-          "seconds": 360.88,
-          "share": 0.0321,
+          "seconds": 947.99,
+          "share": 0.0845,
           "representatives": [
-            "msedge.exe｜且曼学院 和另外 3 个页面 - 个人 - Microsoft​ Edge",
-            "msedge.exe｜小鹅通学员版线上学习-小鹅通学员版-小鹅通 和另外 3 个页面 - 个人 - Microsoft​ Edge",
-            "msedge.exe｜小鹅通-鹅圈子-登录页 和另外 3 个页面 - 个人 - Microsoft​ Edge"
+            "chrome.exe｜Landing page设计解析 - Google Chrome",
+            "chrome.exe｜web-clone-prompt — Build-ready prompts for web clone work - Google Chrome",
+            "chrome.exe｜任务进度管理 - 飞书云文档 - Google Chrome"
           ],
           "color": "#61ddaa"
         },
         {
           "name": "系统/维护",
-          "seconds": 167.56,
-          "share": 0.0149,
+          "seconds": 606.58,
+          "share": 0.0541,
           "representatives": [
-            "explorer.exe",
-            "clash-verge.exe｜Clash Verge",
+            "explorer.exe｜暂时不用 - 文件资源管理器",
+            "explorer.exe｜此电脑 - 文件资源管理器",
             "explorer.exe｜Program Manager"
           ],
           "color": "#8a7dff"
         },
         {
-          "name": "工作/创作",
-          "seconds": 50.18,
-          "share": 0.0045,
+          "name": "设计",
+          "seconds": 267.23,
+          "share": 0.0238,
           "representatives": [
-            "ChatGPT.exe｜ChatGPT",
-            "msedge.exe｜appo8jahz3e4635.h5.xet.pomoho.com/xe.learn-mini-program.login?code=xiaoetong:9b9bb073b757a000f478dfc07dadf9ee&gray_app_id=appo8JaHz3E4635 和另外 3 个页面 - 个人 - Microsoft​ Edge",
-            "msedge.exe｜appo8jahz3e4635.h5.xet.pomoho.com/xe.learn-mini-program.login?code=xiaoetong:6ce840053872a0a5906dad7a48c7e9c1&gray_app_id=appo8JaHz3E4635 和另外 4 个页面 - 个人 - Microsoft​ Edge"
+            "Figma.exe｜APP 详情页 - Figma",
+            "AfterFX.exe｜Adobe After Effects 2020 - 无标题项目.aep",
+            "explorer.exe｜After Effects - 文件资源管理器"
           ],
-          "color": "#7aa2ff"
+          "color": "#f6bd16"
         },
         {
-          "name": "其他",
-          "seconds": 13.2,
-          "share": 0.0012,
+          "name": "娱乐",
+          "seconds": 263.35,
+          "share": 0.0235,
           "representatives": [
-            "Snipaste.exe｜Snipper - Snipaste",
-            "LockApp.exe｜Windows 默认锁屏界面",
-            "Weixin.exe｜图片和视频"
+            "steamwebhelper.exe｜登录 Steam",
+            "steamwebhelper.exe｜登录方面的帮助",
+            "steamwebhelper.exe｜Steam"
           ],
-          "color": "#cbd5e1"
+          "color": "#ff7d7d"
         }
       ],
-      "switch_count": 146,
-      "segment_count": 176,
-      "summary_line": "这一天共记录 3小时7分 的活跃电脑时间，主轴是“娱乐”，切换密度偏高，像是在多线程推进。",
+      "switch_count": 461,
+      "segment_count": 593,
+      "summary_line": "这一天共记录 3小时6分 的活跃电脑时间，主轴是“沟通”，切换密度偏高，像是在多线程推进。",
       "notes": [
-        "主类目是“娱乐”，占比 91.2%，说明当天最主要的电脑注意力投向比较清晰。",
-        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。",
-        "出现了 1小时 的长专注块，可以回看这段前后的环境条件并尝试复用。"
+        "主类目是“沟通”，占比 42.9%，说明当天最主要的电脑注意力投向比较清晰。",
+        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。"
       ],
       "longest_focus": {
-        "category": "娱乐",
-        "activity": "douyin.exe｜抖音",
-        "seconds": 3608.71,
-        "text": "1小时",
-        "range": "17:01–18:01"
+        "category": "沟通",
+        "activity": "Weixin.exe｜微信",
+        "seconds": 737.96,
+        "text": "12分",
+        "range": "01:52–02:05"
       },
       "energy": {
-        "high_zone": "娱乐",
-        "fragmented_zone": "沟通",
-        "recovery_zone": "娱乐",
+        "high_zone": "沟通",
+        "fragmented_zone": "其他",
+        "recovery_zone": "沟通",
         "confidence": "中",
         "evidence": [
-          "总活跃时长 3小时7分",
-          "窗口切换 146 次",
-          "最长连续专注块 1小时"
+          "总活跃时长 3小时6分",
+          "窗口切换 461 次",
+          "最长连续专注块 12分"
         ]
       },
       "hourly_seconds": {
-        "0": 2.28,
-        "1": 0.0,
-        "2": 0.0,
-        "3": 0.0,
+        "0": 2856.42,
+        "1": 3144.65,
+        "2": 3002.14,
+        "3": 2210.22,
         "4": 0.0,
         "5": 0.0,
         "6": 0.0,
@@ -3273,63 +2354,796 @@
         "14": 0.0,
         "15": 0.0,
         "16": 0.0,
-        "17": 3547.82,
-        "18": 2746.3,
-        "19": 2554.79,
-        "20": 1821.89,
-        "21": 55.04,
+        "17": 0.0,
+        "18": 0.0,
+        "19": 0.0,
+        "20": 0.0,
+        "21": 0.0,
         "22": 0.0,
-        "23": 515.74
+        "23": 0.0
       },
       "top_activities": [
         {
-          "activity": "douyin.exe｜抖音",
-          "seconds": 9732.57,
-          "text": "2小时42分"
+          "activity": "Weixin.exe｜微信",
+          "seconds": 3986.37,
+          "text": "1小时6分"
         },
         {
-          "activity": "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
-          "seconds": 467.48,
+          "activity": "Codex.exe｜Codex",
+          "seconds": 1096.63,
+          "text": "18分"
+        },
+        {
+          "activity": "chrome.exe｜Wispr Flow | Effortless Voice Dictation｜wisprflow.ai",
+          "seconds": 447.46,
           "text": "7分"
         },
         {
-          "activity": "Weixin.exe｜微信",
-          "seconds": 292.84,
+          "activity": "chrome.exe｜优秀产品Landing Page推荐｜chatgpt.com",
+          "seconds": 396.91,
+          "text": "6分"
+        },
+        {
+          "activity": "chrome.exe｜Webflow: The agentic web platform for modern businesses｜webflow.com",
+          "seconds": 322.32,
+          "text": "5分"
+        },
+        {
+          "activity": "chrome.exe｜web-clone-prompt — Build-ready prompts for web clone work｜xiaopu-ai.github.io",
+          "seconds": 254.35,
           "text": "4分"
         },
         {
-          "activity": "msedge.exe｜且曼学院 和另外 3 个页面 - 个人 - Microsoft​ Edge",
-          "seconds": 216.95,
+          "activity": "explorer.exe｜暂时不用 - 文件资源管理器",
+          "seconds": 237.42,
           "text": "3分"
         },
         {
-          "activity": "WeChatAppEx.exe｜微信",
-          "seconds": 78.05,
-          "text": "1分"
+          "activity": "chrome.exe｜Typeless | 实际智能的AI语音听写｜www.typeless.com",
+          "seconds": 236.43,
+          "text": "3分"
+        }
+      ],
+      "generated_at": "2026-07-17T19:40:08.649342-07:00"
+    },
+    {
+      "date": "2026-07-07",
+      "weekday": "周二",
+      "total_active_seconds": 15594.57,
+      "total_active_text": "4小时19分",
+      "top_categories": [
+        "其他",
+        "工作/创作",
+        "学习/信息"
+      ],
+      "categories": [
+        {
+          "name": "其他",
+          "seconds": 6047.94,
+          "share": 0.3878,
+          "representatives": [
+            "chrome.exe｜Typeless | 实际智能的AI语音听写｜localhost:3000",
+            "chrome.exe｜Best Note Taking App - Organize Your Notes with Evernote｜evernote.com",
+            "chrome.exe｜(60) Pinterest｜www.pinterest.com"
+          ],
+          "color": "#cbd5e1"
+        },
+        {
+          "name": "工作/创作",
+          "seconds": 5283.06,
+          "share": 0.3388,
+          "representatives": [
+            "Codex.exe｜Codex",
+            "chrome.exe｜Pencil – Design on canvas. Land in code.｜www.pencil.dev",
+            "chrome.exe｜HTML与CMS关系解释｜chatgpt.com"
+          ],
+          "color": "#7aa2ff"
+        },
+        {
+          "name": "学习/信息",
+          "seconds": 2597.06,
+          "share": 0.1665,
+          "representatives": [
+            "chrome.exe｜Typeless | 实际智能的AI语音听写 - Google Chrome",
+            "chrome.exe｜(60) Pinterest - Google Chrome",
+            "chrome.exe｜产品演示动画设计 - Google Chrome"
+          ],
+          "color": "#61ddaa"
+        },
+        {
+          "name": "沟通",
+          "seconds": 790.92,
+          "share": 0.0507,
+          "representatives": [
+            "Weixin.exe｜微信",
+            "Feishu.exe｜飞书",
+            "WeChatAppEx.exe｜微信"
+          ],
+          "color": "#5ad1e6"
+        },
+        {
+          "name": "系统/维护",
+          "seconds": 428.4,
+          "share": 0.0275,
+          "representatives": [
+            "explorer.exe",
+            "explorer.exe｜assets - 文件资源管理器",
+            "explorer.exe｜landing page - 文件资源管理器"
+          ],
+          "color": "#8a7dff"
+        },
+        {
+          "name": "设计",
+          "seconds": 273.64,
+          "share": 0.0175,
+          "representatives": [
+            "chrome.exe｜键盘 – Figma｜www.figma.com",
+            "Figma.exe｜APP 详情页 - Figma",
+            "chrome.exe｜键盘 – Figma - Google Chrome"
+          ],
+          "color": "#f6bd16"
+        },
+        {
+          "name": "生活/杂务",
+          "seconds": 173.54,
+          "share": 0.0111,
+          "representatives": [
+            "chrome.exe｜Workshops visual | Creative Ads Visual for LinkedIn | Linkedist Social Media Design｜www.pinterest.com"
+          ],
+          "color": "#ffa940"
+        }
+      ],
+      "switch_count": 542,
+      "segment_count": 733,
+      "summary_line": "这一天共记录 4小时19分 的活跃电脑时间，主轴是“其他”，切换密度偏高，像是在多线程推进。",
+      "notes": [
+        "主类目是“其他”，占比 38.8%，说明当天最主要的电脑注意力投向比较清晰。",
+        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。",
+        "最长连续专注块偏短，后续可重点观察是什么因素把整块时间切碎了。"
+      ],
+      "longest_focus": {
+        "category": "其他",
+        "activity": "chrome.exe｜(60) Pinterest｜www.pinterest.com",
+        "seconds": 332.3,
+        "text": "5分",
+        "range": "00:10–00:15"
+      },
+      "energy": {
+        "high_zone": "其他",
+        "fragmented_zone": "工作/创作",
+        "recovery_zone": "无明显恢复区",
+        "confidence": "中",
+        "evidence": [
+          "总活跃时长 4小时19分",
+          "窗口切换 542 次",
+          "最长连续专注块 5分"
+        ]
+      },
+      "hourly_seconds": {
+        "0": 3226.94,
+        "1": 3322.03,
+        "2": 3366.07,
+        "3": 2984.27,
+        "4": 2525.41,
+        "5": 152.04,
+        "6": 0.0,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0,
+        "10": 0.0,
+        "11": 0.0,
+        "12": 0.0,
+        "13": 0.0,
+        "14": 0.0,
+        "15": 0.0,
+        "16": 0.0,
+        "17": 0.0,
+        "18": 0.0,
+        "19": 0.0,
+        "20": 0.0,
+        "21": 0.0,
+        "22": 0.0,
+        "23": 17.81
+      },
+      "top_activities": [
+        {
+          "activity": "Codex.exe｜Codex",
+          "seconds": 2538.92,
+          "text": "42分"
+        },
+        {
+          "activity": "chrome.exe｜Typeless | 实际智能的AI语音听写｜localhost:3000",
+          "seconds": 2088.91,
+          "text": "34分"
+        },
+        {
+          "activity": "chrome.exe｜Best Note Taking App - Organize Your Notes with Evernote｜evernote.com",
+          "seconds": 789.41,
+          "text": "13分"
+        },
+        {
+          "activity": "chrome.exe｜(60) Pinterest｜www.pinterest.com",
+          "seconds": 728.34,
+          "text": "12分"
+        },
+        {
+          "activity": "chrome.exe｜Pencil – Design on canvas. Land in code.｜www.pencil.dev",
+          "seconds": 656.48,
+          "text": "10分"
+        },
+        {
+          "activity": "chrome.exe｜HTML与CMS关系解释｜chatgpt.com",
+          "seconds": 547.59,
+          "text": "9分"
+        },
+        {
+          "activity": "chrome.exe｜Typeless | 实际智能的AI语音听写 - Google Chrome",
+          "seconds": 503.43,
+          "text": "8分"
+        },
+        {
+          "activity": "chrome.exe｜Framer: AI website builder for professional sites｜www.framer.com",
+          "seconds": 464.04,
+          "text": "7分"
+        }
+      ],
+      "generated_at": "2026-07-17T19:40:08.538361-07:00"
+    },
+    {
+      "date": "2026-07-08",
+      "weekday": "周三",
+      "total_active_seconds": 12198.92,
+      "total_active_text": "3小时23分",
+      "top_categories": [
+        "工作/创作",
+        "其他",
+        "学习/信息"
+      ],
+      "categories": [
+        {
+          "name": "工作/创作",
+          "seconds": 5924.54,
+          "share": 0.4857,
+          "representatives": [
+            "Codex.exe｜Codex",
+            "chrome.exe｜分支 · 产品演示动画设计｜chatgpt.com",
+            "哔哩哔哩.exe｜🚀神器来袭！Pencil让UI设计彻底变天：AI同时生成多个专业级UI，Claude Code一键转代码，Pencil高级使用技巧保姆级教程！"
+          ],
+          "color": "#7aa2ff"
+        },
+        {
+          "name": "其他",
+          "seconds": 2723.26,
+          "share": 0.2232,
+          "representatives": [
+            "chrome.exe｜Typeless | 实际智能的AI语音听写｜localhost:3000",
+            "chrome.exe｜定价 | 实际智能的AI语音听写｜www.typeless.com",
+            "chrome.exe｜http://localhost:3000/ – Framer --- http://localhost:3000/ – Framer｜framer.com"
+          ],
+          "color": "#cbd5e1"
+        },
+        {
+          "name": "学习/信息",
+          "seconds": 2154.43,
+          "share": 0.1766,
+          "representatives": [
+            "chrome.exe｜Typeless | 实际智能的AI语音听写 - Google Chrome",
+            "chrome.exe｜花瓣 - Google 搜索｜www.google.com.hk",
+            "chrome.exe｜Cybersecurity and Data Protection: Safeguarding Your Digital World - Google Chrome"
+          ],
+          "color": "#61ddaa"
+        },
+        {
+          "name": "娱乐",
+          "seconds": 488.41,
+          "share": 0.04,
+          "representatives": [
+            "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+            "哔哩哔哩.exe｜如何快速让 AI 复刻任何网页设计？",
+            "哔哩哔哩.exe｜3招拯救Vibecoding丑设计！拥有大厂级 UI"
+          ],
+          "color": "#ff7d7d"
+        },
+        {
+          "name": "设计",
+          "seconds": 443.66,
+          "share": 0.0364,
+          "representatives": [
+            "Figma.exe｜APP 详情页 - Figma",
+            "Figma.exe｜另存为"
+          ],
+          "color": "#f6bd16"
+        },
+        {
+          "name": "系统/维护",
+          "seconds": 240.8,
+          "share": 0.0197,
+          "representatives": [
+            "explorer.exe",
+            "explorer.exe｜安哲素材汇总 - 文件资源管理器",
+            "explorer.exe｜dictation - 文件资源管理器"
+          ],
+          "color": "#8a7dff"
+        },
+        {
+          "name": "沟通",
+          "seconds": 223.82,
+          "share": 0.0183,
+          "representatives": [
+            "Weixin.exe｜微信",
+            "Feishu.exe｜飞书"
+          ],
+          "color": "#5ad1e6"
+        }
+      ],
+      "switch_count": 505,
+      "segment_count": 655,
+      "summary_line": "这一天共记录 3小时23分 的活跃电脑时间，主轴是“工作/创作”，切换密度偏高，像是在多线程推进。",
+      "notes": [
+        "主类目是“工作/创作”，占比 48.6%，说明当天最主要的电脑注意力投向比较清晰。",
+        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。",
+        "最长连续专注块偏短，后续可重点观察是什么因素把整块时间切碎了。"
+      ],
+      "longest_focus": {
+        "category": "工作/创作",
+        "activity": "chrome.exe｜分支 · 产品演示动画设计｜chatgpt.com",
+        "seconds": 251.4,
+        "text": "4分",
+        "range": "02:30–02:34"
+      },
+      "energy": {
+        "high_zone": "工作/创作",
+        "fragmented_zone": "其他",
+        "recovery_zone": "无明显恢复区",
+        "confidence": "中",
+        "evidence": [
+          "总活跃时长 3小时23分",
+          "窗口切换 505 次",
+          "最长连续专注块 4分"
+        ]
+      },
+      "hourly_seconds": {
+        "0": 3354.93,
+        "1": 2761.94,
+        "2": 2569.71,
+        "3": 3273.39,
+        "4": 230.04,
+        "5": 0.0,
+        "6": 0.0,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0,
+        "10": 0.0,
+        "11": 0.0,
+        "12": 0.0,
+        "13": 0.0,
+        "14": 0.0,
+        "15": 0.0,
+        "16": 0.0,
+        "17": 0.0,
+        "18": 0.0,
+        "19": 0.0,
+        "20": 0.0,
+        "21": 0.0,
+        "22": 0.0,
+        "23": 8.91
+      },
+      "top_activities": [
+        {
+          "activity": "Codex.exe｜Codex",
+          "seconds": 4842.52,
+          "text": "1小时20分"
+        },
+        {
+          "activity": "chrome.exe｜Typeless | 实际智能的AI语音听写｜localhost:3000",
+          "seconds": 1053.38,
+          "text": "17分"
+        },
+        {
+          "activity": "chrome.exe｜Typeless | 实际智能的AI语音听写 - Google Chrome",
+          "seconds": 917.45,
+          "text": "15分"
+        },
+        {
+          "activity": "chrome.exe｜分支 · 产品演示动画设计｜chatgpt.com",
+          "seconds": 496.69,
+          "text": "8分"
+        },
+        {
+          "activity": "Figma.exe｜APP 详情页 - Figma",
+          "seconds": 441.59,
+          "text": "7分"
+        },
+        {
+          "activity": "chrome.exe｜定价 | 实际智能的AI语音听写｜www.typeless.com",
+          "seconds": 399.57,
+          "text": "6分"
+        },
+        {
+          "activity": "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+          "seconds": 216.32,
+          "text": "3分"
+        },
+        {
+          "activity": "哔哩哔哩.exe｜🚀神器来袭！Pencil让UI设计彻底变天：AI同时生成多个专业级UI，Claude Code一键转代码，Pencil高级使用技巧保姆级教程！",
+          "seconds": 215.5,
+          "text": "3分"
+        }
+      ],
+      "generated_at": "2026-07-17T19:40:08.325857-07:00"
+    },
+    {
+      "date": "2026-07-09",
+      "weekday": "周四",
+      "total_active_seconds": 11793.64,
+      "total_active_text": "3小时16分",
+      "top_categories": [
+        "其他",
+        "工作/创作",
+        "学习/信息"
+      ],
+      "categories": [
+        {
+          "name": "其他",
+          "seconds": 3301.49,
+          "share": 0.2799,
+          "representatives": [
+            "chrome.exe｜嘴替键盘 | AI聊天回复键盘｜127.0.0.1:3001",
+            "Snipaste.exe｜Snipper - Snipaste",
+            "chrome.exe｜lovekey键盘官网｜www.lovekeyboard.com"
+          ],
+          "color": "#cbd5e1"
+        },
+        {
+          "name": "工作/创作",
+          "seconds": 3171.29,
+          "share": 0.2689,
+          "representatives": [
+            "Codex.exe｜Codex",
+            "chrome.exe｜详情页文案生成｜chatgpt.com",
+            "chrome.exe｜灵感网站推荐｜chatgpt.com"
+          ],
+          "color": "#7aa2ff"
+        },
+        {
+          "name": "学习/信息",
+          "seconds": 2612.53,
+          "share": 0.2215,
+          "representatives": [
+            "chrome.exe｜嘴替键盘 | AI聊天回复键盘 - Google Chrome",
+            "chrome.exe｜(62) Pinterest - Google Chrome",
+            "chrome.exe｜图片创作要求 - Google Chrome"
+          ],
+          "color": "#61ddaa"
+        },
+        {
+          "name": "设计",
+          "seconds": 1550.61,
+          "share": 0.1315,
+          "representatives": [
+            "Figma.exe｜APP 详情页 - Figma",
+            "Figma.exe｜选择文件夹",
+            "Figma.exe｜Replace Existing Files"
+          ],
+          "color": "#f6bd16"
+        },
+        {
+          "name": "沟通",
+          "seconds": 1012.81,
+          "share": 0.0859,
+          "representatives": [
+            "Feishu.exe｜飞书",
+            "chrome.exe｜Proton Mail: Get a free email account with privacy and encryption | Proton - Google Chrome",
+            "chrome.exe｜Proton Mail: Get a free email account with privacy and encryption | Proton｜www.pinterest.com"
+          ],
+          "color": "#5ad1e6"
+        },
+        {
+          "name": "系统/维护",
+          "seconds": 125.36,
+          "share": 0.0106,
+          "representatives": [
+            "explorer.exe",
+            "chrome.exe｜下载FlowUs-FlowUs官网｜flowus.cn",
+            "explorer.exe｜landing page - 文件资源管理器"
+          ],
+          "color": "#8a7dff"
+        },
+        {
+          "name": "生活/杂务",
+          "seconds": 19.55,
+          "share": 0.0017,
+          "representatives": [
+            "chrome.exe｜美团 - 帮大家吃得更好，生活更好｜www.meituan.com"
+          ],
+          "color": "#ffa940"
+        }
+      ],
+      "switch_count": 467,
+      "segment_count": 625,
+      "summary_line": "这一天共记录 3小时16分 的活跃电脑时间，主轴是“其他”，切换密度偏高，像是在多线程推进。",
+      "notes": [
+        "主类目是“其他”，占比 28.0%，说明当天最主要的电脑注意力投向比较清晰。",
+        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。",
+        "最长连续专注块偏短，后续可重点观察是什么因素把整块时间切碎了。"
+      ],
+      "longest_focus": {
+        "category": "其他",
+        "activity": "chrome.exe｜嘴替键盘 | AI聊天回复键盘｜127.0.0.1:3001",
+        "seconds": 591.82,
+        "text": "9分",
+        "range": "02:26–02:36"
+      },
+      "energy": {
+        "high_zone": "其他",
+        "fragmented_zone": "工作/创作",
+        "recovery_zone": "无明显恢复区",
+        "confidence": "中",
+        "evidence": [
+          "总活跃时长 3小时16分",
+          "窗口切换 467 次",
+          "最长连续专注块 9分"
+        ]
+      },
+      "hourly_seconds": {
+        "0": 3353.06,
+        "1": 3265.44,
+        "2": 3203.84,
+        "3": 1965.25,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0,
+        "10": 0.0,
+        "11": 0.0,
+        "12": 0.0,
+        "13": 0.0,
+        "14": 0.0,
+        "15": 0.0,
+        "16": 0.0,
+        "17": 0.0,
+        "18": 0.0,
+        "19": 0.0,
+        "20": 0.0,
+        "21": 0.0,
+        "22": 0.0,
+        "23": 6.04
+      },
+      "top_activities": [
+        {
+          "activity": "Codex.exe｜Codex",
+          "seconds": 1868.77,
+          "text": "31分"
+        },
+        {
+          "activity": "Figma.exe｜APP 详情页 - Figma",
+          "seconds": 1547.51,
+          "text": "25分"
+        },
+        {
+          "activity": "chrome.exe｜嘴替键盘 | AI聊天回复键盘｜127.0.0.1:3001",
+          "seconds": 1500.0,
+          "text": "25分"
+        },
+        {
+          "activity": "chrome.exe｜嘴替键盘 | AI聊天回复键盘 - Google Chrome",
+          "seconds": 1396.83,
+          "text": "23分"
+        },
+        {
+          "activity": "Feishu.exe｜飞书",
+          "seconds": 504.29,
+          "text": "8分"
+        },
+        {
+          "activity": "chrome.exe｜详情页文案生成｜chatgpt.com",
+          "seconds": 447.9,
+          "text": "7分"
+        },
+        {
+          "activity": "Snipaste.exe｜Snipper - Snipaste",
+          "seconds": 303.64,
+          "text": "5分"
+        },
+        {
+          "activity": "chrome.exe｜lovekey键盘官网｜www.lovekeyboard.com",
+          "seconds": 279.32,
+          "text": "4分"
+        }
+      ],
+      "generated_at": "2026-07-17T19:40:08.157962-07:00"
+    },
+    {
+      "date": "2026-07-10",
+      "weekday": "周五",
+      "total_active_seconds": 18296.84,
+      "total_active_text": "5小时4分",
+      "top_categories": [
+        "工作/创作",
+        "其他",
+        "学习/信息"
+      ],
+      "categories": [
+        {
+          "name": "工作/创作",
+          "seconds": 4102.6,
+          "share": 0.2242,
+          "representatives": [
+            "ChatGPT.exe｜ChatGPT",
+            "msedge.exe｜Work模式与Codex额度｜chatgpt.com",
+            "chrome.exe｜iPhone 17 尺寸解析｜chatgpt.com"
+          ],
+          "color": "#7aa2ff"
+        },
+        {
+          "name": "其他",
+          "seconds": 3866.53,
+          "share": 0.2113,
+          "representatives": [
+            "chrome.exe｜嘴替键盘 | AI聊天回复键盘｜127.0.0.1:3001",
+            "WinRAR.exe｜正在创建压缩文件 嘴替键盘-landing page2.0.rar",
+            "chrome.exe｜(63) Pinterest｜www.pinterest.com"
+          ],
+          "color": "#cbd5e1"
+        },
+        {
+          "name": "学习/信息",
+          "seconds": 3312.21,
+          "share": 0.181,
+          "representatives": [
+            "chrome.exe｜嘴替键盘 | AI聊天回复键盘 - Google Chrome",
+            "chrome.exe｜语音测试 - Google Chrome",
+            "Tabbit Browser.exe｜Framer: AI website builder for professional sites - Tabbit"
+          ],
+          "color": "#61ddaa"
+        },
+        {
+          "name": "娱乐",
+          "seconds": 2296.14,
+          "share": 0.1255,
+          "representatives": [
+            "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+            "哔哩哔哩.exe｜武亮能够代替张雪峰吗？解析为何大众这么抵制他的深层原因…",
+            "哔哩哔哩.exe｜董路怒斥孙继海拿着踢球的光环来搞青训，一场对外比赛都不踢，纯粹扯淡！"
+          ],
+          "color": "#ff7d7d"
+        },
+        {
+          "name": "设计",
+          "seconds": 1921.26,
+          "share": 0.105,
+          "representatives": [
+            "Figma.exe｜APP 详情页 - Figma",
+            "哔哩哔哩.exe｜猫Sir | figma交互 弹窗还可以这样弹？",
+            "哔哩哔哩.exe｜猫sir | figma交互 下拉列表下拉菜单效果"
+          ],
+          "color": "#f6bd16"
+        },
+        {
+          "name": "系统/维护",
+          "seconds": 1424.29,
+          "share": 0.0778,
+          "representatives": [
+            "explorer.exe",
+            "explorer.exe｜Program Manager",
+            "explorer.exe｜新加卷 (E:) - 文件资源管理器"
+          ],
+          "color": "#8a7dff"
+        },
+        {
+          "name": "沟通",
+          "seconds": 1373.81,
+          "share": 0.0751,
+          "representatives": [
+            "Feishu.exe｜飞书",
+            "Weixin.exe｜微信",
+            "WeChatAppEx.exe｜微信"
+          ],
+          "color": "#5ad1e6"
+        }
+      ],
+      "switch_count": 849,
+      "segment_count": 991,
+      "summary_line": "这一天共记录 5小时4分 的活跃电脑时间，主轴是“工作/创作”，切换密度偏高，像是在多线程推进。",
+      "notes": [
+        "主类目是“工作/创作”，占比 22.4%，说明当天最主要的电脑注意力投向比较清晰。",
+        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。"
+      ],
+      "longest_focus": {
+        "category": "娱乐",
+        "activity": "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+        "seconds": 649.89,
+        "text": "10分",
+        "range": "04:52–05:03"
+      },
+      "energy": {
+        "high_zone": "工作/创作",
+        "fragmented_zone": "其他",
+        "recovery_zone": "娱乐",
+        "confidence": "中",
+        "evidence": [
+          "总活跃时长 5小时4分",
+          "窗口切换 849 次",
+          "最长连续专注块 10分"
+        ]
+      },
+      "hourly_seconds": {
+        "0": 2787.14,
+        "1": 3215.67,
+        "2": 1528.7,
+        "3": 0.0,
+        "4": 1604.13,
+        "5": 3299.39,
+        "6": 2421.78,
+        "7": 2980.03,
+        "8": 445.95,
+        "9": 0.0,
+        "10": 0.0,
+        "11": 0.0,
+        "12": 0.0,
+        "13": 0.0,
+        "14": 0.0,
+        "15": 0.0,
+        "16": 0.0,
+        "17": 0.0,
+        "18": 0.0,
+        "19": 0.0,
+        "20": 0.0,
+        "21": 0.0,
+        "22": 0.0,
+        "23": 14.05
+      },
+      "top_activities": [
+        {
+          "activity": "ChatGPT.exe｜ChatGPT",
+          "seconds": 3748.76,
+          "text": "1小时2分"
+        },
+        {
+          "activity": "Figma.exe｜APP 详情页 - Figma",
+          "seconds": 1855.38,
+          "text": "30分"
+        },
+        {
+          "activity": "chrome.exe｜嘴替键盘 | AI聊天回复键盘 - Google Chrome",
+          "seconds": 1690.85,
+          "text": "28分"
+        },
+        {
+          "activity": "chrome.exe｜嘴替键盘 | AI聊天回复键盘｜127.0.0.1:3001",
+          "seconds": 1481.92,
+          "text": "24分"
+        },
+        {
+          "activity": "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+          "seconds": 1259.03,
+          "text": "20分"
+        },
+        {
+          "activity": "Feishu.exe｜飞书",
+          "seconds": 874.57,
+          "text": "14分"
         },
         {
           "activity": "explorer.exe",
-          "seconds": 71.45,
-          "text": "1分"
+          "seconds": 736.03,
+          "text": "12分"
         },
         {
-          "activity": "clash-verge.exe｜Clash Verge",
-          "seconds": 58.37,
-          "text": "58秒"
-        },
-        {
-          "activity": "哔哩哔哩.exe｜拒绝 AI 廉价感，如何开发一个好看 App？AI Coding 实录，从原型到上架的全流程分享【B站AI创造公开赛】",
-          "seconds": 54.38,
-          "text": "54秒"
+          "activity": "Weixin.exe｜微信",
+          "seconds": 473.44,
+          "text": "7分"
         }
       ],
-      "generated_at": "2026-07-18T10:35:07.677474+08:00"
+      "generated_at": "2026-07-17T19:40:07.974567-07:00"
     },
     {
-      "date": "2026-07-12",
-      "weekday": "周日",
-      "total_active_seconds": 18903.38,
-      "total_active_text": "5小时15分",
+      "date": "2026-07-11",
+      "weekday": "周六",
+      "total_active_seconds": 14271.1,
+      "total_active_text": "3小时57分",
       "top_categories": [
         "娱乐",
         "工作/创作",
@@ -3338,30 +3152,191 @@
       "categories": [
         {
           "name": "娱乐",
-          "seconds": 7600.29,
-          "share": 0.4021,
+          "seconds": 10420.44,
+          "share": 0.7302,
           "representatives": [
             "douyin.exe｜抖音",
             "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
-            "哔哩哔哩.exe｜UI 设计教程 爆火的 Framer 建站工具 可用性评测报告 | 功能逻辑、是否好用 一个视频带你体验 | 2024 新像素"
+            "哔哩哔哩.exe｜拒绝 AI 廉价感，如何开发一个好看 App？AI Coding 实录，从原型到上架的全流程分享【B站AI创造公开赛】"
           ],
           "color": "#ff7d7d"
         },
         {
           "name": "工作/创作",
-          "seconds": 4879.72,
-          "share": 0.2581,
+          "seconds": 2552.27,
+          "share": 0.1788,
           "representatives": [
             "ChatGPT.exe｜ChatGPT",
-            "Hermes.exe｜Hermes",
-            "Hermes.exe｜Add folders as context"
+            "msedge.exe｜appo8jahz3e4635.h5.xet.pomoho.com/xe.learn-mini-program.login?code=xiaoetong:9b9bb073b757a000f478dfc07dadf9ee&gray_app_id=appo8JaHz3E4635 和另外 3 个页面 - 个人 - Microsoft​ Edge",
+            "msedge.exe｜appo8jahz3e4635.h5.xet.pomoho.com/xe.learn-mini-program.login?code=xiaoetong:6ce840053872a0a5906dad7a48c7e9c1&gray_app_id=appo8JaHz3E4635 和另外 4 个页面 - 个人 - Microsoft​ Edge"
           ],
           "color": "#7aa2ff"
         },
         {
           "name": "学习/信息",
-          "seconds": 3267.35,
-          "share": 0.1728,
+          "seconds": 603.03,
+          "share": 0.0423,
+          "representatives": [
+            "chrome.exe｜嘴替键盘 | AI聊天回复键盘 - Google Chrome",
+            "msedge.exe｜且曼学院 和另外 3 个页面 - 个人 - Microsoft​ Edge",
+            "msedge.exe｜小鹅通学员版线上学习-小鹅通学员版-小鹅通 和另外 3 个页面 - 个人 - Microsoft​ Edge"
+          ],
+          "color": "#61ddaa"
+        },
+        {
+          "name": "沟通",
+          "seconds": 397.61,
+          "share": 0.0279,
+          "representatives": [
+            "Weixin.exe｜微信",
+            "WeChatAppEx.exe｜微信",
+            "WeChatAppEx.exe"
+          ],
+          "color": "#5ad1e6"
+        },
+        {
+          "name": "系统/维护",
+          "seconds": 248.56,
+          "share": 0.0174,
+          "representatives": [
+            "explorer.exe",
+            "clash-verge.exe｜Clash Verge",
+            "explorer.exe｜Program Manager"
+          ],
+          "color": "#8a7dff"
+        },
+        {
+          "name": "设计",
+          "seconds": 24.68,
+          "share": 0.0017,
+          "representatives": [
+            "哔哩哔哩.exe｜掌握Apple风格的UI动画设计｜After Effects教程"
+          ],
+          "color": "#f6bd16"
+        },
+        {
+          "name": "其他",
+          "seconds": 24.51,
+          "share": 0.0017,
+          "representatives": [
+            "chrome.exe｜嘴替键盘 | AI聊天回复键盘｜127.0.0.1:3001",
+            "Snipaste.exe｜Snipper - Snipaste",
+            "LockApp.exe｜Windows 默认锁屏界面"
+          ],
+          "color": "#cbd5e1"
+        }
+      ],
+      "switch_count": 194,
+      "segment_count": 232,
+      "summary_line": "这一天共记录 3小时57分 的活跃电脑时间，主轴是“娱乐”，切换密度偏高，像是在多线程推进。",
+      "notes": [
+        "主类目是“娱乐”，占比 73.0%，说明当天最主要的电脑注意力投向比较清晰。",
+        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。",
+        "出现了 1小时 的长专注块，可以回看这段前后的环境条件并尝试复用。"
+      ],
+      "longest_focus": {
+        "category": "娱乐",
+        "activity": "douyin.exe｜抖音",
+        "seconds": 3608.71,
+        "text": "1小时",
+        "range": "02:01–03:01"
+      },
+      "energy": {
+        "high_zone": "娱乐",
+        "fragmented_zone": "工作/创作",
+        "recovery_zone": "娱乐",
+        "confidence": "中",
+        "evidence": [
+          "总活跃时长 3小时57分",
+          "窗口切换 194 次",
+          "最长连续专注块 1小时"
+        ]
+      },
+      "hourly_seconds": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 3547.82,
+        "3": 2746.3,
+        "4": 2554.79,
+        "5": 1821.89,
+        "6": 55.04,
+        "7": 0.0,
+        "8": 515.74,
+        "9": 2291.31,
+        "10": 738.2,
+        "11": 0.0,
+        "12": 0.0,
+        "13": 0.0,
+        "14": 0.0,
+        "15": 0.0,
+        "16": 0.0,
+        "17": 0.0,
+        "18": 0.0,
+        "19": 0.0,
+        "20": 0.0,
+        "21": 0.0,
+        "22": 0.0,
+        "23": 0.0
+      },
+      "top_activities": [
+        {
+          "activity": "douyin.exe｜抖音",
+          "seconds": 9732.57,
+          "text": "2小时42分"
+        },
+        {
+          "activity": "ChatGPT.exe｜ChatGPT",
+          "seconds": 2548.17,
+          "text": "42分"
+        },
+        {
+          "activity": "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+          "seconds": 524.85,
+          "text": "8分"
+        },
+        {
+          "activity": "Weixin.exe｜微信",
+          "seconds": 292.84,
+          "text": "4分"
+        },
+        {
+          "activity": "chrome.exe｜嘴替键盘 | AI聊天回复键盘 - Google Chrome",
+          "seconds": 242.15,
+          "text": "4分"
+        },
+        {
+          "activity": "msedge.exe｜且曼学院 和另外 3 个页面 - 个人 - Microsoft​ Edge",
+          "seconds": 216.95,
+          "text": "3分"
+        },
+        {
+          "activity": "explorer.exe",
+          "seconds": 140.12,
+          "text": "2分"
+        },
+        {
+          "activity": "哔哩哔哩.exe｜拒绝 AI 廉价感，如何开发一个好看 App？AI Coding 实录，从原型到上架的全流程分享【B站AI创造公开赛】",
+          "seconds": 85.1,
+          "text": "1分"
+        }
+      ],
+      "generated_at": "2026-07-17T19:40:07.790711-07:00"
+    },
+    {
+      "date": "2026-07-12",
+      "weekday": "周日",
+      "total_active_seconds": 12579.84,
+      "total_active_text": "3小时29分",
+      "top_categories": [
+        "学习/信息",
+        "设计",
+        "工作/创作"
+      ],
+      "categories": [
+        {
+          "name": "学习/信息",
+          "seconds": 3897.63,
+          "share": 0.3098,
           "representatives": [
             "chrome.exe｜情侣头像 - 搜索结果 - 花瓣 - Google Chrome",
             "chrome.exe｜嘴替键盘 | AI聊天回复键盘 - Google Chrome",
@@ -3371,110 +3346,126 @@
         },
         {
           "name": "设计",
-          "seconds": 1472.67,
-          "share": 0.0779,
+          "seconds": 2947.78,
+          "share": 0.2343,
           "representatives": [
             "Figma.exe｜APP 详情页 - Figma",
-            "哔哩哔哩.exe｜掌握Apple风格的UI动画设计｜After Effects教程",
             "Figma.exe｜另存为"
           ],
           "color": "#f6bd16"
         },
         {
+          "name": "工作/创作",
+          "seconds": 2143.71,
+          "share": 0.1704,
+          "representatives": [
+            "ChatGPT.exe｜ChatGPT",
+            "Hermes.exe｜Hermes",
+            "Hermes.exe｜Add folders as context"
+          ],
+          "color": "#7aa2ff"
+        },
+        {
+          "name": "娱乐",
+          "seconds": 1507.5,
+          "share": 0.1198,
+          "representatives": [
+            "douyin.exe｜抖音",
+            "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+            "哔哩哔哩.exe｜【吴恩达】2026年公认最好的【Vibe Coding】教程！大模型入门到进阶，一套全解决！DeepLearning.AI—附带课件代码"
+          ],
+          "color": "#ff7d7d"
+        },
+        {
           "name": "其他",
-          "seconds": 1091.11,
-          "share": 0.0577,
+          "seconds": 1483.02,
+          "share": 0.1179,
           "representatives": [
             "chrome.exe｜嘴替键盘 | AI聊天回复键盘｜127.0.0.1:3001",
             "chrome.exe｜(63) Pinterest｜www.pinterest.com",
-            "Snipaste.exe｜Paster - Snipaste"
+            "chrome.exe｜新标签页｜newtab"
           ],
           "color": "#cbd5e1"
         },
         {
+          "name": "沟通",
+          "seconds": 314.85,
+          "share": 0.025,
+          "representatives": [
+            "Weixin.exe｜微信",
+            "WeChatAppEx.exe｜微信",
+            "WeChatAppEx.exe"
+          ],
+          "color": "#5ad1e6"
+        },
+        {
           "name": "系统/维护",
-          "seconds": 457.07,
-          "share": 0.0242,
+          "seconds": 285.36,
+          "share": 0.0227,
           "representatives": [
             "explorer.exe",
             "explorer.exe｜Program Manager",
             "explorer.exe｜assets - 文件资源管理器"
           ],
           "color": "#8a7dff"
-        },
-        {
-          "name": "沟通",
-          "seconds": 135.17,
-          "share": 0.0072,
-          "representatives": [
-            "Weixin.exe｜微信",
-            "WeChatAppEx.exe"
-          ],
-          "color": "#5ad1e6"
         }
       ],
-      "switch_count": 280,
-      "segment_count": 361,
-      "summary_line": "这一天共记录 5小时15分 的活跃电脑时间，主轴是“娱乐”，切换密度偏高，像是在多线程推进。",
+      "switch_count": 345,
+      "segment_count": 431,
+      "summary_line": "这一天共记录 3小时29分 的活跃电脑时间，主轴是“学习/信息”，切换密度偏高，像是在多线程推进。",
       "notes": [
-        "主类目是“娱乐”，占比 40.2%，说明当天最主要的电脑注意力投向比较清晰。",
-        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。",
-        "出现了 1小时26分 的长专注块，可以回看这段前后的环境条件并尝试复用。"
+        "主类目是“学习/信息”，占比 31.0%，说明当天最主要的电脑注意力投向比较清晰。",
+        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。"
       ],
       "longest_focus": {
-        "category": "娱乐",
-        "activity": "douyin.exe｜抖音",
-        "seconds": 5207.94,
-        "text": "1小时26分",
-        "range": "12:05–13:32"
+        "category": "学习/信息",
+        "activity": "chrome.exe｜情侣头像 - 搜索结果 - 花瓣 - Google Chrome",
+        "seconds": 846.96,
+        "text": "14分",
+        "range": "07:59–08:08"
       },
       "energy": {
-        "high_zone": "娱乐",
-        "fragmented_zone": "工作/创作",
+        "high_zone": "学习/信息",
+        "fragmented_zone": "设计",
         "recovery_zone": "娱乐",
         "confidence": "中",
         "evidence": [
-          "总活跃时长 5小时15分",
-          "窗口切换 280 次",
-          "最长连续专注块 1小时26分"
+          "总活跃时长 3小时29分",
+          "窗口切换 345 次",
+          "最长连续专注块 14分"
         ]
       },
       "hourly_seconds": {
-        "0": 2291.31,
-        "1": 738.2,
-        "2": 0.0,
-        "3": 0.0,
-        "4": 0.0,
-        "5": 0.0,
-        "6": 0.0,
-        "7": 0.0,
-        "8": 0.0,
+        "0": 1540.07,
+        "1": 1735.85,
+        "2": 1058.08,
+        "3": 1098.24,
+        "4": 1319.44,
+        "5": 432.47,
+        "6": 291.13,
+        "7": 600.24,
+        "8": 715.41,
         "9": 0.0,
-        "10": 0.0,
-        "11": 0.0,
-        "12": 3358.7,
-        "13": 2209.2,
-        "14": 1482.49,
-        "15": 1540.07,
-        "16": 1735.85,
-        "17": 1058.08,
-        "18": 1098.24,
-        "19": 1319.44,
-        "20": 432.47,
-        "21": 291.13,
-        "22": 600.24,
-        "23": 747.95
+        "10": 1956.74,
+        "11": 1644.54,
+        "12": 187.63,
+        "13": 0.0,
+        "14": 0.0,
+        "15": 0.0,
+        "16": 0.0,
+        "17": 0.0,
+        "18": 0.0,
+        "19": 0.0,
+        "20": 0.0,
+        "21": 0.0,
+        "22": 0.0,
+        "23": 0.0
       },
       "top_activities": [
         {
-          "activity": "douyin.exe｜抖音",
-          "seconds": 6939.46,
-          "text": "1小时55分"
-        },
-        {
-          "activity": "ChatGPT.exe｜ChatGPT",
-          "seconds": 4139.31,
-          "text": "1小时8分"
+          "activity": "Figma.exe｜APP 详情页 - Figma",
+          "seconds": 2922.18,
+          "text": "48分"
         },
         {
           "activity": "chrome.exe｜情侣头像 - 搜索结果 - 花瓣 - Google Chrome",
@@ -3482,9 +3473,19 @@
           "text": "28分"
         },
         {
-          "activity": "Figma.exe｜APP 详情页 - Figma",
-          "seconds": 1427.53,
+          "activity": "douyin.exe｜抖音",
+          "seconds": 1444.36,
+          "text": "24分"
+        },
+        {
+          "activity": "ChatGPT.exe｜ChatGPT",
+          "seconds": 1403.3,
           "text": "23分"
+        },
+        {
+          "activity": "chrome.exe｜嘴替键盘 | AI聊天回复键盘 - Google Chrome",
+          "seconds": 1005.36,
+          "text": "16分"
         },
         {
           "activity": "Hermes.exe｜Hermes",
@@ -3492,28 +3493,23 @@
           "text": "12分"
         },
         {
-          "activity": "chrome.exe｜嘴替键盘 | AI聊天回复键盘 - Google Chrome",
-          "seconds": 573.35,
+          "activity": "chrome.exe｜嘴替键盘 | AI聊天回复键盘｜127.0.0.1:3001",
+          "seconds": 540.65,
           "text": "9分"
         },
         {
-          "activity": "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
-          "seconds": 380.17,
-          "text": "6分"
-        },
-        {
-          "activity": "chrome.exe｜嘴替键盘 | AI聊天回复键盘｜127.0.0.1:3001",
-          "seconds": 290.23,
-          "text": "4分"
+          "activity": "chrome.exe｜(63) Pinterest｜www.pinterest.com",
+          "seconds": 344.16,
+          "text": "5分"
         }
       ],
-      "generated_at": "2026-07-18T10:35:07.567068+08:00"
+      "generated_at": "2026-07-17T19:40:07.675767-07:00"
     },
     {
       "date": "2026-07-13",
       "weekday": "周一",
-      "total_active_seconds": 33169.66,
-      "total_active_text": "9小时12分",
+      "total_active_seconds": 19438.46,
+      "total_active_text": "5小时23分",
       "top_categories": [
         "工作/创作",
         "学习/信息",
@@ -3522,52 +3518,52 @@
       "categories": [
         {
           "name": "工作/创作",
-          "seconds": 10375.23,
-          "share": 0.3128,
+          "seconds": 6178.82,
+          "share": 0.3179,
           "representatives": [
             "ChatGPT.exe｜ChatGPT",
-            "Hermes.exe｜Hermes",
-            "chrome.exe｜核心功能提炼｜chatgpt.com"
+            "chrome.exe｜核心功能提炼｜chatgpt.com",
+            "Hermes.exe｜Hermes"
           ],
           "color": "#7aa2ff"
         },
         {
           "name": "学习/信息",
-          "seconds": 8426.38,
-          "share": 0.254,
+          "seconds": 5466.54,
+          "share": 0.2812,
           "representatives": [
             "chrome.exe｜嘴替键盘 | AI聊天回复键盘 - Google Chrome",
             "chrome.exe｜(64) Pinterest - Google Chrome",
-            "chrome.exe｜摄影类App推荐 - Google Chrome"
+            "chrome.exe｜核心功能提炼 - Google Chrome"
           ],
           "color": "#61ddaa"
         },
         {
           "name": "设计",
-          "seconds": 6646.84,
-          "share": 0.2004,
+          "seconds": 4434.05,
+          "share": 0.2281,
           "representatives": [
-            "Figma.exe｜APP 详情页 - Figma",
             "Figma.exe｜数毛-详情页 - Figma",
-            "Figma.exe｜另存为"
+            "Figma.exe｜APP 详情页 - Figma",
+            "Figma.exe｜New File - Figma"
           ],
           "color": "#f6bd16"
         },
         {
           "name": "其他",
-          "seconds": 5681.56,
-          "share": 0.1713,
+          "seconds": 2218.31,
+          "share": 0.1141,
           "representatives": [
-            "chrome.exe｜嘴替键盘 | AI聊天回复键盘｜127.0.0.1:3001",
-            "chrome.exe｜127.0.0.1｜127.0.0.1:3001",
-            "fastpdf.exe｜作品集【UI_UE设计师_北京 15-25K】刘泽润 8年.pdf"
+            "fastpdf.exe｜作品集【UI_UE设计师_北京 15-25K】刘泽润 8年.pdf",
+            "chrome.exe｜嘴替键盘 | AI聊天回复键盘｜192.168.31.46:3001",
+            "chrome.exe｜新标签页｜newtab"
           ],
           "color": "#cbd5e1"
         },
         {
           "name": "沟通",
-          "seconds": 1268.95,
-          "share": 0.0383,
+          "seconds": 683.33,
+          "share": 0.0352,
           "representatives": [
             "Weixin.exe｜微信",
             "Feishu.exe｜飞书",
@@ -3577,38 +3573,29 @@
         },
         {
           "name": "系统/维护",
-          "seconds": 764.53,
-          "share": 0.023,
+          "seconds": 457.41,
+          "share": 0.0235,
           "representatives": [
-            "explorer.exe｜Program Manager",
-            "explorer.exe｜assets - 文件资源管理器",
-            "explorer.exe｜作品集 - 文件资源管理器"
+            "explorer.exe｜作品集 - 文件资源管理器",
+            "ApplicationFrameHost.exe｜设置",
+            "explorer.exe｜Program Manager"
           ],
           "color": "#8a7dff"
-        },
-        {
-          "name": "娱乐",
-          "seconds": 6.17,
-          "share": 0.0002,
-          "representatives": [
-            "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili"
-          ],
-          "color": "#ff7d7d"
         }
       ],
-      "switch_count": 1123,
-      "segment_count": 1358,
-      "summary_line": "这一天共记录 9小时12分 的活跃电脑时间，主轴是“工作/创作”，切换密度偏高，像是在多线程推进。",
+      "switch_count": 525,
+      "segment_count": 641,
+      "summary_line": "这一天共记录 5小时23分 的活跃电脑时间，主轴是“工作/创作”，切换密度偏高，像是在多线程推进。",
       "notes": [
-        "主类目是“工作/创作”，占比 31.3%，说明当天最主要的电脑注意力投向比较清晰。",
+        "主类目是“工作/创作”，占比 31.8%，说明当天最主要的电脑注意力投向比较清晰。",
         "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。"
       ],
       "longest_focus": {
         "category": "设计",
-        "activity": "Figma.exe｜APP 详情页 - Figma",
-        "seconds": 1400.82,
-        "text": "23分",
-        "range": "10:32–10:55"
+        "activity": "Figma.exe｜数毛-详情页 - Figma",
+        "seconds": 781.98,
+        "text": "13分",
+        "range": "09:41–09:55"
       },
       "energy": {
         "high_zone": "工作/创作",
@@ -3616,96 +3603,96 @@
         "recovery_zone": "无明显恢复区",
         "confidence": "中",
         "evidence": [
-          "总活跃时长 9小时12分",
-          "窗口切换 1123 次",
-          "最长连续专注块 23分"
+          "总活跃时长 5小时23分",
+          "窗口切换 525 次",
+          "最长连续专注块 13分"
         ]
       },
       "hourly_seconds": {
-        "0": 248.85,
-        "1": 1956.74,
-        "2": 1644.54,
-        "3": 187.63,
-        "4": 0.0,
+        "0": 3136.45,
+        "1": 3357.07,
+        "2": 2984.67,
+        "3": 2121.84,
+        "4": 891.85,
         "5": 0.0,
-        "6": 0.0,
-        "7": 0.0,
-        "8": 177.94,
-        "9": 1193.94,
-        "10": 3459.44,
-        "11": 2758.46,
-        "12": 104.41,
-        "13": 1428.84,
-        "14": 3338.28,
-        "15": 3136.45,
-        "16": 3357.07,
-        "17": 2984.67,
-        "18": 2121.84,
-        "19": 891.85,
+        "6": 1319.3,
+        "7": 1152.83,
+        "8": 1706.59,
+        "9": 2505.08,
+        "10": 165.21,
+        "11": 0.0,
+        "12": 0.0,
+        "13": 0.0,
+        "14": 0.0,
+        "15": 0.0,
+        "16": 0.0,
+        "17": 0.0,
+        "18": 0.0,
+        "19": 0.0,
         "20": 0.0,
-        "21": 1319.3,
-        "22": 1152.83,
-        "23": 1706.59
+        "21": 0.0,
+        "22": 0.0,
+        "23": 97.56
       },
       "top_activities": [
         {
           "activity": "ChatGPT.exe｜ChatGPT",
-          "seconds": 8422.92,
-          "text": "2小时20分"
-        },
-        {
-          "activity": "Figma.exe｜APP 详情页 - Figma",
-          "seconds": 5618.38,
-          "text": "1小时33分"
+          "seconds": 4288.78,
+          "text": "1小时11分"
         },
         {
           "activity": "chrome.exe｜嘴替键盘 | AI聊天回复键盘 - Google Chrome",
-          "seconds": 5261.47,
-          "text": "1小时27分"
-        },
-        {
-          "activity": "chrome.exe｜嘴替键盘 | AI聊天回复键盘｜127.0.0.1:3001",
-          "seconds": 1142.38,
-          "text": "19分"
-        },
-        {
-          "activity": "chrome.exe｜127.0.0.1｜127.0.0.1:3001",
-          "seconds": 955.95,
-          "text": "15分"
-        },
-        {
-          "activity": "chrome.exe｜(64) Pinterest - Google Chrome",
-          "seconds": 950.93,
-          "text": "15分"
+          "seconds": 3008.62,
+          "text": "50分"
         },
         {
           "activity": "Figma.exe｜数毛-详情页 - Figma",
-          "seconds": 931.05,
-          "text": "15分"
+          "seconds": 2649.45,
+          "text": "44分"
+        },
+        {
+          "activity": "Figma.exe｜APP 详情页 - Figma",
+          "seconds": 1720.99,
+          "text": "28分"
+        },
+        {
+          "activity": "chrome.exe｜(64) Pinterest - Google Chrome",
+          "seconds": 695.01,
+          "text": "11分"
+        },
+        {
+          "activity": "fastpdf.exe｜作品集【UI_UE设计师_北京 15-25K】刘泽润 8年.pdf",
+          "seconds": 662.64,
+          "text": "11分"
+        },
+        {
+          "activity": "chrome.exe｜核心功能提炼｜chatgpt.com",
+          "seconds": 580.42,
+          "text": "9分"
         },
         {
           "activity": "Hermes.exe｜Hermes",
-          "seconds": 681.22,
-          "text": "11分"
+          "seconds": 577.68,
+          "text": "9分"
         }
       ],
-      "generated_at": "2026-07-18T10:35:07.413745+08:00"
+      "generated_at": "2026-07-17T19:40:07.472387-07:00"
     },
     {
       "date": "2026-07-14",
       "weekday": "周二",
-      "total_active_seconds": 29440.8,
-      "total_active_text": "8小时10分",
+      "total_active_seconds": 15139.78,
+      "total_active_text": "4小时12分",
       "top_categories": [
         "设计",
         "学习/信息",
-        "工作/创作"
+        "沟通"
       ],
       "categories": [
         {
           "name": "设计",
-          "seconds": 16095.34,
-          "share": 0.5467,
+          "seconds": 11341.53,
+          "share": 0.7491,
           "representatives": [
             "Figma.exe｜Untitled - Figma",
             "Figma.exe｜数毛-详情页 - Figma",
@@ -3715,74 +3702,65 @@
         },
         {
           "name": "学习/信息",
-          "seconds": 7297.36,
-          "share": 0.2479,
+          "seconds": 2041.17,
+          "share": 0.1348,
           "representatives": [
             "chrome.exe｜字体排版设计需求 - Google Chrome",
-            "chrome.exe｜角色生成请求 - Google Chrome",
-            "chrome.exe｜核心功能提炼 - Google Chrome"
+            "chrome.exe｜手机界面悬浮卡片 - Google Chrome",
+            "msedge.exe｜弹窗图片大全-弹窗高清好看的图片--花瓣用户TZvlsgL6的画板 和另外 3 个页面 - 个人 - Microsoft​ Edge"
           ],
           "color": "#61ddaa"
         },
         {
-          "name": "工作/创作",
-          "seconds": 2017.09,
-          "share": 0.0685,
-          "representatives": [
-            "Hermes.exe｜Hermes",
-            "chrome.exe｜ChatGPT - Google Chrome",
-            "chrome.exe｜鸟类拍摄相关App｜chatgpt.com"
-          ],
-          "color": "#7aa2ff"
-        },
-        {
           "name": "沟通",
-          "seconds": 1705.76,
-          "share": 0.0579,
+          "seconds": 580.51,
+          "share": 0.0383,
           "representatives": [
             "Weixin.exe｜微信",
-            "Feishu.exe｜飞书",
-            "WeChatAppEx.exe｜微信"
+            "WeChatAppEx.exe｜微信",
+            "Feishu.exe｜飞书"
           ],
           "color": "#5ad1e6"
         },
         {
-          "name": "其他",
-          "seconds": 1642.8,
-          "share": 0.0558,
+          "name": "工作/创作",
+          "seconds": 577.04,
+          "share": 0.0381,
           "representatives": [
-            "WinRAR.exe｜正在创建压缩文件 landing page.rar",
-            "chrome.exe｜新标签页｜newtab",
-            "Weixin.exe｜图片和视频"
+            "chrome.exe｜ChatGPT - Google Chrome",
+            "chrome.exe｜鸟类拍摄相关App｜chatgpt.com",
+            "msedge.exe｜字体排版设计需求｜chatgpt.com"
+          ],
+          "color": "#7aa2ff"
+        },
+        {
+          "name": "其他",
+          "seconds": 418.09,
+          "share": 0.0276,
+          "representatives": [
+            "Lsf.exe",
+            "chrome.exe｜打开",
+            "chrome.exe｜新标签页｜newtab"
           ],
           "color": "#cbd5e1"
         },
         {
           "name": "系统/维护",
-          "seconds": 646.43,
-          "share": 0.022,
+          "seconds": 181.44,
+          "share": 0.012,
           "representatives": [
-            "explorer.exe｜嘴替键盘-landing page2.0 - 文件资源管理器",
             "explorer.exe｜Program Manager",
-            "clash-verge.exe｜Clash Verge"
+            "clash-verge.exe｜Clash Verge",
+            "explorer.exe"
           ],
           "color": "#8a7dff"
-        },
-        {
-          "name": "娱乐",
-          "seconds": 36.01,
-          "share": 0.0012,
-          "representatives": [
-            "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili"
-          ],
-          "color": "#ff7d7d"
         }
       ],
-      "switch_count": 741,
-      "segment_count": 847,
-      "summary_line": "这一天共记录 8小时10分 的活跃电脑时间，主轴是“设计”，切换密度偏高，像是在多线程推进。",
+      "switch_count": 275,
+      "segment_count": 313,
+      "summary_line": "这一天共记录 4小时12分 的活跃电脑时间，主轴是“设计”，切换密度偏高，像是在多线程推进。",
       "notes": [
-        "主类目是“设计”，占比 54.7%，说明当天最主要的电脑注意力投向比较清晰。",
+        "主类目是“设计”，占比 74.9%，说明当天最主要的电脑注意力投向比较清晰。",
         "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。"
       ],
       "longest_focus": {
@@ -3790,7 +3768,7 @@
         "activity": "Figma.exe｜Untitled - Figma",
         "seconds": 1902.43,
         "text": "31分",
-        "range": "16:57–17:29"
+        "range": "01:57–02:29"
       },
       "energy": {
         "high_zone": "设计",
@@ -3798,270 +3776,86 @@
         "recovery_zone": "无明显恢复区",
         "confidence": "中",
         "evidence": [
-          "总活跃时长 8小时10分",
-          "窗口切换 741 次",
+          "总活跃时长 4小时12分",
+          "窗口切换 275 次",
           "最长连续专注块 31分"
         ]
       },
       "hourly_seconds": {
-        "0": 2505.08,
-        "1": 165.21,
-        "2": 0.0,
-        "3": 0.0,
+        "0": 3536.56,
+        "1": 3282.28,
+        "2": 3579.14,
+        "3": 1295.65,
         "4": 0.0,
         "5": 0.0,
         "6": 0.0,
-        "7": 0.0,
-        "8": 0.0,
-        "9": 1297.58,
-        "10": 3254.73,
-        "11": 3436.97,
-        "12": 560.09,
-        "13": 3.27,
-        "14": 3475.33,
-        "15": 3536.56,
-        "16": 3282.28,
-        "17": 3579.14,
-        "18": 1295.65,
-        "19": 0.0,
-        "20": 0.0,
-        "21": 0.0,
-        "22": 2716.05,
-        "23": 332.86
-      },
-      "top_activities": [
-        {
-          "activity": "Figma.exe｜Untitled - Figma",
-          "seconds": 12777.26,
-          "text": "3小时32分"
-        },
-        {
-          "activity": "Figma.exe｜数毛-详情页 - Figma",
-          "seconds": 3228.8,
-          "text": "53分"
-        },
-        {
-          "activity": "chrome.exe｜字体排版设计需求 - Google Chrome",
-          "seconds": 1233.1,
-          "text": "20分"
-        },
-        {
-          "activity": "chrome.exe｜角色生成请求 - Google Chrome",
-          "seconds": 1193.46,
-          "text": "19分"
-        },
-        {
-          "activity": "Weixin.exe｜微信",
-          "seconds": 1144.93,
-          "text": "19分"
-        },
-        {
-          "activity": "Hermes.exe｜Hermes",
-          "seconds": 886.94,
-          "text": "14分"
-        },
-        {
-          "activity": "chrome.exe｜核心功能提炼 - Google Chrome",
-          "seconds": 745.57,
-          "text": "12分"
-        },
-        {
-          "activity": "msedge.exe｜H5图片大全-H5高清好看的图片--花瓣用户TZvlsgL6的画板 和另外 2 个页面 - 个人 - Microsoft​ Edge",
-          "seconds": 600.64,
-          "text": "10分"
-        }
-      ],
-      "generated_at": "2026-07-18T10:35:07.015401+08:00"
-    },
-    {
-      "date": "2026-07-15",
-      "weekday": "周三",
-      "total_active_seconds": 26542.36,
-      "total_active_text": "7小时22分",
-      "top_categories": [
-        "设计",
-        "学习/信息",
-        "工作/创作"
-      ],
-      "categories": [
-        {
-          "name": "设计",
-          "seconds": 18382.22,
-          "share": 0.6926,
-          "representatives": [
-            "Figma.exe｜付费页面 - Figma",
-            "Figma.exe｜数毛-详情页 - Figma",
-            "Figma.exe｜APP 详情页 - Figma"
-          ],
-          "color": "#f6bd16"
-        },
-        {
-          "name": "学习/信息",
-          "seconds": 4823.42,
-          "share": 0.1817,
-          "representatives": [
-            "chrome.exe｜创建键盘设计 - Google Chrome",
-            "chrome.exe｜角色配色与表情转换 - Google Chrome",
-            "chrome.exe｜水晶材质蓝色调 - Google Chrome"
-          ],
-          "color": "#61ddaa"
-        },
-        {
-          "name": "工作/创作",
-          "seconds": 1277.52,
-          "share": 0.0481,
-          "representatives": [
-            "哔哩哔哩.exe｜Obsidian+Claude Code搭建个人知识库",
-            "chrome.exe｜ChatGPT - Google Chrome",
-            "msedge.exe｜提升专注力的方法｜chatgpt.com"
-          ],
-          "color": "#7aa2ff"
-        },
-        {
-          "name": "沟通",
-          "seconds": 895.73,
-          "share": 0.0337,
-          "representatives": [
-            "Weixin.exe｜微信",
-            "Feishu.exe｜图片",
-            "Feishu.exe｜飞书"
-          ],
-          "color": "#5ad1e6"
-        },
-        {
-          "name": "系统/维护",
-          "seconds": 470.49,
-          "share": 0.0177,
-          "representatives": [
-            "explorer.exe｜Program Manager",
-            "explorer.exe",
-            "ShellHost.exe｜快速设置"
-          ],
-          "color": "#8a7dff"
-        },
-        {
-          "name": "其他",
-          "seconds": 469.48,
-          "share": 0.0177,
-          "representatives": [
-            "Weixin.exe｜图片和视频",
-            "Weixin.exe｜群聊的聊天记录",
-            "Doubao.exe｜豆包"
-          ],
-          "color": "#cbd5e1"
-        },
-        {
-          "name": "娱乐",
-          "seconds": 223.5,
-          "share": 0.0084,
-          "representatives": [
-            "哔哩哔哩.exe｜【B站独家】战术推演：英格兰阿根廷恩怨之争，球王能否再进一步？",
-            "哔哩哔哩.exe｜哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
-            "哔哩哔哩.exe｜赛后情书：罗哥疯狂凯瑞，西班牙智力压制狂虐法国。"
-          ],
-          "color": "#ff7d7d"
-        }
-      ],
-      "switch_count": 444,
-      "segment_count": 482,
-      "summary_line": "这一天共记录 7小时22分 的活跃电脑时间，主轴是“设计”，切换密度偏高，像是在多线程推进。",
-      "notes": [
-        "主类目是“设计”，占比 69.3%，说明当天最主要的电脑注意力投向比较清晰。",
-        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。"
-      ],
-      "longest_focus": {
-        "category": "设计",
-        "activity": "Figma.exe｜付费页面 - Figma",
-        "seconds": 1410.03,
-        "text": "23分",
-        "range": "15:57–16:20"
-      },
-      "energy": {
-        "high_zone": "设计",
-        "fragmented_zone": "学习/信息",
-        "recovery_zone": "无明显恢复区",
-        "confidence": "中",
-        "evidence": [
-          "总活跃时长 7小时22分",
-          "窗口切换 444 次",
-          "最长连续专注块 23分"
-        ]
-      },
-      "hourly_seconds": {
-        "0": 0.0,
-        "1": 4.13,
-        "2": 0.0,
-        "3": 0.0,
-        "4": 0.0,
-        "5": 0.0,
-        "6": 0.0,
-        "7": 0.0,
-        "8": 0.0,
-        "9": 1399.03,
-        "10": 3463.23,
-        "11": 3233.43,
-        "12": 1614.56,
-        "13": 1484.06,
-        "14": 3521.04,
-        "15": 3141.19,
-        "16": 2573.45,
-        "17": 3568.11,
-        "18": 2540.13,
+        "7": 2716.05,
+        "8": 290.64,
+        "9": 0.0,
+        "10": 4.13,
+        "11": 0.0,
+        "12": 0.0,
+        "13": 0.0,
+        "14": 0.0,
+        "15": 0.0,
+        "16": 0.0,
+        "17": 0.0,
+        "18": 0.0,
         "19": 0.0,
         "20": 0.0,
         "21": 0.0,
         "22": 0.0,
-        "23": 0.0
+        "23": 435.33
       },
       "top_activities": [
         {
-          "activity": "Figma.exe｜付费页面 - Figma",
-          "seconds": 17849.9,
-          "text": "4小时57分"
+          "activity": "Figma.exe｜Untitled - Figma",
+          "seconds": 9846.23,
+          "text": "2小时44分"
         },
         {
-          "activity": "chrome.exe｜创建键盘设计 - Google Chrome",
-          "seconds": 617.2,
-          "text": "10分"
+          "activity": "Figma.exe｜数毛-详情页 - Figma",
+          "seconds": 1407.03,
+          "text": "23分"
         },
         {
-          "activity": "chrome.exe｜角色配色与表情转换 - Google Chrome",
-          "seconds": 528.42,
-          "text": "8分"
-        },
-        {
-          "activity": "chrome.exe｜水晶材质蓝色调 - Google Chrome",
-          "seconds": 487.19,
-          "text": "8分"
-        },
-        {
-          "activity": "Weixin.exe｜微信",
-          "seconds": 404.81,
+          "activity": "chrome.exe｜字体排版设计需求 - Google Chrome",
+          "seconds": 390.43,
           "text": "6分"
         },
         {
-          "activity": "Feishu.exe｜图片",
-          "seconds": 329.67,
-          "text": "5分"
-        },
-        {
-          "activity": "msedge.exe｜icon - 搜索结果 - 花瓣 和另外 3 个页面 - 个人 - Microsoft​ Edge",
-          "seconds": 302.19,
-          "text": "5分"
-        },
-        {
-          "activity": "chrome.exe｜详情页文案生成 - Google Chrome",
-          "seconds": 292.66,
+          "activity": "chrome.exe｜ChatGPT - Google Chrome",
+          "seconds": 277.36,
           "text": "4分"
+        },
+        {
+          "activity": "Weixin.exe｜微信",
+          "seconds": 272.75,
+          "text": "4分"
+        },
+        {
+          "activity": "chrome.exe｜手机界面悬浮卡片 - Google Chrome",
+          "seconds": 267.29,
+          "text": "4分"
+        },
+        {
+          "activity": "msedge.exe｜弹窗图片大全-弹窗高清好看的图片--花瓣用户TZvlsgL6的画板 和另外 3 个页面 - 个人 - Microsoft​ Edge",
+          "seconds": 225.49,
+          "text": "3分"
+        },
+        {
+          "activity": "WeChatAppEx.exe｜微信",
+          "seconds": 162.94,
+          "text": "2分"
         }
       ],
-      "generated_at": "2026-07-18T10:35:06.773963+08:00"
+      "generated_at": "2026-07-17T19:40:07.299248-07:00"
     },
     {
-      "date": "2026-07-16",
-      "weekday": "周四",
-      "total_active_seconds": 28860.92,
-      "total_active_text": "8小时1分",
+      "date": "2026-07-15",
+      "weekday": "周三",
+      "total_active_seconds": 17444.72,
+      "total_active_text": "4小时50分",
       "top_categories": [
         "设计",
         "学习/信息",
@@ -4070,8 +3864,8 @@
       "categories": [
         {
           "name": "设计",
-          "seconds": 16504.7,
-          "share": 0.5719,
+          "seconds": 11906.76,
+          "share": 0.6825,
           "representatives": [
             "Figma.exe｜付费页面 - Figma",
             "Figma.exe｜数毛-详情页 - Figma",
@@ -4081,73 +3875,73 @@
         },
         {
           "name": "学习/信息",
-          "seconds": 7878.84,
-          "share": 0.273,
+          "seconds": 3416.29,
+          "share": 0.1958,
           "representatives": [
             "chrome.exe｜手机界面设计 - Google Chrome",
-            "chrome.exe｜创建键盘设计 - Google Chrome",
-            "msedge.exe｜付费界面 - 小红书搜索 和另外 7 个页面 - 个人 - Microsoft​ Edge"
+            "chrome.exe｜角色配色与表情转换 - Google Chrome",
+            "chrome.exe｜创建键盘设计 - Google Chrome"
           ],
           "color": "#61ddaa"
         },
         {
           "name": "沟通",
-          "seconds": 2025.61,
-          "share": 0.0702,
+          "seconds": 941.65,
+          "share": 0.054,
           "representatives": [
             "Weixin.exe｜微信",
-            "Feishu.exe｜飞书",
-            "Feishu.exe｜打开"
+            "Feishu.exe｜图片",
+            "Feishu.exe｜飞书"
           ],
           "color": "#5ad1e6"
         },
         {
           "name": "其他",
-          "seconds": 1517.01,
-          "share": 0.0526,
+          "seconds": 653.66,
+          "share": 0.0375,
           "representatives": [
             "chrome.exe｜新标签页｜newtab",
-            "LockApp.exe｜Windows 默认锁屏界面",
-            "Weixin.exe｜图片和视频"
+            "Weixin.exe｜图片和视频",
+            "Doubao.exe｜豆包"
           ],
           "color": "#cbd5e1"
         },
         {
           "name": "工作/创作",
-          "seconds": 679.14,
-          "share": 0.0235,
+          "seconds": 432.68,
+          "share": 0.0248,
           "representatives": [
-            "chrome.exe｜ChatGPT - Google Chrome",
-            "msedge.exe｜3D风格转换请求｜chatgpt.com",
-            "msedge.exe｜文字内容修改请求｜chatgpt.com"
+            "msedge.exe｜提升专注力的方法｜chatgpt.com",
+            "msedge.exe｜苹果退出App Store问题｜chatgpt.com",
+            "chrome.exe｜ChatGPT - Google Chrome"
           ],
           "color": "#7aa2ff"
         },
         {
           "name": "系统/维护",
-          "seconds": 255.63,
-          "share": 0.0089,
+          "seconds": 93.68,
+          "share": 0.0054,
           "representatives": [
-            "clash-verge.exe｜Clash Verge",
             "explorer.exe",
-            "explorer.exe｜Program Manager"
+            "explorer.exe｜Program Manager",
+            "clash-verge.exe｜Clash Verge"
           ],
           "color": "#8a7dff"
         }
       ],
-      "switch_count": 760,
-      "segment_count": 828,
-      "summary_line": "这一天共记录 8小时1分 的活跃电脑时间，主轴是“设计”，切换密度偏高，像是在多线程推进。",
+      "switch_count": 272,
+      "segment_count": 307,
+      "summary_line": "这一天共记录 4小时50分 的活跃电脑时间，主轴是“设计”，切换密度偏高，像是在多线程推进。",
       "notes": [
-        "主类目是“设计”，占比 57.2%，说明当天最主要的电脑注意力投向比较清晰。",
+        "主类目是“设计”，占比 68.2%，说明当天最主要的电脑注意力投向比较清晰。",
         "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。"
       ],
       "longest_focus": {
         "category": "设计",
         "activity": "Figma.exe｜付费页面 - Figma",
-        "seconds": 1499.7,
-        "text": "25分",
-        "range": "15:10–15:35"
+        "seconds": 1410.03,
+        "text": "23分",
+        "range": "00:57–01:20"
       },
       "energy": {
         "high_zone": "设计",
@@ -4155,52 +3949,47 @@
         "recovery_zone": "无明显恢复区",
         "confidence": "中",
         "evidence": [
-          "总活跃时长 8小时1分",
-          "窗口切换 760 次",
-          "最长连续专注块 25分"
+          "总活跃时长 4小时50分",
+          "窗口切换 272 次",
+          "最长连续专注块 23分"
         ]
       },
       "hourly_seconds": {
-        "0": 0.0,
-        "1": 0.0,
-        "2": 0.0,
-        "3": 0.0,
+        "0": 3141.19,
+        "1": 2573.45,
+        "2": 3568.11,
+        "3": 2540.13,
         "4": 0.0,
         "5": 0.0,
-        "6": 2104.32,
-        "7": 2747.35,
+        "6": 0.0,
+        "7": 0.0,
         "8": 0.0,
-        "9": 2496.3,
-        "10": 3480.22,
-        "11": 3247.69,
-        "12": 143.32,
-        "13": 1359.21,
-        "14": 3476.6,
-        "15": 3497.2,
-        "16": 1968.88,
-        "17": 2425.33,
-        "18": 1914.49,
+        "9": 0.0,
+        "10": 0.0,
+        "11": 0.0,
+        "12": 0.0,
+        "13": 0.0,
+        "14": 0.0,
+        "15": 2104.32,
+        "16": 2747.35,
+        "17": 0.0,
+        "18": 0.0,
         "19": 0.0,
         "20": 0.0,
         "21": 0.0,
         "22": 0.0,
-        "23": 0.0
+        "23": 770.17
       },
       "top_activities": [
         {
           "activity": "Figma.exe｜付费页面 - Figma",
-          "seconds": 12361.2,
-          "text": "3小时26分"
+          "seconds": 9093.38,
+          "text": "2小时31分"
         },
         {
           "activity": "Figma.exe｜数毛-详情页 - Figma",
-          "seconds": 3785.68,
-          "text": "1小时3分"
-        },
-        {
-          "activity": "Weixin.exe｜微信",
-          "seconds": 1967.43,
-          "text": "32分"
+          "seconds": 2484.37,
+          "text": "41分"
         },
         {
           "activity": "chrome.exe｜手机界面设计 - Google Chrome",
@@ -4208,33 +3997,38 @@
           "text": "15分"
         },
         {
-          "activity": "chrome.exe｜创建键盘设计 - Google Chrome",
-          "seconds": 908.52,
-          "text": "15分"
+          "activity": "Weixin.exe｜微信",
+          "seconds": 812.49,
+          "text": "13分"
+        },
+        {
+          "activity": "chrome.exe｜角色配色与表情转换 - Google Chrome",
+          "seconds": 528.42,
+          "text": "8分"
         },
         {
           "activity": "chrome.exe｜新标签页｜newtab",
-          "seconds": 737.74,
-          "text": "12分"
+          "seconds": 350.95,
+          "text": "5分"
         },
         {
-          "activity": "msedge.exe｜付费界面 - 小红书搜索 和另外 7 个页面 - 个人 - Microsoft​ Edge",
-          "seconds": 597.04,
-          "text": "9分"
+          "activity": "chrome.exe｜创建键盘设计 - Google Chrome",
+          "seconds": 310.89,
+          "text": "5分"
         },
         {
-          "activity": "LockApp.exe｜Windows 默认锁屏界面",
-          "seconds": 500.05,
-          "text": "8分"
+          "activity": "msedge.exe｜icon - 搜索结果 - 花瓣 和另外 3 个页面 - 个人 - Microsoft​ Edge",
+          "seconds": 302.19,
+          "text": "5分"
         }
       ],
-      "generated_at": "2026-07-18T10:35:06.614782+08:00"
+      "generated_at": "2026-07-17T19:40:07.143341-07:00"
     },
     {
-      "date": "2026-07-17",
-      "weekday": "周五",
-      "total_active_seconds": 26170.64,
-      "total_active_text": "7小时16分",
+      "date": "2026-07-16",
+      "weekday": "周四",
+      "total_active_seconds": 9831.17,
+      "total_active_text": "2小时43分",
       "top_categories": [
         "设计",
         "学习/信息",
@@ -4243,8 +4037,180 @@
       "categories": [
         {
           "name": "设计",
-          "seconds": 16753.7,
-          "share": 0.6402,
+          "seconds": 6023.97,
+          "share": 0.6127,
+          "representatives": [
+            "Figma.exe｜付费页面 - Figma",
+            "msedge.exe｜UI设计 | Figma4步制作高级感会员卡片教程 - 小红书 和另外 7 个页面 - 个人 - Microsoft​ Edge",
+            "Figma.exe｜另存为"
+          ],
+          "color": "#f6bd16"
+        },
+        {
+          "name": "学习/信息",
+          "seconds": 2886.61,
+          "share": 0.2936,
+          "representatives": [
+            "msedge.exe｜付费界面 - 小红书搜索 和另外 7 个页面 - 个人 - Microsoft​ Edge",
+            "msedge.exe｜会员卡片不同状态 - 小红书搜索 和另外 7 个页面 - 个人 - Microsoft​ Edge",
+            "msedge.exe｜小红书 - 你的生活兴趣社区 和另外 7 个页面 - 个人 - Microsoft​ Edge"
+          ],
+          "color": "#61ddaa"
+        },
+        {
+          "name": "沟通",
+          "seconds": 796.33,
+          "share": 0.081,
+          "representatives": [
+            "Weixin.exe｜微信",
+            "Feishu.exe｜飞书",
+            "Feishu.exe｜打开"
+          ],
+          "color": "#5ad1e6"
+        },
+        {
+          "name": "工作/创作",
+          "seconds": 66.79,
+          "share": 0.0068,
+          "representatives": [
+            "msedge.exe｜文字内容修改请求｜chatgpt.com",
+            "msedge.exe｜万物皆可吃谷，Codex也沦陷了…… - 小红书 和另外 7 个页面 - 个人 - Microsoft​ Edge"
+          ],
+          "color": "#7aa2ff"
+        },
+        {
+          "name": "系统/维护",
+          "seconds": 35.9,
+          "share": 0.0037,
+          "representatives": [
+            "explorer.exe",
+            "clash-verge.exe｜Clash Verge",
+            "explorer.exe｜Program Manager"
+          ],
+          "color": "#8a7dff"
+        },
+        {
+          "name": "其他",
+          "seconds": 21.57,
+          "share": 0.0022,
+          "representatives": [
+            "Snipaste.exe｜Snipper - Snipaste",
+            "Weixin.exe｜Weixin",
+            "Weixin.exe｜图片和视频"
+          ],
+          "color": "#cbd5e1"
+        }
+      ],
+      "switch_count": 313,
+      "segment_count": 326,
+      "summary_line": "这一天共记录 2小时43分 的活跃电脑时间，主轴是“设计”，切换密度偏高，像是在多线程推进。",
+      "notes": [
+        "主类目是“设计”，占比 61.3%，说明当天最主要的电脑注意力投向比较清晰。",
+        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。"
+      ],
+      "longest_focus": {
+        "category": "设计",
+        "activity": "Figma.exe｜付费页面 - Figma",
+        "seconds": 1499.7,
+        "text": "25分",
+        "range": "00:10–00:35"
+      },
+      "energy": {
+        "high_zone": "设计",
+        "fragmented_zone": "学习/信息",
+        "recovery_zone": "无明显恢复区",
+        "confidence": "中",
+        "evidence": [
+          "总活跃时长 2小时43分",
+          "窗口切换 313 次",
+          "最长连续专注块 25分"
+        ]
+      },
+      "hourly_seconds": {
+        "0": 3497.2,
+        "1": 1968.88,
+        "2": 2425.33,
+        "3": 1914.49,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0,
+        "10": 0.0,
+        "11": 0.0,
+        "12": 0.0,
+        "13": 0.0,
+        "14": 0.0,
+        "15": 0.0,
+        "16": 0.0,
+        "17": 0.0,
+        "18": 0.0,
+        "19": 0.0,
+        "20": 0.0,
+        "21": 0.0,
+        "22": 0.0,
+        "23": 25.26
+      },
+      "top_activities": [
+        {
+          "activity": "Figma.exe｜付费页面 - Figma",
+          "seconds": 6012.64,
+          "text": "1小时40分"
+        },
+        {
+          "activity": "Weixin.exe｜微信",
+          "seconds": 741.9,
+          "text": "12分"
+        },
+        {
+          "activity": "msedge.exe｜付费界面 - 小红书搜索 和另外 7 个页面 - 个人 - Microsoft​ Edge",
+          "seconds": 597.04,
+          "text": "9分"
+        },
+        {
+          "activity": "msedge.exe｜会员卡片不同状态 - 小红书搜索 和另外 7 个页面 - 个人 - Microsoft​ Edge",
+          "seconds": 187.09,
+          "text": "3分"
+        },
+        {
+          "activity": "msedge.exe｜小红书 - 你的生活兴趣社区 和另外 7 个页面 - 个人 - Microsoft​ Edge",
+          "seconds": 145.88,
+          "text": "2分"
+        },
+        {
+          "activity": "msedge.exe｜英格兰门将皮克福德水瓶上的小抄被发现😂 - 小红书 和另外 7 个页面 - 个人 - Microsoft​ Edge",
+          "seconds": 130.25,
+          "text": "2分"
+        },
+        {
+          "activity": "msedge.exe｜UI分享 | 移动端「VIP权益会员页面」 - 小红书 和另外 7 个页面 - 个人 - Microsoft​ Edge",
+          "seconds": 107.87,
+          "text": "1分"
+        },
+        {
+          "activity": "chrome.exe｜文字内容修改请求 - Google Chrome",
+          "seconds": 80.18,
+          "text": "1分"
+        }
+      ],
+      "generated_at": "2026-07-17T19:40:06.996081-07:00"
+    },
+    {
+      "date": "2026-07-17",
+      "weekday": "周五",
+      "total_active_seconds": 12307.02,
+      "total_active_text": "3小时25分",
+      "top_categories": [
+        "设计",
+        "学习/信息",
+        "沟通"
+      ],
+      "categories": [
+        {
+          "name": "设计",
+          "seconds": 5419.58,
+          "share": 0.4404,
           "representatives": [
             "Figma.exe｜付费页面 - Figma",
             "Figma.exe｜另存为",
@@ -4254,139 +4220,135 @@
         },
         {
           "name": "学习/信息",
-          "seconds": 4980.63,
-          "share": 0.1903,
+          "seconds": 3393.0,
+          "share": 0.2757,
           "representatives": [
-            "chrome.exe｜设计交付问题 - Google Chrome",
             "msedge.exe｜小红书 - 你的生活兴趣社区 和另外 7 个页面 - 个人 - Microsoft​ Edge",
-            "chrome.exe｜Krea2简介 - Google Chrome"
+            "chrome.exe｜Krea2简介 - Google Chrome",
+            "msedge.exe｜设计 - 小红书搜索 和另外 6 个页面 - 个人 - Microsoft​ Edge"
           ],
           "color": "#61ddaa"
         },
         {
           "name": "沟通",
-          "seconds": 2280.21,
-          "share": 0.0871,
+          "seconds": 1968.1,
+          "share": 0.1599,
           "representatives": [
             "Weixin.exe｜微信",
             "Feishu.exe｜飞书",
-            "WeChatAppEx.exe"
+            "WeChatAppEx.exe｜微信"
           ],
           "color": "#5ad1e6"
         },
         {
           "name": "工作/创作",
-          "seconds": 973.81,
-          "share": 0.0372,
+          "seconds": 708.55,
+          "share": 0.0576,
           "representatives": [
             "ChatGPT.exe｜ChatGPT",
-            "chrome.exe｜设计交付问题｜chatgpt.com",
-            "msedge.exe｜Krea2简介｜chatgpt.com"
+            "msedge.exe｜Krea2简介｜chatgpt.com",
+            "chrome.exe｜Krea2简介｜chatgpt.com"
           ],
           "color": "#7aa2ff"
         },
         {
-          "name": "其他",
-          "seconds": 674.02,
-          "share": 0.0258,
-          "representatives": [
-            "chrome.exe｜新标签页｜newtab",
-            "Snipaste.exe｜Snipper - Snipaste",
-            "Weixin.exe｜Weixin"
-          ],
-          "color": "#cbd5e1"
-        },
-        {
           "name": "系统/维护",
-          "seconds": 504.13,
-          "share": 0.0193,
+          "seconds": 410.6,
+          "share": 0.0334,
           "representatives": [
-            "explorer.exe｜Program Manager",
             "explorer.exe｜安哲素材汇总 - 文件资源管理器",
-            "explorer.exe"
+            "explorer.exe｜Program Manager",
+            "explorer.exe｜付费页面 - 文件资源管理器"
           ],
           "color": "#8a7dff"
         },
         {
+          "name": "其他",
+          "seconds": 403.04,
+          "share": 0.0327,
+          "representatives": [
+            "Weixin.exe｜Weixin",
+            "chrome.exe｜Krea｜www.krea.ai",
+            "Weixin.exe｜图片和视频"
+          ],
+          "color": "#cbd5e1"
+        },
+        {
           "name": "娱乐",
           "seconds": 4.14,
-          "share": 0.0002,
+          "share": 0.0003,
           "representatives": [
             "msedge.exe｜抖音支付分期福利主视觉设计 - 小红书 和另外 1 个页面 - 个人 - Microsoft​ Edge"
           ],
           "color": "#ff7d7d"
         }
       ],
-      "switch_count": 773,
-      "segment_count": 864,
-      "summary_line": "这一天共记录 7小时16分 的活跃电脑时间，主轴是“设计”，切换密度偏高，像是在多线程推进。",
+      "switch_count": 559,
+      "segment_count": 624,
+      "summary_line": "这一天共记录 3小时25分 的活跃电脑时间，主轴是“设计”，切换密度偏高，像是在多线程推进。",
       "notes": [
-        "主类目是“设计”，占比 64.0%，说明当天最主要的电脑注意力投向比较清晰。",
-        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。"
+        "主类目是“设计”，占比 44.0%，说明当天最主要的电脑注意力投向比较清晰。",
+        "窗口切换次数较高，建议回看是否有过多的检索/切页/消息打断。",
+        "最长连续专注块偏短，后续可重点观察是什么因素把整块时间切碎了。"
       ],
       "longest_focus": {
         "category": "设计",
         "activity": "Figma.exe｜付费页面 - Figma",
-        "seconds": 1650.89,
-        "text": "27分",
-        "range": "11:41–12:09"
+        "seconds": 553.98,
+        "text": "9分",
+        "range": "00:08–00:17"
       },
       "energy": {
         "high_zone": "设计",
         "fragmented_zone": "学习/信息",
-        "recovery_zone": "无明显恢复区",
+        "recovery_zone": "沟通",
         "confidence": "中",
         "evidence": [
-          "总活跃时长 7小时16分",
-          "窗口切换 773 次",
-          "最长连续专注块 27分"
+          "总活跃时长 3小时25分",
+          "窗口切换 559 次",
+          "最长连续专注块 9分"
         ]
       },
       "hourly_seconds": {
-        "0": 0.0,
-        "1": 0.0,
-        "2": 0.0,
-        "3": 0.0,
+        "0": 3226.87,
+        "1": 3175.7,
+        "2": 2769.12,
+        "3": 2764.85,
         "4": 0.0,
         "5": 0.0,
         "6": 0.0,
-        "7": 0.0,
-        "8": 0.0,
-        "9": 2884.82,
-        "10": 2726.52,
-        "11": 3529.28,
-        "12": 566.11,
-        "13": 1732.28,
-        "14": 2511.86,
-        "15": 3226.87,
-        "16": 3175.7,
-        "17": 2769.12,
-        "18": 2764.85,
+        "7": 94.98,
+        "8": 188.26,
+        "9": 0.0,
+        "10": 0.0,
+        "11": 0.0,
+        "12": 0.0,
+        "13": 0.0,
+        "14": 0.0,
+        "15": 0.0,
+        "16": 0.0,
+        "17": 0.0,
+        "18": 0.0,
         "19": 0.0,
         "20": 0.0,
         "21": 0.0,
-        "22": 94.98,
-        "23": 188.26
+        "22": 0.0,
+        "23": 87.25
       },
       "top_activities": [
         {
           "activity": "Figma.exe｜付费页面 - Figma",
-          "seconds": 16527.65,
-          "text": "4小时35分"
+          "seconds": 5216.04,
+          "text": "1小时26分"
         },
         {
           "activity": "Weixin.exe｜微信",
-          "seconds": 1816.35,
-          "text": "30分"
-        },
-        {
-          "activity": "chrome.exe｜设计交付问题 - Google Chrome",
-          "seconds": 846.25,
-          "text": "14分"
+          "seconds": 1559.67,
+          "text": "26分"
         },
         {
           "activity": "Feishu.exe｜飞书",
-          "seconds": 385.1,
+          "seconds": 378.97,
           "text": "6分"
         },
         {
@@ -4405,28 +4367,44 @@
           "text": "4分"
         },
         {
-          "activity": "chrome.exe｜设计交付问题｜chatgpt.com",
-          "seconds": 242.78,
-          "text": "4分"
+          "activity": "msedge.exe｜设计 - 小红书搜索 和另外 6 个页面 - 个人 - Microsoft​ Edge",
+          "seconds": 196.14,
+          "text": "3分"
+        },
+        {
+          "activity": "msedge.exe｜设计 - 小红书搜索 和另外 5 个页面 - 个人 - Microsoft​ Edge",
+          "seconds": 189.0,
+          "text": "3分"
         }
       ],
-      "generated_at": "2026-07-18T10:35:06.389379+08:00"
+      "generated_at": "2026-07-17T19:40:06.846394-07:00"
     },
     {
       "date": "2026-07-18",
       "weekday": "周六",
-      "total_active_seconds": 160.55,
-      "total_active_text": "2分",
+      "total_active_seconds": 310.59,
+      "total_active_text": "5分",
       "top_categories": [
+        "其他",
         "工作/创作",
-        "系统/维护",
-        "其他"
+        "系统/维护"
       ],
       "categories": [
         {
+          "name": "其他",
+          "seconds": 137.98,
+          "share": 0.4443,
+          "representatives": [
+            "ShellExperienceHost.exe｜Windows Shell Experience 主机",
+            "chrome.exe｜新标签页｜newtab",
+            "ShellExperienceHost.exe｜通知中心"
+          ],
+          "color": "#cbd5e1"
+        },
+        {
           "name": "工作/创作",
-          "seconds": 89.98,
-          "share": 0.5604,
+          "seconds": 91.0,
+          "share": 0.293,
           "representatives": [
             "ChatGPT.exe｜ChatGPT",
             "chrome.exe｜ChatGPT 方案 - Google Chrome",
@@ -4436,28 +4414,28 @@
         },
         {
           "name": "系统/维护",
-          "seconds": 36.73,
-          "share": 0.2288,
+          "seconds": 74.46,
+          "share": 0.2397,
           "representatives": [
-            "clash-verge.exe｜Clash Verge",
             "explorer.exe｜Program Manager",
-            "explorer.exe"
+            "explorer.exe",
+            "ShellHost.exe｜快速设置"
           ],
           "color": "#8a7dff"
         },
         {
-          "name": "其他",
-          "seconds": 30.77,
-          "share": 0.1917,
+          "name": "学习/信息",
+          "seconds": 4.08,
+          "share": 0.0131,
           "representatives": [
-            "chrome.exe｜新标签页｜newtab"
+            "SearchHost.exe｜搜索"
           ],
-          "color": "#cbd5e1"
+          "color": "#61ddaa"
         },
         {
           "name": "沟通",
           "seconds": 3.07,
-          "share": 0.0191,
+          "share": 0.0099,
           "representatives": [
             "Weixin.exe｜微信",
             "chrome.exe｜《定位卡》模板(第2课·定位 · 作业交付物,课前发群)（复刻） - 飞书云文档｜my.feishu.cn"
@@ -4465,30 +4443,30 @@
           "color": "#5ad1e6"
         }
       ],
-      "switch_count": 16,
-      "segment_count": 21,
-      "summary_line": "这一天共记录 2分 的活跃电脑时间，主轴是“工作/创作”，节奏相对稳定，存在可识别的连续工作块。",
+      "switch_count": 25,
+      "segment_count": 30,
+      "summary_line": "这一天共记录 5分 的活跃电脑时间，主轴是“其他”，节奏相对稳定，存在可识别的连续工作块。",
       "notes": [
-        "主类目是“工作/创作”，占比 56.0%，说明当天最主要的电脑注意力投向比较清晰。",
+        "主类目是“其他”，占比 44.4%，说明当天最主要的电脑注意力投向比较清晰。",
         "窗口切换不高，说明这一天的任务切换成本相对可控。",
         "最长连续专注块偏短，后续可重点观察是什么因素把整块时间切碎了。"
       ],
       "longest_focus": {
-        "category": "工作/创作",
-        "activity": "ChatGPT.exe｜ChatGPT",
-        "seconds": 55.14,
-        "text": "55秒",
-        "range": "10:32–10:33"
+        "category": "其他",
+        "activity": "ShellExperienceHost.exe｜Windows Shell Experience 主机",
+        "seconds": 104.15,
+        "text": "1分",
+        "range": "10:33–10:35"
       },
       "energy": {
-        "high_zone": "工作/创作",
-        "fragmented_zone": "系统/维护",
+        "high_zone": "其他",
+        "fragmented_zone": "工作/创作",
         "recovery_zone": "系统/维护",
         "confidence": "低",
         "evidence": [
-          "总活跃时长 2分",
-          "窗口切换 16 次",
-          "最长连续专注块 55秒"
+          "总活跃时长 5分",
+          "窗口切换 25 次",
+          "最长连续专注块 1分"
         ]
       },
       "hourly_seconds": {
@@ -4502,7 +4480,7 @@
         "7": 0.0,
         "8": 0.0,
         "9": 0.0,
-        "10": 160.55,
+        "10": 310.59,
         "11": 0.0,
         "12": 0.0,
         "13": 0.0,
@@ -4519,14 +4497,34 @@
       },
       "top_activities": [
         {
+          "activity": "ShellExperienceHost.exe｜Windows Shell Experience 主机",
+          "seconds": 104.15,
+          "text": "1分"
+        },
+        {
           "activity": "ChatGPT.exe｜ChatGPT",
-          "seconds": 78.73,
+          "seconds": 79.74,
           "text": "1分"
         },
         {
           "activity": "chrome.exe｜新标签页｜newtab",
           "seconds": 30.77,
           "text": "31秒"
+        },
+        {
+          "activity": "explorer.exe｜Program Manager",
+          "seconds": 18.36,
+          "text": "18秒"
+        },
+        {
+          "activity": "explorer.exe",
+          "seconds": 17.43,
+          "text": "17秒"
+        },
+        {
+          "activity": "ShellHost.exe｜快速设置",
+          "seconds": 13.22,
+          "text": "13秒"
         },
         {
           "activity": "clash-verge.exe｜Clash Verge",
@@ -4537,29 +4535,9 @@
           "activity": "chrome.exe｜ChatGPT 方案 - Google Chrome",
           "seconds": 10.23,
           "text": "10秒"
-        },
-        {
-          "activity": "explorer.exe｜Program Manager",
-          "seconds": 9.18,
-          "text": "9秒"
-        },
-        {
-          "activity": "explorer.exe",
-          "seconds": 7.2,
-          "text": "7秒"
-        },
-        {
-          "activity": "ShellHost.exe｜快速设置",
-          "seconds": 5.06,
-          "text": "5秒"
-        },
-        {
-          "activity": "explorer.exe｜此电脑 - 文件资源管理器",
-          "seconds": 2.05,
-          "text": "2秒"
         }
       ],
-      "generated_at": "2026-07-18T10:35:06.141169+08:00"
+      "generated_at": "2026-07-18T10:36:31.342312+08:00"
     }
   ],
   "weeks": [
@@ -4612,7 +4590,7 @@
       "notes": [
         "最投入的一天是 2026-06-15，活跃 0秒。"
       ],
-      "generated_at": "2026-07-18T10:35:11.569851+08:00"
+      "generated_at": "2026-07-17T19:40:08.872472-07:00"
     },
     {
       "id": "2026-06-22~2026-06-28",
@@ -4707,61 +4685,61 @@
         "最投入的一天是 2026-06-28，活跃 4小时29分。",
         "前三类目合计占比 78.6%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-18T10:35:11.570749+08:00"
+      "generated_at": "2026-07-17T19:40:08.872472-07:00"
     },
     {
       "id": "2026-06-29~2026-07-05",
       "start_date": "2026-06-29",
       "end_date": "2026-07-05",
       "label": "06/29 - 07/05",
-      "total_active_seconds": 176942.13,
-      "total_active_text": "49小时9分",
+      "total_active_seconds": 160562.65,
+      "total_active_text": "44小时36分",
       "categories": [
         {
           "name": "设计",
-          "seconds": 69131.83,
-          "share": 0.3907,
+          "seconds": 62177.85,
+          "share": 0.3872,
           "color": "#f6bd16"
         },
         {
           "name": "学习/信息",
-          "seconds": 35287.68,
-          "share": 0.1994,
+          "seconds": 34631.01,
+          "share": 0.2157,
           "color": "#61ddaa"
         },
         {
           "name": "工作/创作",
-          "seconds": 26509.7,
-          "share": 0.1498,
+          "seconds": 24841.76,
+          "share": 0.1547,
           "color": "#7aa2ff"
         },
         {
           "name": "沟通",
-          "seconds": 20062.07,
-          "share": 0.1134,
+          "seconds": 17986.92,
+          "share": 0.112,
           "color": "#5ad1e6"
         },
         {
           "name": "其他",
-          "seconds": 18288.96,
-          "share": 0.1034,
+          "seconds": 17151.16,
+          "share": 0.1068,
           "color": "#cbd5e1"
         },
         {
           "name": "系统/维护",
-          "seconds": 4702.63,
-          "share": 0.0266,
+          "seconds": 2938.34,
+          "share": 0.0183,
           "color": "#8a7dff"
         },
         {
           "name": "娱乐",
-          "seconds": 2939.78,
-          "share": 0.0166,
+          "seconds": 820.23,
+          "share": 0.0051,
           "color": "#ff7d7d"
         },
         {
           "name": "生活/杂务",
-          "seconds": 19.46,
+          "seconds": 15.38,
           "share": 0.0001,
           "color": "#ffa940"
         }
@@ -4789,8 +4767,8 @@
         },
         {
           "date": "2026-07-03",
-          "seconds": 25018.18,
-          "text": "6小时56分"
+          "seconds": 11473.52,
+          "text": "3小时11分"
         },
         {
           "date": "2026-07-04",
@@ -4799,125 +4777,125 @@
         },
         {
           "date": "2026-07-05",
-          "seconds": 26279.57,
-          "text": "7小时18分"
+          "seconds": 23444.75,
+          "text": "6小时30分"
         }
       ],
-      "summary_line": "本周累计 49小时9分，主轴是“设计”。",
+      "summary_line": "本周累计 44小时36分，主轴是“设计”。",
       "notes": [
         "最投入的一天是 2026-07-01，活跃 10小时10分。",
-        "周末占比 14.9%，可用来观察休息日是否也被工作/信息流挤占。",
-        "前三类目合计占比 74.0%，说明这一周的电脑使用主线集中度。"
+        "周末占比 14.6%，可用来观察休息日是否也被工作/信息流挤占。",
+        "前三类目合计占比 75.8%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-18T10:35:11.575446+08:00"
+      "generated_at": "2026-07-17T19:40:08.872472-07:00"
     },
     {
       "id": "2026-07-06~2026-07-12",
       "start_date": "2026-07-06",
       "end_date": "2026-07-12",
       "label": "07/06 - 07/12",
-      "total_active_seconds": 175592.67,
-      "total_active_text": "48小时46分",
+      "total_active_seconds": 95948.34,
+      "total_active_text": "26小时39分",
       "categories": [
         {
           "name": "工作/创作",
-          "seconds": 50228.77,
-          "share": 0.2861,
+          "seconds": 25296.12,
+          "share": 0.2636,
           "color": "#7aa2ff"
         },
         {
           "name": "其他",
-          "seconds": 33655.76,
-          "share": 0.1917,
+          "seconds": 19650.34,
+          "share": 0.2048,
           "color": "#cbd5e1"
         },
         {
           "name": "学习/信息",
-          "seconds": 29496.14,
-          "share": 0.168,
+          "seconds": 16124.88,
+          "share": 0.1681,
           "color": "#61ddaa"
         },
         {
           "name": "娱乐",
-          "seconds": 21134.82,
-          "share": 0.1204,
+          "seconds": 14975.84,
+          "share": 0.1561,
           "color": "#ff7d7d"
         },
         {
           "name": "沟通",
-          "seconds": 17136.38,
-          "share": 0.0976,
+          "seconds": 8919.85,
+          "share": 0.093,
           "color": "#5ad1e6"
         },
         {
           "name": "设计",
-          "seconds": 15480.37,
-          "share": 0.0882,
+          "seconds": 7428.86,
+          "share": 0.0774,
           "color": "#f6bd16"
         },
         {
           "name": "系统/维护",
-          "seconds": 8267.33,
-          "share": 0.0471,
+          "seconds": 3359.35,
+          "share": 0.035,
           "color": "#8a7dff"
         },
         {
           "name": "生活/杂务",
           "seconds": 193.09,
-          "share": 0.0011,
+          "share": 0.002,
           "color": "#ffa940"
         }
       ],
       "daily_totals": [
         {
           "date": "2026-07-06",
-          "seconds": 28330.61,
-          "text": "7小时52分"
+          "seconds": 11213.43,
+          "text": "3小时6分"
         },
         {
           "date": "2026-07-07",
-          "seconds": 31705.64,
-          "text": "8小时48分"
+          "seconds": 15594.57,
+          "text": "4小时19分"
         },
         {
           "date": "2026-07-08",
-          "seconds": 26267.04,
-          "text": "7小时17分"
+          "seconds": 12198.92,
+          "text": "3小时23分"
         },
         {
           "date": "2026-07-09",
-          "seconds": 26729.84,
-          "text": "7小时25分"
+          "seconds": 11793.64,
+          "text": "3小时16分"
         },
         {
           "date": "2026-07-10",
-          "seconds": 32412.3,
-          "text": "9小时"
+          "seconds": 18296.84,
+          "text": "5小时4分"
         },
         {
           "date": "2026-07-11",
-          "seconds": 11243.86,
-          "text": "3小时7分"
+          "seconds": 14271.1,
+          "text": "3小时57分"
         },
         {
           "date": "2026-07-12",
-          "seconds": 18903.38,
-          "text": "5小时15分"
+          "seconds": 12579.84,
+          "text": "3小时29分"
         }
       ],
-      "summary_line": "本周累计 48小时46分，主轴是“工作/创作”。",
+      "summary_line": "本周累计 26小时39分，主轴是“工作/创作”。",
       "notes": [
-        "最投入的一天是 2026-07-10，活跃 9小时。",
-        "周末占比 17.2%，可用来观察休息日是否也被工作/信息流挤占。",
-        "前三类目合计占比 64.6%，说明这一周的电脑使用主线集中度。"
+        "最投入的一天是 2026-07-10，活跃 5小时4分。",
+        "周末占比 28.0%，可用来观察休息日是否也被工作/信息流挤占。",
+        "前三类目合计占比 63.7%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-18T10:35:11.575446+08:00"
+      "generated_at": "2026-07-17T19:40:08.872472-07:00"
     }
   ],
   "meta": {
     "db_path": "C:\\Users\\Klh\\AppData\\Local\\activitywatch\\activitywatch\\aw-server\\peewee-sqlite.v2.db",
-    "generated_at": "2026-07-18T10:35:05.972381+08:00",
+    "generated_at": "2026-07-17T19:40:06.594190-07:00",
     "delivery_time": "19:30",
-    "timezone": "中国标准时间"
+    "timezone": "太平洋夏令时"
   }
 }
