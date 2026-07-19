@@ -2220,7 +2220,7 @@
           "text": "8分"
         }
       ],
-      "generated_at": "2026-07-19T00:01:00.805073-07:00"
+      "generated_at": "2026-07-19T00:06:01.277654-07:00"
     },
     {
       "date": "2026-07-06",
@@ -2404,7 +2404,7 @@
           "text": "3分"
         }
       ],
-      "generated_at": "2026-07-19T00:01:00.658301-07:00"
+      "generated_at": "2026-07-19T00:06:01.129370-07:00"
     },
     {
       "date": "2026-07-07",
@@ -2587,7 +2587,7 @@
           "text": "7分"
         }
       ],
-      "generated_at": "2026-07-19T00:01:00.547739-07:00"
+      "generated_at": "2026-07-19T00:06:01.019451-07:00"
     },
     {
       "date": "2026-07-08",
@@ -2770,7 +2770,7 @@
           "text": "3分"
         }
       ],
-      "generated_at": "2026-07-19T00:01:00.313355-07:00"
+      "generated_at": "2026-07-19T00:06:00.786367-07:00"
     },
     {
       "date": "2026-07-09",
@@ -2953,7 +2953,7 @@
           "text": "4分"
         }
       ],
-      "generated_at": "2026-07-19T00:01:00.140005-07:00"
+      "generated_at": "2026-07-19T00:06:00.609019-07:00"
     },
     {
       "date": "2026-07-10",
@@ -3137,7 +3137,7 @@
           "text": "7分"
         }
       ],
-      "generated_at": "2026-07-19T00:00:59.949277-07:00"
+      "generated_at": "2026-07-19T00:06:00.423697-07:00"
     },
     {
       "date": "2026-07-11",
@@ -3320,7 +3320,7 @@
           "text": "1分"
         }
       ],
-      "generated_at": "2026-07-19T00:00:59.767902-07:00"
+      "generated_at": "2026-07-19T00:06:00.212155-07:00"
     },
     {
       "date": "2026-07-12",
@@ -3503,7 +3503,7 @@
           "text": "5分"
         }
       ],
-      "generated_at": "2026-07-19T00:00:59.651728-07:00"
+      "generated_at": "2026-07-19T00:06:00.080501-07:00"
     },
     {
       "date": "2026-07-13",
@@ -3676,7 +3676,7 @@
           "text": "9分"
         }
       ],
-      "generated_at": "2026-07-19T00:00:59.453042-07:00"
+      "generated_at": "2026-07-19T00:05:59.871991-07:00"
     },
     {
       "date": "2026-07-14",
@@ -3849,7 +3849,7 @@
           "text": "2分"
         }
       ],
-      "generated_at": "2026-07-19T00:00:59.272873-07:00"
+      "generated_at": "2026-07-19T00:05:59.681705-07:00"
     },
     {
       "date": "2026-07-15",
@@ -4022,7 +4022,7 @@
           "text": "5分"
         }
       ],
-      "generated_at": "2026-07-19T00:00:59.110427-07:00"
+      "generated_at": "2026-07-19T00:05:59.516416-07:00"
     },
     {
       "date": "2026-07-16",
@@ -4194,7 +4194,7 @@
           "text": "1分"
         }
       ],
-      "generated_at": "2026-07-19T00:00:58.955957-07:00"
+      "generated_at": "2026-07-19T00:05:59.354040-07:00"
     },
     {
       "date": "2026-07-17",
@@ -4377,7 +4377,7 @@
           "text": "3分"
         }
       ],
-      "generated_at": "2026-07-19T00:00:58.806057-07:00"
+      "generated_at": "2026-07-19T00:05:59.188084-07:00"
     },
     {
       "date": "2026-07-18",
@@ -4559,32 +4559,68 @@
           "text": "4分"
         }
       ],
-      "generated_at": "2026-07-19T00:00:58.594669-07:00"
+      "generated_at": "2026-07-19T00:05:58.966410-07:00"
     },
     {
       "date": "2026-07-19",
       "weekday": "周日",
-      "total_active_seconds": 127.75,
-      "total_active_text": "2分",
+      "total_active_seconds": 392.33,
+      "total_active_text": "6分",
       "top_categories": [
-        "学习/信息"
+        "学习/信息",
+        "沟通",
+        "系统/维护"
       ],
       "categories": [
         {
           "name": "学习/信息",
-          "seconds": 127.75,
-          "share": 1.0,
+          "seconds": 214.02,
+          "share": 0.5455,
           "representatives": [
-            "chrome.exe｜‎Opal: Screen Time Control App - App Store - Google Chrome"
+            "chrome.exe｜‎Opal: Screen Time Control App - App Store - Google Chrome",
+            "chrome.exe｜Search and discover all TinyWow tools: AI, PDF, Image, Video - TinyWow - Google Chrome",
+            "chrome.exe｜Free AI Writing, PDF, Image, and other Online Tools - TinyWow - Google Chrome"
           ],
           "color": "#61ddaa"
+        },
+        {
+          "name": "沟通",
+          "seconds": 92.45,
+          "share": 0.2356,
+          "representatives": [
+            "WeChatAppEx.exe｜微信",
+            "Weixin.exe｜微信",
+            "WeChatAppEx.exe"
+          ],
+          "color": "#5ad1e6"
+        },
+        {
+          "name": "系统/维护",
+          "seconds": 82.78,
+          "share": 0.211,
+          "representatives": [
+            "explorer.exe",
+            "explorer.exe｜新加卷 (E:) - 文件资源管理器",
+            "explorer.exe｜Program Manager"
+          ],
+          "color": "#8a7dff"
+        },
+        {
+          "name": "其他",
+          "seconds": 3.08,
+          "share": 0.0079,
+          "representatives": [
+            "PickerHost.exe｜Windows 安全中心",
+            "chrome.exe｜已添加书签"
+          ],
+          "color": "#cbd5e1"
         }
       ],
-      "switch_count": 0,
-      "segment_count": 1,
-      "summary_line": "这一天共记录 2分 的活跃电脑时间，主轴是“学习/信息”，节奏相对稳定，存在可识别的连续工作块。",
+      "switch_count": 27,
+      "segment_count": 29,
+      "summary_line": "这一天共记录 6分 的活跃电脑时间，主轴是“学习/信息”，节奏相对稳定，存在可识别的连续工作块。",
       "notes": [
-        "主类目是“学习/信息”，占比 100.0%，说明当天最主要的电脑注意力投向比较清晰。",
+        "主类目是“学习/信息”，占比 54.5%，说明当天最主要的电脑注意力投向比较清晰。",
         "窗口切换不高，说明这一天的任务切换成本相对可控。",
         "最长连续专注块偏短，后续可重点观察是什么因素把整块时间切碎了。"
       ],
@@ -4597,17 +4633,17 @@
       },
       "energy": {
         "high_zone": "学习/信息",
-        "fragmented_zone": "学习/信息",
-        "recovery_zone": "无明显恢复区",
+        "fragmented_zone": "沟通",
+        "recovery_zone": "沟通",
         "confidence": "低",
         "evidence": [
-          "总活跃时长 2分",
-          "窗口切换 0 次",
+          "总活跃时长 6分",
+          "窗口切换 27 次",
           "最长连续专注块 2分"
         ]
       },
       "hourly_seconds": {
-        "0": 50.38,
+        "0": 314.96,
         "1": 0.0,
         "2": 0.0,
         "3": 0.0,
@@ -4637,9 +4673,44 @@
           "activity": "chrome.exe｜‎Opal: Screen Time Control App - App Store - Google Chrome",
           "seconds": 127.75,
           "text": "2分"
+        },
+        {
+          "activity": "chrome.exe｜Search and discover all TinyWow tools: AI, PDF, Image, Video - TinyWow - Google Chrome",
+          "seconds": 78.05,
+          "text": "1分"
+        },
+        {
+          "activity": "explorer.exe",
+          "seconds": 58.19,
+          "text": "58秒"
+        },
+        {
+          "activity": "WeChatAppEx.exe｜微信",
+          "seconds": 57.55,
+          "text": "58秒"
+        },
+        {
+          "activity": "Weixin.exe｜微信",
+          "seconds": 31.72,
+          "text": "32秒"
+        },
+        {
+          "activity": "explorer.exe｜新加卷 (E:) - 文件资源管理器",
+          "seconds": 15.36,
+          "text": "15秒"
+        },
+        {
+          "activity": "explorer.exe｜Program Manager",
+          "seconds": 6.15,
+          "text": "6秒"
+        },
+        {
+          "activity": "chrome.exe｜Free AI Writing, PDF, Image, and other Online Tools - TinyWow - Google Chrome",
+          "seconds": 5.14,
+          "text": "5秒"
         }
       ],
-      "generated_at": "2026-07-19T00:00:58.425820-07:00"
+      "generated_at": "2026-07-19T00:05:58.799111-07:00"
     }
   ],
   "weeks": [
@@ -4692,7 +4763,7 @@
       "notes": [
         "最投入的一天是 2026-06-15，活跃 0秒。"
       ],
-      "generated_at": "2026-07-19T00:01:00.805982-07:00"
+      "generated_at": "2026-07-19T00:06:01.278660-07:00"
     },
     {
       "id": "2026-06-22~2026-06-28",
@@ -4787,7 +4858,7 @@
         "最投入的一天是 2026-06-28，活跃 4小时29分。",
         "前三类目合计占比 78.6%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-19T00:01:00.805982-07:00"
+      "generated_at": "2026-07-19T00:06:01.278660-07:00"
     },
     {
       "id": "2026-06-29~2026-07-05",
@@ -4889,7 +4960,7 @@
         "周末占比 14.6%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 75.8%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-19T00:01:00.805982-07:00"
+      "generated_at": "2026-07-19T00:06:01.279762-07:00"
     },
     {
       "id": "2026-07-06~2026-07-12",
@@ -4991,50 +5062,50 @@
         "周末占比 28.0%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 63.7%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-19T00:01:00.805982-07:00"
+      "generated_at": "2026-07-19T00:06:01.279762-07:00"
     },
     {
       "id": "2026-07-13~2026-07-19",
       "start_date": "2026-07-13",
       "end_date": "2026-07-19",
       "label": "07/13 - 07/19",
-      "total_active_seconds": 81135.2,
-      "total_active_text": "22小时32分",
+      "total_active_seconds": 81399.78,
+      "total_active_text": "22小时36分",
       "categories": [
         {
           "name": "设计",
           "seconds": 40176.38,
-          "share": 0.4952,
+          "share": 0.4936,
           "color": "#f6bd16"
         },
         {
           "name": "学习/信息",
-          "seconds": 17585.48,
-          "share": 0.2167,
+          "seconds": 17671.75,
+          "share": 0.2171,
           "color": "#61ddaa"
         },
         {
           "name": "工作/创作",
           "seconds": 12041.57,
-          "share": 0.1484,
+          "share": 0.1479,
           "color": "#7aa2ff"
         },
         {
           "name": "沟通",
-          "seconds": 5298.66,
-          "share": 0.0653,
+          "seconds": 5391.11,
+          "share": 0.0662,
           "color": "#5ad1e6"
         },
         {
           "name": "其他",
-          "seconds": 4424.5,
-          "share": 0.0545,
+          "seconds": 4427.58,
+          "share": 0.0544,
           "color": "#cbd5e1"
         },
         {
           "name": "系统/维护",
-          "seconds": 1264.05,
-          "share": 0.0156,
+          "seconds": 1346.83,
+          "share": 0.0165,
           "color": "#8a7dff"
         },
         {
@@ -5077,22 +5148,22 @@
         },
         {
           "date": "2026-07-19",
-          "seconds": 127.75,
-          "text": "2分"
+          "seconds": 392.33,
+          "text": "6分"
         }
       ],
-      "summary_line": "本周累计 22小时32分，主轴是“设计”。",
+      "summary_line": "本周累计 22小时36分，主轴是“设计”。",
       "notes": [
         "最投入的一天是 2026-07-13，活跃 5小时23分。",
-        "周末占比 8.6%，可用来观察休息日是否也被工作/信息流挤占。",
-        "前三类目合计占比 86.0%，说明这一周的电脑使用主线集中度。"
+        "周末占比 8.9%，可用来观察休息日是否也被工作/信息流挤占。",
+        "前三类目合计占比 85.9%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-19T00:01:00.805982-07:00"
+      "generated_at": "2026-07-19T00:06:01.279762-07:00"
     }
   ],
   "meta": {
     "db_path": "C:\\Users\\Klh\\AppData\\Local\\activitywatch\\activitywatch\\aw-server\\peewee-sqlite.v2.db",
-    "generated_at": "2026-07-19T00:00:58.258486-07:00",
+    "generated_at": "2026-07-19T00:05:58.632606-07:00",
     "delivery_time": "19:30",
     "timezone": "太平洋夏令时"
   }
