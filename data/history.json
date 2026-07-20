@@ -2223,11 +2223,11 @@
       "data_policy": {
         "afk_excluded": true,
         "afk_status_source": "ActivityWatch afkstatus",
-        "ai_prompt_note": "统计口径：已剔除 ActivityWatch AFK/离开时间。后续分析只基于人在电脑前的有效使用时间。",
+        "ai_prompt_note": "已剔除 ActivityWatch AFK/离开时间，后续分析只基于人在电脑前的有效使用时间。",
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-19T23:38:06.913010-07:00"
+      "generated_at": "2026-07-19T23:40:45.441804-07:00"
     },
     {
       "date": "2026-07-06",
@@ -2414,11 +2414,11 @@
       "data_policy": {
         "afk_excluded": true,
         "afk_status_source": "ActivityWatch afkstatus",
-        "ai_prompt_note": "统计口径：已剔除 ActivityWatch AFK/离开时间。后续分析只基于人在电脑前的有效使用时间。",
+        "ai_prompt_note": "已剔除 ActivityWatch AFK/离开时间，后续分析只基于人在电脑前的有效使用时间。",
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-19T23:38:06.563384-07:00"
+      "generated_at": "2026-07-19T23:40:45.176390-07:00"
     },
     {
       "date": "2026-07-07",
@@ -2604,11 +2604,11 @@
       "data_policy": {
         "afk_excluded": true,
         "afk_status_source": "ActivityWatch afkstatus",
-        "ai_prompt_note": "统计口径：已剔除 ActivityWatch AFK/离开时间。后续分析只基于人在电脑前的有效使用时间。",
+        "ai_prompt_note": "已剔除 ActivityWatch AFK/离开时间，后续分析只基于人在电脑前的有效使用时间。",
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-19T23:38:06.451310-07:00"
+      "generated_at": "2026-07-19T23:40:45.051896-07:00"
     },
     {
       "date": "2026-07-08",
@@ -2794,11 +2794,11 @@
       "data_policy": {
         "afk_excluded": true,
         "afk_status_source": "ActivityWatch afkstatus",
-        "ai_prompt_note": "统计口径：已剔除 ActivityWatch AFK/离开时间。后续分析只基于人在电脑前的有效使用时间。",
+        "ai_prompt_note": "已剔除 ActivityWatch AFK/离开时间，后续分析只基于人在电脑前的有效使用时间。",
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-19T23:38:06.226168-07:00"
+      "generated_at": "2026-07-19T23:40:44.840249-07:00"
     },
     {
       "date": "2026-07-09",
@@ -2984,11 +2984,11 @@
       "data_policy": {
         "afk_excluded": true,
         "afk_status_source": "ActivityWatch afkstatus",
-        "ai_prompt_note": "统计口径：已剔除 ActivityWatch AFK/离开时间。后续分析只基于人在电脑前的有效使用时间。",
+        "ai_prompt_note": "已剔除 ActivityWatch AFK/离开时间，后续分析只基于人在电脑前的有效使用时间。",
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-19T23:38:06.054981-07:00"
+      "generated_at": "2026-07-19T23:40:44.661538-07:00"
     },
     {
       "date": "2026-07-10",
@@ -3175,11 +3175,11 @@
       "data_policy": {
         "afk_excluded": true,
         "afk_status_source": "ActivityWatch afkstatus",
-        "ai_prompt_note": "统计口径：已剔除 ActivityWatch AFK/离开时间。后续分析只基于人在电脑前的有效使用时间。",
+        "ai_prompt_note": "已剔除 ActivityWatch AFK/离开时间，后续分析只基于人在电脑前的有效使用时间。",
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-19T23:38:05.865893-07:00"
+      "generated_at": "2026-07-19T23:40:44.452120-07:00"
     },
     {
       "date": "2026-07-11",
@@ -3365,11 +3365,11 @@
       "data_policy": {
         "afk_excluded": true,
         "afk_status_source": "ActivityWatch afkstatus",
-        "ai_prompt_note": "统计口径：已剔除 ActivityWatch AFK/离开时间。后续分析只基于人在电脑前的有效使用时间。",
+        "ai_prompt_note": "已剔除 ActivityWatch AFK/离开时间，后续分析只基于人在电脑前的有效使用时间。",
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-19T23:38:05.651538-07:00"
+      "generated_at": "2026-07-19T23:40:44.266523-07:00"
     },
     {
       "date": "2026-07-12",
@@ -3555,11 +3555,11 @@
       "data_policy": {
         "afk_excluded": true,
         "afk_status_source": "ActivityWatch afkstatus",
-        "ai_prompt_note": "统计口径：已剔除 ActivityWatch AFK/离开时间。后续分析只基于人在电脑前的有效使用时间。",
+        "ai_prompt_note": "已剔除 ActivityWatch AFK/离开时间，后续分析只基于人在电脑前的有效使用时间。",
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-19T23:38:05.519403-07:00"
+      "generated_at": "2026-07-19T23:40:44.135532-07:00"
     },
     {
       "date": "2026-07-13",
@@ -3735,11 +3735,11 @@
       "data_policy": {
         "afk_excluded": true,
         "afk_status_source": "ActivityWatch afkstatus",
-        "ai_prompt_note": "统计口径：已剔除 ActivityWatch AFK/离开时间。后续分析只基于人在电脑前的有效使用时间。",
+        "ai_prompt_note": "已剔除 ActivityWatch AFK/离开时间，后续分析只基于人在电脑前的有效使用时间。",
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-19T23:38:05.301986-07:00"
+      "generated_at": "2026-07-19T23:40:43.913022-07:00"
     },
     {
       "date": "2026-07-14",
@@ -3915,11 +3915,11 @@
       "data_policy": {
         "afk_excluded": true,
         "afk_status_source": "ActivityWatch afkstatus",
-        "ai_prompt_note": "统计口径：已剔除 ActivityWatch AFK/离开时间。后续分析只基于人在电脑前的有效使用时间。",
+        "ai_prompt_note": "已剔除 ActivityWatch AFK/离开时间，后续分析只基于人在电脑前的有效使用时间。",
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-19T23:38:05.101602-07:00"
+      "generated_at": "2026-07-19T23:40:43.712974-07:00"
     },
     {
       "date": "2026-07-15",
@@ -4095,11 +4095,11 @@
       "data_policy": {
         "afk_excluded": true,
         "afk_status_source": "ActivityWatch afkstatus",
-        "ai_prompt_note": "统计口径：已剔除 ActivityWatch AFK/离开时间。后续分析只基于人在电脑前的有效使用时间。",
+        "ai_prompt_note": "已剔除 ActivityWatch AFK/离开时间，后续分析只基于人在电脑前的有效使用时间。",
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-19T23:38:04.936237-07:00"
+      "generated_at": "2026-07-19T23:40:43.538543-07:00"
     },
     {
       "date": "2026-07-16",
@@ -4273,11 +4273,11 @@
       "data_policy": {
         "afk_excluded": true,
         "afk_status_source": "ActivityWatch afkstatus",
-        "ai_prompt_note": "统计口径：已剔除 ActivityWatch AFK/离开时间。后续分析只基于人在电脑前的有效使用时间。",
+        "ai_prompt_note": "已剔除 ActivityWatch AFK/离开时间，后续分析只基于人在电脑前的有效使用时间。",
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": true
       },
-      "generated_at": "2026-07-19T23:38:04.771310-07:00"
+      "generated_at": "2026-07-19T23:40:43.374266-07:00"
     },
     {
       "date": "2026-07-17",
@@ -4463,11 +4463,11 @@
       "data_policy": {
         "afk_excluded": true,
         "afk_status_source": "ActivityWatch afkstatus",
-        "ai_prompt_note": "统计口径：已剔除 ActivityWatch AFK/离开时间。后续分析只基于人在电脑前的有效使用时间。",
+        "ai_prompt_note": "已剔除 ActivityWatch AFK/离开时间，后续分析只基于人在电脑前的有效使用时间。",
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-19T23:38:04.597458-07:00"
+      "generated_at": "2026-07-19T23:40:43.211184-07:00"
     },
     {
       "date": "2026-07-18",
@@ -4652,11 +4652,11 @@
       "data_policy": {
         "afk_excluded": true,
         "afk_status_source": "ActivityWatch afkstatus",
-        "ai_prompt_note": "统计口径：已剔除 ActivityWatch AFK/离开时间。后续分析只基于人在电脑前的有效使用时间。",
+        "ai_prompt_note": "已剔除 ActivityWatch AFK/离开时间，后续分析只基于人在电脑前的有效使用时间。",
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": true
       },
-      "generated_at": "2026-07-19T23:38:04.380333-07:00"
+      "generated_at": "2026-07-19T23:40:42.985314-07:00"
     },
     {
       "date": "2026-07-19",
@@ -4841,11 +4841,11 @@
       "data_policy": {
         "afk_excluded": true,
         "afk_status_source": "ActivityWatch afkstatus",
-        "ai_prompt_note": "统计口径：已剔除 ActivityWatch AFK/离开时间。后续分析只基于人在电脑前的有效使用时间。",
+        "ai_prompt_note": "已剔除 ActivityWatch AFK/离开时间，后续分析只基于人在电脑前的有效使用时间。",
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-19T23:38:04.203664-07:00"
+      "generated_at": "2026-07-19T23:40:42.809219-07:00"
     }
   ],
   "weeks": [
@@ -4898,7 +4898,7 @@
       "notes": [
         "最投入的一天是 2026-06-15，活跃 0秒。"
       ],
-      "generated_at": "2026-07-19T23:38:06.915009-07:00"
+      "generated_at": "2026-07-19T23:40:45.442793-07:00"
     },
     {
       "id": "2026-06-22~2026-06-28",
@@ -4993,7 +4993,7 @@
         "最投入的一天是 2026-06-28，活跃 4小时29分。",
         "前三类目合计占比 78.6%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-19T23:38:06.915009-07:00"
+      "generated_at": "2026-07-19T23:40:45.442793-07:00"
     },
     {
       "id": "2026-06-29~2026-07-05",
@@ -5095,7 +5095,7 @@
         "周末占比 14.6%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 75.8%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-19T23:38:06.915009-07:00"
+      "generated_at": "2026-07-19T23:40:45.443805-07:00"
     },
     {
       "id": "2026-07-06~2026-07-12",
@@ -5197,7 +5197,7 @@
         "周末占比 28.0%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 63.7%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-19T23:38:06.915009-07:00"
+      "generated_at": "2026-07-19T23:40:45.443805-07:00"
     },
     {
       "id": "2026-07-13~2026-07-19",
@@ -5299,12 +5299,12 @@
         "周末占比 22.5%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 85.0%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-19T23:38:06.915009-07:00"
+      "generated_at": "2026-07-19T23:40:45.443805-07:00"
     }
   ],
   "meta": {
     "db_path": "C:\\Users\\Klh\\AppData\\Local\\activitywatch\\activitywatch\\aw-server\\peewee-sqlite.v2.db",
-    "generated_at": "2026-07-19T23:38:03.916872-07:00",
+    "generated_at": "2026-07-19T23:40:42.518951-07:00",
     "delivery_time": "19:30",
     "timezone": "太平洋夏令时"
   }
