@@ -1,0 +1,13 @@
+{
+  "tasks": [],
+  "reviews": {},
+  "ui": {
+    "deadlineViewMode": "list",
+    "taskCategoryFilter": "all"
+  },
+  "meta": {
+    "schema_version": 1,
+    "updated_at": "2026-07-19T22:50:10.053102-07:00",
+    "source": "project-json"
+  }
+}
