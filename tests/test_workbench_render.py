@@ -55,6 +55,9 @@ def test_render_html_upgrades_time_dashboard_into_personal_workbench():
     assert "localStorage" in html
     assert "workbenchTasks" in html
     assert "workbenchReviews" in html
+    assert "workbenchJsonMigratedAt" in html
+    assert "WORKBENCH_SAVE_URL" in html
+    assert '"workbench"' in html
     assert "renderWorkbench" in html
     assert "每日 19:30" in html
 
@@ -68,6 +71,46 @@ def test_render_html_contains_editable_task_and_review_controls():
     assert "priority" in html
     assert "openTaskModal('${task.id}')" in html
     assert "deleteEditingTask" in html
+
+
+def test_workbench_data_uses_project_json_with_localstorage_migration_safety():
+    module = load_module()
+    workbench = {
+        "tasks": [{"id": "json-task", "title": "JSON 任务", "priority": "P1", "category": "工作"}],
+        "reviews": {"2026-07-01": {"done": "JSON 复盘"}},
+        "ui": {"deadlineViewMode": "calendar", "taskCategoryFilter": "生活"},
+        "meta": {"schema_version": 1, "source": "test"},
+    }
+    html = module.render_html(sample_history(), workbench)
+
+    assert '"id": "json-task"' in html
+    assert '"done": "JSON 复盘"' in html
+    assert "const projectWorkbench = store.workbench" in html
+    assert "function loadWorkbenchDraft()" in html
+    assert "migrated_from_localStorage" in html
+    assert "if (workbenchDraft.meta?.migrated_from_localStorage) queueWorkbenchPersist();" in html
+    assert "fetch(WORKBENCH_SAVE_URL" in html
+    assert "function saveTasks(tasks) { workbenchDraft.tasks = tasks.map(normalizeTask); queueWorkbenchPersist(); }" in html
+    assert "function saveReviews(reviews) { workbenchDraft.reviews = reviews; queueWorkbenchPersist(); }" in html
+    assert "localStorage.setItem(key" in html  # fallback backup only, not the source of truth
+
+
+def test_workbench_json_is_staged_and_local_save_service_is_available():
+    module = load_module()
+
+    assert module.WORKBENCH_PATH.name == "workbench.json"
+    normalized = module.normalize_workbench_data({"tasks": ["a"], "reviews": {"d": {}}, "ui": {"deadlineViewMode": "calendar"}})
+    assert normalized["tasks"] == ["a"]
+    assert normalized["reviews"] == {"d": {}}
+    assert normalized["ui"]["deadlineViewMode"] == "calendar"
+    assert module.allowed_workbench_origin("https://klinghui80-web.github.io")
+    assert module.allowed_workbench_origin("http://127.0.0.1:8765")
+    assert not module.allowed_workbench_origin("https://evil.example")
+
+    source = SCRIPT.read_text(encoding="utf-8")
+    assert '"data/workbench.json"' in source
+    assert "--serve-workbench" in source
+    assert "ThreadingHTTPServer((\"127.0.0.1\", port), WorkbenchHandler)" in source
 
 
 def test_first_screen_is_a_radial_task_orbit_overview_not_a_donut():
@@ -353,7 +396,7 @@ def test_task_category_chips_are_clickable_filters_that_preserve_priority_lanes(
     module = load_module()
     html = module.render_html(sample_history())
 
-    assert "let taskCategoryFilter = localStorage.getItem('taskCategoryFilter') || 'all'" in html
+    assert "let taskCategoryFilter = workbenchDraft.ui?.taskCategoryFilter || 'all'" in html
     assert "setTaskCategoryFilter" in html
     assert "taskCategories.map(category" in html
     assert "setTaskCategoryFilter('${category}')" in html
@@ -401,6 +444,8 @@ def test_dragging_uses_priority_lanes_with_same_priority_and_cross_priority_feed
 if __name__ == "__main__":
     test_render_html_upgrades_time_dashboard_into_personal_workbench()
     test_render_html_contains_editable_task_and_review_controls()
+    test_workbench_data_uses_project_json_with_localstorage_migration_safety()
+    test_workbench_json_is_staged_and_local_save_service_is_available()
     test_first_screen_is_a_radial_task_orbit_overview_not_a_donut()
     test_visual_regressions_keep_glass_subtle_priority_colored_orbit_spacious_and_weekly_unwarped()
     test_top_nav_has_overview_task_panel_and_time_energy_management()

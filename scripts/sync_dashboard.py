@@ -11,6 +11,7 @@ import sys
 from collections import defaultdict
 from dataclasses import dataclass
 from datetime import date, datetime, time, timedelta
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
@@ -22,6 +23,7 @@ SITE_DIR = ROOT / "site"
 DOCS_DIR = ROOT / "docs"
 HISTORY_PATH = DATA_DIR / "history.json"
 STATE_PATH = DATA_DIR / "state.json"
+WORKBENCH_PATH = DATA_DIR / "workbench.json"
 INDEX_PATH = SITE_DIR / "index.html"
 NOJEKYLL_PATH = SITE_DIR / ".nojekyll"
 DOCS_INDEX_PATH = DOCS_DIR / "index.html"
@@ -82,6 +84,44 @@ def save_json(path: Path, data: Any) -> None:
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+def default_workbench_data() -> dict[str, Any]:
+    now = datetime.now().astimezone().isoformat()
+    return {
+        "tasks": [],
+        "reviews": {},
+        "ui": {"deadlineViewMode": "list", "taskCategoryFilter": "all"},
+        "meta": {"schema_version": 1, "updated_at": now, "source": "project-json"},
+    }
+
+
+def normalize_workbench_data(data: Any) -> dict[str, Any]:
+    base = default_workbench_data()
+    if not isinstance(data, dict):
+        return base
+    tasks = data.get("tasks") if isinstance(data.get("tasks"), list) else base["tasks"]
+    reviews = data.get("reviews") if isinstance(data.get("reviews"), dict) else base["reviews"]
+    ui = {**base["ui"], **(data.get("ui") if isinstance(data.get("ui"), dict) else {})}
+    meta = {**base["meta"], **(data.get("meta") if isinstance(data.get("meta"), dict) else {})}
+    return {"tasks": tasks, "reviews": reviews, "ui": ui, "meta": meta}
+
+
+def load_workbench() -> dict[str, Any]:
+    ensure_dirs()
+    if not WORKBENCH_PATH.exists():
+        data = default_workbench_data()
+        save_json(WORKBENCH_PATH, data)
+        return data
+    return normalize_workbench_data(load_json(WORKBENCH_PATH, default_workbench_data()))
+
+
+def save_workbench_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    data = normalize_workbench_data(payload)
+    data["meta"]["updated_at"] = datetime.now().astimezone().isoformat()
+    data["meta"]["source"] = "project-json"
+    save_json(WORKBENCH_PATH, data)
+    return data
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--now")
@@ -91,6 +131,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--send-all-missed", action="store_true")
     parser.add_argument("--skip-push", action="store_true")
     parser.add_argument("--print-dry-run", action="store_true")
+    parser.add_argument("--serve-workbench", action="store_true", help="启动本地工作台 JSON 保存服务")
+    parser.add_argument("--workbench-port", type=int, default=8765)
     return parser.parse_args()
 
 
@@ -544,7 +586,7 @@ def run_git(args: list[str]) -> subprocess.CompletedProcess[str]:
 
 def maybe_commit_and_push(now: datetime, skip_push: bool) -> dict[str, Any]:
     status = {"committed": False, "pushed": False, "message": "未配置远程仓库，已只在本地更新。"}
-    run_git(["git", "add", "site/index.html", "site/.nojekyll", "docs/index.html", "docs/.nojekyll", "data/history.json", "data/state.json"])
+    run_git(["git", "add", "site/index.html", "site/.nojekyll", "docs/index.html", "docs/.nojekyll", "data/history.json", "data/state.json", "data/workbench.json"])
     diff = run_git(["git", "diff", "--cached", "--quiet"])
     if diff.returncode == 0:
         status["message"] = "本次没有新的 Git 变更。"
@@ -560,7 +602,73 @@ def maybe_commit_and_push(now: datetime, skip_push: bool) -> dict[str, Any]:
     return status
 
 
-def render_html(history: dict[str, Any]) -> str:
+def allowed_workbench_origin(origin: str | None) -> bool:
+    if not origin or origin == "null":
+        return True
+    return origin.startswith("http://127.0.0.1") or origin.startswith("http://localhost") or origin == "https://klinghui80-web.github.io"
+
+
+def run_workbench_server(port: int) -> None:
+    class WorkbenchHandler(BaseHTTPRequestHandler):
+        def _headers(self, status: int = 200, content_type: str = "application/json") -> bool:
+            origin = self.headers.get("Origin")
+            if not allowed_workbench_origin(origin):
+                self.send_response(403)
+                self.end_headers()
+                return False
+            self.send_response(status)
+            self.send_header("Content-Type", content_type)
+            self.send_header("Access-Control-Allow-Origin", origin or "null")
+            self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+            self.send_header("Access-Control-Allow-Headers", "Content-Type")
+            self.end_headers()
+            return True
+
+        def log_message(self, fmt: str, *args: Any) -> None:
+            return
+
+        def do_OPTIONS(self) -> None:
+            self._headers(204)
+
+        def do_GET(self) -> None:
+            if urlparse(self.path).path != "/workbench":
+                self.send_error(404)
+                return
+            if not self._headers():
+                return
+            self.wfile.write(json.dumps(load_workbench(), ensure_ascii=False).encode("utf-8"))
+
+        def do_POST(self) -> None:
+            if urlparse(self.path).path != "/workbench":
+                self.send_error(404)
+                return
+            length = int(self.headers.get("Content-Length", "0") or 0)
+            raw = self.rfile.read(length)
+            try:
+                payload = json.loads(raw.decode("utf-8"))
+                saved = save_workbench_payload(payload)
+                now = datetime.now().astimezone()
+                history, _state = update_history(now, rebuild_days=14)
+                write_site(history)
+                git_status = maybe_commit_and_push(now, skip_push=False)
+                response = {"ok": True, "workbench": saved, "git": git_status}
+                if not self._headers():
+                    return
+                self.wfile.write(json.dumps(response, ensure_ascii=False).encode("utf-8"))
+            except Exception as exc:
+                if not self._headers(500):
+                    return
+                self.wfile.write(json.dumps({"ok": False, "error": str(exc)}, ensure_ascii=False).encode("utf-8"))
+
+    ensure_dirs()
+    server = ThreadingHTTPServer(("127.0.0.1", port), WorkbenchHandler)
+    print(f"工作台 JSON 保存服务已启动：http://127.0.0.1:{port}/workbench")
+    server.serve_forever()
+
+
+def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None) -> str:
+    workbench = normalize_workbench_data(workbench if workbench is not None else load_workbench())
+    store = {**history, "workbench": workbench}
     template = '''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -919,6 +1027,9 @@ def render_html(history: dict[str, Any]) -> str:
     const today = days[0] || null;
     const WORKBENCH_TASK_KEY = 'workbenchTasks';
     const WORKBENCH_REVIEW_KEY = 'workbenchReviews';
+    const WORKBENCH_MIGRATION_KEY = 'workbenchJsonMigratedAt';
+    const WORKBENCH_SAVE_URL = 'http://127.0.0.1:8765/workbench';
+    const projectWorkbench = store.workbench || { tasks: [], reviews: {}, ui: { deadlineViewMode: 'list', taskCategoryFilter: 'all' }, meta: {} };
     const priorityRank = { P0: 0, P1: 1, P2: 2, P3: 3 };
     const priorityLabels = { P0: 'P0 火烧屁股', P1: 'P1 今日必完成', P2: 'P2 常规推进', P3: 'P3 可延后' };
     const priorityStyles = { P0: '#c95d45', P1: '#c49a42', P2: '#4f6f92', P3: '#4f9b72' };
@@ -940,8 +1051,68 @@ def render_html(history: dict[str, Any]) -> str:
       try { return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback)); }
       catch { return fallback; }
     };
-    const writeLocal = (key, value) => localStorage.setItem(key, JSON.stringify(value));
+    const writeLocal = (key, value) => {
+      try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
+    };
+    const readLocalRaw = (key) => {
+      try { return localStorage.getItem(key); } catch { return null; }
+    };
     const uid = () => `task_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+    let workbenchPersistTimer = null;
+    let workbenchDraft = null;
+
+    function normalizeWorkbenchShape(data = {}) {
+      return {
+        tasks: Array.isArray(data.tasks) ? data.tasks : [],
+        reviews: data.reviews && typeof data.reviews === 'object' && !Array.isArray(data.reviews) ? data.reviews : {},
+        ui: { deadlineViewMode: 'list', taskCategoryFilter: 'all', ...(data.ui || {}) },
+        meta: { schema_version: 1, source: 'project-json', ...(data.meta || {}) },
+      };
+    }
+
+    function loadWorkbenchDraft() {
+      const fromProject = normalizeWorkbenchShape(projectWorkbench);
+      const legacyTasks = readLocal(WORKBENCH_TASK_KEY, null);
+      const legacyReviews = readLocal(WORKBENCH_REVIEW_KEY, null);
+      const notMigrated = !readLocalRaw(WORKBENCH_MIGRATION_KEY);
+      if (notMigrated && (Array.isArray(legacyTasks) || (legacyReviews && typeof legacyReviews === 'object'))) {
+        return normalizeWorkbenchShape({
+          ...fromProject,
+          tasks: Array.isArray(legacyTasks) ? legacyTasks : fromProject.tasks,
+          reviews: legacyReviews && typeof legacyReviews === 'object' ? legacyReviews : fromProject.reviews,
+          meta: { ...fromProject.meta, migrated_from_localStorage: true },
+        });
+      }
+      return fromProject;
+    }
+
+    function snapshotWorkbench() {
+      return normalizeWorkbenchShape({
+        ...workbenchDraft,
+        ui: { deadlineViewMode, taskCategoryFilter },
+        meta: { ...(workbenchDraft?.meta || {}), updated_at: new Date().toISOString(), source: 'project-json' },
+      });
+    }
+
+    async function persistWorkbenchNow() {
+      const payload = snapshotWorkbench();
+      writeLocal(WORKBENCH_TASK_KEY, payload.tasks);
+      writeLocal(WORKBENCH_REVIEW_KEY, payload.reviews);
+      try {
+        const res = await fetch(WORKBENCH_SAVE_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (res.ok) writeLocal(WORKBENCH_MIGRATION_KEY, new Date().toISOString());
+      } catch {}
+    }
+
+    function queueWorkbenchPersist() {
+      clearTimeout(workbenchPersistTimer);
+      workbenchPersistTimer = setTimeout(persistWorkbenchNow, 700);
+    }
+
 
     function inferTaskCategory(task) {
       if (taskCategories.includes(task.category)) return task.category;
@@ -962,19 +1133,20 @@ def render_html(history: dict[str, Any]) -> str:
       };
     }
     function loadTasks() {
-      const saved = readLocal(WORKBENCH_TASK_KEY, null);
+      const saved = workbenchDraft?.tasks;
       if (saved && Array.isArray(saved)) return saved.map(normalizeTask);
       const defaults = [
         { id: uid(), title: '确认个人工作台首页结构', description: '根据实际使用反馈调整今日总览、待办和复盘区块。', priority: 'P1', status: 'doing', progress: 45, order: 1, category: '工作', due: today?.date || '', focus: true, createdAt: new Date().toISOString() },
         { id: uid(), title: '晚上填写今日复盘', description: '记录完成事项、推进情况、阻塞和明日下一步。', priority: 'P0', status: 'todo', progress: 15, order: 0, category: '生活', due: today?.date || '', focus: true, createdAt: new Date().toISOString() },
         { id: uid(), title: '观察 19:30 飞书自动推送', description: '时间管理自动化保持不动，只观察是否稳定到达。', priority: 'P2', status: 'waiting', progress: 20, order: 2, category: '工作', due: today?.date || '', focus: false, createdAt: new Date().toISOString() },
       ].map(normalizeTask);
-      writeLocal(WORKBENCH_TASK_KEY, defaults);
+      workbenchDraft.tasks = defaults;
+      queueWorkbenchPersist();
       return defaults;
     }
-    function saveTasks(tasks) { writeLocal(WORKBENCH_TASK_KEY, tasks.map(normalizeTask)); }
-    function loadReviews() { return readLocal(WORKBENCH_REVIEW_KEY, {}); }
-    function saveReviews(reviews) { writeLocal(WORKBENCH_REVIEW_KEY, reviews); }
+    function saveTasks(tasks) { workbenchDraft.tasks = tasks.map(normalizeTask); queueWorkbenchPersist(); }
+    function loadReviews() { return workbenchDraft?.reviews || {}; }
+    function saveReviews(reviews) { workbenchDraft.reviews = reviews; queueWorkbenchPersist(); }
     function sortTasksForDisplay(tasks) {
       return [...tasks].sort((a,b) => (priorityRank[a.priority] ?? 9) - (priorityRank[b.priority] ?? 9) || (a.order ?? 999) - (b.order ?? 999) || String(a.createdAt || '').localeCompare(String(b.createdAt || '')));
     }
@@ -1177,12 +1349,15 @@ def render_html(history: dict[str, Any]) -> str:
 
     let mode = 'overview';
     let currentKey = days[0]?.date || weeks[0]?.id;
-    let deadlineViewMode = localStorage.getItem('deadlineViewMode') || 'list';
-    let taskCategoryFilter = localStorage.getItem('taskCategoryFilter') || 'all';
+    workbenchDraft = loadWorkbenchDraft();
+    let deadlineViewMode = workbenchDraft.ui?.deadlineViewMode || 'list';
+    let taskCategoryFilter = workbenchDraft.ui?.taskCategoryFilter || 'all';
+    if (workbenchDraft.meta?.migrated_from_localStorage) queueWorkbenchPersist();
 
     window.setTaskCategoryFilter = function setTaskCategoryFilter(category) {
       taskCategoryFilter = category === 'all' || taskCategories.includes(category) ? category : 'all';
-      localStorage.setItem('taskCategoryFilter', taskCategoryFilter);
+      if (workbenchDraft?.ui) workbenchDraft.ui.taskCategoryFilter = taskCategoryFilter;
+      queueWorkbenchPersist();
       renderWorkbench();
     };
 
@@ -1354,8 +1529,9 @@ def render_html(history: dict[str, Any]) -> str:
 
     window.setDeadlineView = function setDeadlineView(next) {
       deadlineViewMode = next;
-      localStorage.setItem('deadlineViewMode', next);
-      renderWorkbench();
+      if (workbenchDraft?.ui) workbenchDraft.ui.deadlineViewMode = next;
+      queueWorkbenchPersist();
+      renderContent();
     };
 
     function renderDeadlineView(tasks) {
@@ -1722,13 +1898,14 @@ def render_html(history: dict[str, Any]) -> str:
   </script>
 </body>
 </html>'''
-    return template.replace("__STORE_JSON__", json.dumps(history, ensure_ascii=False))
+    return template.replace("__STORE_JSON__", json.dumps(store, ensure_ascii=False))
 
 
 def write_site(history: dict[str, Any]) -> None:
-    INDEX_PATH.write_text(render_html(history), encoding="utf-8")
+    workbench = load_workbench()
+    INDEX_PATH.write_text(render_html(history, workbench), encoding="utf-8")
     NOJEKYLL_PATH.write_text("", encoding="utf-8")
-    DOCS_INDEX_PATH.write_text(render_html(history), encoding="utf-8")
+    DOCS_INDEX_PATH.write_text(render_html(history, workbench), encoding="utf-8")
     DOCS_NOJEKYLL_PATH.write_text("", encoding="utf-8")
 
 def build_message(day_record: dict[str, Any], week_record: dict[str, Any] | None, git_status: dict[str, Any]) -> str:
@@ -1754,6 +1931,9 @@ def build_message(day_record: dict[str, Any], week_record: dict[str, Any] | None
 
 def main() -> int:
     args = parse_args()
+    if args.serve_workbench:
+        run_workbench_server(args.workbench_port)
+        return 0
     now = local_now(args)
     history, state = update_history(now, rebuild_days=args.rebuild_days, force_date=args.force_date)
     if args.mark_sent_date:

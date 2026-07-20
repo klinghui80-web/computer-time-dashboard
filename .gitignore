@@ -4,3 +4,7 @@ __pycache__/
 *.pyd
 Thumbs.db
 desktop.ini
+.env
+.env.*
+secrets/
+*.secret
