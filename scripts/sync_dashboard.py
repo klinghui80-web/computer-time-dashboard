@@ -56,6 +56,10 @@ CATEGORY_RULES = [
     ("生活/杂务", ["taobao", "京东", "美团", "外卖", "calendar", "todo", "地图", "map", "shop", "shopping", "支付宝", "bank"]),
 ]
 BROWSER_APPS = {"chrome.exe", "msedge.exe", "firefox.exe", "browser", "chrome", "edge"}
+LOW_USAGE_THRESHOLD_SECONDS = 3 * 3600
+AFK_AWAY_STATUSES = {"afk", "away", "离开"}
+AFK_ACTIVE_STATUSES = {"not-afk", "active", "使用中", "在线"}
+AI_PROMPT_DATA_POLICY_NOTE = "已剔除 ActivityWatch AFK/离开时间，后续分析只基于人在电脑前的有效使用时间。"
 
 
 @dataclass
@@ -223,15 +227,60 @@ def intersect_ranges(a_start: datetime, a_end: datetime, b_start: datetime, b_en
     return start, end
 
 
-def load_active_ranges(conn: sqlite3.Connection, day: date) -> list[tuple[datetime, datetime]]:
+def normalize_afk_status(value: Any) -> str:
+    return normalize_text(str(value or "")).lower()
+
+
+def inspect_afk_statuses(conn: sqlite3.Connection) -> dict[str, Any]:
     bucket_key = latest_bucket_key(conn, "afkstatus")
     if bucket_key is None:
-        return []
-    ranges = []
+        return {"bucket_found": False, "bucket_key": None, "statuses": {}}
+    rows = conn.execute(
+        "SELECT datastr, COUNT(*) AS count FROM eventmodel WHERE bucket_id = ? GROUP BY datastr",
+        (bucket_key,),
+    ).fetchall()
+    statuses: dict[str, int] = defaultdict(int)
+    for row in rows:
+        status = normalize_afk_status(parse_datastr(row[0]).get("status")) or "unknown"
+        statuses[status] += int(row[1] or 0)
+    return {"bucket_found": True, "bucket_key": bucket_key, "statuses": dict(statuses)}
+
+
+def load_afk_ranges(conn: sqlite3.Connection, day: date) -> dict[str, list[tuple[datetime, datetime]]]:
+    bucket_key = latest_bucket_key(conn, "afkstatus")
+    ranges = {"active": [], "away": []}
+    if bucket_key is None:
+        return ranges
     for event in fetch_events(conn, bucket_key, start_of_day(day), end_of_day(day)):
-        if event["data"].get("status") == "not-afk":
-            ranges.append((event["start"], event["end"]))
+        status = normalize_afk_status(event["data"].get("status"))
+        item = (event["start"], event["end"])
+        if status in AFK_AWAY_STATUSES:
+            ranges["away"].append(item)
+        elif status in AFK_ACTIVE_STATUSES:
+            ranges["active"].append(item)
     return ranges
+
+
+def subtract_ranges(base_start: datetime, base_end: datetime, blockers: list[tuple[datetime, datetime]]) -> list[tuple[datetime, datetime]]:
+    pieces = [(base_start, base_end)]
+    for block_start, block_end in blockers:
+        next_pieces: list[tuple[datetime, datetime]] = []
+        for piece_start, piece_end in pieces:
+            overlap = intersect_ranges(piece_start, piece_end, block_start, block_end)
+            if not overlap:
+                next_pieces.append((piece_start, piece_end))
+                continue
+            overlap_start, overlap_end = overlap
+            if piece_start < overlap_start:
+                next_pieces.append((piece_start, overlap_start))
+            if overlap_end < piece_end:
+                next_pieces.append((overlap_end, piece_end))
+        pieces = next_pieces
+    return pieces
+
+
+def load_active_ranges(conn: sqlite3.Connection, day: date) -> list[tuple[datetime, datetime]]:
+    return load_afk_ranges(conn, day)["active"]
 
 
 def normalize_text(text: str) -> str:
@@ -268,7 +317,9 @@ def load_segments(conn: sqlite3.Connection, day: date) -> list[Segment]:
     web_key = latest_bucket_key(conn, "web.tab.current")
     if bucket_key is None:
         return []
-    active_ranges = load_active_ranges(conn, day)
+    afk_ranges = load_afk_ranges(conn, day)
+    active_ranges = afk_ranges["active"]
+    away_ranges = afk_ranges["away"]
     if not active_ranges:
         return []
     web_events = fetch_events(conn, web_key, start_of_day(day), end_of_day(day)) if web_key else []
@@ -286,10 +337,11 @@ def load_segments(conn: sqlite3.Connection, day: date) -> list[Segment]:
             if not overlap:
                 continue
             seg_start, seg_end = overlap
-            seconds = (seg_end - seg_start).total_seconds()
-            if seconds < 1:
-                continue
-            segments.append(Segment(seg_start, seg_end, seconds, app, title, activity, category))
+            for clipped_start, clipped_end in subtract_ranges(seg_start, seg_end, away_ranges):
+                seconds = (clipped_end - clipped_start).total_seconds()
+                if seconds < 1:
+                    continue
+                segments.append(Segment(clipped_start, clipped_end, seconds, app, title, activity, category))
     segments.sort(key=lambda item: item.start)
     return segments
 
@@ -372,7 +424,7 @@ def build_daily_summary(day: date, segments: list[Segment]) -> dict[str, Any]:
     summary_line = summarize_day_line(total, categories, switch_count)
     notes = build_daily_notes(total, categories, switch_count, longest)
 
-    return {
+    summary = {
         "date": day.isoformat(),
         "weekday": WEEKDAY_NAMES[day.weekday()],
         "total_active_seconds": round(total, 2),
@@ -402,8 +454,32 @@ def build_daily_summary(day: date, segments: list[Segment]) -> dict[str, Any]:
             {"activity": activity, "seconds": round(seconds, 2), "text": fmt_duration(seconds)}
             for activity, seconds in sorted(activity_seconds.items(), key=lambda item: item[1], reverse=True)[:8]
         ],
+        "data_policy": {
+            "afk_excluded": True,
+            "afk_status_source": "ActivityWatch afkstatus",
+            "ai_prompt_note": AI_PROMPT_DATA_POLICY_NOTE,
+            "low_usage_threshold_seconds": LOW_USAGE_THRESHOLD_SECONDS,
+            "low_usage_no_ai_analysis": total <= LOW_USAGE_THRESHOLD_SECONDS,
+        },
         "generated_at": datetime.now().astimezone().isoformat(),
     }
+    return apply_low_usage_policy(summary)
+
+
+def apply_low_usage_policy(day_record: dict[str, Any]) -> dict[str, Any]:
+    policy = day_record.setdefault("data_policy", {})
+    policy.setdefault("afk_excluded", True)
+    policy.setdefault("afk_status_source", "ActivityWatch afkstatus")
+    policy.setdefault("ai_prompt_note", AI_PROMPT_DATA_POLICY_NOTE)
+    policy.setdefault("low_usage_threshold_seconds", LOW_USAGE_THRESHOLD_SECONDS)
+    is_low = day_record.get("total_active_seconds", 0) <= LOW_USAGE_THRESHOLD_SECONDS
+    policy["low_usage_no_ai_analysis"] = bool(is_low)
+    if is_low:
+        day_record["summary_line"] = "今日数据量不足"
+        day_record["notes"] = ["今日使用时长未超过3小时，仅保存基础统计，不生成详细分析。"]
+        energy = day_record.setdefault("energy", {})
+        energy["confidence"] = "低"
+    return day_record
 
 
 def summarize_day_line(total: float, categories: list[dict[str, Any]], switch_count: int) -> str:
@@ -495,7 +571,7 @@ def build_all_weeks(days: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def update_history(now: datetime, rebuild_days: int, force_date: str | None = None) -> tuple[dict[str, Any], dict[str, Any]]:
     ensure_dirs()
     history = load_json(HISTORY_PATH, {"days": [], "weeks": [], "meta": {}})
-    state = load_json(STATE_PATH, {"sent_days": [], "sent_weeks": [], "last_push": None})
+    state = load_json(STATE_PATH, {"sent_days": [], "sent_weeks": [], "low_usage_days": [], "last_push": None})
     by_date = {item["date"]: item for item in history.get("days", [])}
 
     conn = open_db()
@@ -526,14 +602,41 @@ def update_history(now: datetime, rebuild_days: int, force_date: str | None = No
     return history, state
 
 
+def is_due_for_delivery(day_record: dict[str, Any], now: datetime) -> bool:
+    day_date = date.fromisoformat(day_record["date"])
+    due = datetime.combine(day_date, DELIVERY_TIME, tzinfo=LOCAL_TZ)
+    return day_date < now.date() or now >= due
+
+
+def should_skip_detailed_analysis(day_record: dict[str, Any]) -> bool:
+    return day_record.get("total_active_seconds", 0) <= LOW_USAGE_THRESHOLD_SECONDS
+
+
+def mark_low_usage_due_days(history: dict[str, Any], state: dict[str, Any], now: datetime) -> list[str]:
+    sent = set(state.get("sent_days", []))
+    low_usage_days = set(state.get("low_usage_days", []))
+    skipped: list[str] = []
+    for day in history.get("days", []):
+        if day.get("date") in sent or day.get("date") in low_usage_days:
+            continue
+        if is_due_for_delivery(day, now) and should_skip_detailed_analysis(day):
+            low_usage_days.add(day["date"])
+            skipped.append(day["date"])
+    if skipped:
+        state["low_usage_days"] = sorted(low_usage_days)
+        save_json(STATE_PATH, state)
+    else:
+        state.setdefault("low_usage_days", sorted(low_usage_days))
+    return skipped
+
+
 def eligible_unsent_day(history: dict[str, Any], state: dict[str, Any], now: datetime) -> dict[str, Any] | None:
     sent = set(state.get("sent_days", []))
+    low_usage_days = set(state.get("low_usage_days", []))
     forced = None
     for day in history.get("days", []):
-        day_date = date.fromisoformat(day["date"])
-        due = datetime.combine(day_date, DELIVERY_TIME, tzinfo=LOCAL_TZ)
-        if day_date < now.date() or now >= due:
-            if day["date"] not in sent and day.get("total_active_seconds", 0) > 0:
+        if is_due_for_delivery(day, now):
+            if day["date"] not in sent and day["date"] not in low_usage_days and not should_skip_detailed_analysis(day):
                 forced = day
     return forced
 
@@ -1915,6 +2018,7 @@ def build_message(day_record: dict[str, Any], week_record: dict[str, Any] | None
         f"- 总活跃时长：{day_record['total_active_text']}",
         f"- 主要类目：{' / '.join(day_record['top_categories'][:3]) if day_record['top_categories'] else '暂无'}",
         f"- 今日判断：{day_record['summary_line']}",
+        f"- 统计口径：{day_record.get('data_policy', {}).get('ai_prompt_note', AI_PROMPT_DATA_POLICY_NOTE)}",
         f"- 最长专注块：{day_record['longest_focus']['text']} · {day_record['longest_focus']['range']}",
     ]
     if week_record:
@@ -1939,6 +2043,8 @@ def main() -> int:
     if args.mark_sent_date:
         mark_sent_by_date(history, state, args.mark_sent_date)
         return 0
+    if not args.force_date:
+        mark_low_usage_due_days(history, state, now)
     write_site(history)
     git_status = maybe_commit_and_push(now, skip_push=args.skip_push)
     day_record = None

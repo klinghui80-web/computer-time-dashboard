@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import importlib.util
+import sqlite3
 import sys
+from datetime import date, datetime, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -111,6 +113,98 @@ def test_workbench_json_is_staged_and_local_save_service_is_available():
     assert '"data/workbench.json"' in source
     assert "--serve-workbench" in source
     assert "ThreadingHTTPServer((\"127.0.0.1\", port), WorkbenchHandler)" in source
+
+
+def make_activitywatch_test_db(module):
+    conn = sqlite3.connect(":memory:")
+    conn.row_factory = sqlite3.Row
+    conn.execute("CREATE TABLE bucketmodel (key INTEGER PRIMARY KEY, id TEXT, type TEXT, created TEXT)")
+    conn.execute("CREATE TABLE eventmodel (bucket_id INTEGER, timestamp TEXT, duration REAL, datastr TEXT)")
+    conn.execute("INSERT INTO bucketmodel VALUES (1, 'aw-watcher-window_test', 'currentwindow', '2026-07-01T00:00:00')")
+    conn.execute("INSERT INTO bucketmodel VALUES (2, 'aw-watcher-afk_test', 'afkstatus', '2026-07-01T00:00:00')")
+    day = date(2026, 7, 1)
+
+    def ts(hour, minute=0):
+        return datetime.combine(day, datetime.min.time(), tzinfo=module.LOCAL_TZ).replace(hour=hour, minute=minute).isoformat(sep=" ")
+
+    conn.execute(
+        "INSERT INTO eventmodel VALUES (1, ?, ?, ?)",
+        (ts(9), 3600, '{"app":"Figma","title":"设计稿"}'),
+    )
+    conn.execute("INSERT INTO eventmodel VALUES (2, ?, ?, ?)", (ts(9), 1200, '{"status":"not-afk"}'))
+    conn.execute("INSERT INTO eventmodel VALUES (2, ?, ?, ?)", (ts(9, 20), 1800, '{"status":"afk"}'))
+    conn.execute("INSERT INTO eventmodel VALUES (2, ?, ?, ?)", (ts(9, 50), 600, '{"status":"not-afk"}'))
+    return conn, day
+
+
+def test_activitywatch_afk_away_time_is_excluded_before_daily_totals_and_categories():
+    module = load_module()
+    conn, day = make_activitywatch_test_db(module)
+    try:
+        statuses = module.inspect_afk_statuses(conn)
+        segments = module.load_segments(conn, day)
+        summary = module.build_daily_summary(day, segments)
+    finally:
+        conn.close()
+
+    assert statuses["bucket_found"] is True
+    assert statuses["statuses"]["afk"] >= 1
+    assert statuses["statuses"]["not-afk"] >= 1
+    assert round(sum(seg.seconds for seg in segments)) == 1800
+    assert summary["total_active_seconds"] == 1800
+    assert summary["categories"][0]["seconds"] == 1800
+    assert summary["data_policy"]["afk_excluded"] is True
+    assert "已剔除 ActivityWatch AFK/离开时间" in summary["data_policy"]["ai_prompt_note"]
+
+
+def test_low_usage_days_are_saved_as_low_confidence_but_not_eligible_for_automation_push():
+    module = load_module()
+    low_day = {
+        "date": "2026-07-01",
+        "weekday": "周三",
+        "total_active_seconds": module.LOW_USAGE_THRESHOLD_SECONDS - 60,
+        "total_active_text": "2小时59分",
+        "top_categories": ["设计"],
+        "categories": [{"name": "设计", "seconds": 1000, "share": 1, "color": "#f6bd16"}],
+        "summary_line": "旧摘要",
+        "notes": ["旧详细分析"],
+        "energy": {"confidence": "高"},
+        "longest_focus": {"text": "10分", "range": "09:00–09:10"},
+    }
+    normalized = module.apply_low_usage_policy(low_day.copy())
+    history = {"days": [normalized], "weeks": []}
+    state = {"sent_days": [], "sent_weeks": []}
+    state_path = ROOT / "tests" / ".tmp_state_low_usage.json"
+    if state_path.exists():
+        state_path.unlink()
+    original_state_path = module.STATE_PATH
+    module.STATE_PATH = state_path
+    now = datetime(2026, 7, 2, 20, 0, tzinfo=module.LOCAL_TZ)
+
+    try:
+        skipped = module.mark_low_usage_due_days(history, state, now)
+    finally:
+        module.STATE_PATH = original_state_path
+        if state_path.exists():
+            state_path.unlink()
+
+    assert normalized["summary_line"] == "今日数据量不足"
+    assert normalized["energy"]["confidence"] == "低"
+    assert normalized["notes"] == ["今日使用时长未超过3小时，仅保存基础统计，不生成详细分析。"]
+    assert normalized["data_policy"]["low_usage_no_ai_analysis"] is True
+    assert skipped == ["2026-07-01"]
+    assert "2026-07-01" in state["low_usage_days"]
+    assert module.eligible_unsent_day(history, state, now) is None
+
+
+def test_automation_message_mentions_afk_removed_for_days_that_are_pushed():
+    module = load_module()
+    day = sample_history()["days"][0]
+    day["total_active_seconds"] = module.LOW_USAGE_THRESHOLD_SECONDS + 1
+    day["data_policy"] = {"ai_prompt_note": "统计口径：已剔除 ActivityWatch AFK/离开时间。"}
+    message = module.build_message(day, None, {"message": "已推送到 GitHub。"})
+
+    assert "统计口径：已剔除 ActivityWatch AFK/离开时间。" in message
 
 
 def test_first_screen_is_a_radial_task_orbit_overview_not_a_donut():
@@ -446,6 +540,9 @@ if __name__ == "__main__":
     test_render_html_contains_editable_task_and_review_controls()
     test_workbench_data_uses_project_json_with_localstorage_migration_safety()
     test_workbench_json_is_staged_and_local_save_service_is_available()
+    test_activitywatch_afk_away_time_is_excluded_before_daily_totals_and_categories()
+    test_low_usage_days_are_saved_as_low_confidence_but_not_eligible_for_automation_push()
+    test_automation_message_mentions_afk_removed_for_days_that_are_pushed()
     test_first_screen_is_a_radial_task_orbit_overview_not_a_donut()
     test_visual_regressions_keep_glass_subtle_priority_colored_orbit_spacious_and_weekly_unwarped()
     test_top_nav_has_overview_task_panel_and_time_energy_management()
