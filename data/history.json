@@ -2043,7 +2043,7 @@
     {
       "date": "2026-07-05",
       "weekday": "周日",
-      "total_active_seconds": 23444.75,
+      "total_active_seconds": 23444.37,
       "total_active_text": "6小时30分",
       "top_categories": [
         "工作/创作",
@@ -2053,7 +2053,7 @@
       "categories": [
         {
           "name": "工作/创作",
-          "seconds": 10333.36,
+          "seconds": 10333.21,
           "share": 0.4408,
           "representatives": [
             "Hermes.exe｜Hermes",
@@ -2064,7 +2064,7 @@
         },
         {
           "name": "学习/信息",
-          "seconds": 4750.25,
+          "seconds": 4750.21,
           "share": 0.2026,
           "representatives": [
             "chrome.exe｜个人工作台 · 时间、任务与复盘 - Google Chrome",
@@ -2075,7 +2075,7 @@
         },
         {
           "name": "其他",
-          "seconds": 3719.78,
+          "seconds": 3719.75,
           "share": 0.1587,
           "representatives": [
             "chrome.exe｜个人工作台 · 时间、任务与复盘",
@@ -2086,7 +2086,7 @@
         },
         {
           "name": "沟通",
-          "seconds": 3669.11,
+          "seconds": 3668.96,
           "share": 0.1565,
           "representatives": [
             "Feishu.exe｜飞书会议",
@@ -2107,7 +2107,7 @@
         },
         {
           "name": "系统/维护",
-          "seconds": 373.24,
+          "seconds": 373.23,
           "share": 0.0159,
           "representatives": [
             "explorer.exe｜Program Manager",
@@ -2137,7 +2137,7 @@
       "longest_focus": {
         "category": "工作/创作",
         "activity": "Hermes.exe｜Hermes",
-        "seconds": 778.44,
+        "seconds": 778.41,
         "text": "12分",
         "range": "01:50–01:53"
       },
@@ -2153,16 +2153,16 @@
         ]
       },
       "hourly_seconds": {
-        "0": 3589.47,
-        "1": 2652.14,
-        "2": 2976.94,
-        "3": 1117.92,
-        "4": 2303.81,
-        "5": 2228.99,
+        "0": 3589.43,
+        "1": 2652.05,
+        "2": 2976.92,
+        "3": 1117.9,
+        "4": 2303.78,
+        "5": 2228.98,
         "6": 3236.45,
-        "7": 1404.95,
-        "8": 1971.13,
-        "9": 1958.57,
+        "7": 1404.92,
+        "8": 1971.05,
+        "9": 1958.53,
         "10": 0.0,
         "11": 0.0,
         "12": 0.0,
@@ -2181,17 +2181,17 @@
       "top_activities": [
         {
           "activity": "Hermes.exe｜Hermes",
-          "seconds": 8577.01,
+          "seconds": 8576.86,
           "text": "2小时22分"
         },
         {
           "activity": "chrome.exe｜个人工作台 · 时间、任务与复盘 - Google Chrome",
-          "seconds": 3907.48,
+          "seconds": 3907.44,
           "text": "1小时5分"
         },
         {
           "activity": "Feishu.exe｜飞书会议",
-          "seconds": 2275.04,
+          "seconds": 2274.93,
           "text": "37分"
         },
         {
@@ -2201,7 +2201,7 @@
         },
         {
           "activity": "Weixin.exe｜微信",
-          "seconds": 1218.07,
+          "seconds": 1218.03,
           "text": "20分"
         },
         {
@@ -2211,7 +2211,7 @@
         },
         {
           "activity": "chrome.exe｜App interfaces, dashboards, widgets｜www.pinterest.com",
-          "seconds": 633.63,
+          "seconds": 633.61,
           "text": "10分"
         },
         {
@@ -2220,12 +2220,12 @@
           "text": "8分"
         }
       ],
-      "generated_at": "2026-07-19T23:30:44.792091-07:00"
+      "generated_at": "2026-07-19T23:35:45.407839-07:00"
     },
     {
       "date": "2026-07-06",
       "weekday": "周一",
-      "total_active_seconds": 11213.43,
+      "total_active_seconds": 11213.38,
       "total_active_text": "3小时6分",
       "top_categories": [
         "沟通",
@@ -2246,7 +2246,7 @@
         },
         {
           "name": "其他",
-          "seconds": 2203.59,
+          "seconds": 2203.58,
           "share": 0.1965,
           "representatives": [
             "chrome.exe｜Wispr Flow | Effortless Voice Dictation｜wisprflow.ai",
@@ -2268,7 +2268,7 @@
         },
         {
           "name": "学习/信息",
-          "seconds": 947.99,
+          "seconds": 947.98,
           "share": 0.0845,
           "representatives": [
             "chrome.exe｜Landing page设计解析 - Google Chrome",
@@ -2290,7 +2290,7 @@
         },
         {
           "name": "设计",
-          "seconds": 267.23,
+          "seconds": 267.22,
           "share": 0.0238,
           "representatives": [
             "Figma.exe｜APP 详情页 - Figma",
@@ -2337,9 +2337,9 @@
         ]
       },
       "hourly_seconds": {
-        "0": 2856.42,
-        "1": 3144.65,
-        "2": 3002.14,
+        "0": 2856.41,
+        "1": 3144.64,
+        "2": 3002.12,
         "3": 2210.22,
         "4": 0.0,
         "5": 0.0,
@@ -2385,7 +2385,7 @@
         },
         {
           "activity": "chrome.exe｜Webflow: The agentic web platform for modern businesses｜webflow.com",
-          "seconds": 322.32,
+          "seconds": 322.3,
           "text": "5分"
         },
         {
@@ -2404,12 +2404,12 @@
           "text": "3分"
         }
       ],
-      "generated_at": "2026-07-19T23:30:44.557210-07:00"
+      "generated_at": "2026-07-19T23:35:44.911937-07:00"
     },
     {
       "date": "2026-07-07",
       "weekday": "周二",
-      "total_active_seconds": 15594.57,
+      "total_active_seconds": 15594.52,
       "total_active_text": "4小时19分",
       "top_categories": [
         "其他",
@@ -2441,7 +2441,7 @@
         },
         {
           "name": "学习/信息",
-          "seconds": 2597.06,
+          "seconds": 2597.03,
           "share": 0.1665,
           "representatives": [
             "chrome.exe｜Typeless | 实际智能的AI语音听写 - Google Chrome",
@@ -2452,7 +2452,7 @@
         },
         {
           "name": "沟通",
-          "seconds": 790.92,
+          "seconds": 790.91,
           "share": 0.0507,
           "representatives": [
             "Weixin.exe｜微信",
@@ -2523,9 +2523,9 @@
         "0": 3226.94,
         "1": 3322.03,
         "2": 3366.07,
-        "3": 2984.27,
-        "4": 2525.41,
-        "5": 152.04,
+        "3": 2984.25,
+        "4": 2525.39,
+        "5": 152.03,
         "6": 0.0,
         "7": 0.0,
         "8": 0.0,
@@ -2587,12 +2587,12 @@
           "text": "7分"
         }
       ],
-      "generated_at": "2026-07-19T23:30:44.401680-07:00"
+      "generated_at": "2026-07-19T23:35:44.730049-07:00"
     },
     {
       "date": "2026-07-08",
       "weekday": "周三",
-      "total_active_seconds": 12198.92,
+      "total_active_seconds": 12198.89,
       "total_active_text": "3小时23分",
       "top_categories": [
         "工作/创作",
@@ -2602,7 +2602,7 @@
       "categories": [
         {
           "name": "工作/创作",
-          "seconds": 5924.54,
+          "seconds": 5924.52,
           "share": 0.4857,
           "representatives": [
             "Codex.exe｜Codex",
@@ -2704,7 +2704,7 @@
       },
       "hourly_seconds": {
         "0": 3354.93,
-        "1": 2761.94,
+        "1": 2761.91,
         "2": 2569.71,
         "3": 3273.39,
         "4": 230.04,
@@ -2731,7 +2731,7 @@
       "top_activities": [
         {
           "activity": "Codex.exe｜Codex",
-          "seconds": 4842.52,
+          "seconds": 4842.49,
           "text": "1小时20分"
         },
         {
@@ -2770,12 +2770,12 @@
           "text": "3分"
         }
       ],
-      "generated_at": "2026-07-19T23:30:44.160680-07:00"
+      "generated_at": "2026-07-19T23:35:44.489689-07:00"
     },
     {
       "date": "2026-07-09",
       "weekday": "周四",
-      "total_active_seconds": 11793.64,
+      "total_active_seconds": 11793.62,
       "total_active_text": "3小时16分",
       "top_categories": [
         "其他",
@@ -2807,7 +2807,7 @@
         },
         {
           "name": "学习/信息",
-          "seconds": 2612.53,
+          "seconds": 2612.52,
           "share": 0.2215,
           "representatives": [
             "chrome.exe｜嘴替键盘 | AI聊天回复键盘 - Google Chrome",
@@ -2829,7 +2829,7 @@
         },
         {
           "name": "沟通",
-          "seconds": 1012.81,
+          "seconds": 1012.8,
           "share": 0.0859,
           "representatives": [
             "Feishu.exe｜飞书",
@@ -2888,8 +2888,8 @@
       "hourly_seconds": {
         "0": 3353.06,
         "1": 3265.44,
-        "2": 3203.84,
-        "3": 1965.25,
+        "2": 3203.83,
+        "3": 1965.24,
         "4": 0.0,
         "5": 0.0,
         "6": 0.0,
@@ -2934,7 +2934,7 @@
         },
         {
           "activity": "Feishu.exe｜飞书",
-          "seconds": 504.29,
+          "seconds": 504.28,
           "text": "8分"
         },
         {
@@ -2953,12 +2953,12 @@
           "text": "4分"
         }
       ],
-      "generated_at": "2026-07-19T23:30:43.977028-07:00"
+      "generated_at": "2026-07-19T23:35:44.309254-07:00"
     },
     {
       "date": "2026-07-10",
       "weekday": "周五",
-      "total_active_seconds": 18296.84,
+      "total_active_seconds": 18296.73,
       "total_active_text": "5小时4分",
       "top_categories": [
         "工作/创作",
@@ -2968,7 +2968,7 @@
       "categories": [
         {
           "name": "工作/创作",
-          "seconds": 4102.6,
+          "seconds": 4102.56,
           "share": 0.2242,
           "representatives": [
             "ChatGPT.exe｜ChatGPT",
@@ -3023,7 +3023,7 @@
         },
         {
           "name": "系统/维护",
-          "seconds": 1424.29,
+          "seconds": 1424.25,
           "share": 0.0778,
           "representatives": [
             "explorer.exe",
@@ -3034,7 +3034,7 @@
         },
         {
           "name": "沟通",
-          "seconds": 1373.81,
+          "seconds": 1373.78,
           "share": 0.0751,
           "representatives": [
             "Feishu.exe｜飞书",
@@ -3070,15 +3070,15 @@
         ]
       },
       "hourly_seconds": {
-        "0": 2787.14,
+        "0": 2787.13,
         "1": 3215.67,
         "2": 1528.7,
         "3": 0.0,
         "4": 1604.13,
         "5": 3299.39,
-        "6": 2421.78,
-        "7": 2980.03,
-        "8": 445.95,
+        "6": 2421.74,
+        "7": 2980.01,
+        "8": 445.91,
         "9": 0.0,
         "10": 0.0,
         "11": 0.0,
@@ -3098,7 +3098,7 @@
       "top_activities": [
         {
           "activity": "ChatGPT.exe｜ChatGPT",
-          "seconds": 3748.76,
+          "seconds": 3748.72,
           "text": "1小时2分"
         },
         {
@@ -3128,21 +3128,21 @@
         },
         {
           "activity": "explorer.exe",
-          "seconds": 736.03,
+          "seconds": 735.99,
           "text": "12分"
         },
         {
           "activity": "Weixin.exe｜微信",
-          "seconds": 473.44,
+          "seconds": 473.41,
           "text": "7分"
         }
       ],
-      "generated_at": "2026-07-19T23:30:43.766347-07:00"
+      "generated_at": "2026-07-19T23:35:44.113693-07:00"
     },
     {
       "date": "2026-07-11",
       "weekday": "周六",
-      "total_active_seconds": 14271.1,
+      "total_active_seconds": 14270.79,
       "total_active_text": "3小时57分",
       "top_categories": [
         "娱乐",
@@ -3152,7 +3152,7 @@
       "categories": [
         {
           "name": "娱乐",
-          "seconds": 10420.44,
+          "seconds": 10420.21,
           "share": 0.7302,
           "representatives": [
             "douyin.exe｜抖音",
@@ -3163,7 +3163,7 @@
         },
         {
           "name": "工作/创作",
-          "seconds": 2552.27,
+          "seconds": 2552.2,
           "share": 0.1788,
           "representatives": [
             "ChatGPT.exe｜ChatGPT",
@@ -3256,14 +3256,14 @@
         "0": 0.0,
         "1": 0.0,
         "2": 3547.82,
-        "3": 2746.3,
-        "4": 2554.79,
-        "5": 1821.89,
-        "6": 55.04,
+        "3": 2746.22,
+        "4": 2554.75,
+        "5": 1821.78,
+        "6": 55.03,
         "7": 0.0,
         "8": 515.74,
-        "9": 2291.31,
-        "10": 738.2,
+        "9": 2291.26,
+        "10": 738.18,
         "11": 0.0,
         "12": 0.0,
         "13": 0.0,
@@ -3281,12 +3281,12 @@
       "top_activities": [
         {
           "activity": "douyin.exe｜抖音",
-          "seconds": 9732.57,
+          "seconds": 9732.34,
           "text": "2小时42分"
         },
         {
           "activity": "ChatGPT.exe｜ChatGPT",
-          "seconds": 2548.17,
+          "seconds": 2548.1,
           "text": "42分"
         },
         {
@@ -3320,12 +3320,12 @@
           "text": "1分"
         }
       ],
-      "generated_at": "2026-07-19T23:30:43.568241-07:00"
+      "generated_at": "2026-07-19T23:35:43.899249-07:00"
     },
     {
       "date": "2026-07-12",
       "weekday": "周日",
-      "total_active_seconds": 12579.84,
+      "total_active_seconds": 12579.54,
       "total_active_text": "3小时29分",
       "top_categories": [
         "学习/信息",
@@ -3335,7 +3335,7 @@
       "categories": [
         {
           "name": "学习/信息",
-          "seconds": 3897.63,
+          "seconds": 3897.45,
           "share": 0.3098,
           "representatives": [
             "chrome.exe｜情侣头像 - 搜索结果 - 花瓣 - Google Chrome",
@@ -3346,7 +3346,7 @@
         },
         {
           "name": "设计",
-          "seconds": 2947.78,
+          "seconds": 2947.72,
           "share": 0.2343,
           "representatives": [
             "Figma.exe｜APP 详情页 - Figma",
@@ -3356,7 +3356,7 @@
         },
         {
           "name": "工作/创作",
-          "seconds": 2143.71,
+          "seconds": 2143.68,
           "share": 0.1704,
           "representatives": [
             "ChatGPT.exe｜ChatGPT",
@@ -3378,7 +3378,7 @@
         },
         {
           "name": "其他",
-          "seconds": 1483.02,
+          "seconds": 1482.99,
           "share": 0.1179,
           "representatives": [
             "chrome.exe｜嘴替键盘 | AI聊天回复键盘｜127.0.0.1:3001",
@@ -3400,7 +3400,7 @@
         },
         {
           "name": "系统/维护",
-          "seconds": 285.36,
+          "seconds": 285.35,
           "share": 0.0227,
           "representatives": [
             "explorer.exe",
@@ -3420,7 +3420,7 @@
       "longest_focus": {
         "category": "学习/信息",
         "activity": "chrome.exe｜情侣头像 - 搜索结果 - 花瓣 - Google Chrome",
-        "seconds": 846.96,
+        "seconds": 846.92,
         "text": "14分",
         "range": "07:59–08:08"
       },
@@ -3436,18 +3436,18 @@
         ]
       },
       "hourly_seconds": {
-        "0": 1540.07,
-        "1": 1735.85,
-        "2": 1058.08,
-        "3": 1098.24,
-        "4": 1319.44,
-        "5": 432.47,
-        "6": 291.13,
-        "7": 600.24,
-        "8": 715.41,
+        "0": 1540.03,
+        "1": 1735.83,
+        "2": 1058.06,
+        "3": 1098.2,
+        "4": 1319.41,
+        "5": 432.44,
+        "6": 291.09,
+        "7": 600.19,
+        "8": 715.4,
         "9": 0.0,
-        "10": 1956.74,
-        "11": 1644.54,
+        "10": 1956.73,
+        "11": 1644.52,
         "12": 187.63,
         "13": 0.0,
         "14": 0.0,
@@ -3464,12 +3464,12 @@
       "top_activities": [
         {
           "activity": "Figma.exe｜APP 详情页 - Figma",
-          "seconds": 2922.18,
+          "seconds": 2922.12,
           "text": "48分"
         },
         {
           "activity": "chrome.exe｜情侣头像 - 搜索结果 - 花瓣 - Google Chrome",
-          "seconds": 1701.6,
+          "seconds": 1701.47,
           "text": "28分"
         },
         {
@@ -3479,12 +3479,12 @@
         },
         {
           "activity": "ChatGPT.exe｜ChatGPT",
-          "seconds": 1403.3,
+          "seconds": 1403.27,
           "text": "23分"
         },
         {
           "activity": "chrome.exe｜嘴替键盘 | AI聊天回复键盘 - Google Chrome",
-          "seconds": 1005.36,
+          "seconds": 1005.33,
           "text": "16分"
         },
         {
@@ -3503,12 +3503,12 @@
           "text": "5分"
         }
       ],
-      "generated_at": "2026-07-19T23:30:43.434776-07:00"
+      "generated_at": "2026-07-19T23:35:43.773128-07:00"
     },
     {
       "date": "2026-07-13",
       "weekday": "周一",
-      "total_active_seconds": 19438.46,
+      "total_active_seconds": 19438.22,
       "total_active_text": "5小时23分",
       "top_categories": [
         "工作/创作",
@@ -3518,7 +3518,7 @@
       "categories": [
         {
           "name": "工作/创作",
-          "seconds": 6178.82,
+          "seconds": 6178.75,
           "share": 0.3179,
           "representatives": [
             "ChatGPT.exe｜ChatGPT",
@@ -3529,7 +3529,7 @@
         },
         {
           "name": "学习/信息",
-          "seconds": 5466.54,
+          "seconds": 5466.44,
           "share": 0.2812,
           "representatives": [
             "chrome.exe｜嘴替键盘 | AI聊天回复键盘 - Google Chrome",
@@ -3540,7 +3540,7 @@
         },
         {
           "name": "设计",
-          "seconds": 4434.05,
+          "seconds": 4434.01,
           "share": 0.2281,
           "representatives": [
             "Figma.exe｜数毛-详情页 - Figma",
@@ -3551,7 +3551,7 @@
         },
         {
           "name": "其他",
-          "seconds": 2218.31,
+          "seconds": 2218.3,
           "share": 0.1141,
           "representatives": [
             "fastpdf.exe｜作品集【UI_UE设计师_北京 15-25K】刘泽润 8年.pdf",
@@ -3573,7 +3573,7 @@
         },
         {
           "name": "系统/维护",
-          "seconds": 457.41,
+          "seconds": 457.39,
           "share": 0.0235,
           "representatives": [
             "explorer.exe｜作品集 - 文件资源管理器",
@@ -3609,17 +3609,17 @@
         ]
       },
       "hourly_seconds": {
-        "0": 3136.45,
+        "0": 3136.44,
         "1": 3357.07,
-        "2": 2984.67,
-        "3": 2121.84,
-        "4": 891.85,
+        "2": 2984.66,
+        "3": 2121.81,
+        "4": 891.84,
         "5": 0.0,
-        "6": 1319.3,
-        "7": 1152.83,
-        "8": 1706.59,
-        "9": 2505.08,
-        "10": 165.21,
+        "6": 1319.28,
+        "7": 1152.76,
+        "8": 1706.57,
+        "9": 2505.04,
+        "10": 165.19,
         "11": 0.0,
         "12": 0.0,
         "13": 0.0,
@@ -3637,22 +3637,22 @@
       "top_activities": [
         {
           "activity": "ChatGPT.exe｜ChatGPT",
-          "seconds": 4288.78,
+          "seconds": 4288.74,
           "text": "1小时11分"
         },
         {
           "activity": "chrome.exe｜嘴替键盘 | AI聊天回复键盘 - Google Chrome",
-          "seconds": 3008.62,
+          "seconds": 3008.61,
           "text": "50分"
         },
         {
           "activity": "Figma.exe｜数毛-详情页 - Figma",
-          "seconds": 2649.45,
+          "seconds": 2649.42,
           "text": "44分"
         },
         {
           "activity": "Figma.exe｜APP 详情页 - Figma",
-          "seconds": 1720.99,
+          "seconds": 1720.97,
           "text": "28分"
         },
         {
@@ -3667,7 +3667,7 @@
         },
         {
           "activity": "chrome.exe｜核心功能提炼｜chatgpt.com",
-          "seconds": 580.42,
+          "seconds": 580.39,
           "text": "9分"
         },
         {
@@ -3676,12 +3676,12 @@
           "text": "9分"
         }
       ],
-      "generated_at": "2026-07-19T23:30:43.207744-07:00"
+      "generated_at": "2026-07-19T23:35:43.548860-07:00"
     },
     {
       "date": "2026-07-14",
       "weekday": "周二",
-      "total_active_seconds": 15139.78,
+      "total_active_seconds": 15139.71,
       "total_active_text": "4小时12分",
       "top_categories": [
         "设计",
@@ -3691,7 +3691,7 @@
       "categories": [
         {
           "name": "设计",
-          "seconds": 11341.53,
+          "seconds": 11341.46,
           "share": 0.7491,
           "representatives": [
             "Figma.exe｜Untitled - Figma",
@@ -3783,14 +3783,14 @@
       },
       "hourly_seconds": {
         "0": 3536.56,
-        "1": 3282.28,
+        "1": 3282.27,
         "2": 3579.14,
-        "3": 1295.65,
+        "3": 1295.62,
         "4": 0.0,
         "5": 0.0,
         "6": 0.0,
-        "7": 2716.05,
-        "8": 290.64,
+        "7": 2716.04,
+        "8": 290.62,
         "9": 0.0,
         "10": 4.13,
         "11": 0.0,
@@ -3810,12 +3810,12 @@
       "top_activities": [
         {
           "activity": "Figma.exe｜Untitled - Figma",
-          "seconds": 9846.23,
+          "seconds": 9846.19,
           "text": "2小时44分"
         },
         {
           "activity": "Figma.exe｜数毛-详情页 - Figma",
-          "seconds": 1407.03,
+          "seconds": 1407.01,
           "text": "23分"
         },
         {
@@ -3849,12 +3849,12 @@
           "text": "2分"
         }
       ],
-      "generated_at": "2026-07-19T23:30:43.014409-07:00"
+      "generated_at": "2026-07-19T23:35:43.345794-07:00"
     },
     {
       "date": "2026-07-15",
       "weekday": "周三",
-      "total_active_seconds": 17444.72,
+      "total_active_seconds": 17444.67,
       "total_active_text": "4小时50分",
       "top_categories": [
         "设计",
@@ -3864,7 +3864,7 @@
       "categories": [
         {
           "name": "设计",
-          "seconds": 11906.76,
+          "seconds": 11906.71,
           "share": 0.6825,
           "representatives": [
             "Figma.exe｜付费页面 - Figma",
@@ -3955,10 +3955,10 @@
         ]
       },
       "hourly_seconds": {
-        "0": 3141.19,
-        "1": 2573.45,
+        "0": 3141.17,
+        "1": 2573.44,
         "2": 3568.11,
-        "3": 2540.13,
+        "3": 2540.11,
         "4": 0.0,
         "5": 0.0,
         "6": 0.0,
@@ -3970,7 +3970,7 @@
         "12": 0.0,
         "13": 0.0,
         "14": 0.0,
-        "15": 2104.32,
+        "15": 2104.31,
         "16": 2747.35,
         "17": 0.0,
         "18": 0.0,
@@ -3983,17 +3983,17 @@
       "top_activities": [
         {
           "activity": "Figma.exe｜付费页面 - Figma",
-          "seconds": 9093.38,
+          "seconds": 9093.34,
           "text": "2小时31分"
         },
         {
           "activity": "Figma.exe｜数毛-详情页 - Figma",
-          "seconds": 2484.37,
+          "seconds": 2484.36,
           "text": "41分"
         },
         {
           "activity": "chrome.exe｜手机界面设计 - Google Chrome",
-          "seconds": 932.08,
+          "seconds": 932.07,
           "text": "15分"
         },
         {
@@ -4022,12 +4022,12 @@
           "text": "5分"
         }
       ],
-      "generated_at": "2026-07-19T23:30:42.825801-07:00"
+      "generated_at": "2026-07-19T23:35:43.169411-07:00"
     },
     {
       "date": "2026-07-16",
       "weekday": "周四",
-      "total_active_seconds": 9831.17,
+      "total_active_seconds": 9831.03,
       "total_active_text": "2小时43分",
       "top_categories": [
         "设计",
@@ -4037,7 +4037,7 @@
       "categories": [
         {
           "name": "设计",
-          "seconds": 6023.97,
+          "seconds": 6023.88,
           "share": 0.6127,
           "representatives": [
             "Figma.exe｜付费页面 - Figma",
@@ -4048,7 +4048,7 @@
         },
         {
           "name": "学习/信息",
-          "seconds": 2886.61,
+          "seconds": 2886.6,
           "share": 0.2936,
           "representatives": [
             "msedge.exe｜付费界面 - 小红书搜索 和另外 7 个页面 - 个人 - Microsoft​ Edge",
@@ -4059,7 +4059,7 @@
         },
         {
           "name": "沟通",
-          "seconds": 796.33,
+          "seconds": 796.29,
           "share": 0.081,
           "representatives": [
             "Weixin.exe｜微信",
@@ -4128,9 +4128,9 @@
       },
       "hourly_seconds": {
         "0": 3497.2,
-        "1": 1968.88,
-        "2": 2425.33,
-        "3": 1914.49,
+        "1": 1968.83,
+        "2": 2425.31,
+        "3": 1914.43,
         "4": 0.0,
         "5": 0.0,
         "6": 0.0,
@@ -4155,12 +4155,12 @@
       "top_activities": [
         {
           "activity": "Figma.exe｜付费页面 - Figma",
-          "seconds": 6012.64,
+          "seconds": 6012.55,
           "text": "1小时40分"
         },
         {
           "activity": "Weixin.exe｜微信",
-          "seconds": 741.9,
+          "seconds": 741.86,
           "text": "12分"
         },
         {
@@ -4194,12 +4194,12 @@
           "text": "1分"
         }
       ],
-      "generated_at": "2026-07-19T23:30:42.650900-07:00"
+      "generated_at": "2026-07-19T23:35:43.014272-07:00"
     },
     {
       "date": "2026-07-17",
       "weekday": "周五",
-      "total_active_seconds": 12307.02,
+      "total_active_seconds": 12306.96,
       "total_active_text": "3小时25分",
       "top_categories": [
         "设计",
@@ -4209,7 +4209,7 @@
       "categories": [
         {
           "name": "设计",
-          "seconds": 5419.58,
+          "seconds": 5419.57,
           "share": 0.4404,
           "representatives": [
             "Figma.exe｜付费页面 - Figma",
@@ -4220,7 +4220,7 @@
         },
         {
           "name": "学习/信息",
-          "seconds": 3393.0,
+          "seconds": 3392.98,
           "share": 0.2757,
           "representatives": [
             "msedge.exe｜小红书 - 你的生活兴趣社区 和另外 7 个页面 - 个人 - Microsoft​ Edge",
@@ -4231,7 +4231,7 @@
         },
         {
           "name": "沟通",
-          "seconds": 1968.1,
+          "seconds": 1968.09,
           "share": 0.1599,
           "representatives": [
             "Weixin.exe｜微信",
@@ -4253,7 +4253,7 @@
         },
         {
           "name": "系统/维护",
-          "seconds": 410.6,
+          "seconds": 410.58,
           "share": 0.0334,
           "representatives": [
             "explorer.exe｜安哲素材汇总 - 文件资源管理器",
@@ -4311,14 +4311,14 @@
       },
       "hourly_seconds": {
         "0": 3226.87,
-        "1": 3175.7,
-        "2": 2769.12,
-        "3": 2764.85,
+        "1": 3175.68,
+        "2": 2769.1,
+        "3": 2764.83,
         "4": 0.0,
         "5": 0.0,
         "6": 0.0,
         "7": 94.98,
-        "8": 188.26,
+        "8": 188.24,
         "9": 0.0,
         "10": 0.0,
         "11": 0.0,
@@ -4338,12 +4338,12 @@
       "top_activities": [
         {
           "activity": "Figma.exe｜付费页面 - Figma",
-          "seconds": 5216.04,
+          "seconds": 5216.03,
           "text": "1小时26分"
         },
         {
           "activity": "Weixin.exe｜微信",
-          "seconds": 1559.67,
+          "seconds": 1559.66,
           "text": "26分"
         },
         {
@@ -4377,12 +4377,12 @@
           "text": "3分"
         }
       ],
-      "generated_at": "2026-07-19T23:30:42.438542-07:00"
+      "generated_at": "2026-07-19T23:35:42.857229-07:00"
     },
     {
       "date": "2026-07-18",
       "weekday": "周六",
-      "total_active_seconds": 6846.3,
+      "total_active_seconds": 6846.13,
       "total_active_text": "1小时54分",
       "top_categories": [
         "工作/创作",
@@ -4392,7 +4392,7 @@
       "categories": [
         {
           "name": "工作/创作",
-          "seconds": 4077.69,
+          "seconds": 4077.6,
           "share": 0.5956,
           "representatives": [
             "chrome.exe｜New chat - Claude - Google Chrome",
@@ -4403,7 +4403,7 @@
         },
         {
           "name": "设计",
-          "seconds": 1050.49,
+          "seconds": 1050.48,
           "share": 0.1534,
           "representatives": [
             "Figma.exe｜数毛-详情页 - Figma",
@@ -4413,7 +4413,7 @@
         },
         {
           "name": "其他",
-          "seconds": 709.83,
+          "seconds": 709.8,
           "share": 0.1037,
           "representatives": [
             "chrome.exe｜个人工作台 · 时间、任务与复盘",
@@ -4435,7 +4435,7 @@
         },
         {
           "name": "沟通",
-          "seconds": 328.74,
+          "seconds": 328.71,
           "share": 0.048,
           "representatives": [
             "chrome.exe｜未命名文档 - 飞书云文档｜qcnnv0ahl6aw.feishu.cn",
@@ -4446,7 +4446,7 @@
         },
         {
           "name": "学习/信息",
-          "seconds": 254.12,
+          "seconds": 254.11,
           "share": 0.0371,
           "representatives": [
             "chrome.exe｜个人工作台 · 时间、任务与复盘 - Google Chrome",
@@ -4476,7 +4476,7 @@
       "longest_focus": {
         "category": "工作/创作",
         "activity": "chrome.exe｜设计师编码网站的工作流程和工具选择 - Claude｜claude.ai",
-        "seconds": 608.21,
+        "seconds": 608.19,
         "text": "10分",
         "range": "07:13–07:23"
       },
@@ -4492,14 +4492,14 @@
         ]
       },
       "hourly_seconds": {
-        "0": 1069.06,
-        "1": 1234.28,
-        "2": 2549.05,
-        "3": 442.52,
-        "4": 693.46,
+        "0": 1069.04,
+        "1": 1234.25,
+        "2": 2549.02,
+        "3": 442.48,
+        "4": 693.43,
         "5": 0.0,
         "6": 0.0,
-        "7": 837.17,
+        "7": 837.14,
         "8": 0.0,
         "9": 20.75,
         "10": 0.0,
@@ -4520,32 +4520,32 @@
       "top_activities": [
         {
           "activity": "Figma.exe｜数毛-详情页 - Figma",
-          "seconds": 1036.18,
+          "seconds": 1036.16,
           "text": "17分"
         },
         {
           "activity": "chrome.exe｜New chat - Claude - Google Chrome",
-          "seconds": 1004.84,
+          "seconds": 1004.82,
           "text": "16分"
         },
         {
           "activity": "chrome.exe｜个人工作台项目改版方案 - Claude｜claude.ai",
-          "seconds": 891.68,
+          "seconds": 891.65,
           "text": "14分"
         },
         {
           "activity": "chrome.exe｜设计师编码网站的工作流程和工具选择 - Claude｜claude.ai",
-          "seconds": 811.65,
+          "seconds": 811.62,
           "text": "13分"
         },
         {
           "activity": "chrome.exe｜个人工作台项目改版方案 - Claude - Google Chrome",
-          "seconds": 615.9,
+          "seconds": 615.88,
           "text": "10分"
         },
         {
           "activity": "chrome.exe｜个人工作台 · 时间、任务与复盘",
-          "seconds": 448.97,
+          "seconds": 448.96,
           "text": "7分"
         },
         {
@@ -4555,16 +4555,16 @@
         },
         {
           "activity": "chrome.exe｜未命名文档 - 飞书云文档｜qcnnv0ahl6aw.feishu.cn",
-          "seconds": 248.66,
+          "seconds": 248.64,
           "text": "4分"
         }
       ],
-      "generated_at": "2026-07-19T23:30:42.188420-07:00"
+      "generated_at": "2026-07-19T23:35:42.613435-07:00"
     },
     {
       "date": "2026-07-19",
       "weekday": "周日",
-      "total_active_seconds": 14675.22,
+      "total_active_seconds": 14675.02,
       "total_active_text": "4小时4分",
       "top_categories": [
         "设计",
@@ -4574,7 +4574,7 @@
       "categories": [
         {
           "name": "设计",
-          "seconds": 7699.42,
+          "seconds": 7699.31,
           "share": 0.5247,
           "representatives": [
             "Figma.exe｜数毛-详情页 - Figma",
@@ -4585,7 +4585,7 @@
         },
         {
           "name": "学习/信息",
-          "seconds": 2870.11,
+          "seconds": 2870.08,
           "share": 0.1956,
           "representatives": [
             "chrome.exe｜Pinterest - Google Chrome",
@@ -4607,7 +4607,7 @@
         },
         {
           "name": "工作/创作",
-          "seconds": 1067.94,
+          "seconds": 1067.88,
           "share": 0.0728,
           "representatives": [
             "chrome.exe｜App Store 详情页设计｜chatgpt.com",
@@ -4674,15 +4674,15 @@
         ]
       },
       "hourly_seconds": {
-        "0": 2797.08,
-        "1": 838.2,
-        "2": 1449.82,
+        "0": 2797.05,
+        "1": 838.16,
+        "2": 1449.73,
         "3": 1297.19,
-        "4": 3017.81,
-        "5": 2489.72,
+        "4": 3017.79,
+        "5": 2489.7,
         "6": 0.0,
         "7": 1485.99,
-        "8": 1222.05,
+        "8": 1222.03,
         "9": 0.0,
         "10": 0.0,
         "11": 0.0,
@@ -4702,7 +4702,7 @@
       "top_activities": [
         {
           "activity": "Figma.exe｜数毛-详情页 - Figma",
-          "seconds": 7416.6,
+          "seconds": 7416.48,
           "text": "2小时3分"
         },
         {
@@ -4712,7 +4712,7 @@
         },
         {
           "activity": "chrome.exe｜Pinterest - Google Chrome",
-          "seconds": 484.46,
+          "seconds": 484.44,
           "text": "8分"
         },
         {
@@ -4741,7 +4741,7 @@
           "text": "3分"
         }
       ],
-      "generated_at": "2026-07-19T23:30:41.997082-07:00"
+      "generated_at": "2026-07-19T23:35:42.412064-07:00"
     }
   ],
   "weeks": [
@@ -4794,7 +4794,7 @@
       "notes": [
         "最投入的一天是 2026-06-15，活跃 0秒。"
       ],
-      "generated_at": "2026-07-19T23:30:44.792091-07:00"
+      "generated_at": "2026-07-19T23:35:45.409835-07:00"
     },
     {
       "id": "2026-06-22~2026-06-28",
@@ -4889,49 +4889,49 @@
         "最投入的一天是 2026-06-28，活跃 4小时29分。",
         "前三类目合计占比 78.6%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-19T23:30:44.792091-07:00"
+      "generated_at": "2026-07-19T23:35:45.409835-07:00"
     },
     {
       "id": "2026-06-29~2026-07-05",
       "start_date": "2026-06-29",
       "end_date": "2026-07-05",
       "label": "06/29 - 07/05",
-      "total_active_seconds": 160562.65,
+      "total_active_seconds": 160562.27,
       "total_active_text": "44小时36分",
       "categories": [
         {
           "name": "设计",
           "seconds": 62177.85,
-          "share": 0.3872,
+          "share": 0.3873,
           "color": "#f6bd16"
         },
         {
           "name": "学习/信息",
-          "seconds": 34631.01,
+          "seconds": 34630.97,
           "share": 0.2157,
           "color": "#61ddaa"
         },
         {
           "name": "工作/创作",
-          "seconds": 24841.76,
+          "seconds": 24841.61,
           "share": 0.1547,
           "color": "#7aa2ff"
         },
         {
           "name": "沟通",
-          "seconds": 17986.92,
+          "seconds": 17986.77,
           "share": 0.112,
           "color": "#5ad1e6"
         },
         {
           "name": "其他",
-          "seconds": 17151.16,
+          "seconds": 17151.13,
           "share": 0.1068,
           "color": "#cbd5e1"
         },
         {
           "name": "系统/维护",
-          "seconds": 2938.34,
+          "seconds": 2938.33,
           "share": 0.0183,
           "color": "#8a7dff"
         },
@@ -4981,7 +4981,7 @@
         },
         {
           "date": "2026-07-05",
-          "seconds": 23444.75,
+          "seconds": 23444.37,
           "text": "6小时30分"
         }
       ],
@@ -4991,55 +4991,55 @@
         "周末占比 14.6%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 75.8%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-19T23:30:44.792091-07:00"
+      "generated_at": "2026-07-19T23:35:45.409835-07:00"
     },
     {
       "id": "2026-07-06~2026-07-12",
       "start_date": "2026-07-06",
       "end_date": "2026-07-12",
       "label": "07/06 - 07/12",
-      "total_active_seconds": 95948.34,
+      "total_active_seconds": 95947.47,
       "total_active_text": "26小时39分",
       "categories": [
         {
           "name": "工作/创作",
-          "seconds": 25296.12,
+          "seconds": 25295.96,
           "share": 0.2636,
           "color": "#7aa2ff"
         },
         {
           "name": "其他",
-          "seconds": 19650.34,
+          "seconds": 19650.3,
           "share": 0.2048,
           "color": "#cbd5e1"
         },
         {
           "name": "学习/信息",
-          "seconds": 16124.88,
+          "seconds": 16124.65,
           "share": 0.1681,
           "color": "#61ddaa"
         },
         {
           "name": "娱乐",
-          "seconds": 14975.84,
+          "seconds": 14975.61,
           "share": 0.1561,
           "color": "#ff7d7d"
         },
         {
           "name": "沟通",
-          "seconds": 8919.85,
+          "seconds": 8919.8,
           "share": 0.093,
           "color": "#5ad1e6"
         },
         {
           "name": "设计",
-          "seconds": 7428.86,
+          "seconds": 7428.79,
           "share": 0.0774,
           "color": "#f6bd16"
         },
         {
           "name": "系统/维护",
-          "seconds": 3359.35,
+          "seconds": 3359.3,
           "share": 0.035,
           "color": "#8a7dff"
         },
@@ -5053,37 +5053,37 @@
       "daily_totals": [
         {
           "date": "2026-07-06",
-          "seconds": 11213.43,
+          "seconds": 11213.38,
           "text": "3小时6分"
         },
         {
           "date": "2026-07-07",
-          "seconds": 15594.57,
+          "seconds": 15594.52,
           "text": "4小时19分"
         },
         {
           "date": "2026-07-08",
-          "seconds": 12198.92,
+          "seconds": 12198.89,
           "text": "3小时23分"
         },
         {
           "date": "2026-07-09",
-          "seconds": 11793.64,
+          "seconds": 11793.62,
           "text": "3小时16分"
         },
         {
           "date": "2026-07-10",
-          "seconds": 18296.84,
+          "seconds": 18296.73,
           "text": "5小时4分"
         },
         {
           "date": "2026-07-11",
-          "seconds": 14271.1,
+          "seconds": 14270.79,
           "text": "3小时57分"
         },
         {
           "date": "2026-07-12",
-          "seconds": 12579.84,
+          "seconds": 12579.54,
           "text": "3小时29分"
         }
       ],
@@ -5093,49 +5093,49 @@
         "周末占比 28.0%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 63.7%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-19T23:30:44.792091-07:00"
+      "generated_at": "2026-07-19T23:35:45.409835-07:00"
     },
     {
       "id": "2026-07-13~2026-07-19",
       "start_date": "2026-07-13",
       "end_date": "2026-07-19",
       "label": "07/13 - 07/19",
-      "total_active_seconds": 95682.67,
+      "total_active_seconds": 95681.74,
       "total_active_text": "26小时34分",
       "categories": [
         {
           "name": "设计",
-          "seconds": 47875.8,
+          "seconds": 47875.42,
           "share": 0.5004,
           "color": "#f6bd16"
         },
         {
           "name": "学习/信息",
-          "seconds": 20327.84,
+          "seconds": 20327.67,
           "share": 0.2125,
           "color": "#61ddaa"
         },
         {
           "name": "工作/创作",
-          "seconds": 13109.51,
+          "seconds": 13109.29,
           "share": 0.137,
           "color": "#7aa2ff"
         },
         {
           "name": "其他",
-          "seconds": 6974.73,
+          "seconds": 6974.69,
           "share": 0.0729,
           "color": "#cbd5e1"
         },
         {
           "name": "沟通",
-          "seconds": 5542.72,
+          "seconds": 5542.64,
           "share": 0.0579,
           "color": "#5ad1e6"
         },
         {
           "name": "系统/维护",
-          "seconds": 1455.75,
+          "seconds": 1455.71,
           "share": 0.0152,
           "color": "#8a7dff"
         },
@@ -5155,37 +5155,37 @@
       "daily_totals": [
         {
           "date": "2026-07-13",
-          "seconds": 19438.46,
+          "seconds": 19438.22,
           "text": "5小时23分"
         },
         {
           "date": "2026-07-14",
-          "seconds": 15139.78,
+          "seconds": 15139.71,
           "text": "4小时12分"
         },
         {
           "date": "2026-07-15",
-          "seconds": 17444.72,
+          "seconds": 17444.67,
           "text": "4小时50分"
         },
         {
           "date": "2026-07-16",
-          "seconds": 9831.17,
+          "seconds": 9831.03,
           "text": "2小时43分"
         },
         {
           "date": "2026-07-17",
-          "seconds": 12307.02,
+          "seconds": 12306.96,
           "text": "3小时25分"
         },
         {
           "date": "2026-07-18",
-          "seconds": 6846.3,
+          "seconds": 6846.13,
           "text": "1小时54分"
         },
         {
           "date": "2026-07-19",
-          "seconds": 14675.22,
+          "seconds": 14675.02,
           "text": "4小时4分"
         }
       ],
@@ -5195,12 +5195,12 @@
         "周末占比 22.5%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 85.0%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-19T23:30:44.792091-07:00"
+      "generated_at": "2026-07-19T23:35:45.409835-07:00"
     }
   ],
   "meta": {
     "db_path": "C:\\Users\\Klh\\AppData\\Local\\activitywatch\\activitywatch\\aw-server\\peewee-sqlite.v2.db",
-    "generated_at": "2026-07-19T23:30:41.706707-07:00",
+    "generated_at": "2026-07-19T23:35:42.099138-07:00",
     "delivery_time": "19:30",
     "timezone": "太平洋夏令时"
   }
