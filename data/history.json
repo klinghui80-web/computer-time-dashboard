@@ -2418,7 +2418,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-20T00:10:05.430687-07:00"
+      "generated_at": "2026-07-20T00:15:05.792040-07:00"
     },
     {
       "date": "2026-07-07",
@@ -2608,7 +2608,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-20T00:10:05.205316-07:00"
+      "generated_at": "2026-07-20T00:15:05.620029-07:00"
     },
     {
       "date": "2026-07-08",
@@ -2798,7 +2798,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-20T00:10:04.957676-07:00"
+      "generated_at": "2026-07-20T00:15:05.386242-07:00"
     },
     {
       "date": "2026-07-09",
@@ -2988,7 +2988,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-20T00:10:04.780444-07:00"
+      "generated_at": "2026-07-20T00:15:05.201742-07:00"
     },
     {
       "date": "2026-07-10",
@@ -3179,7 +3179,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-20T00:10:04.590026-07:00"
+      "generated_at": "2026-07-20T00:15:04.992567-07:00"
     },
     {
       "date": "2026-07-11",
@@ -3369,7 +3369,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-20T00:10:04.388420-07:00"
+      "generated_at": "2026-07-20T00:15:04.787299-07:00"
     },
     {
       "date": "2026-07-12",
@@ -3559,7 +3559,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-20T00:10:04.261155-07:00"
+      "generated_at": "2026-07-20T00:15:04.664837-07:00"
     },
     {
       "date": "2026-07-13",
@@ -3739,7 +3739,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-20T00:10:04.020735-07:00"
+      "generated_at": "2026-07-20T00:15:04.449157-07:00"
     },
     {
       "date": "2026-07-14",
@@ -3919,7 +3919,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-20T00:10:03.821655-07:00"
+      "generated_at": "2026-07-20T00:15:04.247949-07:00"
     },
     {
       "date": "2026-07-15",
@@ -4099,7 +4099,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-20T00:10:03.645618-07:00"
+      "generated_at": "2026-07-20T00:15:04.084255-07:00"
     },
     {
       "date": "2026-07-16",
@@ -4277,7 +4277,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": true
       },
-      "generated_at": "2026-07-20T00:10:03.488447-07:00"
+      "generated_at": "2026-07-20T00:15:03.923258-07:00"
     },
     {
       "date": "2026-07-17",
@@ -4467,7 +4467,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-20T00:10:03.324582-07:00"
+      "generated_at": "2026-07-20T00:15:03.762228-07:00"
     },
     {
       "date": "2026-07-18",
@@ -4656,7 +4656,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": true
       },
-      "generated_at": "2026-07-20T00:10:03.104978-07:00"
+      "generated_at": "2026-07-20T00:15:03.542988-07:00"
     },
     {
       "date": "2026-07-19",
@@ -4845,69 +4845,83 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-20T00:10:02.928337-07:00"
+      "generated_at": "2026-07-20T00:15:03.370405-07:00"
     },
     {
       "date": "2026-07-20",
       "weekday": "周一",
-      "total_active_seconds": 606.08,
-      "total_active_text": "10分",
+      "total_active_seconds": 862.66,
+      "total_active_text": "14分",
       "top_categories": [
         "设计",
         "沟通",
-        "系统/维护"
+        "其他"
       ],
       "categories": [
         {
           "name": "设计",
-          "seconds": 532.05,
-          "share": 0.8779,
+          "seconds": 671.98,
+          "share": 0.779,
           "representatives": [
             "Figma.exe｜付费页面 - Figma",
             "Figma.exe｜支付页面-交付 - Figma",
-            "Figma.exe｜选择文件夹"
+            "Figma.exe｜另存为"
           ],
           "color": "#f6bd16"
         },
         {
           "name": "沟通",
-          "seconds": 62.69,
-          "share": 0.1034,
+          "seconds": 92.56,
+          "share": 0.1073,
           "representatives": [
-            "Weixin.exe｜微信"
+            "Weixin.exe｜微信",
+            "Feishu.exe｜飞书",
+            "Feishu.exe｜图片"
           ],
           "color": "#5ad1e6"
         },
         {
-          "name": "系统/维护",
-          "seconds": 5.15,
-          "share": 0.0085,
-          "representatives": [
-            "explorer.exe｜安哲素材汇总 - 文件资源管理器"
-          ],
-          "color": "#8a7dff"
-        },
-        {
           "name": "其他",
-          "seconds": 5.15,
-          "share": 0.0085,
+          "seconds": 66.86,
+          "share": 0.0775,
           "representatives": [
+            "chrome.exe｜(67) Pinterest｜www.pinterest.com",
+            "Photos.exe｜Frame 109.jpg",
             "Weixin.exe｜图片和视频"
           ],
           "color": "#cbd5e1"
         },
         {
+          "name": "系统/维护",
+          "seconds": 16.46,
+          "share": 0.0191,
+          "representatives": [
+            "explorer.exe｜安哲素材汇总 - 文件资源管理器",
+            "explorer.exe｜主文件夹 - 文件资源管理器"
+          ],
+          "color": "#8a7dff"
+        },
+        {
+          "name": "工作/创作",
+          "seconds": 13.77,
+          "share": 0.016,
+          "representatives": [
+            "Hermes.exe｜Hermes"
+          ],
+          "color": "#7aa2ff"
+        },
+        {
           "name": "学习/信息",
           "seconds": 1.04,
-          "share": 0.0017,
+          "share": 0.0012,
           "representatives": [
             "chrome.exe｜令辉的工作台 · 改版与推进方案 - 飞书云文档 - Google Chrome"
           ],
           "color": "#61ddaa"
         }
       ],
-      "switch_count": 14,
-      "segment_count": 15,
+      "switch_count": 38,
+      "segment_count": 42,
       "summary_line": "今日数据量不足",
       "notes": [
         "今日使用时长未超过3小时，仅保存基础统计，不生成详细分析。"
@@ -4925,13 +4939,13 @@
         "recovery_zone": "无明显恢复区",
         "confidence": "低",
         "evidence": [
-          "总活跃时长 10分",
-          "窗口切换 14 次",
+          "总活跃时长 14分",
+          "窗口切换 38 次",
           "最长连续专注块 2分"
         ]
       },
       "hourly_seconds": {
-        "0": 570.49,
+        "0": 827.07,
         "1": 0.0,
         "2": 0.0,
         "3": 0.0,
@@ -4959,8 +4973,8 @@
       "top_activities": [
         {
           "activity": "Figma.exe｜付费页面 - Figma",
-          "seconds": 334.57,
-          "text": "5分"
+          "seconds": 464.18,
+          "text": "7分"
         },
         {
           "activity": "Figma.exe｜支付页面-交付 - Figma",
@@ -4973,24 +4987,29 @@
           "text": "1分"
         },
         {
+          "activity": "chrome.exe｜(67) Pinterest｜www.pinterest.com",
+          "seconds": 55.54,
+          "text": "56秒"
+        },
+        {
+          "activity": "Feishu.exe｜飞书",
+          "seconds": 25.75,
+          "text": "26秒"
+        },
+        {
           "activity": "explorer.exe｜安哲素材汇总 - 文件资源管理器",
-          "seconds": 5.15,
-          "text": "5秒"
+          "seconds": 15.44,
+          "text": "15秒"
         },
         {
-          "activity": "Weixin.exe｜图片和视频",
-          "seconds": 5.15,
-          "text": "5秒"
+          "activity": "Hermes.exe｜Hermes",
+          "seconds": 13.77,
+          "text": "14秒"
         },
         {
-          "activity": "Figma.exe｜选择文件夹",
-          "seconds": 4.11,
-          "text": "4秒"
-        },
-        {
-          "activity": "chrome.exe｜令辉的工作台 · 改版与推进方案 - 飞书云文档 - Google Chrome",
-          "seconds": 1.04,
-          "text": "1秒"
+          "activity": "Figma.exe｜另存为",
+          "seconds": 10.31,
+          "text": "10秒"
         }
       ],
       "data_policy": {
@@ -5000,7 +5019,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": true
       },
-      "generated_at": "2026-07-20T00:10:02.653804-07:00"
+      "generated_at": "2026-07-20T00:15:03.095685-07:00"
     }
   ],
   "weeks": [
@@ -5053,7 +5072,7 @@
       "notes": [
         "最投入的一天是 2026-06-15，活跃 0秒。"
       ],
-      "generated_at": "2026-07-20T00:10:05.432686-07:00"
+      "generated_at": "2026-07-20T00:15:05.793038-07:00"
     },
     {
       "id": "2026-06-22~2026-06-28",
@@ -5148,7 +5167,7 @@
         "最投入的一天是 2026-06-28，活跃 4小时29分。",
         "前三类目合计占比 78.6%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-20T00:10:05.432686-07:00"
+      "generated_at": "2026-07-20T00:15:05.794038-07:00"
     },
     {
       "id": "2026-06-29~2026-07-05",
@@ -5250,7 +5269,7 @@
         "周末占比 14.6%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 75.8%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-20T00:10:05.433686-07:00"
+      "generated_at": "2026-07-20T00:15:05.794038-07:00"
     },
     {
       "id": "2026-07-06~2026-07-12",
@@ -5352,7 +5371,7 @@
         "周末占比 28.0%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 63.7%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-20T00:10:05.433686-07:00"
+      "generated_at": "2026-07-20T00:15:05.794038-07:00"
     },
     {
       "id": "2026-07-13~2026-07-19",
@@ -5454,12 +5473,12 @@
         "周末占比 22.5%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 85.0%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-20T00:10:05.433686-07:00"
+      "generated_at": "2026-07-20T00:15:05.794038-07:00"
     }
   ],
   "meta": {
     "db_path": "C:\\Users\\Klh\\AppData\\Local\\activitywatch\\activitywatch\\aw-server\\peewee-sqlite.v2.db",
-    "generated_at": "2026-07-20T00:10:02.467985-07:00",
+    "generated_at": "2026-07-20T00:15:02.911027-07:00",
     "delivery_time": "19:30",
     "timezone": "太平洋夏令时"
   }
