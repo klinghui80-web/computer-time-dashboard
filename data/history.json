@@ -2988,7 +2988,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T03:05:41.811782-07:00"
+      "generated_at": "2026-07-23T03:10:41.594888-07:00"
     },
     {
       "date": "2026-07-10",
@@ -3179,7 +3179,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T03:05:41.319474-07:00"
+      "generated_at": "2026-07-23T03:10:41.415302-07:00"
     },
     {
       "date": "2026-07-11",
@@ -3369,7 +3369,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T03:05:41.132026-07:00"
+      "generated_at": "2026-07-23T03:10:41.235512-07:00"
     },
     {
       "date": "2026-07-12",
@@ -3559,7 +3559,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T03:05:41.011613-07:00"
+      "generated_at": "2026-07-23T03:10:41.105167-07:00"
     },
     {
       "date": "2026-07-13",
@@ -3739,7 +3739,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T03:05:40.799304-07:00"
+      "generated_at": "2026-07-23T03:10:40.896265-07:00"
     },
     {
       "date": "2026-07-14",
@@ -3919,7 +3919,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T03:05:40.602142-07:00"
+      "generated_at": "2026-07-23T03:10:40.712816-07:00"
     },
     {
       "date": "2026-07-15",
@@ -4099,7 +4099,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T03:05:40.436895-07:00"
+      "generated_at": "2026-07-23T03:10:40.559099-07:00"
     },
     {
       "date": "2026-07-16",
@@ -4277,7 +4277,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": true
       },
-      "generated_at": "2026-07-23T03:05:40.281727-07:00"
+      "generated_at": "2026-07-23T03:10:40.407684-07:00"
     },
     {
       "date": "2026-07-17",
@@ -4467,7 +4467,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T03:05:40.115233-07:00"
+      "generated_at": "2026-07-23T03:10:40.253181-07:00"
     },
     {
       "date": "2026-07-18",
@@ -4656,7 +4656,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": true
       },
-      "generated_at": "2026-07-23T03:05:39.901747-07:00"
+      "generated_at": "2026-07-23T03:10:40.056486-07:00"
     },
     {
       "date": "2026-07-19",
@@ -4845,7 +4845,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T03:05:39.735772-07:00"
+      "generated_at": "2026-07-23T03:10:39.896867-07:00"
     },
     {
       "date": "2026-07-20",
@@ -5024,7 +5024,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": true
       },
-      "generated_at": "2026-07-23T03:05:39.424423-07:00"
+      "generated_at": "2026-07-23T03:10:39.631363-07:00"
     },
     {
       "date": "2026-07-21",
@@ -5215,7 +5215,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T03:05:39.230857-07:00"
+      "generated_at": "2026-07-23T03:10:39.457873-07:00"
     },
     {
       "date": "2026-07-22",
@@ -5404,13 +5404,13 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T03:05:38.993213-07:00"
+      "generated_at": "2026-07-23T03:10:39.227429-07:00"
     },
     {
       "date": "2026-07-23",
       "weekday": "周四",
-      "total_active_seconds": 10319.11,
-      "total_active_text": "2小时51分",
+      "total_active_seconds": 10609.65,
+      "total_active_text": "2小时56分",
       "top_categories": [
         "设计",
         "工作/创作",
@@ -5419,8 +5419,8 @@
       "categories": [
         {
           "name": "设计",
-          "seconds": 5768.93,
-          "share": 0.5591,
+          "seconds": 6059.48,
+          "share": 0.5711,
           "representatives": [
             "Figma.exe｜APP 详情页 - Figma",
             "Figma.exe｜打开"
@@ -5430,7 +5430,7 @@
         {
           "name": "工作/创作",
           "seconds": 2042.11,
-          "share": 0.1979,
+          "share": 0.1925,
           "representatives": [
             "chrome.exe｜ChatGPT - Google Chrome",
             "chrome.exe｜恋爱场景APP详情页文案和视觉风格优化 - Claude - Google Chrome",
@@ -5441,7 +5441,7 @@
         {
           "name": "其他",
           "seconds": 1245.0,
-          "share": 0.1207,
+          "share": 0.1173,
           "representatives": [
             "Eagle.exe｜Eagle",
             "chrome.exe｜新标签页｜newtab",
@@ -5452,7 +5452,7 @@
         {
           "name": "学习/信息",
           "seconds": 1163.19,
-          "share": 0.1127,
+          "share": 0.1096,
           "representatives": [
             "chrome.exe｜丘比特形象修改请求 - Google Chrome",
             "msedge.exe｜IPui - 小红书搜索 和另外 7 个页面 - 个人 - Microsoft​ Edge",
@@ -5463,7 +5463,7 @@
         {
           "name": "沟通",
           "seconds": 87.52,
-          "share": 0.0085,
+          "share": 0.0082,
           "representatives": [
             "Feishu.exe｜飞书",
             "Weixin.exe｜微信",
@@ -5491,9 +5491,9 @@
       "longest_focus": {
         "category": "设计",
         "activity": "Figma.exe｜APP 详情页 - Figma",
-        "seconds": 907.68,
-        "text": "15分",
-        "range": "02:50–03:05"
+        "seconds": 1198.22,
+        "text": "19分",
+        "range": "02:50–03:10"
       },
       "energy": {
         "high_zone": "设计",
@@ -5501,16 +5501,16 @@
         "recovery_zone": "无明显恢复区",
         "confidence": "低",
         "evidence": [
-          "总活跃时长 2小时51分",
+          "总活跃时长 2小时56分",
           "窗口切换 287 次",
-          "最长连续专注块 15分"
+          "最长连续专注块 19分"
         ]
       },
       "hourly_seconds": {
         "0": 3207.31,
         "1": 3465.19,
         "2": 3224.36,
-        "3": 330.58,
+        "3": 621.12,
         "4": 0.0,
         "5": 0.0,
         "6": 0.0,
@@ -5535,8 +5535,8 @@
       "top_activities": [
         {
           "activity": "Figma.exe｜APP 详情页 - Figma",
-          "seconds": 5728.74,
-          "text": "1小时35分"
+          "seconds": 6019.28,
+          "text": "1小时40分"
         },
         {
           "activity": "Eagle.exe｜Eagle",
@@ -5581,7 +5581,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": true
       },
-      "generated_at": "2026-07-23T03:05:38.751450-07:00"
+      "generated_at": "2026-07-23T03:10:38.987834-07:00"
     }
   ],
   "weeks": [
@@ -5634,7 +5634,7 @@
       "notes": [
         "最投入的一天是 2026-06-15，活跃 0秒。"
       ],
-      "generated_at": "2026-07-23T03:05:41.819543-07:00"
+      "generated_at": "2026-07-23T03:10:41.594888-07:00"
     },
     {
       "id": "2026-06-22~2026-06-28",
@@ -5729,7 +5729,7 @@
         "最投入的一天是 2026-06-28，活跃 4小时29分。",
         "前三类目合计占比 78.6%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-23T03:05:41.819543-07:00"
+      "generated_at": "2026-07-23T03:10:41.594888-07:00"
     },
     {
       "id": "2026-06-29~2026-07-05",
@@ -5831,7 +5831,7 @@
         "周末占比 14.6%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 75.8%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-23T03:05:41.819543-07:00"
+      "generated_at": "2026-07-23T03:10:41.594888-07:00"
     },
     {
       "id": "2026-07-06~2026-07-12",
@@ -5933,7 +5933,7 @@
         "周末占比 28.0%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 63.7%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-23T03:05:41.819543-07:00"
+      "generated_at": "2026-07-23T03:10:41.594888-07:00"
     },
     {
       "id": "2026-07-13~2026-07-19",
@@ -6035,12 +6035,12 @@
         "周末占比 22.5%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 85.0%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-23T03:05:41.819543-07:00"
+      "generated_at": "2026-07-23T03:10:41.594888-07:00"
     }
   ],
   "meta": {
     "db_path": "C:\\Users\\Klh\\AppData\\Local\\activitywatch\\activitywatch\\aw-server\\peewee-sqlite.v2.db",
-    "generated_at": "2026-07-23T03:05:38.539854-07:00",
+    "generated_at": "2026-07-23T03:10:38.789675-07:00",
     "delivery_time": "19:30",
     "timezone": "太平洋夏令时"
   }
