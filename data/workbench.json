@@ -1,16 +1,6 @@
 {
   "tasks": [],
   "reviews": {},
-  "ui": {
-    "deadlineViewMode": "list",
-    "taskCategoryFilter": "all",
-    "expandedGoalId": "work"
-  },
-  "meta": {
-    "schema_version": 1,
-    "updated_at": "2026-07-23T22:18:26.768959-07:00",
-    "source": "project-json"
-  },
   "goals": [
     {
       "id": "life",
@@ -69,5 +59,16 @@
         }
       ]
     }
-  ]
+  ],
+  "ui": {
+    "deadlineViewMode": "list",
+    "taskCategoryFilter": "all",
+    "expandedGoalId": "work"
+  },
+  "meta": {
+    "schema_version": 1,
+    "updated_at": "2026-07-23T22:25:21.421532-07:00",
+    "source": "project-json",
+    "migrated_from_localStorage": true
+  }
 }
