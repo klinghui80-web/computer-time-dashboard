@@ -351,18 +351,29 @@ def test_overview_top_nav_page_is_strategy_goal_dashboard_with_gantt_progress():
 
     assert "renderOverview" in html
     assert "strategy-goal-first-fold" in html
+    assert "strategy-hero-copy" in html
+    assert "抬头看山，低头赶路" in html
+    assert "目标不必天天仰望，路要日日去走" in html
     assert "strategy-domain-card" in html
     assert "生活" in html and "工作" in html and "自媒体" in html
     assert "进大厂实习" in html
     assert "goal-progress-ring" in html
     assert "renderGoalTree" in html
     assert "战略目标 → 二级方向 → 具体子任务" in html
+    assert "strategy-tree-bottom" in html
     assert "goalId" in html and "directionId" in html
     assert "computeGoalProgress" in html
     assert "renderTaskGantt" in html
     assert "progress-gantt-card" in html
     assert "任务进度甘特图" in html
     assert "gantt-task-list" in html and "gantt-timeline-grid" in html and "gantt-bar" in html
+    assert "openStrategyEditor" in html
+    assert "编辑战略目标" in html
+    assert "strategyEditorModal" in html
+    assert "saveStrategyGoals" in html
+    assert "strategy-editor-grid" in html
+    assert "新增子任务" in html
+    assert "openTaskModal(null, '${goal.id}', '${direction.id}')" in html
     assert "overview-deadline-card" not in html
     render_overview_block = html[html.index("function renderOverview()"):html.index("function renderWorkbench()")]
     assert "renderStrategyOverview(tasks)" in render_overview_block

@@ -962,9 +962,13 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
     .carryover-item { border-radius:15px; padding:11px 12px; background:rgba(255,255,255,.075); border:1px solid rgba(255,255,255,.09); color:#eef4ff; }
     .carryover-item small { display:block; margin-top:5px; color:rgba(223,231,255,.6); }
     .next-fold { margin-top:4px; }
-    .strategy-goal-first-fold { min-height:calc(100vh - 112px); display:flex; align-items:center; background:radial-gradient(circle at 16% 18%, rgba(110,231,183,.10), transparent 30%), radial-gradient(circle at 50% 12%, rgba(122,162,255,.12), transparent 32%), radial-gradient(circle at 82% 18%, rgba(244,114,182,.10), transparent 30%), linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.014)); overflow:hidden; }
-    .strategy-overview-shell { width:100%; display:grid; gap:22px; }
-    .strategy-cards-row { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+    .strategy-goal-first-fold { min-height:calc(100vh - 112px); display:flex; align-items:stretch; background:radial-gradient(circle at 16% 18%, rgba(110,231,183,.10), transparent 30%), radial-gradient(circle at 50% 12%, rgba(122,162,255,.12), transparent 32%), radial-gradient(circle at 82% 18%, rgba(244,114,182,.10), transparent 30%), linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.014)); overflow:hidden; }
+    .strategy-overview-shell { width:100%; min-height:calc(100vh - 170px); display:grid; grid-template-rows:auto 1fr auto; gap:18px; }
+    .strategy-hero-copy { align-self:start; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:18px; align-items:start; max-width:980px; margin:6px auto 0; text-align:center; }
+    .strategy-hero-copy h2 { grid-column:1 / -1; margin:0; font-size:48px; line-height:1.08; letter-spacing:-1.4px; font-weight:820; color:#f7f8f8; }
+    .strategy-hero-copy p { grid-column:1 / -1; margin:0; color:rgba(223,231,255,.70); font-size:18px; letter-spacing:.2px; }
+    .strategy-edit-button { justify-self:center; margin-top:8px; border:1px solid rgba(255,255,255,.12); border-radius:999px; padding:10px 14px; color:#dfe7ff; background:rgba(255,255,255,.055); cursor:pointer; box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 14px 36px rgba(0,0,0,.28); }
+    .strategy-cards-row { align-self:center; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
     .strategy-domain-card { position:relative; min-height:260px; display:grid; grid-template-rows:auto 1fr auto; gap:18px; text-align:left; border:1px solid color-mix(in srgb, var(--domain-color), rgba(255,255,255,.12) 60%); border-radius:30px; padding:24px; color:#f7f8f8; background:linear-gradient(145deg, color-mix(in srgb, var(--domain-color), transparent 88%), rgba(255,255,255,.042)); box-shadow:inset 0 1px 0 rgba(255,255,255,.10), 0 24px 70px rgba(0,0,0,.42), 0 0 44px color-mix(in srgb, var(--domain-color), transparent 86%); cursor:pointer; }
     .strategy-domain-card.active { transform:translateY(-2px); border-color:color-mix(in srgb, var(--domain-color), rgba(255,255,255,.18) 34%); box-shadow:inset 0 1px 0 rgba(255,255,255,.13), 0 30px 80px rgba(0,0,0,.48), 0 0 56px color-mix(in srgb, var(--domain-color), transparent 72%); }
     .strategy-card-head { display:flex; align-items:center; justify-content:space-between; gap:12px; color:#dfe7ff; }
@@ -975,6 +979,7 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
     .goal-progress-ring::before { content:""; position:absolute; width:74px; height:74px; border-radius:50%; background:rgba(0,0,0,.72); border:1px solid rgba(255,255,255,.09); }
     .goal-progress-ring span { position:relative; z-index:1; font-family:'JetBrains Mono', ui-monospace, monospace; font-weight:760; color:#fff; }
     .goal-tree-panel { border:1px solid color-mix(in srgb, var(--domain-color), rgba(255,255,255,.12) 58%); border-radius:28px; padding:20px; background:linear-gradient(145deg, color-mix(in srgb, var(--domain-color), transparent 92%), rgba(255,255,255,.036)); }
+    .strategy-tree-bottom { align-self:end; margin-top:18px; }
     .goal-tree-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px; color:rgba(223,231,255,.72); }
     .goal-tree-heading strong { color:#fff; }
     .goal-tree-root { display:grid; grid-template-columns:minmax(220px,.34fr) minmax(0,1fr); gap:18px; align-items:start; }
@@ -989,6 +994,13 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
     .tree-task-node { display:flex; justify-content:space-between; gap:12px; align-items:center; border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:10px 12px; color:#dfe7ff; background:rgba(255,255,255,.035); cursor:pointer; text-align:left; }
     .tree-task-node i { color:var(--domain-color); font-style:normal; font-family:'JetBrains Mono', ui-monospace, monospace; }
     .tree-empty { border:1px dashed rgba(255,255,255,.10); border-radius:14px; padding:12px; color:#8a8f98; text-align:center; }
+    .tree-add-task { border:1px dashed color-mix(in srgb, var(--domain-color), rgba(255,255,255,.15) 45%); border-radius:14px; padding:10px 12px; color:#dfe7ff; background:rgba(255,255,255,.026); cursor:pointer; }
+    .strategy-editor-modal { width:min(1100px, 100%); }
+    .strategy-editor-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .strategy-editor-card { border:1px solid rgba(255,255,255,.09); border-radius:20px; padding:16px; background:rgba(255,255,255,.035); display:grid; gap:12px; }
+    .strategy-editor-card h4 { margin:0; color:#f7f8f8; }
+    .strategy-editor-card label { display:grid; gap:6px; color:var(--muted); font-size:12px; }
+    .strategy-editor-card textarea { min-height:150px; }
     .progress-gantt-card { overflow:hidden; }
     .gantt-board { display:grid; grid-template-columns:minmax(260px,.32fr) minmax(0,1fr); border:1px solid rgba(255,255,255,.08); border-radius:22px; overflow:auto; background:rgba(255,255,255,.025); }
     .gantt-task-list { min-width:260px; border-right:1px solid rgba(255,255,255,.09); background:rgba(0,0,0,.16); }
@@ -1134,7 +1146,7 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
       .orbit-connector-layer { display:none; }
       .overview-orbit-map { min-height:auto; height:auto; padding:150px 8px 18px; display:grid; gap:10px; }
       .overview-first-fold { min-height:auto; }
-      .strategy-cards-row, .goal-tree-root, .tree-branches, .gantt-board { grid-template-columns:1fr; }
+      .strategy-cards-row, .goal-tree-root, .tree-branches, .gantt-board, .strategy-editor-grid { grid-template-columns:1fr; }
       .strategy-domain-card { min-height:210px; }
       .gantt-task-list { border-right:0; border-bottom:1px solid rgba(255,255,255,.09); }
       .deadline-calendar { grid-template-columns:repeat(2,minmax(0,1fr)); }
@@ -1421,7 +1433,7 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
       if (categorySelect && goal?.domain) categorySelect.value = goal.domain;
     };
 
-    window.openTaskModal = function openTaskModal(id = null) {
+    window.openTaskModal = function openTaskModal(id = null, defaultGoalId = null, defaultDirectionId = null) {
       editingTaskId = id;
       const modal = document.getElementById('taskModal');
       const task = id ? loadTasks().find(item => item.id === id) : null;
@@ -1436,9 +1448,9 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
       const setValue = (field, value) => { const node = document.getElementById(field); if (node) node.value = value || ''; };
       setValue('taskTitle', task?.title || '');
       setValue('taskPriority', task?.priority || 'P1');
-      const modalGoal = task?.goalId ? goalById(task.goalId) : goalForCategory(task?.category || '工作');
+      const modalGoal = task?.goalId ? goalById(task.goalId) : (defaultGoalId ? goalById(defaultGoalId) : goalForCategory(task?.category || '工作'));
       setValue('taskGoalId', modalGoal.id);
-      updateTaskDirectionOptions(task?.directionId || directionForGoal(modalGoal, '').id);
+      updateTaskDirectionOptions(task?.directionId || defaultDirectionId || directionForGoal(modalGoal, '').id);
       setValue('taskCategory', modalGoal.domain || task?.category || '工作');
       setValue('taskDue', task?.due || today?.date || '');
       setValue('taskDescription', task?.description || '');
@@ -2021,6 +2033,76 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
       renderOverview();
     };
 
+    window.openStrategyEditor = function openStrategyEditor() {
+      document.getElementById('strategyEditorModal')?.classList.add('open');
+    };
+
+    window.closeStrategyEditor = function closeStrategyEditor() {
+      document.getElementById('strategyEditorModal')?.classList.remove('open');
+    };
+
+    function slugDirection(goalId, title, index) {
+      const ascii = String(title || '').trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      return `${goalId}-${ascii || `direction-${index + 1}`}`;
+    }
+
+    window.saveStrategyGoals = function saveStrategyGoals() {
+      const goals = (workbenchDraft.goals || defaultStrategyGoals).map(goal => {
+        const statement = document.getElementById(`goalStatement-${goal.id}`)?.value.trim() || goal.statement;
+        const rawDirections = document.getElementById(`goalDirections-${goal.id}`)?.value || '';
+        const existingByTitle = Object.fromEntries((goal.directions || []).map(direction => [direction.title, direction]));
+        const directions = rawDirections.split('\\n').map(item => item.trim()).filter(Boolean).map((title, index) => ({ id: existingByTitle[title]?.id || slugDirection(goal.id, title, index), title }));
+        return {...goal, statement, directions: directions.length ? directions : goal.directions};
+      });
+      workbenchDraft.goals = goals;
+      const activeStillExists = goals.some(goal => goal.id === expandedGoalId);
+      expandedGoalId = activeStillExists ? expandedGoalId : goals[0]?.id || 'work';
+      if (workbenchDraft.ui) workbenchDraft.ui.expandedGoalId = expandedGoalId;
+      queueWorkbenchPersist();
+      closeStrategyEditor();
+      renderOverview();
+    };
+
+    function renderTaskModal() {
+      return `<div class="task-modal-backdrop" id="taskModal" onclick="if (event.target === this) closeTaskModal()">
+        <div class="task-modal" role="dialog" aria-modal="true" aria-labelledby="taskModalTitle">
+          <div class="task-modal-head">
+            <div><h3 id="taskModalTitle">新增待办</h3><p id="taskModalIntro">这是一个强操作入口，填写完成后会回到待办中心。</p></div>
+            <button class="icon-close" onclick="closeTaskModal()" aria-label="关闭">×</button>
+          </div>
+          <div class="form-grid">
+            <label>标题<input id="taskTitle" placeholder="例如：完成首页布局" /></label>
+            <label>优先级<select id="taskPriority"><option>P0</option><option selected>P1</option><option>P2</option><option>P3</option></select></label>
+            <label>分类<select id="taskCategory"><option>生活</option><option selected>工作</option><option>自媒体</option></select></label>
+            <label>挂靠目标<select id="taskGoalId" onchange="updateTaskDirectionOptions()">${(workbenchDraft.goals || defaultStrategyGoals).map(goal => `<option value="${goal.id}">${goal.domain}</option>`).join('')}</select></label>
+            <label>二级方向<select id="taskDirectionId"></select></label>
+            <label>截止<input id="taskDue" type="date" value="${today?.date || ''}" /></label>
+            <label class="wide">描述<input id="taskDescription" placeholder="补充下一步动作、验收标准或背景" /></label>
+            <div class="toolbar"><button class="btn primary" id="taskModalAction" onclick="addTask()">添加待办</button><button class="btn danger" id="taskModalDelete" onclick="deleteEditingTask()" style="display:none;">删除卡片</button><button class="btn" onclick="closeTaskModal()">取消</button></div>
+          </div>
+        </div>
+      </div>`;
+    }
+
+    function renderStrategyEditorModal() {
+      const goals = workbenchDraft.goals || defaultStrategyGoals;
+      return `<div class="task-modal-backdrop" id="strategyEditorModal" onclick="if (event.target === this) closeStrategyEditor()">
+        <div class="task-modal strategy-editor-modal" role="dialog" aria-modal="true" aria-labelledby="strategyEditorTitle">
+          <div class="task-modal-head">
+            <div><h3 id="strategyEditorTitle">编辑战略目标</h3><p>手动拆解生活、工作、自媒体的目标和二级方向；具体子任务可以在目标树或任务面板里继续新增和编辑。</p></div>
+            <button class="icon-close" onclick="closeStrategyEditor()" aria-label="关闭">×</button>
+          </div>
+          <div class="strategy-editor-grid">${goals.map(goal => `
+            <section class="strategy-editor-card" style="--domain-color:${categoryColors[goal.domain] || categoryColors['工作']}">
+              <h4>${escapeHtml(goal.domain)}</h4>
+              <label>战略目标一句话<input id="goalStatement-${goal.id}" value="${escapeHtml(goal.statement)}" /></label>
+              <label>二级方向（一行一个）<textarea id="goalDirections-${goal.id}">${(goal.directions || []).map(direction => escapeHtml(direction.title)).join('\\n')}</textarea></label>
+            </section>`).join('')}</div>
+          <div class="toolbar" style="margin-top:18px;"><button class="btn primary" onclick="saveStrategyGoals()">保存目标拆解</button><button class="btn" onclick="closeStrategyEditor()">取消</button></div>
+        </div>
+      </div>`;
+    }
+
     function renderStrategyOverview(tasks) {
       const goals = workbenchDraft.goals || defaultStrategyGoals;
       const activeGoal = goalById(expandedGoalId);
@@ -2035,6 +2117,11 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
         </button>`;
       }).join('');
       return `<div class="strategy-overview-shell">
+        <div class="strategy-hero-copy">
+          <h2>抬头看山，低头赶路</h2>
+          <p>目标不必天天仰望，路要日日去走</p>
+          <button type="button" class="strategy-edit-button" onclick="openStrategyEditor()">✎ 编辑战略目标</button>
+        </div>
         <div class="strategy-cards-row">${cards}</div>
         ${renderGoalTree(activeGoal, tasks)}
       </div>`;
@@ -2044,7 +2131,7 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
       const goalProgress = computeGoalProgress(goal, tasks);
       const color = categoryColors[goal.domain] || categoryColors['工作'];
       const directions = goal.directions || [];
-      return `<section class="goal-tree-panel" style="--domain-color:${color}">
+      return `<section class="goal-tree-panel strategy-tree-bottom" style="--domain-color:${color}">
         <div class="goal-tree-heading"><span>战略目标 → 二级方向 → 具体子任务</span><strong>${escapeHtml(goal.domain)} · ${goalProgress}%</strong></div>
         <div class="goal-tree-root">
           <div class="tree-node strategic-node"><span>战略目标</span><b>${escapeHtml(goal.statement)}</b><em>${goalProgress}%</em></div>
@@ -2056,7 +2143,9 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
               <div class="tree-task-list">${directionTasks.length ? directionTasks.map(task => `
                 <button type="button" class="tree-task-node" onclick="openTaskModal('${task.id}')">
                   <span>${escapeHtml(task.title)}</span><i>${Number(task.progress) || 0}%</i>
-                </button>`).join('') : '<div class="tree-empty">暂无挂靠任务</div>'}</div>
+                </button>`).join('') : '<div class="tree-empty">暂无挂靠任务</div>'}
+                <button type="button" class="tree-add-task" onclick="openTaskModal(null, '${goal.id}', '${direction.id}')">＋ 新增子任务</button>
+              </div>
             </div>`;
           }).join('')}</div>
         </div>
@@ -2120,6 +2209,7 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
         <article class="card span-12 strategy-goal-first-fold">
           ${renderStrategyOverview(tasks)}
         </article>
+        ${renderStrategyEditorModal()}
         <article class="card span-12 next-fold progress-gantt-card"><h3 class="section-title">任务进度甘特图</h3>${renderTaskGantt(tasks)}</article>
       `;
     }
@@ -2139,24 +2229,7 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
         <article class="card span-8 next-fold todo-center-card"><h3 class="section-title">待办中心</h3>${renderTasks(tasks)}
           <button class="add-task-trigger" onclick="openTaskModal()">＋ 新增待办</button>
         </article>
-        <div class="task-modal-backdrop" id="taskModal" onclick="if (event.target === this) closeTaskModal()">
-          <div class="task-modal" role="dialog" aria-modal="true" aria-labelledby="taskModalTitle">
-            <div class="task-modal-head">
-              <div><h3 id="taskModalTitle">新增待办</h3><p id="taskModalIntro">这是一个强操作入口，填写完成后会回到待办中心。</p></div>
-              <button class="icon-close" onclick="closeTaskModal()" aria-label="关闭">×</button>
-            </div>
-            <div class="form-grid">
-              <label>标题<input id="taskTitle" placeholder="例如：完成首页布局" /></label>
-              <label>优先级<select id="taskPriority"><option>P0</option><option selected>P1</option><option>P2</option><option>P3</option></select></label>
-              <label>分类<select id="taskCategory"><option>生活</option><option selected>工作</option><option>自媒体</option></select></label>
-              <label>挂靠目标<select id="taskGoalId" onchange="updateTaskDirectionOptions()">${(workbenchDraft.goals || defaultStrategyGoals).map(goal => `<option value="${goal.id}">${goal.domain}</option>`).join('')}</select></label>
-              <label>二级方向<select id="taskDirectionId"></select></label>
-              <label>截止<input id="taskDue" type="date" value="${today?.date || ''}" /></label>
-              <label class="wide">描述<input id="taskDescription" placeholder="补充下一步动作、验收标准或背景" /></label>
-              <div class="toolbar"><button class="btn primary" id="taskModalAction" onclick="addTask()">添加待办</button><button class="btn danger" id="taskModalDelete" onclick="deleteEditingTask()" style="display:none;">删除卡片</button><button class="btn" onclick="closeTaskModal()">取消</button></div>
-            </div>
-          </div>
-        </div>
+        ${renderTaskModal()}
         <article class="card span-4 next-fold task-reminder-card"><h3 class="section-title">任务提醒</h3>${renderTaskReminders(today, tasks, stats)}</article>
         <article class="card span-6 review-card"><h3 class="section-title">今日复盘</h3>${renderReviewEditor(review)}</article>
         <article class="card span-6 time-preview-card"><h3 class="section-title">时间与精力板块预览</h3><div class="kpis">
