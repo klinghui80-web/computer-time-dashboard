@@ -2988,7 +2988,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T22:49:02.553705-07:00"
+      "generated_at": "2026-07-23T22:50:40.260819-07:00"
     },
     {
       "date": "2026-07-10",
@@ -3179,7 +3179,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T22:49:02.221876-07:00"
+      "generated_at": "2026-07-23T22:50:39.571394-07:00"
     },
     {
       "date": "2026-07-11",
@@ -3369,7 +3369,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T22:49:02.006806-07:00"
+      "generated_at": "2026-07-23T22:50:38.890640-07:00"
     },
     {
       "date": "2026-07-12",
@@ -3559,7 +3559,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T22:49:01.871603-07:00"
+      "generated_at": "2026-07-23T22:50:38.616123-07:00"
     },
     {
       "date": "2026-07-13",
@@ -3739,7 +3739,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T22:49:01.561402-07:00"
+      "generated_at": "2026-07-23T22:50:38.377764-07:00"
     },
     {
       "date": "2026-07-14",
@@ -3919,7 +3919,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T22:49:01.026087-07:00"
+      "generated_at": "2026-07-23T22:50:38.156470-07:00"
     },
     {
       "date": "2026-07-15",
@@ -4099,7 +4099,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T22:49:00.604557-07:00"
+      "generated_at": "2026-07-23T22:50:37.965895-07:00"
     },
     {
       "date": "2026-07-16",
@@ -4277,7 +4277,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": true
       },
-      "generated_at": "2026-07-23T22:49:00.198793-07:00"
+      "generated_at": "2026-07-23T22:50:37.786289-07:00"
     },
     {
       "date": "2026-07-17",
@@ -4467,7 +4467,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T22:48:59.793256-07:00"
+      "generated_at": "2026-07-23T22:50:37.604739-07:00"
     },
     {
       "date": "2026-07-18",
@@ -4656,7 +4656,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": true
       },
-      "generated_at": "2026-07-23T22:48:57.868097-07:00"
+      "generated_at": "2026-07-23T22:50:37.370466-07:00"
     },
     {
       "date": "2026-07-19",
@@ -4845,7 +4845,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T22:48:56.771024-07:00"
+      "generated_at": "2026-07-23T22:50:37.183219-07:00"
     },
     {
       "date": "2026-07-20",
@@ -5024,7 +5024,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": true
       },
-      "generated_at": "2026-07-23T22:48:54.800293-07:00"
+      "generated_at": "2026-07-23T22:50:36.906239-07:00"
     },
     {
       "date": "2026-07-21",
@@ -5215,7 +5215,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T22:48:51.410485-07:00"
+      "generated_at": "2026-07-23T22:50:36.694732-07:00"
     },
     {
       "date": "2026-07-22",
@@ -5404,7 +5404,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T22:48:45.568786-07:00"
+      "generated_at": "2026-07-23T22:50:36.438579-07:00"
     },
     {
       "date": "2026-07-23",
@@ -5584,7 +5584,7 @@
         "low_usage_threshold_seconds": 10800,
         "low_usage_no_ai_analysis": false
       },
-      "generated_at": "2026-07-23T22:48:39.876338-07:00"
+      "generated_at": "2026-07-23T22:50:36.150930-07:00"
     }
   ],
   "weeks": [
@@ -5637,7 +5637,7 @@
       "notes": [
         "最投入的一天是 2026-06-15，活跃 0秒。"
       ],
-      "generated_at": "2026-07-23T22:49:02.553705-07:00"
+      "generated_at": "2026-07-23T22:50:40.262444-07:00"
     },
     {
       "id": "2026-06-22~2026-06-28",
@@ -5732,7 +5732,7 @@
         "最投入的一天是 2026-06-28，活跃 4小时29分。",
         "前三类目合计占比 78.6%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-23T22:49:02.553705-07:00"
+      "generated_at": "2026-07-23T22:50:40.263575-07:00"
     },
     {
       "id": "2026-06-29~2026-07-05",
@@ -5834,7 +5834,7 @@
         "周末占比 14.6%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 75.8%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-23T22:49:02.563833-07:00"
+      "generated_at": "2026-07-23T22:50:40.263575-07:00"
     },
     {
       "id": "2026-07-06~2026-07-12",
@@ -5936,7 +5936,7 @@
         "周末占比 28.0%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 63.7%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-23T22:49:02.563833-07:00"
+      "generated_at": "2026-07-23T22:50:40.263575-07:00"
     },
     {
       "id": "2026-07-13~2026-07-19",
@@ -6038,12 +6038,12 @@
         "周末占比 22.5%，可用来观察休息日是否也被工作/信息流挤占。",
         "前三类目合计占比 85.0%，说明这一周的电脑使用主线集中度。"
       ],
-      "generated_at": "2026-07-23T22:49:02.563833-07:00"
+      "generated_at": "2026-07-23T22:50:40.263575-07:00"
     }
   ],
   "meta": {
     "db_path": "C:\\Users\\Klh\\AppData\\Local\\activitywatch\\activitywatch\\aw-server\\peewee-sqlite.v2.db",
-    "generated_at": "2026-07-23T22:48:29.941230-07:00",
+    "generated_at": "2026-07-23T22:50:35.916869-07:00",
     "delivery_time": "19:30",
     "timezone": "太平洋夏令时"
   }
