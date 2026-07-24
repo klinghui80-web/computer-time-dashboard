@@ -63,12 +63,11 @@
   "ui": {
     "deadlineViewMode": "list",
     "taskCategoryFilter": "all",
-    "expandedGoalId": "work"
+    "expandedGoalId": "media"
   },
   "meta": {
     "schema_version": 1,
-    "updated_at": "2026-07-23T22:27:41.275968-07:00",
+    "updated_at": "2026-07-23T22:27:53.229389-07:00",
     "source": "project-json",
     "migrated_from_localStorage": true
   }
-}
