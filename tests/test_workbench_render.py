@@ -334,27 +334,55 @@ def test_time_weekly_is_nested_under_time_energy_management_left_nav():
     assert "switchMode('days')" in html
 
 
-def test_overview_top_nav_page_contains_deadline_timeline_not_task_panel():
+def test_overview_top_nav_page_is_strategy_goal_dashboard_with_gantt_progress():
     module = load_module()
-    html = module.render_html(sample_history())
+    workbench = {
+        "tasks": [
+            {"id": "t1", "title": "补作品集", "priority": "P1", "category": "工作", "progress": 50, "goalId": "work", "directionId": "work-ability", "due": "2026-07-20"},
+            {"id": "t2", "title": "口播练习", "priority": "P2", "category": "自媒体", "progress": 100, "goalId": "media", "directionId": "media-expression", "due": "2026-07-22"},
+        ],
+        "goals": [
+            {"id": "life", "domain": "生活", "statement": "把生活节奏稳定下来", "directions": [{"id": "life-rhythm", "title": "生活节奏"}]},
+            {"id": "work", "domain": "工作", "statement": "进大厂实习", "directions": [{"id": "work-ability", "title": "专业能力"}]},
+            {"id": "media", "domain": "自媒体", "statement": "形成稳定内容输出", "directions": [{"id": "media-expression", "title": "语言表达"}]},
+        ],
+    }
+    html = module.render_html(sample_history(), workbench)
 
     assert "renderOverview" in html
-    assert "overview-deadline-card" in html
-    assert "任务截止时间轴" in html
-    assert "function renderOverview()" in html
-    assert "function renderWorkbench()" in html
-    deadline_article = "<article class=\"card span-12 overview-deadline-card\"><h3 class=\"section-title\">任务截止时间轴</h3>"
-    todo_article = "<article class=\"card span-8 next-fold todo-center-card\"><h3 class=\"section-title\">待办中心</h3>"
-    assert deadline_article in html
-    assert todo_article in html
-    assert "function renderOverview()" in html
-    assert "function renderWorkbench()" in html
+    assert "strategy-goal-first-fold" in html
+    assert "strategy-domain-card" in html
+    assert "生活" in html and "工作" in html and "自媒体" in html
+    assert "进大厂实习" in html
+    assert "goal-progress-ring" in html
+    assert "renderGoalTree" in html
+    assert "战略目标 → 二级方向 → 具体子任务" in html
+    assert "goalId" in html and "directionId" in html
+    assert "computeGoalProgress" in html
+    assert "renderTaskGantt" in html
+    assert "progress-gantt-card" in html
+    assert "任务进度甘特图" in html
+    assert "gantt-task-list" in html and "gantt-timeline-grid" in html and "gantt-bar" in html
+    assert "overview-deadline-card" not in html
     render_overview_block = html[html.index("function renderOverview()"):html.index("function renderWorkbench()")]
-    assert "overview-deadline-card" in render_overview_block
-    assert "overview-first-fold" not in render_overview_block
+    assert "renderStrategyOverview(tasks)" in render_overview_block
+    assert "renderTaskGantt(tasks)" in render_overview_block
     assert "workbenchList" not in html
     assert "workbenchSection" not in html
     assert "data-kind=\"workbench-section\"" not in html
+
+
+def test_workbench_json_preserves_strategy_goals_for_task_attachment():
+    module = load_module()
+    normalized = module.normalize_workbench_data({
+        "tasks": [{"title": "A", "goalId": "work", "directionId": "work-ability"}],
+        "goals": [{"id": "work", "domain": "工作", "statement": "进大厂实习", "directions": [{"id": "work-ability", "title": "专业能力"}]}],
+    })
+
+    assert normalized["goals"][0]["id"] == "work"
+    assert normalized["goals"][0]["directions"][0]["id"] == "work-ability"
+    assert normalized["tasks"][0]["goalId"] == "work"
+    assert normalized["tasks"][0]["directionId"] == "work-ability"
 
 
 def test_workbench_keeps_large_overview_card_in_original_first_position():
@@ -408,8 +436,8 @@ def test_add_task_form_is_modal_and_deadline_timeline_replaces_day_agenda():
     assert "task-modal-backdrop" in html
     assert "taskModal" in html
     assert "add-task-trigger" in html
-    assert "任务截止时间轴" in html
-    assert "renderDeadlineTimeline" in html
+    assert "任务进度甘特图" in html
+    assert "renderTaskGantt" in html
     assert "任务提醒" in html
     assert "工作台洞察" not in html
     assert "今日时间轴" not in html
@@ -547,7 +575,8 @@ if __name__ == "__main__":
     test_visual_regressions_keep_glass_subtle_priority_colored_orbit_spacious_and_weekly_unwarped()
     test_top_nav_has_overview_task_panel_and_time_energy_management()
     test_time_weekly_is_nested_under_time_energy_management_left_nav()
-    test_overview_top_nav_page_contains_deadline_timeline_not_task_panel()
+    test_overview_top_nav_page_is_strategy_goal_dashboard_with_gantt_progress()
+    test_workbench_json_preserves_strategy_goals_for_task_attachment()
     test_workbench_keeps_large_overview_card_in_original_first_position()
     test_workbench_second_fold_pairs_reminders_and_time_preview_on_the_right()
     test_dropdown_menus_keep_options_readable_on_native_light_popups()

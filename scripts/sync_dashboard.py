@@ -88,12 +88,48 @@ def save_json(path: Path, data: Any) -> None:
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+def default_strategy_goals() -> list[dict[str, Any]]:
+    return [
+        {
+            "id": "life",
+            "domain": "生活",
+            "statement": "把生活节奏稳定下来",
+            "directions": [
+                {"id": "life-rhythm", "title": "生活节奏"},
+                {"id": "life-health", "title": "身体状态"},
+                {"id": "life-review", "title": "日常复盘"},
+            ],
+        },
+        {
+            "id": "work",
+            "domain": "工作",
+            "statement": "进大厂实习",
+            "directions": [
+                {"id": "work-ability", "title": "专业能力"},
+                {"id": "work-portfolio", "title": "作品集"},
+                {"id": "work-communication", "title": "语言表达"},
+            ],
+        },
+        {
+            "id": "media",
+            "domain": "自媒体",
+            "statement": "形成稳定内容输出",
+            "directions": [
+                {"id": "media-content", "title": "选题与脚本"},
+                {"id": "media-expression", "title": "语言表达"},
+                {"id": "media-growth", "title": "发布与增长"},
+            ],
+        },
+    ]
+
+
 def default_workbench_data() -> dict[str, Any]:
     now = datetime.now().astimezone().isoformat()
     return {
         "tasks": [],
         "reviews": {},
-        "ui": {"deadlineViewMode": "list", "taskCategoryFilter": "all"},
+        "goals": default_strategy_goals(),
+        "ui": {"deadlineViewMode": "list", "taskCategoryFilter": "all", "expandedGoalId": "work"},
         "meta": {"schema_version": 1, "updated_at": now, "source": "project-json"},
     }
 
@@ -104,9 +140,10 @@ def normalize_workbench_data(data: Any) -> dict[str, Any]:
         return base
     tasks = data.get("tasks") if isinstance(data.get("tasks"), list) else base["tasks"]
     reviews = data.get("reviews") if isinstance(data.get("reviews"), dict) else base["reviews"]
+    goals = data.get("goals") if isinstance(data.get("goals"), list) else base["goals"]
     ui = {**base["ui"], **(data.get("ui") if isinstance(data.get("ui"), dict) else {})}
     meta = {**base["meta"], **(data.get("meta") if isinstance(data.get("meta"), dict) else {})}
-    return {"tasks": tasks, "reviews": reviews, "ui": ui, "meta": meta}
+    return {"tasks": tasks, "reviews": reviews, "goals": goals, "ui": ui, "meta": meta}
 
 
 def load_workbench() -> dict[str, Any]:
@@ -925,6 +962,49 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
     .carryover-item { border-radius:15px; padding:11px 12px; background:rgba(255,255,255,.075); border:1px solid rgba(255,255,255,.09); color:#eef4ff; }
     .carryover-item small { display:block; margin-top:5px; color:rgba(223,231,255,.6); }
     .next-fold { margin-top:4px; }
+    .strategy-goal-first-fold { min-height:calc(100vh - 112px); display:flex; align-items:center; background:radial-gradient(circle at 16% 18%, rgba(110,231,183,.10), transparent 30%), radial-gradient(circle at 50% 12%, rgba(122,162,255,.12), transparent 32%), radial-gradient(circle at 82% 18%, rgba(244,114,182,.10), transparent 30%), linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.014)); overflow:hidden; }
+    .strategy-overview-shell { width:100%; display:grid; gap:22px; }
+    .strategy-cards-row { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+    .strategy-domain-card { position:relative; min-height:260px; display:grid; grid-template-rows:auto 1fr auto; gap:18px; text-align:left; border:1px solid color-mix(in srgb, var(--domain-color), rgba(255,255,255,.12) 60%); border-radius:30px; padding:24px; color:#f7f8f8; background:linear-gradient(145deg, color-mix(in srgb, var(--domain-color), transparent 88%), rgba(255,255,255,.042)); box-shadow:inset 0 1px 0 rgba(255,255,255,.10), 0 24px 70px rgba(0,0,0,.42), 0 0 44px color-mix(in srgb, var(--domain-color), transparent 86%); cursor:pointer; }
+    .strategy-domain-card.active { transform:translateY(-2px); border-color:color-mix(in srgb, var(--domain-color), rgba(255,255,255,.18) 34%); box-shadow:inset 0 1px 0 rgba(255,255,255,.13), 0 30px 80px rgba(0,0,0,.48), 0 0 56px color-mix(in srgb, var(--domain-color), transparent 72%); }
+    .strategy-card-head { display:flex; align-items:center; justify-content:space-between; gap:12px; color:#dfe7ff; }
+    .strategy-card-head span { font-size:18px; font-weight:760; }
+    .strategy-card-head small { color:rgba(223,231,255,.62); }
+    .strategy-domain-card strong { display:block; max-width:12em; align-self:center; font-size:34px; line-height:1.12; letter-spacing:-.9px; }
+    .goal-progress-ring { width:112px; height:112px; border-radius:50%; justify-self:end; display:grid; place-items:center; background:conic-gradient(var(--domain-color) 0deg var(--progress), rgba(255,255,255,.10) var(--progress) 360deg); box-shadow:0 18px 44px rgba(0,0,0,.36), 0 0 28px color-mix(in srgb, var(--domain-color), transparent 72%); }
+    .goal-progress-ring::before { content:""; position:absolute; width:74px; height:74px; border-radius:50%; background:rgba(0,0,0,.72); border:1px solid rgba(255,255,255,.09); }
+    .goal-progress-ring span { position:relative; z-index:1; font-family:'JetBrains Mono', ui-monospace, monospace; font-weight:760; color:#fff; }
+    .goal-tree-panel { border:1px solid color-mix(in srgb, var(--domain-color), rgba(255,255,255,.12) 58%); border-radius:28px; padding:20px; background:linear-gradient(145deg, color-mix(in srgb, var(--domain-color), transparent 92%), rgba(255,255,255,.036)); }
+    .goal-tree-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px; color:rgba(223,231,255,.72); }
+    .goal-tree-heading strong { color:#fff; }
+    .goal-tree-root { display:grid; grid-template-columns:minmax(220px,.34fr) minmax(0,1fr); gap:18px; align-items:start; }
+    .tree-node { position:relative; display:grid; gap:8px; border:1px solid rgba(255,255,255,.09); border-radius:20px; padding:16px; background:rgba(255,255,255,.045); }
+    .tree-node span { color:rgba(223,231,255,.58); font-size:12px; }
+    .tree-node b { color:#f7f8f8; font-size:18px; line-height:1.35; }
+    .tree-node em { position:absolute; right:14px; top:14px; color:var(--domain-color); font-style:normal; font-family:'JetBrains Mono', ui-monospace, monospace; font-weight:760; }
+    .strategic-node { min-height:160px; border-color:color-mix(in srgb, var(--domain-color), rgba(255,255,255,.14) 52%); }
+    .tree-branches { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .tree-branch { display:grid; gap:10px; }
+    .tree-task-list { display:grid; gap:8px; }
+    .tree-task-node { display:flex; justify-content:space-between; gap:12px; align-items:center; border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:10px 12px; color:#dfe7ff; background:rgba(255,255,255,.035); cursor:pointer; text-align:left; }
+    .tree-task-node i { color:var(--domain-color); font-style:normal; font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .tree-empty { border:1px dashed rgba(255,255,255,.10); border-radius:14px; padding:12px; color:#8a8f98; text-align:center; }
+    .progress-gantt-card { overflow:hidden; }
+    .gantt-board { display:grid; grid-template-columns:minmax(260px,.32fr) minmax(0,1fr); border:1px solid rgba(255,255,255,.08); border-radius:22px; overflow:auto; background:rgba(255,255,255,.025); }
+    .gantt-task-list { min-width:260px; border-right:1px solid rgba(255,255,255,.09); background:rgba(0,0,0,.16); }
+    .gantt-list-head, .gantt-month-head { min-height:58px; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:0 16px; color:#d0d6e0; border-bottom:1px solid rgba(255,255,255,.08); }
+    .gantt-task-name { height:54px; display:grid; grid-template-columns:44px minmax(0,1fr); gap:10px; align-items:center; padding:0 14px; border-bottom:1px solid rgba(255,255,255,.055); }
+    .gantt-task-name span { color:#8a8f98; text-align:center; font-family:'JetBrains Mono', ui-monospace, monospace; }
+    .gantt-task-name strong { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:560; }
+    .gantt-timeline-grid { min-width:760px; }
+    .gantt-month-head span { color:#8a8f98; font-size:12px; }
+    .gantt-days { display:grid; grid-template-columns:repeat(var(--gantt-columns), minmax(78px,1fr)); height:44px; border-bottom:1px solid rgba(255,255,255,.08); }
+    .gantt-days span { display:grid; place-items:center; color:#8a8f98; border-right:1px solid rgba(255,255,255,.075); }
+    .gantt-bars { display:grid; grid-template-columns:repeat(var(--gantt-columns), minmax(78px,1fr)); grid-auto-rows:54px; background:repeating-linear-gradient(90deg, transparent 0, transparent calc(10% - 1px), rgba(255,255,255,.055) calc(10% - 1px), rgba(255,255,255,.055) 10%); }
+    .gantt-row { display:contents; }
+    .gantt-bar { grid-column:var(--start) / span var(--span); grid-row:var(--row); align-self:center; height:38px; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:0 14px; border-radius:14px; color:#06201a; background:linear-gradient(90deg, var(--bar-color) 0 var(--bar-progress), color-mix(in srgb, var(--bar-color), white 58%) var(--bar-progress) 100%); box-shadow:0 12px 28px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.38); overflow:hidden; }
+    .gantt-bar span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .gantt-bar b { white-space:nowrap; }
     .toolbar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
     .btn { border:1px solid rgba(255,255,255,0.08); color:var(--text); background:rgba(255,255,255,0.04); border-radius:10px; padding:9px 12px; cursor:pointer; font:inherit; }
     .btn.primary { background:#5e6ad2; border-color:#7170ff; color:#fff; }
@@ -1054,6 +1134,9 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
       .orbit-connector-layer { display:none; }
       .overview-orbit-map { min-height:auto; height:auto; padding:150px 8px 18px; display:grid; gap:10px; }
       .overview-first-fold { min-height:auto; }
+      .strategy-cards-row, .goal-tree-root, .tree-branches, .gantt-board { grid-template-columns:1fr; }
+      .strategy-domain-card { min-height:210px; }
+      .gantt-task-list { border-right:0; border-bottom:1px solid rgba(255,255,255,.09); }
       .deadline-calendar { grid-template-columns:repeat(2,minmax(0,1fr)); }
       .task-modal { max-height:88vh; overflow:auto; }
       .task-card { grid-template-columns:1fr; }
@@ -1132,7 +1215,7 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
     const WORKBENCH_REVIEW_KEY = 'workbenchReviews';
     const WORKBENCH_MIGRATION_KEY = 'workbenchJsonMigratedAt';
     const WORKBENCH_SAVE_URL = 'http://127.0.0.1:8765/workbench';
-    const projectWorkbench = store.workbench || { tasks: [], reviews: {}, ui: { deadlineViewMode: 'list', taskCategoryFilter: 'all' }, meta: {} };
+    const projectWorkbench = store.workbench || { tasks: [], reviews: {}, goals: [], ui: { deadlineViewMode: 'list', taskCategoryFilter: 'all', expandedGoalId: 'work' }, meta: {} };
     const priorityRank = { P0: 0, P1: 1, P2: 2, P3: 3 };
     const priorityLabels = { P0: 'P0 火烧屁股', P1: 'P1 今日必完成', P2: 'P2 常规推进', P3: 'P3 可延后' };
     const priorityStyles = { P0: '#c95d45', P1: '#c49a42', P2: '#4f6f92', P3: '#4f9b72' };
@@ -1140,6 +1223,11 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
     const urgencyRadius = { P0: 220, P1: 270, P2: 325, P3: 370 };
     const overviewEncouragements = ['开启美好的一天吧！', '今天也向前推进一点点。', '保持节奏，把重要的事做漂亮。', '灵感在线，稳稳推进。'];
     const taskCategories = ['生活', '工作', '自媒体'];
+    const defaultStrategyGoals = [
+      { id: 'life', domain: '生活', statement: '把生活节奏稳定下来', directions: [{id:'life-rhythm', title:'生活节奏'}, {id:'life-health', title:'身体状态'}, {id:'life-review', title:'日常复盘'}] },
+      { id: 'work', domain: '工作', statement: '进大厂实习', directions: [{id:'work-ability', title:'专业能力'}, {id:'work-portfolio', title:'作品集'}, {id:'work-communication', title:'语言表达'}] },
+      { id: 'media', domain: '自媒体', statement: '形成稳定内容输出', directions: [{id:'media-content', title:'选题与脚本'}, {id:'media-expression', title:'语言表达'}, {id:'media-growth', title:'发布与增长'}] },
+    ];
     const statusLabels = { todo: '待办', doing: '进行中', waiting: '等待中', blocked: '阻塞中', done: '已完成' };
     const statusStyles = {
       urgent: { label: '紧急', color: '#c95d45' },
@@ -1168,7 +1256,8 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
       return {
         tasks: Array.isArray(data.tasks) ? data.tasks : [],
         reviews: data.reviews && typeof data.reviews === 'object' && !Array.isArray(data.reviews) ? data.reviews : {},
-        ui: { deadlineViewMode: 'list', taskCategoryFilter: 'all', ...(data.ui || {}) },
+        goals: Array.isArray(data.goals) && data.goals.length ? data.goals : defaultStrategyGoals,
+        ui: { deadlineViewMode: 'list', taskCategoryFilter: 'all', expandedGoalId: 'work', ...(data.ui || {}) },
         meta: { schema_version: 1, source: 'project-json', ...(data.meta || {}) },
       };
     }
@@ -1192,7 +1281,7 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
     function snapshotWorkbench() {
       return normalizeWorkbenchShape({
         ...workbenchDraft,
-        ui: { deadlineViewMode, taskCategoryFilter },
+        ui: { deadlineViewMode, taskCategoryFilter, expandedGoalId },
         meta: { ...(workbenchDraft?.meta || {}), updated_at: new Date().toISOString(), source: 'project-json' },
       });
     }
@@ -1217,6 +1306,16 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
     }
 
 
+    function goalById(id) {
+      return (workbenchDraft?.goals || defaultStrategyGoals).find(goal => goal.id === id) || defaultStrategyGoals.find(goal => goal.id === id) || defaultStrategyGoals[1];
+    }
+    function goalForCategory(category) {
+      const domain = category || '工作';
+      return (workbenchDraft?.goals || defaultStrategyGoals).find(goal => goal.domain === domain) || goalById('work');
+    }
+    function directionForGoal(goal, directionId) {
+      return (goal?.directions || []).find(direction => direction.id === directionId) || (goal?.directions || [])[0] || {id: `${goal?.id || 'work'}-default`, title: '具体推进'};
+    }
     function inferTaskCategory(task) {
       if (taskCategories.includes(task.category)) return task.category;
       const text = `${task.project || ''} ${task.title || ''} ${task.description || ''}`;
@@ -1226,11 +1325,16 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
     }
     function normalizeTask(task, index) {
       const progress = Number.isFinite(Number(task.progress)) ? Math.min(100, Math.max(0, Number(task.progress))) : (task.status === 'done' ? 100 : 0);
+      const category = inferTaskCategory(task);
+      const goal = task.goalId ? goalById(task.goalId) : goalForCategory(category);
+      const direction = directionForGoal(goal, task.directionId);
       return {
         ...task,
         order: Number.isFinite(Number(task.order)) ? Number(task.order) : index,
         priority: task.priority || 'P3',
-        category: inferTaskCategory(task),
+        category,
+        goalId: goal.id,
+        directionId: direction.id,
         progress,
         status: progress >= 100 ? 'done' : (task.status === 'done' ? 'doing' : (task.status || 'todo')),
       };
@@ -1294,7 +1398,9 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
         description: document.getElementById('taskDescription').value.trim(),
         priority,
         order: existing?.priority === priority ? existing.order : nextOrder,
-        category: document.getElementById('taskCategory').value,
+        category: goalById(document.getElementById('taskGoalId')?.value || '').domain || document.getElementById('taskCategory').value,
+        goalId: document.getElementById('taskGoalId')?.value || goalForCategory(document.getElementById('taskCategory').value).id,
+        directionId: document.getElementById('taskDirectionId')?.value || directionForGoal(goalById(document.getElementById('taskGoalId')?.value || ''), '').id,
         due: document.getElementById('taskDue').value,
         updatedAt: new Date().toISOString(),
       };
@@ -1305,6 +1411,16 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
       closeTaskModal();
       renderWorkbench();
     };
+    window.updateTaskDirectionOptions = function updateTaskDirectionOptions(selectedDirectionId = '') {
+      const goalSelect = document.getElementById('taskGoalId');
+      const directionSelect = document.getElementById('taskDirectionId');
+      const categorySelect = document.getElementById('taskCategory');
+      if (!goalSelect || !directionSelect) return;
+      const goal = goalById(goalSelect.value);
+      directionSelect.innerHTML = (goal.directions || []).map(direction => `<option value="${direction.id}" ${direction.id === selectedDirectionId ? 'selected' : ''}>${escapeHtml(direction.title)}</option>`).join('');
+      if (categorySelect && goal?.domain) categorySelect.value = goal.domain;
+    };
+
     window.openTaskModal = function openTaskModal(id = null) {
       editingTaskId = id;
       const modal = document.getElementById('taskModal');
@@ -1320,7 +1436,10 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
       const setValue = (field, value) => { const node = document.getElementById(field); if (node) node.value = value || ''; };
       setValue('taskTitle', task?.title || '');
       setValue('taskPriority', task?.priority || 'P1');
-      setValue('taskCategory', task?.category || '工作');
+      const modalGoal = task?.goalId ? goalById(task.goalId) : goalForCategory(task?.category || '工作');
+      setValue('taskGoalId', modalGoal.id);
+      updateTaskDirectionOptions(task?.directionId || directionForGoal(modalGoal, '').id);
+      setValue('taskCategory', modalGoal.domain || task?.category || '工作');
       setValue('taskDue', task?.due || today?.date || '');
       setValue('taskDescription', task?.description || '');
       if (modal) modal.classList.add('open');
@@ -1455,6 +1574,7 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
     workbenchDraft = loadWorkbenchDraft();
     let deadlineViewMode = workbenchDraft.ui?.deadlineViewMode || 'list';
     let taskCategoryFilter = workbenchDraft.ui?.taskCategoryFilter || 'all';
+    let expandedGoalId = workbenchDraft.ui?.expandedGoalId || 'work';
     if (workbenchDraft.meta?.migrated_from_localStorage) queueWorkbenchPersist();
 
     window.setTaskCategoryFilter = function setTaskCategoryFilter(category) {
@@ -1873,13 +1993,134 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
         </div>`;
     }
 
+    function tasksForGoal(goal, tasks) {
+      return tasks.filter(task => task.goalId === goal.id || (!task.goalId && (task.category || '工作') === goal.domain));
+    }
+
+    function tasksForDirection(goal, direction, tasks) {
+      return tasksForGoal(goal, tasks).filter(task => task.directionId === direction.id);
+    }
+
+    function averageProgress(tasks) {
+      if (!tasks.length) return 0;
+      return Math.round(tasks.reduce((sum, task) => sum + (Number(task.progress) || 0), 0) / tasks.length);
+    }
+
+    function computeGoalProgress(goal, tasks) {
+      return averageProgress(tasksForGoal(goal, tasks));
+    }
+
+    function computeDirectionProgress(goal, direction, tasks) {
+      return averageProgress(tasksForDirection(goal, direction, tasks));
+    }
+
+    window.expandStrategyGoal = function expandStrategyGoal(goalId) {
+      expandedGoalId = goalId;
+      if (workbenchDraft?.ui) workbenchDraft.ui.expandedGoalId = goalId;
+      queueWorkbenchPersist();
+      renderOverview();
+    };
+
+    function renderStrategyOverview(tasks) {
+      const goals = workbenchDraft.goals || defaultStrategyGoals;
+      const activeGoal = goalById(expandedGoalId);
+      const cards = goals.map(goal => {
+        const progress = computeGoalProgress(goal, tasks);
+        const color = categoryColors[goal.domain] || categoryColors['工作'];
+        const count = tasksForGoal(goal, tasks).length;
+        return `<button type="button" class="strategy-domain-card ${goal.id === activeGoal.id ? 'active' : ''}" style="--domain-color:${color}; --progress:${progress * 3.6}deg" onclick="expandStrategyGoal('${goal.id}')">
+          <div class="strategy-card-head"><span>${escapeHtml(goal.domain)}</span><small>${count} 个挂靠任务</small></div>
+          <strong>${escapeHtml(goal.statement)}</strong>
+          <div class="goal-progress-ring" aria-label="${escapeHtml(goal.domain)}完成度 ${progress}%"><span>${progress}%</span></div>
+        </button>`;
+      }).join('');
+      return `<div class="strategy-overview-shell">
+        <div class="strategy-cards-row">${cards}</div>
+        ${renderGoalTree(activeGoal, tasks)}
+      </div>`;
+    }
+
+    function renderGoalTree(goal, tasks) {
+      const goalProgress = computeGoalProgress(goal, tasks);
+      const color = categoryColors[goal.domain] || categoryColors['工作'];
+      const directions = goal.directions || [];
+      return `<section class="goal-tree-panel" style="--domain-color:${color}">
+        <div class="goal-tree-heading"><span>战略目标 → 二级方向 → 具体子任务</span><strong>${escapeHtml(goal.domain)} · ${goalProgress}%</strong></div>
+        <div class="goal-tree-root">
+          <div class="tree-node strategic-node"><span>战略目标</span><b>${escapeHtml(goal.statement)}</b><em>${goalProgress}%</em></div>
+          <div class="tree-branches">${directions.map(direction => {
+            const directionTasks = tasksForDirection(goal, direction, tasks);
+            const directionProgress = computeDirectionProgress(goal, direction, tasks);
+            return `<div class="tree-branch">
+              <div class="tree-node direction-node"><span>二级方向</span><b>${escapeHtml(direction.title)}</b><em>${directionProgress}%</em></div>
+              <div class="tree-task-list">${directionTasks.length ? directionTasks.map(task => `
+                <button type="button" class="tree-task-node" onclick="openTaskModal('${task.id}')">
+                  <span>${escapeHtml(task.title)}</span><i>${Number(task.progress) || 0}%</i>
+                </button>`).join('') : '<div class="tree-empty">暂无挂靠任务</div>'}</div>
+            </div>`;
+          }).join('')}</div>
+        </div>
+      </section>`;
+    }
+
+    function parseTaskDate(value, fallback) {
+      const parsed = value ? new Date(`${value}T00:00:00`) : null;
+      return parsed && !Number.isNaN(parsed.getTime()) ? parsed : fallback;
+    }
+
+    function taskGanttWindow(tasks) {
+      const base = today?.date ? new Date(`${today.date}T00:00:00`) : new Date();
+      const dated = tasks.map(task => parseTaskDate(task.due, null)).filter(Boolean);
+      const min = dated.length ? new Date(Math.min(...dated.map(item => item.getTime()))) : base;
+      const start = new Date(min); start.setDate(start.getDate() - 3);
+      return { start, days: Array.from({length: 10}, (_, index) => { const d = new Date(start); d.setDate(start.getDate() + index); return d; }) };
+    }
+
+    function dateShort(date) { return `${date.getMonth() + 1}/${date.getDate()}`; }
+
+    function renderTaskGantt(tasks) {
+      const pending = sortTasksForDisplay(tasks).slice(0, 12);
+      const window = taskGanttWindow(pending);
+      const columns = window.days.length;
+      const rows = pending.map((task, index) => {
+        const end = parseTaskDate(task.due, window.days[Math.min(columns - 1, index + 3)]);
+        const estimatedDays = task.priority === 'P0' ? 2 : task.priority === 'P1' ? 4 : task.priority === 'P2' ? 6 : 8;
+        const start = parseTaskDate(task.startDate, new Date(end.getTime() - estimatedDays * 86400000));
+        const startIndex = Math.max(0, Math.min(columns - 1, Math.round((start - window.start) / 86400000)));
+        const endIndex = Math.max(startIndex + 1, Math.min(columns, Math.round((end - window.start) / 86400000) + 1));
+        const span = Math.max(1, endIndex - startIndex);
+        const color = categoryColors[task.category || '工作'] || categoryColors['工作'];
+        const progress = Math.min(100, Math.max(0, Number(task.progress) || 0));
+        return { task, index, startIndex, span, color, progress };
+      });
+      return `<div class="gantt-board" style="--gantt-columns:${columns}">
+        <div class="gantt-task-list">
+          <div class="gantt-list-head">#　任务描述</div>
+          ${rows.map(row => `<div class="gantt-task-name"><span>${row.index + 1}</span><strong>${escapeHtml(row.task.title)}</strong></div>`).join('')}
+        </div>
+        <div class="gantt-timeline-grid">
+          <div class="gantt-month-head"><strong>${window.days[0].getFullYear()}年${window.days[0].getMonth() + 1}月</strong><span>按任务截止倒排 · 下滑查看进度</span></div>
+          <div class="gantt-days">${window.days.map(day => `<span>${dateShort(day)}</span>`).join('')}</div>
+          <div class="gantt-bars">${rows.map(row => `
+            <div class="gantt-row" style="--row:${row.index + 1}">
+              <div class="gantt-bar" style="--start:${row.startIndex + 1}; --span:${row.span}; --bar-color:${row.color}; --bar-progress:${row.progress}%">
+                <span>${escapeHtml(row.task.title)}</span><b>${row.progress}%</b>
+              </div>
+            </div>`).join('')}</div>
+        </div>
+      </div>`;
+    }
+
     function renderOverview() {
       const tasks = loadTasks();
       title.textContent = '';
       subtitle.textContent = '';
       meta.innerHTML = '';
       content.innerHTML = `
-        <article class="card span-12 overview-deadline-card"><h3 class="section-title">任务截止时间轴</h3>${renderDeadlineView(tasks)}</article>
+        <article class="card span-12 strategy-goal-first-fold">
+          ${renderStrategyOverview(tasks)}
+        </article>
+        <article class="card span-12 next-fold progress-gantt-card"><h3 class="section-title">任务进度甘特图</h3>${renderTaskGantt(tasks)}</article>
       `;
     }
 
@@ -1908,6 +2149,8 @@ def render_html(history: dict[str, Any], workbench: dict[str, Any] | None = None
               <label>标题<input id="taskTitle" placeholder="例如：完成首页布局" /></label>
               <label>优先级<select id="taskPriority"><option>P0</option><option selected>P1</option><option>P2</option><option>P3</option></select></label>
               <label>分类<select id="taskCategory"><option>生活</option><option selected>工作</option><option>自媒体</option></select></label>
+              <label>挂靠目标<select id="taskGoalId" onchange="updateTaskDirectionOptions()">${(workbenchDraft.goals || defaultStrategyGoals).map(goal => `<option value="${goal.id}">${goal.domain}</option>`).join('')}</select></label>
+              <label>二级方向<select id="taskDirectionId"></select></label>
               <label>截止<input id="taskDue" type="date" value="${today?.date || ''}" /></label>
               <label class="wide">描述<input id="taskDescription" placeholder="补充下一步动作、验收标准或背景" /></label>
               <div class="toolbar"><button class="btn primary" id="taskModalAction" onclick="addTask()">添加待办</button><button class="btn danger" id="taskModalDelete" onclick="deleteEditingTask()" style="display:none;">删除卡片</button><button class="btn" onclick="closeTaskModal()">取消</button></div>
