@@ -3,11 +3,71 @@
   "reviews": {},
   "ui": {
     "deadlineViewMode": "list",
-    "taskCategoryFilter": "all"
+    "taskCategoryFilter": "all",
+    "expandedGoalId": "work"
   },
   "meta": {
     "schema_version": 1,
-    "updated_at": null,
+    "updated_at": "2026-07-23T22:18:26.768959-07:00",
     "source": "project-json"
-  }
+  },
+  "goals": [
+    {
+      "id": "life",
+      "domain": "生活",
+      "statement": "把生活节奏稳定下来",
+      "directions": [
+        {
+          "id": "life-rhythm",
+          "title": "生活节奏"
+        },
+        {
+          "id": "life-health",
+          "title": "身体状态"
+        },
+        {
+          "id": "life-review",
+          "title": "日常复盘"
+        }
+      ]
+    },
+    {
+      "id": "work",
+      "domain": "工作",
+      "statement": "进大厂实习",
+      "directions": [
+        {
+          "id": "work-ability",
+          "title": "专业能力"
+        },
+        {
+          "id": "work-portfolio",
+          "title": "作品集"
+        },
+        {
+          "id": "work-communication",
+          "title": "语言表达"
+        }
+      ]
+    },
+    {
+      "id": "media",
+      "domain": "自媒体",
+      "statement": "形成稳定内容输出",
+      "directions": [
+        {
+          "id": "media-content",
+          "title": "选题与脚本"
+        },
+        {
+          "id": "media-expression",
+          "title": "语言表达"
+        },
+        {
+          "id": "media-growth",
+          "title": "发布与增长"
+        }
+      ]
+    }
+  ]
 }
